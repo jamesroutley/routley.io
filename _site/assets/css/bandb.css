@@ -15,11 +15,11 @@
     text-shadow: none;
 }
 
-::selection {
+/*::selection {
     background: #16a085;
     color: #a4003a;
     text-shadow: none;
-}
+}*/
 
 /*
  * A better looking default horizontal rule
