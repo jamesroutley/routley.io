@@ -113,10 +113,10 @@ html {
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
+/*body {
+   Margin bottom by footer height 
   margin-bottom: 240px;
-}
+}*/
 .footer {
   position: absolute;
   bottom: 0;
