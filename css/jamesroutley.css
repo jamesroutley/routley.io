@@ -1,0 +1,49 @@
+/* Font */
+
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+
+body {
+    font-family: 'Josefin Slab', monospace;
+    font-size: 16px;
+    color: #000000;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Hyperlinks in black */
+
+a:link {
+    color: #000000;
+}
+
+a:hover {
+    color: #333;
+}
+
+a:visited {
+    color: #333;
+}
+
+a:active {
+    color: #333;
+}
+
+/* Margins */
+
+.mt {
+	margin-top: 40px;
+}
+
+.mb {
+	margin-bottom: 20px;
+}
+
+/* Text and image alignment */
+
+.centered {
+	text-align: center
+}
+
+.centre-image{
+  margin-left: auto;
+  margin-right: auto;
+}
