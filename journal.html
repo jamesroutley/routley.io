@@ -1,0 +1,14 @@
+---
+layout: page
+title: James Routley | Journal
+---
+<div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <h1>Journal</h1>
+  <ul>
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
