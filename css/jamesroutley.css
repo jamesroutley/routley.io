@@ -13,6 +13,7 @@ body {
 
 a:link {
     color: Black;
+    text-decoration: underline;
 }
 
 a:visited {
@@ -22,10 +23,6 @@ a:visited {
 a:hover {
     color: Red;
 }
-
-/*a:active {
-    color: Black;
-}*/
 
 /* Margins */
 
