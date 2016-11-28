@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Configuring a Python Development Environment"
-date: 2016-06-27
+date: 2016-11-28
 categories: london
 ---
 

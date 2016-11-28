@@ -1,71 +1,67 @@
-/* Font */
-
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+/* Page defaults */
 
 body {
-    font-family: 'Josefin Slab', 'Courier New', monospace;
-    font-size: 16px;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
+  /* Use system fonts */
+  font-family:
+    -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 85%;
+  line-height: 1.7;
+  text-align: justify;
 }
 
-/* Hyperlinks in black */
+.main {
+  max-width: 600px;
+  margin: 50px auto 50px;
+}
+
+/* Header styling */
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.1em;
+  font-weight: 600
+}
+
+h1 {
+  font-size: 1.2em;
+}
+
+/* Image styling */
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+/* Code styling */
+
+code, pre {
+  font-size: 0.95em;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+}
+
+pre {
+  padding: 1.2em;
+}
+
+/* Hyperlink styling */
 
 a:link {
-    color: Black;
+    color: #ff6868;
     text-decoration: underline;
 }
 
 a:visited {
-    color: Black;
+    color: #ff6868;
 }
 
 a:hover {
-    color: Red;
-}
-
-/* Margins */
-
-.mt {
-	margin-top: 40px;
-}
-
-.mb {
-	margin-bottom: 20px;
-}
-
-/* Text and image alignment */
-
-.centered {
-	text-align: center
-}
-
-.centre-image{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Put dt and dd on the same line */
-
-dl {
-  width: 100%;
-  overflow: hidden;
-  padding: 0;
-  margin: 0
-}
-dt {
-  float: left;
-  width: 30%;
-  /* adjust the width; make sure the total of both is 100% */
-  padding: 0;
-  margin: 0
-}
-dd {
-  float: left;
-  width: 70%;
-  /* adjust the width; make sure the total of both is 100% */
-  color: Red;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 5px
+    color: white;
+    background-color: #ff6868;
+    text-decoration: none;
 }
