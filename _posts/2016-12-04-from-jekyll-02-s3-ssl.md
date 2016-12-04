@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Moving from Jekyll, Part 02: Deployment to S3 and SSL"
-date: 2016-11-29
+date: 2016-12-04
 ---
 
 This article is part of a series detailing the move of this website from Jekyll and GitHub Pages to a self-hosted solution. Motivation and roadmap can be found [here]({% post_url 2016-11-28-from-jekyll-00-motivation-and-roadmap %}).
