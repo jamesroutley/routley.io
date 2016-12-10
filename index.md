@@ -8,6 +8,7 @@ title: James Routley | James Routley
 Cloud Systems Developer at [Cloudreach](https://www.cloudreach.com/), co-founder of and chef at [Bergamot and Black](http://bergamotandblack.com/), masters graduate in Engineering Science from the University of Oxford.
 
 - [Blog](blog.html)
+- [Food Journal](journal.html)
 - [GitHub](https://github.com/jamesroutley)
 - [LinkedIn](https://uk.linkedin.com/pub/james-routley/a8/28b/ab9)
 - [Twitter](https://twitter.com/james_routley)
