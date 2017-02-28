@@ -4,7 +4,7 @@ title: "Moving from Jekyll, Part 01: CSS"
 date: 2016-11-29
 ---
 
-This article is part of a series detailing the move of this website from Jekyll and GitHub Pages to a self-hosted solution. Motivation and roadmap can be found [here]({% post_url 2016-11-28-from-jekyll-00-motivation-and-roadmap %}).
+This article is part of a series detailing the move of this website from Jekyll and GitHub Pages to a self-hosted solution. Motivation and roadmap can be found [here]({% post_url /tech/2016-11-28-from-jekyll-00-motivation-and-roadmap %}).
 
 ## Old Website
 
