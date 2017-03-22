@@ -12,7 +12,7 @@ Cloud Systems Developer at [Cloudreach](https://www.cloudreach.com/), co-founder
 - [GitHub](https://github.com/jamesroutley)
 - [LinkedIn](https://uk.linkedin.com/pub/james-routley/a8/28b/ab9)
 - [Twitter](https://twitter.com/james_routley)
-- [Curriculum Vitae](assets/pdf/james-routley-cv-2016-11-27.pdf) (pdf)
+- [Curriculum Vitae](assets/pdf/james-routley-cv-2017-03-22.pdf) (pdf)
 
 
 ## Projects
