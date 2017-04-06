@@ -28,7 +28,7 @@ deploy-prod: build  # Deploy the production website to S3
 	aws s3 sync _site s3://jamesroutley.co.uk --delete
 ~~~
 
-They deployment uses the AWS [CLI](the updated site), which must be correctly [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) with AWS credentials for the destination account.
+They deployment uses the AWS [CLI](https://aws.amazon.com/cli/), which must be correctly [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) with AWS credentials for the destination account.
 
 A development environment was set up at [dev.jamesroutley.co.uk](https://dev.jamesroutley.co.uk/).
 
