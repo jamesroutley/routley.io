@@ -35,7 +35,7 @@ A development environment was set up at [dev.jamesroutley.co.uk](https://dev.jam
 
 ## DNS
 
-S3 static websites are assigned a URL, such as [http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/](http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/). To access the website from a custom domain name, a Route53 Alias Record pointing the custom domain name to the S3 bucket [should be created]((https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html)).
+S3 static websites are assigned a URL, such as [http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/](http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/). To access the website from a custom domain name, a Route53 Alias Record pointing the custom domain name to the S3 bucket [should be created](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html).
 
 
 ## SSL
