@@ -17,3 +17,8 @@ github_username:  jamesroutley
 
 # Build settings
 markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - venv
+  - vendor
