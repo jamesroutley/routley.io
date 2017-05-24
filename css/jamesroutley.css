@@ -42,7 +42,6 @@ code, pre {
   font-size: 0.95em;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   background-color: #f7f7f7;
-  border-radius: 4px;
   padding: 2.7px;
 }
 
@@ -53,16 +52,16 @@ pre {
 /* Hyperlink styling */
 
 a:link {
-    color: #ff6868;
+    color: #d81b60;
     text-decoration: underline;
 }
 
 a:visited {
-    color: #ff6868;
+    color: #d81b60;
 }
 
 a:hover {
     color: white;
-    background-color: #ff6868;
+    background-color: #d81b60;
     text-decoration: none;
 }

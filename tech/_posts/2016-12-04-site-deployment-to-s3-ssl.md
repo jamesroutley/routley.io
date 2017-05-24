@@ -17,13 +17,13 @@ AWS S3 can be [configured](http://docs.aws.amazon.com/AmazonS3/latest/dev/Websit
 
 These two steps can be automated using the following `Make` process:
 
-~~~Make
+```make
 build:  # Create the static and store it in _site/
 	jekyll build
 
 deploy-prod: build  # Deploy the production website to S3
 	aws s3 sync _site s3://jamesroutley.co.uk --delete
-~~~
+```
 
 They deployment uses the AWS [CLI](https://aws.amazon.com/cli/), which must be correctly [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) with AWS credentials for the destination account.
 
