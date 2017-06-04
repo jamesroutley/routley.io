@@ -10,9 +10,9 @@ written in a generic way, with notes on how to alter and extend the recipe.
 
 Happy 17th Birthday!
 
-- [Starters](/recipes/starters)
-- [Main Courses](/recipes/mains)
-- [Desserts](/recipes/desserts)
-- [Projects](/recipes/projects)
-- [Preparations](/recipes/preparations)
+- [Starters](/recipes/starters.html)
+- [Main Courses](/recipes/mains.html)
+- [Desserts](/recipes/desserts.html)
+- [Projects](/recipes/projects.html)
+- [Preparations](/recipes/preparations.html)
 
