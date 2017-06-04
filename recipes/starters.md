@@ -10,8 +10,14 @@ layout: default
 - creme fraiche
 - 2 small beetroot per person
 
-Fillet and debone the mackrel. Place tin foil on the base of a pan. Add wood
-chips or rice, and heat until it starts to smoke.
+Fillet and debone the mackerel. Apply salt to the fillets and let lightly cure
+for ten minues. This forms a sticky pellicle to which smoke can adhere. 
+Place tin foil on the base of a pan. Add wood
+chips or rice, and heat until it starts to smoke. Suspend the mackerel fillets
+over the smoke using a sheet of foil with holes poked in it. Cover and smoke
+for 20 mins, until the fish is cooked. Flake fish, and mix with creme fraiche.
+
+Serve with cooked beetroot.
 
 ## Turkish red lentil soup
 
@@ -32,13 +38,11 @@ cook for 3 mins. Add tomato paste and spices. Stir for 1 min. Add chicken
 stock. Bring to boil and simmer for 15 mins. Roughly blend with a stick 
 blender. Add lemon juice before serving.
 
-## Notes on salads
-
 ## Chicken liver pate
 
 This needs to be made ahead, making it a good starter for a dinner party. 
-Pates need fat in them for the texture, duck and geese store fat in their
-livers. Chickens don't so we can add in butter ourselves.
+Pates need fat in them for the texture. Duck and geese store fat in their
+livers. Chickens don't, so we need to add it in the form of butter ourselves.
 
 - 400g chicken livers
 - 2 shallots, finely chopped
@@ -54,13 +58,13 @@ till it splits. Pour the clear liquid onto the pate. Discard the milk solids.
 Press a sage leaf into the butter to make it look nice and chill until ready
 to serve.
 
-Serve with sourdough, seasalt and honey.
+Serve with sourdough, sea salt and honey.
 
 ## Puff-pastry tarts
 
-These are easy to put together for starters/side dishes.
+These are easy to put together for starters or side dishes.
 
-- 1 roll puff pastry
+- 1 roll of puff pastry
 
 Toppings:
 
@@ -77,7 +81,6 @@ Roll pastry out, score it 1cm from the edge. Add topping and bake at 180C for
 - walnuts
 - stilton
 
-Wash chicory and separate leaves. 
-
-
+Wash chicory and separate leaves. Add chopped walnuts and pieces of stilton.
+Serve with a viniagrette with honey in it.
 

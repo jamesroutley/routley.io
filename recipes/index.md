@@ -5,14 +5,14 @@ layout: default
 # Recipes for Jonathan
 
 
-This site contains a collection of recipes to try. Where possible, they are 
+A collection of recipes for you to try. Where possible, they are 
 written in a generic way, with notes on how to alter and extend the recipe.
 
 Happy 17th Birthday!
 
 - [Starters](/recipes/starters)
 - [Main Courses](/recipes/mains)
-- [Deserts](/recipes/deserts)
+- [Desserts](/recipes/desserts)
 - [Projects](/recipes/projects)
 - [Preparations](/recipes/preparations)
 
