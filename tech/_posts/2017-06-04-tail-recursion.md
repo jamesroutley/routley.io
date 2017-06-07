@@ -5,7 +5,7 @@ title: Tail recursion for imperative programmers
 
 At the Recurse Center, I've been working my way through The Structure and
 Interpretation of Computer Programs (SICP) book. It's an introductory 
-programming book written for an MIT course in 1985. It teaching programming 
+programming book written for an MIT course in 1985. It teaches programming 
 using the language Scheme, a LISP dialect. Scheme is functional, and I've
 been enjoying learning new functional concepts.
 
@@ -143,7 +143,8 @@ variable `total`, not by the interpreter.
 In tail-recursive languages, recursive procedures defined in the second way are
 interpreted as *iterative* processes, and do not exhibit the downsides of
 recursive processes. You get the performance benefits of an iterative process,
-with the elegance of a recursive procedure.
+with the elegance of a recursive procedure. The interpreter works out that no
+more work needs to be done on the stack frame, and throws it away.
 
 Unfortunately, Python is not a tail-recursive language, so 
 `factorial_new(1000)` still throws `RuntimeError: maximum recursion depth 
