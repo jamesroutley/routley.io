@@ -18,6 +18,7 @@ Cloud Systems Developer at [Cloudreach](https://www.cloudreach.com/), co-founder
 ## Projects
 
 - [Sceptre](https://github.com/cloudreach/sceptre), a tool for launching and managing CloudFormation stacks
+- [Slingshot](https://slingshot.jamesroutley.co.uk/), an interplanetary physics game.
 - [Ptolemy](https://github.com/cloudreach/ptolemy), a tool for writing terse AWS DMS Mapping Tables
 - [Dev](https://github.com/jamesroutley/dev), a cli tool for initialising development environments
 - [AWSCM](awscm.html), an AWS Credentials Manager
