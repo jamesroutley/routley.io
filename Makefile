@@ -16,5 +16,8 @@ deploy-prod: clean build  # Deploy the production website to S3
 deploy-dev: clean build
 	aws s3 sync _site s3://dev.jamesroutley.co.uk --delete
 
+install:
+	bundle install --path vendor
+
 serve: clean
 	bundle exec jekyll serve
