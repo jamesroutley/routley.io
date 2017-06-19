@@ -65,3 +65,7 @@ a:hover {
     background-color: #d81b60;
     text-decoration: none;
 }
+
+footer {
+  margin-top: 50px;
+}
