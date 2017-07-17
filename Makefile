@@ -20,4 +20,4 @@ install:
 	bundle install --path vendor
 
 serve: clean
-	bundle exec jekyll serve
+	bundle exec jekyll serve --drafts
