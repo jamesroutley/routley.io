@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Improve python testing with parameterisation"
+title: "Improve Python testing with parameterisation"
 tags:
     - python
     - tdd
