@@ -8,12 +8,15 @@ clean-build:
 build:  # Create the static and store it in _site/
 	bundle exec jekyll build
 
+build-dev:  # Create the static and store it in _site/
+	bundle exec jekyll build --drafts
+
 deploy: deploy-dev deploy-prod
 
 deploy-prod: clean build  # Deploy the production website to S3
 	aws s3 sync _site s3://jamesroutley.co.uk --delete
 
-deploy-dev: clean build
+deploy-dev: clean build-dev
 	aws s3 sync _site s3://dev.jamesroutley.co.uk --delete
 
 install:
