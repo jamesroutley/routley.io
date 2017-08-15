@@ -6,10 +6,11 @@ title: James Routley | James Routley
 # James Routley
 
 Backend developer at [Monzo](https://monzo.com/), co-founder of and chef at
-[Bergamot and Black](http://bergamotandblack.com/), Computer Business Review 30
-under 30 in the cloud, ex-cloud systems developer at
-[Cloudreach](https://www.cloudreach.com/), alumnus of the [Recurse
-Center](https://www.recurse.com/) and the University of Oxford.
+[Bergamot and Black](http://bergamotandblack.com/), Computer Business Review [30
+under 30 in
+Cloud](http://www.cbronline.com/news/cloud/top-30-under-30-in-cloud/#http://www.cbronline.com/news/cloud/top-30-under-30-in-cloud/#2),
+ex-cloud systems developer at [Cloudreach](https://www.cloudreach.com/), alumnus
+of the [Recurse Center](https://www.recurse.com/) and the University of Oxford.
 
 - [GitHub](https://github.com/jamesroutley)
 - [LinkedIn](https://uk.linkedin.com/pub/james-routley/a8/28b/ab9)
