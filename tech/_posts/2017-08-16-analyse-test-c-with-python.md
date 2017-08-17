@@ -19,7 +19,8 @@ Python library for interfacing with C called `ctypes`.
 
 ## Example C code
 
-For this example, I've written a simple (but unsafe) [stack](TODO) data
+For this example, I've written a simple (but unsafe)
+[stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) data
 structure, which defines the following API:
 
 ```c
