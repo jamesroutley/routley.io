@@ -118,7 +118,7 @@ then run on each of the test cases in turn. This is an improvement, but still
 has some flaws. When we run the test, we get the following output:
 
 ```sh
-% python test_prime.py
+$ python test_prime.py
 Ran 1 test in 0.000s
 
 OK
@@ -144,11 +144,65 @@ Ran 1 test in 0.000s
 
 FAILED (failures=1)
 ```
+## Parameterisation with subTest
+
+Python 3.4 introduced a way to solve this problem. We can use the
+`unittest.TestCase.subTest` decorator for explicit parameterisation:
+
+```python
+import unittest
+
+from prime import is_prime
+
+
+class TestIsPrime(unittest.TestCase):
+
+    def test_is_prime(self):
+        test_cases = [
+            (-1, False),
+            (0, False),
+            (1, False),
+            (2, True),
+            (3, True),
+            (10, True),
+            (53, True),
+        ]
+        for x, output in test_cases:
+            with self.subTest(name=str(x)):
+                self.assertEqual(is_prime(x), output)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+If a test fails, `unittest` will print out the name of the failed test:
+
+```sh
+$ python test_prime.py
+
+======================================================================
+FAIL: test_is_prime (__main__.TestIsPrime) (name='10')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_prime.py", line 20, in test_is_prime
+    self.assertEqual(is_prime(x), output)
+AssertionError: False != True
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+```
+
+The `subTest` feature was only added in Python 3.4, so will not work with
+previous versions.
 
 ## Parameterisation with pytest
 
-The [pytest](https://docs.pytest.org/en/latest/) framework solves these problems
-for us. We can install it with `pip install pytest`.
+The [pytest](https://docs.pytest.org/en/latest/) framework also solves these
+problems for us, and is compatible with Python 2. We can install it with `pip
+install pytest`.
 
 Pytest contains a [feature](https://docs.pytest.org/en/latest/parametrize.html)
 which allows us to parameterise test cases:
@@ -225,3 +279,14 @@ function which satisfies the following constraints:
 
 A pure function's behaviour depends only on the arguments passed to it, so they
 can often be exhaustively tested with a single parameterised test.
+
+---
+
+**Change log**: 
+
+- The [first
+  version](https://github.com/jamesroutley/jamesroutley.co.uk/blob/65539b4e021ea3b5dabb9282dce2d71a7106b119/tech/_posts/2017-08-09-parameterise-python-tests.md)
+  of this article didn't contain the section on [Parameterisation with
+  subTest](#parameterisation-with-subtest). Thanks to
+  [@rochacbruno](https://twitter.com/rochacbruno) and
+  [@ossronny](https://twitter.com/ossronny) for pointing it out.
