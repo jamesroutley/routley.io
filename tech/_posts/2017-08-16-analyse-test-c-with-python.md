@@ -1,6 +1,10 @@
 ---
 layout: post
 title: "Analyse and test C with Python"
+tags:
+    - python
+    - c
+    - tdd
 ---
 
 I've recently been implementing data structures in C. Writing C is fun and
