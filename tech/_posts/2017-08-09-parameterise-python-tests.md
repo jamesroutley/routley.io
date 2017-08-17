@@ -147,7 +147,7 @@ FAILED (failures=1)
 ## Parameterisation with subTest
 
 Python 3.4 introduced a way to solve this problem. We can use the
-`unittest.TestCase.subTest` decorator for explicit parameterisation:
+`unittest.TestCase.subTest` context manager for explicit parameterisation:
 
 ```python
 import unittest
@@ -195,8 +195,9 @@ Ran 1 test in 0.000s
 FAILED (failures=1)
 ```
 
-The `subTest` feature was only added in Python 3.4, so will not work with
-previous versions.
+The `subTest` feature was only added in Python 3.4, but has been backported to
+Python 2.7 onwards with the [unittest2](https://pypi.python.org/pypi/unittest2)
+package.
 
 ## Parameterisation with pytest
 
