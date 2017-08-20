@@ -14,10 +14,10 @@ build-dev:  # Create the static and store it in _site/
 deploy: deploy-dev deploy-prod
 
 deploy-prod: clean build  # Deploy the production website to S3
-	aws s3 sync _site s3://jamesroutley.co.uk --delete
+	aws --region eu-west-2 s3 sync _site s3://routley.io --delete
 
 deploy-dev: clean build-dev
-	aws s3 sync _site s3://dev.jamesroutley.co.uk --delete
+	aws --region eu-west-2 s3 sync _site s3://dev.routley.io --delete
 
 install:
 	bundle install --path vendor
