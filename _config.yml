@@ -9,11 +9,21 @@
 title: James Routley
 email: jroutley@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  James Routley
+  A blog about programming and food.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://jamesroutley.co.uk" # the base hostname & protocol for your site
-twitter_username: james_routley
-github_username:  jamesroutley
+
+# SEO settings
+twitter:
+  username: james_routley
+author: james_routley
+social:
+  name: James Routley
+  links:
+    - https://twitter.com/james_routley
+    - https://github.com/jamesroutley
+    - https://www.linkedin.com/in/james-routley-ab928ba8/
+    - https://keybase.io/jamesroutley
 
 # Build settings
 markdown: kramdown
@@ -22,3 +32,10 @@ exclude:
   - Gemfile.lock
   - venv
   - vendor
+sass:
+  style: compressed
+
+# Plugins
+gems:
+  - jekyll-sitemap
+  - jekyll-seo-tag
