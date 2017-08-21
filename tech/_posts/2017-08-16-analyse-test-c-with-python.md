@@ -18,7 +18,7 @@ language, such as Python. Analysis and testing don't affect performance of the
 actual data structure, so using a slower but easier and more productive language
 for this seems reasonable.
 
-In this article, we walk though a simple example of doing this with a built-in
+In this article, we walk through a simple example of doing this with a built-in
 Python library for interfacing with C called `ctypes`.
 
 ## Example C code
@@ -42,8 +42,8 @@ The stack's source code is included below[^1].
 
 ## Shared library
 
-`ctypes` interacts with with shared libraries. We can compile our stack to a
-shared library with:
+`ctypes` interacts with shared libraries. We can compile our stack to a shared
+library with:
 
 ```
 $ clang -shared -o stack.so -fPIC stack.c
@@ -96,7 +96,9 @@ It's now simple to import and use this module:
 5
 ```
 
-We're now fully in Python land, with a set of objects which let us call into our C code. These objects are native Python, and can be used in any way that native Python objects can be used. We can use them with:
+We're now fully in Python land, with a set of objects which let us call into our
+C code. These objects are native Python, and can be used in any way that native
+Python objects can be used. We can use them with:
 
 - `unittest` or `pytest` for testing
 - `timeit` for benchmarking
@@ -133,5 +135,5 @@ We're now fully in Python land, with a set of objects which let us call into our
 
 [^2]: When using `ctypes`, we end up writing a Python wrapper module, which is
     basically a Python translation of the C header file. Other libraries for
-    calling into C try to remove this repeatition. One example is
+    calling into C try to remove this repetition. One example is
     [`cffi`](https://cffi.readthedocs.io/en/latest/), written by the PyPy team.
