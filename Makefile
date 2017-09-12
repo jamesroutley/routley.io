@@ -20,6 +20,7 @@ deploy-dev: clean build-dev
 	aws --region eu-west-2 s3 sync _site s3://dev.routley.io --delete
 
 install:
+	mkdir -p vendor
 	bundle install --path vendor
 
 serve: clean
