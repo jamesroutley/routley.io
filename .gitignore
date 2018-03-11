@@ -166,3 +166,6 @@ ENV/
 /site
 
 # End of https://www.gitignore.io/api/python
+
+# Don't commit drafts
+_drafts/
