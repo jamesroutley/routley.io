@@ -14,7 +14,7 @@ Unix tool `pwd`, which prints out the current directory. I'm calling it `rpwd`.
 I started a new executable application with:
 
 ```sh
-$ cargo rwpd --bin
+$ cargo rpwd --bin
 ```
 
 ## Code
@@ -55,7 +55,7 @@ expected and recoverable'. It's a way to ensure errors are dealt with.
 
 ## Unwrap
 
-`.unrap()` calls `Result`'s `unwrap` method, which returns the success value if
+`.unwrap()` calls `Result`'s `unwrap` method, which returns the success value if
 the `Result` is `Ok`, or
 [`panics`](https://doc.rust-lang.org/std/macro.panic.html) if there's an error.
 According to `env::current_dir`'s
