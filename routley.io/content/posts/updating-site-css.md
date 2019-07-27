@@ -10,17 +10,17 @@ title: Updating site CSS
 
 The old website's CSS was based on [Bootstrap](http://getbootstrap.com/), with some custom styling. Source code can be found [here](https://github.com/jamesroutley/jamesroutley.github.io/tree/52ae9222a013fe30e56242373e2e6f4f8009128c/css). The code itself was hacked together.
 
-![Old website main page]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/old-main.png "old website main page")
+![Old website main page](/img/posts/from-jekyll/01-css/old-main.png "old website main page")
 
-![Old website portfolio page]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/old-portfolio.png "old website portfolio page")
+![Old website portfolio page](/img/posts/from-jekyll/01-css/old-portfolio.png "old website portfolio page")
 
 The font is [Josefin Slab](https://fonts.google.com/specimen/Josefin+Slab), which I quite liked for the main page, but I thought it felt too affected for use as the main font for blog posts.
 
-![Old website blog page 1]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/old-blog-1.png "old website blog page 1")
+![Old website blog page 1](/img/posts/from-jekyll/01-css/old-blog-1.png "old website blog page 1")
 
 There are issues with the font size of the monospace font used for code blocks.
 
-![Old website blog page 2]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/old-blog-2.png "old website blog page 2")
+![Old website blog page 2](/img/posts/from-jekyll/01-css/old-blog-2.png "old website blog page 2")
 
 
 ## New Website
@@ -53,12 +53,12 @@ The new site removes the Bootstrap dependency. Previously, the content was cente
 }
 ```
 
-![New website main page]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/new-main.png "new website main page")
+![New website main page](/img/posts/from-jekyll/01-css/new-main.png "new website main page")
 
 
 ### Responsive Images
 
-![New website portfolio page]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/new-portfolio.png "new website portfolio page")
+![New website portfolio page](/img/posts/from-jekyll/01-css/new-portfolio.png "new website portfolio page")
 
 Bootstrap-style responsive images can be acomplished with the following code:
 
@@ -96,7 +96,7 @@ pre {
 
 Hyperlink styling introduces the only colour in the website.
 
-![New website hyperlink demonstration]({{ site.baseurl }}/assets/img/posts/from-jekyll/01-css/new-blog-hyperlink.png "new website hyperlink demonstration")
+![New website hyperlink demonstration](/img/posts/from-jekyll/01-css/new-blog-hyperlink.png "new website hyperlink demonstration")
 
 ```css
 a:link {
