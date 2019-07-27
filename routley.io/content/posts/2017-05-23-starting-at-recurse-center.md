@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "Starting at the Recurse Center"
+aliases:
+- /tech/2017/05/23/starting-at-recurse-center
 date: 2017-05-23
+layout: post
+title: Starting at the Recurse Center
 ---
 
 I've recently started at the [Recurse Center](https://www.recurse.com/) (RC), a self-directed, three-month coding program based in New York. The main objective of the course is to improve as a programmer, but the way that's gone about is left up to the individual. Having the opportunity to build anything for an extended period of time in an encouraging and nurturing environment is a privillage offered to few, and it's important to make the most of it.

@@ -1,10 +1,13 @@
 ---
+aliases:
+- /tech/2017/08/16/analyse-test-c-with-python
+date: '2017-08-16'
 layout: post
-title: "Analyse and test C with Python"
 tags:
-    - python
-    - c
-    - tdd
+- python
+- c
+- tdd
+title: Analyse and test C with Python
 ---
 
 I've recently been implementing data structures in C. Writing C is fun and

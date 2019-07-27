@@ -1,8 +1,11 @@
 ---
+aliases:
+- /tech/2017/10/08/text-editor-undo
+date: '2017-10-08'
 layout: post
-title: "Implementing 'undo' in a text editor"
 tags:
-    - algorithms
+- algorithms
+title: Implementing 'undo' in a text editor
 ---
 
 This post explores an elegant method for implementing undo/redo functionality in

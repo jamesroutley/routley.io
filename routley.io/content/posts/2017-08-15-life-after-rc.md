@@ -1,4 +1,7 @@
 ---
+aliases:
+- /tech/2017/08/15/life-after-rc
+date: '2017-08-15'
 layout: post
 title: Life after the Recurse Center
 ---

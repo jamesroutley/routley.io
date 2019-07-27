@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "Updating site CSS"
+aliases:
+- /tech/2016/11/29/updating-site-css
 date: 2016-11-29
+layout: post
+title: Updating site CSS
 ---
 
 ## Old Website

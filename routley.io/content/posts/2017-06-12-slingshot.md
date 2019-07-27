@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2017/06/12/slingshot
+date: '2017-06-12'
 layout: post
-title: "Slingshot: an interplanetary physics game"
+title: 'Slingshot: an interplanetary physics game'
 ---
 
 Over the weekend, Recurse Center held a [game jam](https://en.wikipedia.org/wiki/Game_jam). Over 72 hours, I built a phyics game named Slingshot. In the game, you play the pilot of a spaceship with little fuel. To survive, you must navigate around planets and neutron stars to reach a series of checkpoints. You can play Slingshot [here](https://slingshot.jamesroutley.co.uk/), and view the source code [here](https://github.com/jamesroutley/slingshot).

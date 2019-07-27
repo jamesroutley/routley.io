@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2018/03/11/nine-months-with-vim
+date: '2018-03-11'
 layout: post
-title: "Nine months with Vim"
+title: Nine months with Vim
 ---
 
 Over summer, I attended the Recurse Center. I noticed that around half the

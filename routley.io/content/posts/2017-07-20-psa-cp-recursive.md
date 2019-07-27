@@ -1,8 +1,11 @@
 ---
+aliases:
+- /tech/2017/07/20/psa-cp-recursive
+date: '2017-07-20'
 layout: post
-title: "PSA: cp -r behaves differently on linux and macOS"
 tags:
-    - unix
+- unix
+title: 'PSA: cp -r behaves differently on linux and macOS'
 ---
 
 Today I found out ([the hard

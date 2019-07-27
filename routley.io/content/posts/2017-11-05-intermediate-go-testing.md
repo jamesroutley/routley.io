@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2017/11/05/intermediate-go-testing
+date: '2017-11-05'
 layout: post
-title: "Intermediate Testing in Golang"
+title: Intermediate Testing in Golang
 ---
 
 I've been writing Golang in production at Monzo for a couple of months now. This

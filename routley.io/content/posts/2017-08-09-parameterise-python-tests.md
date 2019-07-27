@@ -1,9 +1,12 @@
 ---
+aliases:
+- /tech/2017/08/09/parameterise-python-tests
+date: '2017-08-09'
 layout: post
-title: "Improve Python testing with parameterisation"
 tags:
-    - python
-    - tdd
+- python
+- tdd
+title: Improve Python testing with parameterisation
 ---
 
 Parameterisation is a technique which makes testing simpler, more concise and

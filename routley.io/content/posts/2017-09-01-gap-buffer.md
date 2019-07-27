@@ -1,7 +1,10 @@
 ---
-layout: post 
-title: "Gap Buffers: a data structure for editable text"
---- 
+aliases:
+- /tech/2017/09/01/gap-buffer
+date: '2017-09-01'
+layout: post
+title: 'Gap Buffers: a data structure for editable text'
+---
 
 I've recently been writing a text editor. One of the first problems I faced was
 deciding how to store the contents of the file being edited. This post looks at

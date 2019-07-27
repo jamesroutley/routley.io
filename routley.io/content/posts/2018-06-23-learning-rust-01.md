@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2018/06/23/learning-rust-01
+date: '2018-06-23'
 layout: post
-title: "Learning Rust 01: a pwd clone"
+title: 'Learning Rust 01: a pwd clone'
 ---
 
 *I'm learning Rust, and documenting the process. These posts are my notes -

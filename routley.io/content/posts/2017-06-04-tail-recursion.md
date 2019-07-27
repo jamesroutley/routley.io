@@ -1,4 +1,7 @@
 ---
+aliases:
+- /tech/2017/06/04/tail-recursion
+date: '2017-06-04'
 layout: post
 title: Tail recursion for imperative programmers
 ---

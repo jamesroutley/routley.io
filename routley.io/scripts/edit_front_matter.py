@@ -1,9 +1,22 @@
 #!/usr/bin/env python3
 
+"""
+This script migrates Jekyll posts to Hugo format. It does two things:
+
+1. Fix the publish date. Hugo gets this from the `date` item in the post's
+front matter. Jekyll gets it from the post filename prefix. This script pulls
+the date from the prefix, and adds it to front matter
+2. Add a URL alias. Jekyll uses a different URL scheme to Hugo. The script sets
+a URL alias to the old Jekyll URL, so we don't break old links
+"""
+
 import sys
 import re
 import yaml
 import os
+
+
+dry_run = False
 
 
 def edit_front_matter(filepath):
@@ -31,7 +44,9 @@ def get_front_matter(filename) -> dict:
     with open(filename) as f:
         data = f.read()
     sections = data.split("---\n", 2)
-    assert len(sections) == 3
+    if len(sections) != 3:
+        print(sections[1])
+        raise Exception("{} has invalid front matter format".format(filename))
 
     front_matter = sections[1]
     return yaml.safe_load(front_matter)
@@ -44,10 +59,12 @@ def set_front_matter(filename, front_matter):
         get_content(filename),
     ]
     data = "---\n".join(sections)
-    # print(data)
 
-    with open(filename, "w") as f:
-        f.write(data)
+    if dry_run:
+        print(data)
+    else:
+        with open(filename, "w") as f:
+            f.write(data)
 
 
 def get_content(filename) -> str:

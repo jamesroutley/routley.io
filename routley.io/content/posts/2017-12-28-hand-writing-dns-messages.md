@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2017/12/28/hand-writing-dns-messages
+date: '2017-12-28'
 layout: post
-title: "Let's hand write DNS messages"
+title: Let's hand write DNS messages
 ---
 
 In this post, we'll explore the Domain Name Service (DNS) binary message format,

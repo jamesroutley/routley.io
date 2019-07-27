@@ -1,9 +1,12 @@
 ---
+aliases:
+- /tech/2017/07/20/golang-test-fixtures
+date: '2017-07-20'
 layout: post
-title: Simplify Golang test fixtures with this one weird trick
 tags:
-    - go
-    - tdd
+- go
+- tdd
+title: Simplify Golang test fixtures with this one weird trick
 ---
 
 When testing code, test functions may depend on some external dependency. For

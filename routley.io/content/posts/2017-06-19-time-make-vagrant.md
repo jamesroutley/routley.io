@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2017/06/19/time-make-vagrant
+date: '2017-06-19'
 layout: post
-title: "A system time bug with Vagrant and Make"
+title: A system time bug with Vagrant and Make
 ---
 
 I've recently been writing a Forth interpreter in x86 assembly. As my laptop

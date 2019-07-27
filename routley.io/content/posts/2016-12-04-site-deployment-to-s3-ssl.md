@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "Site deployment to S3 and SSL"
+aliases:
+- /tech/2016/12/04/site-deployment-to-s3-ssl
 date: 2016-12-04
+layout: post
+title: Site deployment to S3 and SSL
 ---
 
 ## Previous Hosting and Deployment

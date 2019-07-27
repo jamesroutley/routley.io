@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2017/10/31/first-impressions-elm
+date: '2017-10-31'
 layout: post
-title: "First impressions of Elm"
+title: First impressions of Elm
 ---
 
 This week, I've been learning Elm. While at the Recurse Center, I came across

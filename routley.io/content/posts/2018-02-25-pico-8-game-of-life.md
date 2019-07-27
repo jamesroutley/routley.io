@@ -1,6 +1,9 @@
 ---
+aliases:
+- /tech/2018/02/25/pico-8-game-of-life
+date: '2018-02-25'
 layout: post
-title: "Pico-8 Game of life"
+title: Pico-8 Game of life
 ---
 
 The [Pico-8](https://www.lexaloffle.com/pico-8.php) is a 'fantasy console' built
