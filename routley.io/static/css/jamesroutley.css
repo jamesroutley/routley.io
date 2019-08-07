@@ -1,6 +1,5 @@
 body {
-  font-size: 85%;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: plex-sans;
   line-height: 1.7;
   text-align: justify;
   max-width: 700px;
@@ -10,6 +9,7 @@ body {
 /* Header styling */
 
 h1, h2, h3, h4, h5, h6 {
+  /* font-family: plex-serif; */
   text-align: left;
 }
 
@@ -29,12 +29,11 @@ img {
 /* Code styling */
 
 code, pre {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  background-color: #eceff1;
+  font-family: plex-mono;
 }
 
 pre {
-  padding: 1.2em;
+    padding: 1.2em;
 }
 
 /* Hyperlink styling */
@@ -67,4 +66,34 @@ table {
 table, td, th {
     border: 1px solid black;
     padding: 10px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Fonts */
+
+@font-face {
+    font-family: 'plex-sans';
+    src: url('/font/IBMPlexSans-Regular.woff') format('woff'),
+    url('/font/IBMPlexSans-Regular.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'plex-serif';
+    src: url('/font/IBMPlexSerif-Regular.woff') format('woff'),
+    url('/font/IBMPlexSerif-Regular.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'plex-mono';
+    src: url('/font/IBMPlexMono-Regular.woff') format('woff'),
+    url('/font/IBMPlexMono-Regular.eot');
+    font-weight: normal;
+    font-style: italic;
 }
