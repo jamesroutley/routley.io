@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>James Routley | James Routley on James Routley</title>
+    <link>http://routley.io/</link>
+    <description>Recent content in James Routley | James Routley on James Routley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning Rust 02: an ls clone</title>
+      <link>http://routley.io/posts/learning-rust-02/</link>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/learning-rust-02/</guid>
+      <description>I&amp;rsquo;m learning Rust, and documenting the process. These posts are my notes - they&amp;rsquo;re not guaranteed to be useful, interesting or correct!
+In this post, I&amp;rsquo;m building an ls clone. It&amp;rsquo;s pretty similar to the last post&amp;rsquo;s pwd clone. It&amp;rsquo;s called rls.
+Code usestd::env;usestd::fs;usestd::process;fn main(){letargs: Vec&amp;lt;String&amp;gt;=env::args().collect();ifargs.len()!=2{usage();}letdirectory=&amp;amp;args[1];letpaths=fs::read_dir(directory).unwrap();forpathinpaths{letpath_buf=path.unwrap().path();letfile_name=path_buf.file_name().unwrap();println!(&amp;#34;{}&amp;#34;,file_name.to_string_lossy())}}fn usage(){eprintln!(&amp;#34;usage: rls &amp;lt;dir&amp;gt;&amp;#34;);process::exit(1);} Fetching arguments We can get the arguments passed to rls with the env::args function, which returns an iterator. We can convert the iterator to a vector, Rust&amp;rsquo;s &amp;lsquo;contiguous growable array type&amp;rsquo;.</description>
+    </item>
+    
+    <item>
+      <title>Learning Rust 01: a pwd clone</title>
+      <link>http://routley.io/posts/learning-rust-01/</link>
+      <pubDate>Sat, 23 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/learning-rust-01/</guid>
+      <description>I&amp;rsquo;m learning Rust, and documenting the process. These posts are my notes - they&amp;rsquo;re not guaranteed to be useful, interesting or correct!
+In this post, I&amp;rsquo;m writing my first Rust program. It&amp;rsquo;s a simplified clone of the Unix tool pwd, which prints out the current directory. I&amp;rsquo;m calling it rpwd.
+Creating a project I started a new executable application with:
+$ cargo rpwd --bin Code The code is simple:</description>
+    </item>
+    
+    <item>
+      <title>Nine months with Vim</title>
+      <link>http://routley.io/posts/nine-months-with-vim/</link>
+      <pubDate>Sun, 11 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/nine-months-with-vim/</guid>
+      <description>Over summer, I attended the Recurse Center. I noticed that around half the people in my batch were using Vim, and figured it would be a good time to try it out. I ran into two difficulties:
+ I knew the basics of using Vim but I was less efficient than with my previous editor, Visual Studio Code I didn&amp;rsquo;t know how to configure Vim to use the syntax highlighting, indentation and linters I was used to.</description>
+    </item>
+    
+    <item>
+      <title>Pico-8 Game of life</title>
+      <link>http://routley.io/posts/pico-8-game-of-life/</link>
+      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/pico-8-game-of-life/</guid>
+      <description>The Pico-8 is a &amp;lsquo;fantasy console&amp;rsquo; built by Lexaloffle. It&amp;rsquo;s a program that runs on your computer that lets you write an play small games written in Lua. I recently implemented Conway&amp;rsquo;s Game of Life for Pico-8 and it was a fun and rewarding experience. You can play with my implementation here.
+This post contains some thoughts I had while making the game.
+Lua This was my first time writing Lua and found it easy to pick up.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s hand write DNS messages</title>
+      <link>http://routley.io/posts/hand-writing-dns-messages/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/hand-writing-dns-messages/</guid>
+      <description>In this post, we&amp;rsquo;ll explore the Domain Name Service (DNS) binary message format, and we&amp;rsquo;ll write one by hand. This is deeper than you need to use DNS, but I think it&amp;rsquo;s fun and educational to see how these things work under the hood.
+We&amp;rsquo;ll learn how to: - Write binary DNS query messages - Send our message as the body of a UDP datagram using Python - Read the response from the DNS server</description>
+    </item>
+    
+    <item>
+      <title>Using a logbook to improve your programming</title>
+      <link>http://routley.io/posts/logbook/</link>
+      <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/logbook/</guid>
+      <description>In this post, I&amp;rsquo;ll describe the engineering practice of keeping a logbook, and show how it can be applied to programming work.
+Logbooks I studied engineering at university. Part of my course involved practical work, which we recorded in a logbook. To use a logbook successfully, you have to:
+ Consider the problem you&amp;rsquo;re attempting to solve Describe your method for solving it Describe the process of carrying out the method Record what happened, and ask how it could be improved  This process is well suited to problem solving and active learning, and is described by George Pólya in his book How to Solve It, which describes a method for solving mathematical problems.</description>
+    </item>
+    
+    <item>
+      <title>Intermediate Testing in Golang</title>
+      <link>http://routley.io/posts/intermediate-go-testing/</link>
+      <pubDate>Sun, 05 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/intermediate-go-testing/</guid>
+      <description>I&amp;rsquo;ve been writing Golang in production at Monzo for a couple of months now. This post shares some things I&amp;rsquo;ve learnt about testing Go code.
+Parallelisation Golang tests can be easily parallelised by calling t.Parallel() at the beginning of a test:
+func TestThing(t *testing.T) { t.Parallel() // test code } This test will now be run in parallel with other tests marked as parallel. Parallel tests are run in a number of goroutines.</description>
+    </item>
+    
+    <item>
+      <title>First impressions of Elm</title>
+      <link>http://routley.io/posts/first-impressions-elm/</link>
+      <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/first-impressions-elm/</guid>
+      <description>This week, I&amp;rsquo;ve been learning Elm. While at the Recurse Center, I came across the book Seven Languages in Seven Weeks. The book&amp;rsquo;s concept appealed to me. While I don&amp;rsquo;t think it&amp;rsquo;s possible to learn a programming language in a week, I think there&amp;rsquo;s value in broadening your horizons with the quick study of a wide range of concepts.
+This post summarises my initial thoughts about Elm, and lists some resources which may help you learn it.</description>
+    </item>
+    
+    <item>
+      <title>Advice on starting a programming blog</title>
+      <link>http://routley.io/posts/starting-a-programming-blog/</link>
+      <pubDate>Sun, 15 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/starting-a-programming-blog/</guid>
+      <description>I started writing this blog earlier this year. So far, I&amp;rsquo;ve found it to be a valuable experience. It encourages me to:
+ Look for interesting things in the work I do Deeply understand the topic I&amp;rsquo;m writing about  In this post, I cover some of the challenges I face when blogging, and the techniques I use to get around them.
+Content I face two main problems when trying to write: perfectionism and difficulty with correctly scoping posts.</description>
+    </item>
+    
+    <item>
+      <title>Implementing &#39;undo&#39; in a text editor</title>
+      <link>http://routley.io/posts/text-editor-undo/</link>
+      <pubDate>Sun, 08 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/text-editor-undo/</guid>
+      <description>This post explores an elegant method for implementing undo/redo functionality in text editors.
+Problem We wish to implement functionality that allows the user of a text editor to undo their last action. If they accidentally undo an action, we want to let them redo it.
+For the purposes of this post, let&amp;rsquo;s assume that a text editor makes edits to a text object. This text object is an array of string pointers1, with each string representing a line of text2.</description>
+    </item>
+    
+    <item>
+      <title>Gap Buffers: a data structure for editable text</title>
+      <link>http://routley.io/posts/gap-buffer/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/gap-buffer/</guid>
+      <description>I&amp;rsquo;ve recently been writing a text editor. One of the first problems I faced was deciding how to store the contents of the file being edited. This post looks at gap buffers, the data structure I ended up using.
+Problem We wish to find a data structure which supports the following operations:
+ Insert or delete a character at column x, row y Insert or delete the column x  A naive solution: array of strings The simplest way to represent text is with an array of strings.</description>
+    </item>
+    
+    <item>
+      <title>Analyse and test C with Python</title>
+      <link>http://routley.io/posts/analyse-test-c-with-python/</link>
+      <pubDate>Wed, 16 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/analyse-test-c-with-python/</guid>
+      <description>I&amp;rsquo;ve recently been implementing data structures in C. Writing C is fun and educational, because it&amp;rsquo;s lower level than most other common languages. It&amp;rsquo;s fast, and writing it teaches you to understand what&amp;rsquo;s happening at a machine level.
+However, C is also relatively difficult to write, making it harder to analyse and test. It would be helpful to be able to do this with a higher level language, such as Python.</description>
+    </item>
+    
+    <item>
+      <title>Life after the Recurse Center</title>
+      <link>http://routley.io/posts/life-after-rc/</link>
+      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/life-after-rc/</guid>
+      <description>My batch at the Recurse Center finished last week. This seems like an appropriate moment to reflect on what I&amp;rsquo;ve learnt, and what I want to prioritise over the coming months.
+Past three months Technical I learnt:
+ How programming languages work C x86 Assembly JavaScript Scheme Forth Principles of web security P5.js Algorithms + data structures A large amount of &amp;lsquo;osmosis&amp;rsquo; knowledge from being around so many talented people  I wrote:</description>
+    </item>
+    
+    <item>
+      <title>Improve Python testing with parameterisation</title>
+      <link>http://routley.io/posts/parameterise-python-tests/</link>
+      <pubDate>Wed, 09 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/parameterise-python-tests/</guid>
+      <description>Parameterisation is a technique which makes testing simpler, more concise and more effective. It does this by separating test logic from test data. Let&amp;rsquo;s consider a test for a simple function, and how it can be improved by parameterisation.
+Simple test Let&amp;rsquo;s test the following function:
+# prime.py import math def is_prime(x): &amp;#34;&amp;#34;&amp;#34; is_prime returns True or False indicating whether x is prime or not. &amp;#34;&amp;#34;&amp;#34; if x &amp;lt;= 1: return False for i in range(2, int(math.</description>
+    </item>
+    
+    <item>
+      <title>PSA: cp -r behaves differently on linux and macOS</title>
+      <link>http://routley.io/posts/psa-cp-recursive/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/psa-cp-recursive/</guid>
+      <description>Today I found out (the hard way) that the GNU (available on linux) and BSD (available on macOS) implementations of cp behave differently when used to recursively copy.
+The differing behaviour comes when running cp with the -r flag on a source directory that ends with a slash (/):
+ GNU/linux: copy the whole directory BSD/macOS: copy the contents of the directory  While this is documented behaviour (see man pages below), it can lead to unwanted behaviour if you develop on a mac and build on a linux-based CI system.</description>
+    </item>
+    
+    <item>
+      <title>Simplify Golang test fixtures with this one weird trick</title>
+      <link>http://routley.io/posts/golang-test-fixtures/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/golang-test-fixtures/</guid>
+      <description>When testing code, test functions may depend on some external dependency. For example, if we have written a:
+ Web crawler, we may want to test it on a real website Web server, we may want to test GET methods against a real database  Test fixtures are functions which launch the external dependencies our test code requires.
+Say we&amp;rsquo;re writing a web crawler and want to test it against a real website.</description>
+    </item>
+    
+    <item>
+      <title>Investigating tries: writing a spell-checking algorithm</title>
+      <link>http://routley.io/posts/tries/</link>
+      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/tries/</guid>
+      <description>This article walks through writing a spell-checking algorithm, making use of a neat data structure called a trie, which is particularly suited to the problem.
+We will look at:
+ The spell-checking problem and naive solutions What a trie is and how it can offer us a better solution The trie-based solution Analysis of our solution How our solution can be improved Other problems that can be solved with tries  Problem We wish to write a spell-checking algorithm which should return a boolean indicating whether the word might be valid or not.</description>
+    </item>
+    
+    <item>
+      <title>A system time bug with Vagrant and Make</title>
+      <link>http://routley.io/posts/time-make-vagrant/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/time-make-vagrant/</guid>
+      <description>I&amp;rsquo;ve recently been writing a Forth interpreter in x86 assembly. As my laptop runs masOS, I&amp;rsquo;m using an Ubuntu virtual machine to compile and run my code. I&amp;rsquo;m using Vagrant to manage the VM.
+I experienced an issue with Make:
+$ make clean make: Warning: File &amp;#39;Makefile&amp;#39; has modification time 1153 s in the future rm -f forth forth.o make: warning: Clock skew detected. Your build may be incomplete. This turned out to be an issue with clock drift on the VM.</description>
+    </item>
+    
+    <item>
+      <title>Natas wargame walkthrough, levels 1-20</title>
+      <link>http://routley.io/posts/natas/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/natas/</guid>
+      <description>One of my objectives while I&amp;rsquo;m at the Recurse Center is to improve my knowedge of securing computer systems. A good way of learning this is to play an attacker and to try to break into insecure systems1. I&amp;rsquo;ve been working through Natas, a &amp;lsquo;wargame&amp;rsquo; developed by Over The Wire. Natas is a series of insecure webapps, which aim to teach the basics of web security.
+This post covers solutions to the first twenty levels of Natas.</description>
+    </item>
+    
+    <item>
+      <title>Slingshot: an interplanetary physics game</title>
+      <link>http://routley.io/posts/slingshot/</link>
+      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/slingshot/</guid>
+      <description>Over the weekend, Recurse Center held a game jam. Over 72 hours, I built a phyics game named Slingshot. In the game, you play the pilot of a spaceship with little fuel. To survive, you must navigate around planets and neutron stars to reach a series of checkpoints. You can play Slingshot here, and view the source code here.
+This post describes how the game is implemented.
+Drawing All drawing was done using the P5.</description>
+    </item>
+    
+    <item>
+      <title>Tail recursion for imperative programmers</title>
+      <link>http://routley.io/posts/tail-recursion/</link>
+      <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/tail-recursion/</guid>
+      <description>At the Recurse Center, I&amp;rsquo;ve been working my way through The Structure and Interpretation of Computer Programs (SICP) book. It&amp;rsquo;s an introductory programming book written for an MIT course in 1985. It teaches programming using the language Scheme, a LISP dialect. Scheme is functional, and I&amp;rsquo;ve been enjoying learning new functional concepts.
+This article aims to explain tail recursion to programmers without experience in functional languages or concepts.
+Before looking at tail recursion, let&amp;rsquo;s look at recursion in an imperative language, Python.</description>
+    </item>
+    
+    <item>
+      <title>Starting at the Recurse Center</title>
+      <link>http://routley.io/posts/starting-at-recurse-center/</link>
+      <pubDate>Tue, 23 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/starting-at-recurse-center/</guid>
+      <description>I&amp;rsquo;ve recently started at the Recurse Center (RC), a self-directed, three-month coding program based in New York. The main objective of the course is to improve as a programmer, but the way that&amp;rsquo;s gone about is left up to the individual. Having the opportunity to build anything for an extended period of time in an encouraging and nurturing environment is a privillage offered to few, and it&amp;rsquo;s important to make the most of it.</description>
+    </item>
+    
+    <item>
+      <title>Site deployment to S3 and SSL</title>
+      <link>http://routley.io/posts/site-deployment-to-s3-ssl/</link>
+      <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/site-deployment-to-s3-ssl/</guid>
+      <description>Previous Hosting and Deployment Previously, the website was hosted using GitHub Pages, a free static website hosting provided by GitHub. Once Pages is configured, the updated site can be deployed by pushing it to GitHub with git push.
+The old website used the Jekyll static site generator. As Jekyll is written by GitHub, GitHub Pages also natively supports Jekyll sites, running the build step for you.
+S3 Website Hosting AWS S3 can be configured to host static websites.</description>
+    </item>
+    
+    <item>
+      <title>Updating site CSS</title>
+      <link>http://routley.io/posts/updating-site-css/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/updating-site-css/</guid>
+      <description>Old Website The old website&amp;rsquo;s CSS was based on Bootstrap, with some custom styling. Source code can be found here. The code itself was hacked together.
+The font is Josefin Slab, which I quite liked for the main page, but I thought it felt too affected for use as the main font for blog posts.
+There are issues with the font size of the monospace font used for code blocks.</description>
+    </item>
+    
+    <item>
+      <title>Ptolemy: An AWS DMS Table Mapping Generator</title>
+      <link>http://routley.io/posts/ptolemy/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/ptolemy/</guid>
+      <description>This post introduces Ptolemy, a tool for creating AWS DMS mapping tables, recently open sourced by Cloudreach. Ptolemy&amp;rsquo;s source code can be found on GitHub.
+Motivation Amazon Web Services provides the Database Migration Service (DMS) tool for migrating data to, from, or between SQL databases. When running DMS, users can supply a table mapping, which allows the user to specify what data is sent from the source database to the target database.</description>
+    </item>
+    
+    <item>
+      <title>Configuring a Python Development Environment</title>
+      <link>http://routley.io/posts/configuring-a-python-development-environment/</link>
+      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/configuring-a-python-development-environment/</guid>
+      <description>This article outlines how to set up a Python development environment, and introduces tools to aid development work. This article is intended for those who are unfamiliar with Python, but have experience using a text editor and the command line. The Python language itself is not covered.
+Sections  Installation Running Python Code Packages Virtual Environments Linting Debugging  Installation Python can be installed in the following ways:
+Mac (assumes Homebrew is installed):</description>
+    </item>
+    
+  </channel>
+</rss>

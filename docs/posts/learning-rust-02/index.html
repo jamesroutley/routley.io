@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Learning Rust 02: an ls clone</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Learning Rust 02: an ls clone</h1>
+        <div class="header-date">
+            <time datetime="2018-07-08">8 July 2018</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p><em>I&rsquo;m learning Rust, and documenting the process. These posts are my notes -
+they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
+
+<p>In this post, I&rsquo;m building an <code>ls</code> clone. It&rsquo;s pretty similar to the last post&rsquo;s
+<code>pwd</code> clone. It&rsquo;s called <code>rls</code>.</p>
+
+<h2 id="code">Code</h2>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::env;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::fs;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::process;<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">fn</span> <span style="color:#06287e">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>args: <span style="color:#007020">Vec</span><span style="color:#666">&lt;</span><span style="color:#007020">String</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>env::args().collect();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">if</span><span style="color:#bbb"> </span>args.len()<span style="color:#bbb"> </span><span style="color:#666">!=</span><span style="color:#bbb"> </span><span style="color:#40a070">2</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>usage();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>directory<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">&amp;</span>args[<span style="color:#40a070">1</span>];<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>paths<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>fs::read_dir(directory).unwrap();<span style="color:#bbb">
+</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">for</span><span style="color:#bbb"> </span>path<span style="color:#bbb"> </span><span style="color:#007020;font-weight:bold">in</span><span style="color:#bbb"> </span>paths<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>path_buf<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>path.unwrap().path();<span style="color:#bbb">
+</span><span style="color:#bbb">        </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>file_name<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>path_buf.file_name().unwrap();<span style="color:#bbb">
+</span><span style="color:#bbb">        </span>println<span style="color:#666">!</span>(<span style="color:#4070a0">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>file_name.to_string_lossy())<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">fn</span> <span style="color:#06287e">usage</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>eprintln<span style="color:#666">!</span>(<span style="color:#4070a0">&#34;usage: rls &lt;dir&gt;&#34;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>process::exit(<span style="color:#40a070">1</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">            
+</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></code></pre></div>
+<h2 id="fetching-arguments">Fetching arguments</h2>
+
+<p>We can get the arguments passed to <code>rls</code> with the <code>env::args</code> function, which
+returns an iterator. We can convert the iterator to a
+<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">vector</a>, Rust&rsquo;s &lsquo;contiguous
+growable array type&rsquo;. I think vectors are the Rust equivalent to Go&rsquo;s slices, or
+Python&rsquo;s lists. We assign this vector to a new variable, <code>args</code>.</p>
+
+<h2 id="input-validation">Input validation</h2>
+
+<p>We require that an argument is passed to <code>rls</code>, the directory whose contents we
+want to list. If this argument isn&rsquo;t supplied, we call <code>usage</code>, which prints a
+help message to <code>stderr</code> and exits with a non-zero code, indicating an error.</p>
+
+<h2 id="fetching-a-directory-s-contents">Fetching a directory&rsquo;s contents</h2>
+
+<p>The standard library function <code>fs::read_dir</code> returns an iterator of
+<code>Result&lt;ReadDir&gt;</code>, where <code>ReadDir</code> is an iterator of <code>io::Result&lt;DirEntry&gt;</code>s.</p>
+
+<h2 id="printing-the-directories">Printing the directories</h2>
+
+<p>We iterate over the <code>ReadDir</code>, <code>unwrap</code> each path, and pull the actual file name
+out. Printing <code>path_buf</code> would print the file path <strong>relative to the pwd</strong> -
+<code>ls</code> only prints file names. We print the file names with the <code>println!</code> macro.</p>
+
+<h2 id="error-handling">Error handling</h2>
+
+<p>Functions which interact with the file system are error-prone. That&rsquo;s why lots
+of the values we get back from the file system functions are wrapped in
+<code>Results</code>.  To use the success values, we need to handle the error case. We&rsquo;re
+currently doing this using <code>unwrap</code>, which panics if there&rsquo;s an error. This is
+both verbose and bad UX - we probably don&rsquo;t want to display a full Rust error
+message to our users.</p>
+
+<p>It looks like there are a couple of ways of improving this - I&rsquo;ll be doing some
+reading about it
+<a href="https://doc.rust-lang.org/book/second-edition/ch09-00-error-handling.html">here</a>.</p>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

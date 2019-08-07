@@ -5,3 +5,6 @@ title = "James Routley"
 # Enable syntax highlighting in markdown code snippets
 pygmentsCodeFences = true
 pygmentsStyle = "friendly"
+
+# Publish to /docs, where GitHub pages will serve from
+publishDir = "docs"

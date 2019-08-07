@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://routley.io/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/learning-rust-02/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/learning-rust-01/</loc>
+    <lastmod>2018-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/nine-months-with-vim/</loc>
+    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/pico-8-game-of-life/</loc>
+    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/hand-writing-dns-messages/</loc>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/logbook/</loc>
+    <lastmod>2017-11-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/intermediate-go-testing/</loc>
+    <lastmod>2017-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/first-impressions-elm/</loc>
+    <lastmod>2017-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/starting-a-programming-blog/</loc>
+    <lastmod>2017-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/text-editor-undo/</loc>
+    <lastmod>2017-10-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/</loc>
+    <lastmod>2017-10-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/algorithms/</loc>
+    <lastmod>2017-10-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/gap-buffer/</loc>
+    <lastmod>2017-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/analyse-test-c-with-python/</loc>
+    <lastmod>2017-08-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/c/</loc>
+    <lastmod>2017-08-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/python/</loc>
+    <lastmod>2017-08-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/tdd/</loc>
+    <lastmod>2017-08-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/life-after-rc/</loc>
+    <lastmod>2017-08-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/parameterise-python-tests/</loc>
+    <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/psa-cp-recursive/</loc>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/golang-test-fixtures/</loc>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/go/</loc>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/tags/unix/</loc>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/tries/</loc>
+    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/time-make-vagrant/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/natas/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/slingshot/</loc>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/tail-recursion/</loc>
+    <lastmod>2017-06-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/starting-at-recurse-center/</loc>
+    <lastmod>2017-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/site-deployment-to-s3-ssl/</loc>
+    <lastmod>2016-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/updating-site-css/</loc>
+    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/ptolemy/</loc>
+    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/categories/</loc>
+    <lastmod>2016-11-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/configuring-a-python-development-environment/</loc>
+    <lastmod>2016-11-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/categories/tech/</loc>
+    <lastmod>2016-11-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/books/</loc>
+  </url>
+  
+</urlset>

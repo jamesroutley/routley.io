@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Using a logbook to improve your programming</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Using a logbook to improve your programming</h1>
+        <div class="header-date">
+            <time datetime="2017-11-23">23 November 2017</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p>In this post, I&rsquo;ll describe the engineering practice of keeping a logbook, and
+show how it can be applied to programming work.</p>
+
+<h2 id="logbooks">Logbooks</h2>
+
+<p>I studied engineering at university. Part of my course involved practical work,
+which we recorded in a logbook. To use a logbook successfully, you have to:</p>
+
+<ol>
+<li>Consider the problem you&rsquo;re attempting to solve</li>
+<li>Describe your method for solving it</li>
+<li>Describe the process of carrying out the method</li>
+<li>Record what happened, and ask how it could be improved</li>
+</ol>
+
+<p>This process is well suited to problem solving and active learning, and is
+described by George Pólya in his book <a href="https://en.wikipedia.org/wiki/How_to_Solve_It">How to Solve
+It</a>, which describes a method for
+solving mathematical problems.</p>
+
+<h2 id="logbooks-for-programming">Logbooks for programming</h2>
+
+<p>Recently, I&rsquo;ve been trying to apply this method to writing software and
+debugging code. It requires more upfront work than jumping in and trying things
+out, but it offers some advantages:</p>
+
+<ul>
+<li>It provides a framework for solving hard problems by encouraging you to break
+them down into a series of smaller ones.</li>
+<li>It helps you focus on the task at hand by providing immediate context on what
+you&rsquo;re doing. If you forget or become distracted, you can quickly get back to
+your train of thought.</li>
+<li>It helps you learn quickly. You can observe your method for problem solving,
+see what works and what doesn&rsquo;t and make improvements.</li>
+</ul>
+
+<p>Keeping a logbook has been a useful and interesting process for me so far - I&rsquo;d
+encourage you to try it out.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Real engineering logbooks are professional records which can be used as legal
+evidence in case of patent disputes etc. They must be bound so pages can&rsquo;t be
+inserted or removed, written in ink, each page must be dated, and each new day&rsquo;s
+work must start on a new page.</p>
+
+<p>Our logbook doesn&rsquo;t need to be this formal. Mine is a collection of Markdown
+files each titled with today&rsquo;s date. I store them all in the directory
+<code>~/logbook</code>. To simplify this, I&rsquo;ve added a shell function for quickly opening
+today&rsquo;s entry in Vim:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#007020;font-weight:bold">function</span> lb<span style="color:#666">()</span> <span style="color:#666">{</span>
+    vim ~/logbook/<span style="color:#007020;font-weight:bold">$(</span>date <span style="color:#4070a0">&#39;+%Y-%m-%d&#39;</span><span style="color:#007020;font-weight:bold">)</span>.md
+<span style="color:#666">}</span></code></pre></div>
+<p>Although it&rsquo;s simple enough to be added as an <code>alias</code>, I&rsquo;d recommend using the
+function. The function re-evaluates <code>date</code> each time its run, while the alias
+only evaluates it when your <code>bashrc</code> or <code>zshrc</code> is evaluated. If you leave a
+shell open overnight, <code>lb</code> will open yesterday&rsquo;s page.</p>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

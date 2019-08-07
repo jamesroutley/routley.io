@@ -199,7 +199,3 @@ build-iPhoneSimulator/
 
 # End of https://www.gitignore.io/api/ruby,python,jekyll,hugo
 
-# Don't commit drafts
-_drafts/
-/vendor/
-/l-system/

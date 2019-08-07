@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Simplify Golang test fixtures with this one weird trick</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Simplify Golang test fixtures with this one weird trick</h1>
+        <div class="header-date">
+            <time datetime="2017-07-20">20 July 2017</time>
+        </div>
+    </header>
+    <section class="main_post">
+        <p>When testing code, test functions may depend on some external dependency. For
+example, if we have written a:</p>
+
+<ul>
+<li>Web crawler, we may want to test it on a real website</li>
+<li>Web server, we may want to test <code>GET</code> methods against a real database</li>
+</ul>
+
+<p>Test fixtures are functions which launch the external dependencies our test code
+requires.</p>
+
+<p>Say we&rsquo;re writing a web crawler and want to test it against a real website. We
+can define <code>startServer</code> and <code>stopServer</code> functions which are called by our test
+functions to serve the website required for our testing:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">startServer</span>() net.Listener {
+    <span style="color:#60a0b0;font-style:italic">// Start server
+</span><span style="color:#60a0b0;font-style:italic"></span>    <span style="color:#007020;font-weight:bold">return</span> listener
+}
+
+<span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">stopServer</span>(l net.Listener) {
+    <span style="color:#60a0b0;font-style:italic">// Stop server
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+
+<span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestFeature</span>(t <span style="color:#666">*</span>testing.T) {
+    listener <span style="color:#666">:=</span> <span style="color:#06287e">startServer</span>()
+    <span style="color:#007020;font-weight:bold">defer</span> <span style="color:#06287e">stopServer</span>(listener)
+    <span style="color:#60a0b0;font-style:italic">// Run test
+</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+<p>We can simplify this code by making the start function return the stop function:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">startServer</span>() <span style="color:#007020;font-weight:bold">func</span> {
+    <span style="color:#60a0b0;font-style:italic">// Start server
+</span><span style="color:#60a0b0;font-style:italic"></span>
+    <span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">stopServer</span>() {
+        <span style="color:#60a0b0;font-style:italic">// Stop server
+</span><span style="color:#60a0b0;font-style:italic"></span>    }
+
+    <span style="color:#007020;font-weight:bold">return</span> stopServer
+}
+
+<span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestFeature</span>(t <span style="color:#666">*</span>testing.T) {
+    stopServer <span style="color:#666">:=</span> <span style="color:#06287e">startServer</span>()
+    <span style="color:#007020;font-weight:bold">defer</span> <span style="color:#06287e">stopServer</span>()
+    <span style="color:#60a0b0;font-style:italic">// Run test
+</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+<p>This pattern has two benefits:</p>
+
+<ol>
+<li><code>startServer</code> and <code>stopServer</code> are inherently linked and should always be
+called together. Binding the two functions together makes this explicit.</li>
+<li>In the first example, the writer of <code>TestFeature</code> must know that
+<code>startServer</code> returns a <code>net.Listener</code>, which must be passed to <code>stopServer</code>.
+This leaks implementation detail. In the second example, this information is
+hidden<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, giving a cleaner API. The <code>startServer</code> and <code>stopServer</code>
+functions can be changed internally, without affecting test code.</li>
+</ol>
+
+<hr />
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>The nested functions in the second example form a closure, in which the
+<code>net.Listener</code> is persisted.</p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

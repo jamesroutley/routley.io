@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unix on James Routley</title>
+    <link>http://routley.io/tags/unix/</link>
+    <description>Recent content in unix on James Routley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 20 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://routley.io/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PSA: cp -r behaves differently on linux and macOS</title>
+      <link>http://routley.io/posts/psa-cp-recursive/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/psa-cp-recursive/</guid>
+      <description>Today I found out (the hard way) that the GNU (available on linux) and BSD (available on macOS) implementations of cp behave differently when used to recursively copy.
+The differing behaviour comes when running cp with the -r flag on a source directory that ends with a slash (/):
+ GNU/linux: copy the whole directory BSD/macOS: copy the contents of the directory  While this is documented behaviour (see man pages below), it can lead to unwanted behaviour if you develop on a mac and build on a linux-based CI system.</description>
+    </item>
+    
+  </channel>
+</rss>

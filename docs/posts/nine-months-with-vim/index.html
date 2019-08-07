@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Nine months with Vim</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Nine months with Vim</h1>
+        <div class="header-date">
+            <time datetime="2018-03-11">11 March 2018</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p>Over summer, I attended the Recurse Center. I noticed that around half the
+people in my batch were using Vim, and figured it would be a good time to try it
+out. I ran into two difficulties:</p>
+
+<ol>
+<li>I knew the basics of using Vim but I was less efficient than with my previous
+editor, <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+<li>I didn&rsquo;t know how to configure Vim to use the syntax highlighting,
+indentation and linters I was used to. I was trying out lots of different
+programming languages, and needed to set Vim up for each one separately.</li>
+</ol>
+
+<p>I decided to deal with these problems separately. I focused on the former by
+using a preconfigured Vim setup to defer having to think about the  latter.</p>
+
+<h2 id="initial-vim-configuration">Initial Vim configuration</h2>
+
+<p>I installed Amir Salihefendic&rsquo;s <a href="https://github.com/amix/vimrc">vimrc</a>. It
+provided a really good starting point, and I&rsquo;d recommend it to people who don&rsquo;t
+want to roll their own config.</p>
+
+<p>Once I felt productive at using Vim, I decided to write my own Vim
+configuration. This let me address some minor issues I had:
+- I found it difficult to understand which features were and built into
+    Vim, and which came from the <code>vimrc</code>
+- The <code>vimrc</code> contained features I didn&rsquo;t use
+- The <code>vimrc</code> vendored packages into the repo. To add new things, I needed to
+    use git submodules, a lower level of abstraction than I wanted to use
+- I forked the repo to make some changes. Maintaining the fork and keeping
+    everything up to date was a lot of effort</p>
+
+<h2 id="current-vim-configuration">Current Vim configuration</h2>
+
+<p>I wanted a configuration that was:
+- Language agnostic and supported a wide range of languages
+- Minimal and close to native Vim where possible
+- Easy to edit and used a modern package manager</p>
+
+<p>You can see my full configuration on
+<a href="https://github.com/jamesroutley/nvim/blob/master/init.vim">GitHub</a>. It&rsquo;s just
+over 100 lines of code, including comments and newlines.</p>
+
+<h3 id="file-navigation">File navigation</h3>
+
+<p>I use Tim Pope&rsquo;s <a href="https://github.com/tpope/vim-vinegar">vim-vinegar</a> to interact
+with the filesystem and open files. It&rsquo;s a thin wrapper around Vim&rsquo;s built in
+<code>netrw</code>. When editing a file, pressing <code>-</code> opens a listing of that file&rsquo;s parent
+directory. Pressing <code>-</code> again to moves you up a directory. To find a particular
+directory or file, I use the normal Vim search (<code>/</code>).</p>
+
+<p>I&rsquo;ve heard good things about fuzzy finders such as
+<a href="https://github.com/junegunn/fzf.vim">fzf</a>, but haven&rsquo;t used them myself.</p>
+
+<h3 id="splits-and-tabs">Splits and tabs</h3>
+
+<p>I use both tabs and splits to edit multiple files. At work I mostly code on a
+large number of microservices written in Go. I&rsquo;ll use one tab per service, and
+two or three splits per tab.</p>
+
+<p>To open splits, I&rsquo;ve mapped <code>=</code> to open the current file in a vertical split. I
+use this in conjunction with <code>vim-vinegar</code>&rsquo;s <code>-</code> command to quickly open files
+from the same package/directory in a new split.</p>
+
+<p>I don&rsquo;t currently interact with the open buffer list directly.</p>
+
+<p>To move between splits, I&rsquo;ve added the mappings <code>ctrl+&lt;h/j/k/l&gt;</code>:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#60a0b0;font-style:italic">&#34; Easy split navigation</span><span style="">
+</span><span style=""></span>map &lt;C-j&gt; &lt;C-w&gt;j<span style="">
+</span><span style=""></span>map &lt;C-k&gt; &lt;C-W&gt;k<span style="">
+</span><span style=""></span>map &lt;C-h&gt; &lt;C-W&gt;h<span style="">
+</span><span style=""></span>map &lt;C-l&gt; &lt;C-W&gt;l</code></pre></div>
+<p>To create new tabs I use <code>T</code>, and to switch between them, I use <code>alt+&lt;h/l&gt;</code>:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#60a0b0;font-style:italic">&#34; Simplify using tabs</span><span style="">
+</span><span style=""></span>nnoremap ˙ gT<span style="">
+</span><span style=""></span>nnoremap ¬ gt<span style="">
+</span><span style=""></span>nnoremap T :tabnew&lt;cr&gt;</code></pre></div>
+<h3 id="language-support">Language support</h3>
+
+<p>I use two plugins to get decent Vim support for most languages I&rsquo;ll ever use:
+- <a href="https://github.com/sheerun/vim-polyglot">vim-polyglot</a>: Syntax highlighting
+    and correct indenting
+- <a href="https://github.com/w0rp/ale">Asynchronous Line Engine (ALE)</a>: Linting</p>
+
+<h3 id="interacting-with-code">Interacting with code</h3>
+
+<p>I use a couple of small plugins which make writing code marginally easier. The
+features they implement come built into Visual Studio Code:</p>
+
+<ul>
+<li><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment out lines or
+blocks of code. It works for most languages I&rsquo;ve tried</li>
+<li><a href="https://github.com/jiangmiao/auto-pairs">auto-pairs</a>: When you type a left
+parenthesis, it automatically types a right parenthesis and moves your
+cursor between the two</li>
+<li><a href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a>: Display a green
+<code>+</code> or a red <code>-</code> next to columns that have been edited in a file</li>
+<li><code>:set colorcolumn = 80</code>: Display a faint line at 80 chars</li>
+</ul>
+
+<h3 id="package-management">Package management</h3>
+
+<p>I use Junegunn Choi&rsquo;s <a href="https://github.com/junegunn/vim-plug">vim-plug</a> as my
+package manager. I like its simple API (add GitHub repos, run <code>PlugInstall</code>). It
+operates at a higher level of abstraction than
+<a href="https://github.com/tpope/vim-pathogen">Pathogen</a> or Vim 8&rsquo;s native package
+loading in that you don&rsquo;t interact with your plugins&rsquo; files directly. This feels
+familiar if you&rsquo;re used to brew/apt-get/pip etc.</p>
+
+<h3 id="logbook">Logbook</h3>
+
+<p>To simplify writing my
+<a href="https://routley.io/tech/2017/11/23/logbook.html">logbook</a>, I wrote a Vim
+plugin, <a href="https://github.com/jamesroutley/vim-logbook">vim-logbook</a> which lets me
+easily open today&rsquo;s logbook and add timestamps.</p>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

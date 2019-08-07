@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Implementing &#39;undo&#39; in a text editor</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Implementing &#39;undo&#39; in a text editor</h1>
+        <div class="header-date">
+            <time datetime="2017-10-08">8 October 2017</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p>This post explores an elegant method for implementing undo/redo functionality in
+text editors.</p>
+
+<h2 id="problem">Problem</h2>
+
+<p>We wish to implement functionality that allows the user of a text editor to undo
+their last action. If they accidentally undo an action, we want to let them redo
+it.</p>
+
+<p>For the purposes of this post, let&rsquo;s assume that a text editor makes edits to a
+<code>text</code> object. This <code>text</code> object is an array of string pointers<sup class="footnote-ref" id="fnref:pointer"><a href="#fn:pointer">1</a></sup>,
+with each string representing a line of text<sup class="footnote-ref" id="fnref:gap-buffer"><a href="#fn:gap-buffer">2</a></sup>.</p>
+
+<h2 id="a-solution">A solution</h2>
+
+<p>This technique for implementing undo is simple, but requires that the text
+editor is written so that all edit commands are immutable. Immutability means
+that the edit commands won&rsquo;t change the <code>text</code> object, but will return a copy of
+the <code>text</code>, with the changes made to it. If we store each of these text objects
+(let&rsquo;s call them &lsquo;states&rsquo;), we can undo by reverting the text to the previous
+version.</p>
+
+<p>Making a full copy of the <code>text</code> object on every edit would be wasteful. We can
+make things better by copying pointers, rather than full objects.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Consider a document which contains the text:</p>
+
+<pre><code>Hello
+world
+</code></pre>
+
+<p>Let&rsquo;s assume this is stored in an array of pointers to strings. Our strings are
+stored at two locations in memory<sup class="footnote-ref" id="fnref:memory"><a href="#fn:memory">3</a></sup>:</p>
+
+<pre><code>0: &quot;Hello&quot;
+1: &quot;world&quot;
+</code></pre>
+
+<p>Our array contains pointers to those memory locations:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[<span style="color:#666">*</span><span style="color:#40a070">0</span>, <span style="color:#666">*</span><span style="color:#40a070">1</span>]</code></pre></div>
+<p>When we make an edit, we create a new array of strings, where all pointers are
+the same, apart from the edited one:</p>
+
+<pre><code>0: &quot;Hello&quot;
+1: &quot;world&quot;
+2: &quot;James&quot;
+</code></pre>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#666">*</span><span style="color:#40a070">0</span>, <span style="color:#666">*</span><span style="color:#40a070">2</span>]</code></pre></div>
+<p>The trick to implementing undo is to realise that our previous array, containing
+the string <code>&quot;Hello\nworld&quot;</code> still exists. To undo our changes, we simply revert
+to the previous array.</p>
+
+<h2 id="in-finite-history">(In)finite history</h2>
+
+<p>To implement infinite history, we store the states in a linked list. To undo, we
+move back a state. To redo, we move forward a state. Infinite undo history can
+take up an unbounded amount of memory, and with high enough usage will cause the
+program to crash.</p>
+
+<p>To implement finite undo, we must store the states in a doubly linked list. We
+keep track of the length of the list by incrementing a counter whenever a new
+state is added to the list. We decrement this counter on undo and increment it
+again on redo. If the length exceeds some predefined limit, we delete the state
+from the tail end of the list.</p>
+
+<h2 id="garbage-collection">Garbage collection</h2>
+
+<p>When deleting the oldest state, we need to be careful to make sure we don&rsquo;t
+delete any strings which are reused by other states. In a garbage collected
+language, this is managed by the runtime.</p>
+
+<p>We remove the state from our linked list. Because it is no longer used, it can
+be deleted. The strings that are only used in that state can also be deleted.
+Strings used in other states are kept.</p>
+
+<p>This technique can be used in non-garbage collected languages, but this
+object management must be done manually.</p>
+
+<hr />
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:pointer"><p>This technique doesn&rsquo;t actually require a language with pointers;
+Pointers just offer a convenient notation for this example.</p>
+ <a class="footnote-return" href="#fnref:pointer"><sup>[return]</sup></a></li>
+
+<li id="fn:gap-buffer"><p>This isn&rsquo;t actually a good way to store text in a text editor.
+For a better solution, see a post I wrote about <a href="/tech/2017/09/01/gap-buffer.html">gap
+buffers</a>.</p>
+ <a class="footnote-return" href="#fnref:gap-buffer"><sup>[return]</sup></a></li>
+
+<li id="fn:memory"><p>Note that the memory addresses in this example have been simplified
+for the sake of clarity and don&rsquo;t make physical sense.</p>
+ <a class="footnote-return" href="#fnref:memory"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

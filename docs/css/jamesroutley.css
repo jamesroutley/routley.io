@@ -1,0 +1,99 @@
+body {
+  font-family: plex-sans;
+  line-height: 1.7;
+  text-align: justify;
+  max-width: 700px;
+  margin: 50px auto 50px;
+}
+
+/* Header styling */
+
+h1, h2, h3, h4, h5, h6 {
+  /* font-family: plex-serif; */
+  text-align: left;
+}
+
+.header-date {
+  text-align: right;
+}
+
+/* Image styling */
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+/* Code styling */
+
+code, pre {
+  font-family: plex-mono;
+}
+
+pre {
+    padding: 1.2em;
+}
+
+/* Hyperlink styling */
+
+a:link {
+  color: #000;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #000;
+}
+
+a:hover {
+  color: #fff;
+  background-color: #000;
+  text-decoration: none;
+}
+
+hr {
+    margin: 25px auto 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Fonts */
+
+@font-face {
+    font-family: 'plex-sans';
+    src: url('/font/IBMPlexSans-Regular.woff') format('woff'),
+    url('/font/IBMPlexSans-Regular.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'plex-serif';
+    src: url('/font/IBMPlexSerif-Regular.woff') format('woff'),
+    url('/font/IBMPlexSerif-Regular.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'plex-mono';
+    src: url('/font/IBMPlexMono-Regular.woff') format('woff'),
+    url('/font/IBMPlexMono-Regular.eot');
+    font-weight: normal;
+    font-style: italic;
+}

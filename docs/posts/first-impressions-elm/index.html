@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | First impressions of Elm</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">First impressions of Elm</h1>
+        <div class="header-date">
+            <time datetime="2017-10-31">31 October 2017</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p>This week, I&rsquo;ve been learning Elm. While at the Recurse Center, I came across
+the book <a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven
+Weeks</a>. The
+book&rsquo;s concept appealed to me. While I don&rsquo;t think it&rsquo;s possible to learn a
+programming language in a week, I think there&rsquo;s value in broadening your
+horizons with the quick study of a wide range of concepts.</p>
+
+<p>This post summarises my initial thoughts about Elm, and lists some resources
+which may help you learn it.</p>
+
+<h2 id="features">Features</h2>
+
+<p>Elm is a front-end language. It compiles to JavaScript, HTML and CSS. It is a
+strongly typed, purely functional language, and it borrows syntax from Haskell.
+It has a small <a href="http://elm-lang.org/docs/syntax">syntax</a>, and only implements a
+few <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/">core
+libraries</a>.</p>
+
+<p>Elm defines the <a href="https://guide.elm-lang.org/architecture/">Elm Architecture</a>, a
+pattern that most applications should follow. This architecture splits code into
+three sections:</p>
+
+<ol>
+<li>Model - the state of an application</li>
+<li>Update - the way to update the state</li>
+<li>View - how the state is presented as HTML</li>
+</ol>
+
+<h2 id="impressions">Impressions</h2>
+
+<ul>
+<li>Fun to write. Elm aims to be a beginner friendly language. It&rsquo;s accessible,
+and seems to have a good community.</li>
+<li>Friendly compiler. I think Elm&rsquo;s compiler is the most helpful compiler I&rsquo;ve
+used. It offers helpful debugging notes. It also writes in the first person!</li>
+<li>Community. Elm&rsquo;s community seems friendly. It&rsquo;s not huge, and there are fewer
+stack overflow questions etc than I&rsquo;m used to.</li>
+<li>Single ecosystem. Elm is relatively self contained. It&rsquo;s easy to set the
+compiler up, without having to configure babel, react, redux, webpack etc.</li>
+<li>Architecture. Having a fixed architecture makes it easy to start developing in
+Elm. I think more languages should offer example architectures.</li>
+<li>Safety. Elm aims to be a safe language. It has a strict type system which if
+used well can catch a lot of bugs at compile time. It doesn&rsquo;t have a <a href="https://guide.elm-lang.org/error_handling/maybe.html">concept
+of null</a>, and forces the
+user to account for procedures which <a href="https://guide.elm-lang.org/error_handling/result.html">may
+fail</a>.</li>
+<li>Haskell introduction. Elm shares features with Haskell, but is simpler and
+carries less baggage. It may be a useful stepping stone to learning Haskell.</li>
+<li>Javascript interop. Interacting with plain JavaScript libraries happens via
+<a href="https://guide.elm-lang.org/interop/javascript.html">ports or flags</a>. From
+what I understand, these allow safe interaction with potentially unsafe
+external code. I haven&rsquo;t actually done this so I can&rsquo;t say any more about
+this!</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li><a href="https://guide.elm-lang.org/install.html">Elm Guide</a>. I&rsquo;d recommend working
+through this to get an overview of how to install, setup and write Elm.</li>
+<li><a href="https://learnxinyminutes.com/docs/elm/">Learn Elm in Y Minutes</a>. A useful
+guide to Elm&rsquo;s syntax.</li>
+<li>elm-repl. Elm&rsquo;s repl is useful for quickly testing ideas out.</li>
+<li><a href="https://github.com/elm-community/elm-test">elm-test</a>. I found writing tests
+useful for confirming that functions behave as expected.</li>
+<li><a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">Let&rsquo;s be
+mainstream</a>.
+A talk by Evan Czaplicki, Elm&rsquo;s inventor, on some of the philosophy behind the
+language.</li>
+</ul>
+
+    </section>
+</article>
+
+    </div></body>
+</html>

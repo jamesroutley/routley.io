@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on James Routley</title>
+    <link>http://routley.io/tags/python/</link>
+    <description>Recent content in python on James Routley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 16 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://routley.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analyse and test C with Python</title>
+      <link>http://routley.io/posts/analyse-test-c-with-python/</link>
+      <pubDate>Wed, 16 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/analyse-test-c-with-python/</guid>
+      <description>I&amp;rsquo;ve recently been implementing data structures in C. Writing C is fun and educational, because it&amp;rsquo;s lower level than most other common languages. It&amp;rsquo;s fast, and writing it teaches you to understand what&amp;rsquo;s happening at a machine level.
+However, C is also relatively difficult to write, making it harder to analyse and test. It would be helpful to be able to do this with a higher level language, such as Python.</description>
+    </item>
+    
+    <item>
+      <title>Improve Python testing with parameterisation</title>
+      <link>http://routley.io/posts/parameterise-python-tests/</link>
+      <pubDate>Wed, 09 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/parameterise-python-tests/</guid>
+      <description>Parameterisation is a technique which makes testing simpler, more concise and more effective. It does this by separating test logic from test data. Let&amp;rsquo;s consider a test for a simple function, and how it can be improved by parameterisation.
+Simple test Let&amp;rsquo;s test the following function:
+# prime.py import math def is_prime(x): &amp;#34;&amp;#34;&amp;#34; is_prime returns True or False indicating whether x is prime or not. &amp;#34;&amp;#34;&amp;#34; if x &amp;lt;= 1: return False for i in range(2, int(math.</description>
+    </item>
+    
+  </channel>
+</rss>

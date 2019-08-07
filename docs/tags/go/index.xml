@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on James Routley</title>
+    <link>http://routley.io/tags/go/</link>
+    <description>Recent content in go on James Routley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 20 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://routley.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Simplify Golang test fixtures with this one weird trick</title>
+      <link>http://routley.io/posts/golang-test-fixtures/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/golang-test-fixtures/</guid>
+      <description>When testing code, test functions may depend on some external dependency. For example, if we have written a:
+ Web crawler, we may want to test it on a real website Web server, we may want to test GET methods against a real database  Test fixtures are functions which launch the external dependencies our test code requires.
+Say we&amp;rsquo;re writing a web crawler and want to test it against a real website.</description>
+    </item>
+    
+  </channel>
+</rss>

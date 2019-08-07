@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Investigating tries: writing a spell-checking algorithm</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Investigating tries: writing a spell-checking algorithm</h1>
+        <div class="header-date">
+            <time datetime="2017-07-16">16 July 2017</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<p>This article walks through writing a spell-checking algorithm, making use of
+a neat data structure called a <a href="https://en.wikipedia.org/wiki/Trie">trie</a>, which
+is particularly suited to the problem.</p>
+
+<p>We will look at:</p>
+
+<ul>
+<li><a href="#problem">The spell-checking problem and naive solutions</a></li>
+<li><a href="#tries">What a trie is and how it can offer us a better solution</a></li>
+<li><a href="#implementation">The trie-based solution</a></li>
+<li><a href="#analysis">Analysis of our solution</a></li>
+<li><a href="#improvements">How our solution can be improved</a></li>
+<li><a href="#extensions">Other problems that can be solved with tries</a></li>
+</ul>
+
+<h2 id="problem">Problem</h2>
+
+<p>We wish to write a spell-checking algorithm which should return a boolean
+indicating whether the word might be valid or not. It should return false only
+if there is no possibility of the word being correct. Words which are incorrect
+but may be made correct with the addition of further letters should return
+true.</p>
+
+<ul>
+<li><code>zebr</code> -&gt; <code>true</code></li>
+<li><code>zebra</code> -&gt; <code>true</code></li>
+<li><code>zebrak</code> -&gt; <code>false</code></li>
+</ul>
+
+<p>Let&rsquo;s consider some solutions using conventional data structures.</p>
+
+<ul>
+<li><p>List. Sort words and store them in a list. We can then use a modified binary
+search<sup class="footnote-ref" id="fnref:binary-search"><a href="#fn:binary-search">1</a></sup> to search for words in <code>O(m log n)</code>
+time<sup class="footnote-ref" id="fnref:bin-search-complexity"><a href="#fn:bin-search-complexity">2</a></sup>, where <code>m</code> is the length of the search term and
+<code>n</code> is the number of words in the dictionary. This isn&rsquo;t a bad solution, but
+we can do better.</p></li>
+
+<li><p>Dict/set. Store words in a <code>dict</code> or a <code>set</code>. Dicts and sets use hashing
+algorithms to provide constant time (<code>O(1)</code>) lookups. This makes them seem
+suitable for an algorithm which is mostly about looking up whether a word is
+in a list. However, our spell-checker should not return false for the word the
+user is currently typing, even if it is not yet a valid word. In hashing the
+words in the list, we lose information about the word itself, and cannot map a
+word which can be made correct to the correct word. This makes dicts and sets
+unsuitable for this purpose.</p></li>
+</ul>
+
+<h2 id="tries">Tries</h2>
+
+<p>A trie is a data structure which can store strings in a way which makes them
+easy to search. The following diagram shows a trie with the strings <code>app</code>,
+<code>apple</code> and <code>cat</code> stored in it.</p>
+
+<pre><code>0 -&gt; a -&gt; p -&gt; p. -&gt; l -&gt; e.
+ `-&gt; c -&gt; a -&gt; t.
+</code></pre>
+
+<p>In this diagram, <code>0</code> represents the node at the top of the trie, which has no
+value associated. Nodes marked are marked with a dot <code>.</code> to signify that they
+contain a letter which is at the end of a word.</p>
+
+<p>The trie is made up of a series of interconnected nodes. Each node stores a
+single character, and interconnecting lines show the relationship between
+characters. By following the lines, we can see our three words</p>
+
+<p>We can see that a trie explicitly encodes the characters of a word in its nodes,
+making it suitable for our spell-checking algorithm, where we need to be able to
+match substrings of words in the dictionary.</p>
+
+<p>Our trie will need to support two operations:</p>
+
+<ul>
+<li><code>insert</code>, which adds a new word</li>
+<li><code>search</code>, which searches for a match or potential match</li>
+</ul>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>First, let&rsquo;s implement our trie. Tries consist of a series of nodes. Each node
+must store a value, a record of the child nodes, and whether the node points to
+the end of a complete word.</p>
+
+<p>The child nodes can be stored in different ways, depending on the properties
+desired in the trie. Here, we store them in a <code>dict</code>, which offers fast <code>O(1)</code>
+lookup times, but require larger memory usage. A list could alternatively
+be used to reduce memory usage, at the cost of slower lookup time.</p>
+
+<p>Using a <code>dict</code>, the algorithmic complexity of spell-checking a word should be
+<code>O(m)</code>, where <code>m</code> is the length of the string being checked<sup class="footnote-ref" id="fnref:trie-complexity"><a href="#fn:trie-complexity">3</a></sup>.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Node</span>(<span style="color:#007020">object</span>):
+   <span style="color:#007020;font-weight:bold">def</span> __init__(self, value<span style="color:#666">=</span>None):
+        self<span style="color:#666">.</span>value <span style="color:#666">=</span> value
+        self<span style="color:#666">.</span>children <span style="color:#666">=</span> {}
+        self<span style="color:#666">.</span>is_complete <span style="color:#666">=</span> False</code></pre></div>
+<p>The trie itself just contains a reference to the top of the string of nodes:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
+    <span style="color:#007020;font-weight:bold">def</span> __init__(self):
+        self<span style="color:#666">.</span>node <span style="color:#666">=</span> Node()</code></pre></div>
+<p>We can now implement the <code>insert</code> method:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
+    <span style="color:#60a0b0;font-style:italic"># ...</span>
+    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">insert</span>(self, key):
+        node <span style="color:#666">=</span> self<span style="color:#666">.</span>node
+        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
+            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
+                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
+            <span style="color:#007020;font-weight:bold">else</span>:
+                new_node <span style="color:#666">=</span> Node(letter)
+                node<span style="color:#666">.</span>children[letter] <span style="color:#666">=</span> new_node
+                node <span style="color:#666">=</span> new_node
+        node<span style="color:#666">.</span>is_complete <span style="color:#666">=</span> True</code></pre></div>
+<p>Insert takes a key to insert, iterates over it, and adds each letter to the
+trie, creating new nodes if necessary.</p>
+
+<p><code>search</code> method:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
+    <span style="color:#60a0b0;font-style:italic"># ...</span>
+    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">search</span>(self, key):
+        node <span style="color:#666">=</span> self<span style="color:#666">.</span>node
+        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
+            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">not</span> <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
+                <span style="color:#007020;font-weight:bold">return</span> False
+            <span style="color:#007020;font-weight:bold">else</span>:
+                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
+        <span style="color:#007020;font-weight:bold">return</span> True</code></pre></div>
+<p>Search iterates over the letters in the key, checking that each node contains a
+child whose value matches the letter.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<h3 id="comparison-to-binary-search">Comparison to binary search</h3>
+
+<p>We can compare how our trie-based algorithm compares to binary search which by
+running a benchmark test. The test searches for 1000 randomly selected words
+from the dictionary 100 times each.</p>
+
+<pre><code>$ python benchmark.py
+Binary search 1000 items 100 times: 2.32307600975
+Trie search 1000 items 100 times: 0.461572885513
+</code></pre>
+
+<h3 id="complexity">Complexity</h3>
+
+<p>We can empirically measure the algorithm&rsquo;s time complexity by measuring the time
+taken to search for words of variable length known to be in the trie.</p>
+
+<p><img src="/img/trie-search-complexity.png" alt="Graph showing trie's search has linear time complexity." height="420" width="440"></p>
+
+<p><code>Trie.search</code> has linear time complexity, as expected.</p>
+
+<h2 id="improvements">Improvements</h2>
+
+<h3 id="speed-up-searching-successive-characters-in-a-word">Speed up searching successive characters in a word</h3>
+
+<p>When spell-checking, a word as it is typed, we make multiple calls to the
+<code>search()</code> function, each time passing the previously searched value with a new
+character appended. For example, when typing the word &lsquo;word&rsquo;, the following
+searches are made:</p>
+
+<ul>
+<li>w</li>
+<li>wo</li>
+<li>wor</li>
+<li>word</li>
+</ul>
+
+<p>When searching for &lsquo;wor&rsquo;, you repeat the work done when searching for &lsquo;wo&rsquo; and
+&lsquo;w&rsquo;. We can modify our algorithm to take this into account:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
+    <span style="color:#60a0b0;font-style:italic"># ...</span>
+    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">search</span>(self, key, prev_node<span style="color:#666">=</span>None):
+        node <span style="color:#666">=</span> prev_node <span style="color:#007020;font-weight:bold">if</span> prev_node <span style="color:#007020;font-weight:bold">is</span> <span style="color:#007020;font-weight:bold">not</span> None <span style="color:#007020;font-weight:bold">else</span> self<span style="color:#666">.</span>node
+        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
+            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">not</span> <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
+                <span style="color:#007020;font-weight:bold">return</span> False, node
+            <span style="color:#007020;font-weight:bold">else</span>:
+                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
+        <span style="color:#007020;font-weight:bold">return</span> True, node</code></pre></div>
+<p>In this code, the last searched node is returned to the caller. The caller can
+then supply this node when calling <code>search</code> with the next character in the word
+to continue searching when we left off.</p>
+
+<h3 id="startup-time">Startup time</h3>
+
+<p>One disadvantage of this algorithm is that initialising the trie takes some
+time. By profiling the insertion of the dictionary into the trie, we can see
+that a lot of this time is spent initialising <code>Node</code> objects:</p>
+
+<pre><code>$ python profile_trie_insert.py
+     1028667 function calls in 5.354 seconds
+
+Ordered by: standard name
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1    0.176    0.176    5.354    5.354 &lt;string&gt;:1(&lt;module&gt;)
+     1    0.101    0.101    5.178    5.178 profile_trie_insert.py:6(initialise_trie)
+792777    3.273    0.000    3.273    0.000 trie_dict.py:12(__init__)
+     1    0.000    0.000    0.000    0.000 trie_dict.py:20(__init__)
+235886    1.804    0.000    5.077    0.000 trie_dict.py:29(insert)
+     1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+</code></pre>
+
+<p>This startup time could be improved by implementing <code>Node</code> with an object with
+one which is faster to initialise, such as a <code>collections.namedtuple</code>.</p>
+
+<p>However, this slow startup only needs to be run once, and won&rsquo;t affect
+performance once initialised.</p>
+
+<h3 id="memory-usage">Memory usage</h3>
+
+<p>Tries trade off speed for memory usage. Although storing a list of words in a
+trie reduces the total number of characters stored<sup class="footnote-ref" id="fnref:chars-stored"><a href="#fn:chars-stored">4</a></sup>, each
+character stored now has overhead associated with it from the <code>Node</code> object
+which contains it, and the <code>dict</code> used to store its relationships.</p>
+
+<p>This memory usage can be reduced by storing the words in a <a href="https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic
+acyclic finite state
+automaton</a>,
+which prunes some of the redundancy out of the trie.</p>
+
+<h2 id="extensions">Extensions</h2>
+
+<p>Tries can be used in similar ways to implement:</p>
+
+<ul>
+<li>An autocomplete algorithm</li>
+<li>A sort function (insert all keys into the trie, use a depth-first-search-esque
+algorithm to output the keys in order)</li>
+</ul>
+
+<hr />
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:binary-search"><p>Perform binary search, but instead of searching for the string
+in the dictionary which <code>==</code> the search term, search for a string which
+<code>startswith()</code> the search term.</p>
+ <a class="footnote-return" href="#fnref:binary-search"><sup>[return]</sup></a></li>
+
+<li id="fn:bin-search-complexity"><p>We are not just searching for a word in a dictionary,
+but also for words which could have letters added them to make them valid.
+We can do this by checking whether the dictionary entry starts with the
+letters of the search term <code>O(m)</code> at each step of the search <code>O(log n)</code></p>
+ <a class="footnote-return" href="#fnref:bin-search-complexity"><sup>[return]</sup></a></li>
+
+<li id="fn:trie-complexity"><p>At each step of the seach, we do a <code>dict</code> key lookup, which
+is <code>O(1)</code>. For a word with <code>m</code> characters, we perform <code>m</code> of these lookups,
+giving an overall search complexity of <code>O(m)</code>.</p>
+ <a class="footnote-return" href="#fnref:trie-complexity"><sup>[return]</sup></a></li>
+
+<li id="fn:chars-stored"><p>Storing the words &lsquo;cat&rsquo; and &lsquo;cab&rsquo; in a list requires storing
+six characters. In a trie, we only store four:</p>
+
+<pre><code>c -&gt; a -&gt; t
+      `-&gt; b
+</code></pre>
+ <a class="footnote-return" href="#fnref:chars-stored"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+    </section>
+</article>
+
+    </div></body>
+</html>
