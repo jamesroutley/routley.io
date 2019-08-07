@@ -1,7 +1,0 @@
-baseURL = "http://routley.io/"
-languageCode = "en-gb"
-title = "James Routley"
-
-# Enable syntax highlighting in markdown code snippets
-pygmentsCodeFences = true
-pygmentsStyle = "friendly"
