@@ -4,16 +4,12 @@
 {{ define "main" }}
     {{ .Content }}
 
+
+    <h2>Books</h2>
     <ul>
-    {{ range $.Site.Data.books.books }}
-      <li>
-        <div>
-          <h2>{{ .title }}</h2>
-          <p>{{ .author }}</p>
-          <p>{{ dateFormat "January 2006" .date }}</p>
-        </div>
-      </li>
-    {{ end }}
+      {{ range .Site.Data.books.books }}
+      <li>{{ dateFormat "Jan 2006" .date }}: {{ .title }} - <i>{{ .author }}</i></li>
+      {{ end }}
     </ul>
 {{ end }}
 

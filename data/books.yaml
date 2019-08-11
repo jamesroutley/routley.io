@@ -1,4 +1,7 @@
 books:
+  - title: The Road
+    author: Cormac McCarthy
+    date: 2019-08-10
   - title: The New York Trilogy
     author: Paul Auster
     date: 2019-08-04
