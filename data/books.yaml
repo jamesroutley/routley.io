@@ -1,4 +1,7 @@
 books:
+  - title: Adventures of Huckleberry Finn
+    author: Mark Twain
+    date: 2019-08-31
   - title: First, Catch
     author: Thom Eagle
     date: 2019-08-23
