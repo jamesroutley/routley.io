@@ -1,4 +1,7 @@
 books:
+  - title: The Spy Who Came In from the Cold
+    author: John le Carré
+    date: 2019-10-17
   - title: Adventures of Huckleberry Finn
     author: Mark Twain
     date: 2019-08-31
