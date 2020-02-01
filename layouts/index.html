@@ -4,7 +4,7 @@
     <h2>Posts</h2>
     <ul>
       {{ range first 10 (where .Site.RegularPages "Section" "posts") }}
-      <li>{{ .Date.Format "2006-02-01" }}: <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      <li>{{ .Date.Format "2006-01-02" }}: <a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{ end }}
       <li><a href="posts">more</a></li>
     </ul>

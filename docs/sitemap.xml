@@ -4,18 +4,22 @@
   
   <url>
     <loc>http://routley.io/</loc>
-    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/writing-daily/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://routley.io/posts/learning-rust-02/</loc>
     <lastmod>2018-07-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://routley.io/posts/</loc>
-    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -59,6 +63,11 @@
   </url>
   
   <url>
+    <loc>http://routley.io/tags/algorithms/</loc>
+    <lastmod>2017-10-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://routley.io/posts/text-editor-undo/</loc>
     <lastmod>2017-10-08T00:00:00+00:00</lastmod>
   </url>
@@ -66,13 +75,6 @@
   <url>
     <loc>http://routley.io/tags/</loc>
     <lastmod>2017-10-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://routley.io/tags/algorithms/</loc>
-    <lastmod>2017-10-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -88,19 +90,16 @@
   <url>
     <loc>http://routley.io/tags/c/</loc>
     <lastmod>2017-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>http://routley.io/tags/python/</loc>
     <lastmod>2017-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>http://routley.io/tags/tdd/</loc>
     <lastmod>2017-08-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -114,6 +113,11 @@
   </url>
   
   <url>
+    <loc>http://routley.io/tags/go/</loc>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://routley.io/posts/psa-cp-recursive/</loc>
     <lastmod>2017-07-20T00:00:00+00:00</lastmod>
   </url>
@@ -124,15 +128,8 @@
   </url>
   
   <url>
-    <loc>http://routley.io/tags/go/</loc>
-    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://routley.io/tags/unix/</loc>
     <lastmod>2017-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -183,7 +180,6 @@
   <url>
     <loc>http://routley.io/categories/</loc>
     <lastmod>2016-11-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -194,7 +190,6 @@
   <url>
     <loc>http://routley.io/categories/tech/</loc>
     <lastmod>2016-11-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

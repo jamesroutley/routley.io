@@ -1,4 +1,13 @@
 books:
+  - title: Dubliners
+    author: James Joyce
+    date: 2020-01-14
+  - title: Wolf Hall
+    author: Hilary Mantel
+    date: 2019-12-27
+  - title: Paddy Clarke
+    author: Roddy Doyle
+    date: 2019-10-31
   - title: The Spy Who Came In from the Cold
     author: John le Carré
     date: 2019-10-17

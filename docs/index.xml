@@ -6,10 +6,20 @@
     <description>Recent content in James Routley | James Routley on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 08 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Writing daily</title>
+      <link>http://routley.io/posts/writing-daily/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/writing-daily/</guid>
+      <description>Over the month of February, I&amp;rsquo;m going to try and write a blog post each day. I&amp;rsquo;m hoping that this high cadence will have a couple of benefits:
+ I&amp;rsquo;ll get back into the habit of writing I&amp;rsquo;ll learn to write faster The act of writing every day will help my focus my thoughts, and I&amp;rsquo;ll end up having ideas or insights I wouldn&amp;rsquo;t have had otherwise  I expect the format of my posts to change, to become shorter and less fleshed out, but I think that&amp;rsquo;s fine for now.</description>
+    </item>
     
     <item>
       <title>Learning Rust 02: an ls clone</title>

@@ -610,7 +610,7 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
     <span style="color:#007020;font-weight:bold">with</span> concurrent<span style="color:#666">.</span>futures<span style="color:#666">.</span>ThreadPoolExecutor(max_workers<span style="color:#666">=</span><span style="color:#40a070">30</span>) <span style="color:#007020;font-weight:bold">as</span> executor:
-        executor<span style="color:#666">.</span><span style="color:#007020">map</span>(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
+        executor<span style="color:#666">.</span>map(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
 
 
 <span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
@@ -663,7 +663,7 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
     <span style="color:#007020;font-weight:bold">with</span> concurrent<span style="color:#666">.</span>futures<span style="color:#666">.</span>ThreadPoolExecutor(max_workers<span style="color:#666">=</span><span style="color:#40a070">50</span>) <span style="color:#007020;font-weight:bold">as</span> executor:
-        executor<span style="color:#666">.</span><span style="color:#007020">map</span>(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
+        executor<span style="color:#666">.</span>map(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
 
 
 <span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
