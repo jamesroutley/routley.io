@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>James Routley  | Thoughts on a scheduling todo list</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
+    
+    
+    
+  </head>
+  <body><div id="content">
+<article id="content">
+    <header>
+        <h1 id="title">Thoughts on a scheduling todo list</h1>
+        <div class="header-date">
+            <time datetime="2020-02-02">2 February 2020</time>
+        </div>
+    </header>
+    <section class="main_post">
+        
+
+<h2 id="some-issues-with-todo-lists">Some issues with todo lists</h2>
+
+<p>Todo lists store a number of tasks, but don&rsquo;t offer any advice on which order to tackle the tasks in. This system works well - it&rsquo;s simple, and people are generally pretty good at quickly working out what to work on next. However, I&rsquo;ve noticed a couple of issues with the system:</p>
+
+<ol>
+<li>When there are lots of tasks, working out the next task can be complicated. This is especially true if there are multiple constraints on each task - for example if each task has a deadline and priority</li>
+<li>There are certain easy tasks which I irrationally avoid. For example, I don&rsquo;t particularly like replying to email so I avoid it, even though it won&rsquo;t take me long to do.</li>
+<li>Context switching / decision fatigue. Once you finish a task, you need to work out what to work on next, which requires an amount of thinking and can break your focus.</li>
+</ol>
+
+<h2 id="a-scheduling-todo-list">A scheduling todo list</h2>
+
+<p>I think we could solve these issues with a &lsquo;smart&rsquo; todo list which tells you what to work on next. An algorithm run by a computer would run basically instantly, and would remove the need for the user to make any decisions, solving 1) and 3). It also wouldn&rsquo;t have any biases against types of task, so wouldn&rsquo;t be caught out by 2).</p>
+
+<p>The goal of this todo list is to put a list of tasks in an order which they should be tackled. This order should mostly match the order that the user would put them in.</p>
+
+<h2 id="missing-context">Missing context</h2>
+
+<p>With a normal todo list, the user understands the context of each task, and uses this context to decide what to do next. There are many different types of context, but common ones include:</p>
+
+<ul>
+<li>How long the task will take to complete</li>
+<li>When the task is due</li>
+<li>When the task can be started</li>
+<li>Whether the task is blocked by another task</li>
+<li>How important the task is</li>
+<li>Location - some tasks e.g. doing laundry can only be done in certain places</li>
+<li>Home/work tasks - you might not want to do a home tasks when you&rsquo;re at work</li>
+</ul>
+
+<p>This smart todo list would need to collect this sort of context about each task to correctly order the tasks.</p>
+
+<h2 id="working-out-the-order">Working out the order</h2>
+
+<p>Once we&rsquo;ve got the context of each task, we need to order them. I think this is a complex problem, which I haven&rsquo;t thought through deeply. Some initial thoughts:</p>
+
+<ul>
+<li>The tasks&rsquo; contexts give you some constraints that must be solved if possible. For example:
+
+<ul>
+<li>Tasks should be scheduled so there&rsquo;s enough time to complete them before their due date</li>
+<li>Tasks with a location can only be worked on if you&rsquo;re at that location</li>
+<li>If a task is blocked, it can&rsquo;t be scheduled until it&rsquo;s unblocked</li>
+</ul></li>
+<li>The tasks&rsquo; context also give you some nice-to-haves. E.g:
+
+<ul>
+<li>If there are two tasks with the same due date, you should put the higher priority one first</li>
+<li>If there are two tasks with the same priority and due date, you could schedule the shorter one first</li>
+</ul></li>
+<li>We won&rsquo;t be able to satisfy all constraints for some lists. For example, there might not be enough time to complete all tasks before they&rsquo;re due</li>
+<li>Some lists might have multiple &lsquo;correct&rsquo; orders, where all tasks are completable before they&rsquo;re due</li>
+</ul>
+
+<h2 id="user-experience">User experience</h2>
+
+<ul>
+<li>In my experience, users don&rsquo;t like products which are hard to understand or feel in control of. Our todo list should present the ordered list of tasks to the user, but untimately let them reorder things if they want to</li>
+<li>For our smart todo list to work, the user has to enter a greater amount of context than with a normal todo list. This takes time, and might take longer than the time saved</li>
+<li>I think less tech is generally a good thing - normal todo lists work anywhere where someone can write something down, but our version requires a computer</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Having thought through things, I&rsquo;m not sure if the saved time justifies the extra complexity for most people&rsquo;s todo lists. As mentioned in the first section, working out what to do next is a harder problem when there are lots of tasks. A scheduling todo list might make more sense in scenarios with lots of tasks, like a todo list shared between members of a team, or strict time constraints, like when cooking lots of things at once.</p>
+
+    </section>
+</article>
+
+    </div></body>
+</html>
