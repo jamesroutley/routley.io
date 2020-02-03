@@ -6,10 +6,22 @@
     <description>Recent content in Posts on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 02 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 20:19:21 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How I make coffee</title>
+      <link>http://routley.io/posts/how-i-make-coffee/</link>
+      <pubDate>Mon, 03 Feb 2020 20:19:21 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/how-i-make-coffee/</guid>
+      <description>This post covers how I currently make coffee at home. I&amp;rsquo;ll update it if anything changes
+Aeropress Equipment:
+ Porlex hand grinder (I have the &amp;lsquo;tall&amp;rsquo; version) Aeropress Weighing scale Timer  Technique:
+ Grind 15g coffee to a medium grind (7-8 &amp;lsquo;clicks&amp;rsquo; from closed on the Porlex) Insert the Aeropress plunger into the main body, to the &amp;lsquo;4&amp;rsquo; mark. Place the Aeropress upside down onto a weighing scale, so the end of the plunger is on the scale, and the open end of the main body is facing up Place the filter paper into the lid of the Aeropress, and wash it through with water, boil about 400g of water Add the coffee to the Aeropress, tare the scale, Add 200g of water just off the boil, start the timer, add the rest of the water to your cup to heat it up After about 20 seconds, a crust of coffee grounds will form at the top of the Aeropress.</description>
+    </item>
     
     <item>
       <title>Thoughts on a scheduling todo list</title>
