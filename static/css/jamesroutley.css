@@ -1,24 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap");
-
 body {
   font-family: "Nanum Myeongjo", serif;
   /* plex-sans; */
   line-height: 1.7;
-  text-align: justify;
   max-width: 700px;
   margin: 50px auto 50px;
-}
-
-/* Header styling */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  /* font-family: plex-serif; */
-  text-align: left;
 }
 
 .header-date {
@@ -86,17 +71,9 @@ li {
 /* Fonts */
 
 @font-face {
-  font-family: "plex-sans";
-  src: url("/font/IBMPlexSans-Regular.woff") format("woff"),
-    url("/font/IBMPlexSans-Regular.eot");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "plex-serif";
-  src: url("/font/IBMPlexSerif-Regular.woff") format("woff"),
-    url("/font/IBMPlexSerif-Regular.eot");
+  font-family: "Nanum Myeongjo";
+  src: url("/font/nanummyeongjo-regular-webfont.woff2") format("woff2"),
+    url("/font/nanummyeongjo-regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
