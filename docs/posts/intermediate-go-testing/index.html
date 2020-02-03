@@ -64,7 +64,7 @@ which logs a (formatted) message before skipping the test.</p>
 with an array of different input parameters:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestAdd</span>(t <span style="color:#666">*</span>testing.T) {
     testCases <span style="color:#666">:=</span> []<span style="color:#007020;font-weight:bold">struct</span>{
-        a, b, expected <span style="color:#902000">int</span>    
+        a, b, expected <span style="color:#902000">int</span>
     }{
        {a: <span style="color:#40a070">0</span>, b: <span style="color:#40a070">0</span>, expected: <span style="color:#40a070">0</span>},
        {a: <span style="color:#666">-</span><span style="color:#40a070">1</span>, b: <span style="color:#40a070">1</span>, expected: <span style="color:#40a070">0</span>}
@@ -76,15 +76,15 @@ with an array of different input parameters:</p>
         }
     }
 }</code></pre></div>
-<p>Although this is written as a single test, it&rsquo;s really multiple. If one of
-the test cases fails, the whole test function fails, and it can be difficult to
-tell which one failed without a useful error message.</p>
+<p>Although this is written as a single test, it&rsquo;s really multiple. If one of the
+test cases fails, the whole test function fails, and it can be difficult to tell
+which one failed without a useful error message.</p>
 
 <p>The <code>testing</code> package contains a function which allows tests like this to be
 split out into explicit sub-tests:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestAdd</span>(t <span style="color:#666">*</span>testing.T) {
     testCases <span style="color:#666">:=</span> []<span style="color:#007020;font-weight:bold">struct</span>{
-        a, b, expected <span style="color:#902000">int</span>    
+        a, b, expected <span style="color:#902000">int</span>
     }{
        {a: <span style="color:#40a070">0</span>, b: <span style="color:#40a070">0</span>, expected: <span style="color:#40a070">0</span>},
        {a: <span style="color:#666">-</span><span style="color:#40a070">1</span>, b: <span style="color:#40a070">1</span>, expected: <span style="color:#40a070">0</span>}
@@ -167,8 +167,8 @@ function:</p>
 --- FAIL: TestThing <span style="color:#666">(</span><span style="color:#40a070">0</span>.00s<span style="color:#666">)</span>
         scratch_test.go:11: <span style="color:#40a070">1</span> !<span style="color:#666">=</span> <span style="color:#40a070">2</span></code></pre></div>
 <p>This error message tells us which test failed, but the line given (11), is the
-line that <code>Errorf</code> is called. If this helper is called multiple times, it can
-be difficult to work out which call is erroring.</p>
+line that <code>Errorf</code> is called. If this helper is called multiple times, it can be
+difficult to work out which call is erroring.</p>
 
 <p>Golang provides a way, <code>t.Helper</code>, to explicitly mark that function as a helper:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">AssertEqualInt</span>(t <span style="color:#666">*</span>testing.T, a, b <span style="color:#902000">int</span>) {

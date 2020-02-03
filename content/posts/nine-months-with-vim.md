@@ -1,14 +1,14 @@
 ---
 aliases:
-- /tech/2018/03/11/nine-months-with-vim
-date: '2018-03-11'
+  - /tech/2018/03/11/nine-months-with-vim
+date: "2018-03-11"
 layout: post
 title: Nine months with Vim
 ---
 
 Over summer, I attended the Recurse Center. I noticed that around half the
 people in my batch were using Vim, and figured it would be a good time to try it
-out. I ran into two difficulties: 
+out. I ran into two difficulties:
 
 1. I knew the basics of using Vim but I was less efficient than with my previous
    editor, [Visual Studio Code](https://code.visualstudio.com/)
@@ -17,7 +17,7 @@ out. I ran into two difficulties:
    programming languages, and needed to set Vim up for each one separately.
 
 I decided to deal with these problems separately. I focused on the former by
-using a preconfigured Vim setup to defer having to think about the  latter.
+using a preconfigured Vim setup to defer having to think about the latter.
 
 ## Initial Vim configuration
 
@@ -27,17 +27,19 @@ want to roll their own config.
 
 Once I felt productive at using Vim, I decided to write my own Vim
 configuration. This let me address some minor issues I had:
-- I found it difficult to understand which features were and built into
-    Vim, and which came from the `vimrc`
+
+- I found it difficult to understand which features were and built into Vim, and
+  which came from the `vimrc`
 - The `vimrc` contained features I didn't use
 - The `vimrc` vendored packages into the repo. To add new things, I needed to
-    use git submodules, a lower level of abstraction than I wanted to use
+  use git submodules, a lower level of abstraction than I wanted to use
 - I forked the repo to make some changes. Maintaining the fork and keeping
-    everything up to date was a lot of effort
+  everything up to date was a lot of effort
 
 ## Current Vim configuration
 
 I wanted a configuration that was:
+
 - Language agnostic and supported a wide range of languages
 - Minimal and close to native Vim where possible
 - Easy to edit and used a modern package manager
@@ -52,7 +54,7 @@ I use Tim Pope's [vim-vinegar](https://github.com/tpope/vim-vinegar) to interact
 with the filesystem and open files. It's a thin wrapper around Vim's built in
 `netrw`. When editing a file, pressing `-` opens a listing of that file's parent
 directory. Pressing `-` again to moves you up a directory. To find a particular
-directory or file, I use the normal Vim search (`/`). 
+directory or file, I use the normal Vim search (`/`).
 
 I've heard good things about fuzzy finders such as
 [fzf](https://github.com/junegunn/fzf.vim), but haven't used them myself.
@@ -91,8 +93,9 @@ nnoremap T :tabnew<cr>
 ### Language support
 
 I use two plugins to get decent Vim support for most languages I'll ever use:
+
 - [vim-polyglot](https://github.com/sheerun/vim-polyglot): Syntax highlighting
-    and correct indenting 
+  and correct indenting
 - [Asynchronous Line Engine (ALE)](https://github.com/w0rp/ale): Linting
 
 ### Interacting with code
@@ -100,20 +103,20 @@ I use two plugins to get decent Vim support for most languages I'll ever use:
 I use a couple of small plugins which make writing code marginally easier. The
 features they implement come built into Visual Studio Code:
 
-- [vim-commentary](https://github.com/tpope/vim-commentary): Comment out lines or
-    blocks of code. It works for most languages I've tried
+- [vim-commentary](https://github.com/tpope/vim-commentary): Comment out lines
+  or blocks of code. It works for most languages I've tried
 - [auto-pairs](https://github.com/jiangmiao/auto-pairs): When you type a left
-    parenthesis, it automatically types a right parenthesis and moves your
-    cursor between the two
-- [vim-gitgutter](https://github.com/airblade/vim-gitgutter): Display a green 
-    `+` or a red `-` next to columns that have been edited in a file
+  parenthesis, it automatically types a right parenthesis and moves your cursor
+  between the two
+- [vim-gitgutter](https://github.com/airblade/vim-gitgutter): Display a green
+  `+` or a red `-` next to columns that have been edited in a file
 - `:set colorcolumn = 80`: Display a faint line at 80 chars
 
 ### Package management
 
 I use Junegunn Choi's [vim-plug](https://github.com/junegunn/vim-plug) as my
 package manager. I like its simple API (add GitHub repos, run `PlugInstall`). It
-operates at a higher level of abstraction than 
+operates at a higher level of abstraction than
 [Pathogen](https://github.com/tpope/vim-pathogen) or Vim 8's native package
 loading in that you don't interact with your plugins' files directly. This feels
 familiar if you're used to brew/apt-get/pip etc.

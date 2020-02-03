@@ -1,15 +1,15 @@
 ---
 aliases:
-- /tech/2017/10/31/first-impressions-elm
-date: '2017-10-31'
+  - /tech/2017/10/31/first-impressions-elm
+date: "2017-10-31"
 layout: post
 title: First impressions of Elm
 ---
 
 This week, I've been learning Elm. While at the Recurse Center, I came across
-the book [Seven Languages in Seven
-Weeks](https://pragprog.com/book/btlang/seven-languages-in-seven-weeks). The
-book's concept appealed to me. While I don't think it's possible to learn a
+the book
+[Seven Languages in Seven Weeks](https://pragprog.com/book/btlang/seven-languages-in-seven-weeks).
+The book's concept appealed to me. While I don't think it's possible to learn a
 programming language in a week, I think there's value in broadening your
 horizons with the quick study of a wide range of concepts.
 
@@ -21,8 +21,8 @@ which may help you learn it.
 Elm is a front-end language. It compiles to JavaScript, HTML and CSS. It is a
 strongly typed, purely functional language, and it borrows syntax from Haskell.
 It has a small [syntax](http://elm-lang.org/docs/syntax), and only implements a
-few [core
-libraries](http://package.elm-lang.org/packages/elm-lang/core/latest/).
+few
+[core libraries](http://package.elm-lang.org/packages/elm-lang/core/latest/).
 
 Elm defines the [Elm Architecture](https://guide.elm-lang.org/architecture/), a
 pattern that most applications should follow. This architecture splits code into
@@ -39,19 +39,19 @@ three sections:
 - Friendly compiler. I think Elm's compiler is the most helpful compiler I've
   used. It offers helpful debugging notes. It also writes in the first person!
 - Community. Elm's community seems friendly. It's not huge, and there are fewer
-  stack overflow questions etc than I'm used to. 
+  stack overflow questions etc than I'm used to.
 - Single ecosystem. Elm is relatively self contained. It's easy to set the
   compiler up, without having to configure babel, react, redux, webpack etc.
 - Architecture. Having a fixed architecture makes it easy to start developing in
   Elm. I think more languages should offer example architectures.
 - Safety. Elm aims to be a safe language. It has a strict type system which if
-  used well can catch a lot of bugs at compile time. It doesn't have a [concept
-  of null](https://guide.elm-lang.org/error_handling/maybe.html), and forces the
-  user to account for procedures which [may
-  fail](https://guide.elm-lang.org/error_handling/result.html). 
+  used well can catch a lot of bugs at compile time. It doesn't have a
+  [concept of null](https://guide.elm-lang.org/error_handling/maybe.html), and
+  forces the user to account for procedures which
+  [may fail](https://guide.elm-lang.org/error_handling/result.html).
 - Haskell introduction. Elm shares features with Haskell, but is simpler and
   carries less baggage. It may be a useful stepping stone to learning Haskell.
-- Javascript interop. Interacting with plain JavaScript libraries happens via 
+- Javascript interop. Interacting with plain JavaScript libraries happens via
   [ports or flags](https://guide.elm-lang.org/interop/javascript.html). From
   what I understand, these allow safe interaction with potentially unsafe
   external code. I haven't actually done this so I can't say any more about
@@ -66,7 +66,6 @@ three sections:
 - elm-repl. Elm's repl is useful for quickly testing ideas out.
 - [elm-test](https://github.com/elm-community/elm-test). I found writing tests
   useful for confirming that functions behave as expected.
-- [Let's be
-  mainstream](http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design).
+- [Let's be mainstream](http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design).
   A talk by Evan Czaplicki, Elm's inventor, on some of the philosophy behind the
   language.

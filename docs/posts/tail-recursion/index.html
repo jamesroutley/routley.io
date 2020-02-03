@@ -24,12 +24,12 @@
 
 <p>At the Recurse Center, I&rsquo;ve been working my way through The Structure and
 Interpretation of Computer Programs (SICP) book. It&rsquo;s an introductory
-programming book written for an MIT course in 1985. It teaches programming
-using the language Scheme, a LISP dialect. Scheme is functional, and I&rsquo;ve
-been enjoying learning new functional concepts.</p>
+programming book written for an MIT course in 1985. It teaches programming using
+the language Scheme, a LISP dialect. Scheme is functional, and I&rsquo;ve been
+enjoying learning new functional concepts.</p>
 
-<p>This article aims to explain tail recursion to programmers without experience
-in functional languages or concepts.</p>
+<p>This article aims to explain tail recursion to programmers without experience in
+functional languages or concepts.</p>
 
 <p>Before looking at tail recursion, let&rsquo;s look at recursion in an imperative
 language, Python.</p>
@@ -43,8 +43,8 @@ language, Python.</p>
 <span style="color:#666">&gt;&gt;&gt;</span> factorial(<span style="color:#40a070">4</span>)
 <span style="color:#40a070">24</span></code></pre></div>
 <p>The snippet above defines a function which returns the factorial of some number
-<code>n</code>. <code>factorial(n) = n * n - 1 * ... * 2 * 1</code>. For <code>n = 4</code>, we
-expect the result to be <code>4 * 3 * 2 * 1 = 24</code>, which we do get.</p>
+<code>n</code>. <code>factorial(n) = n * n - 1 * ... * 2 * 1</code>. For <code>n = 4</code>, we expect the result
+to be <code>4 * 3 * 2 * 1 = 24</code>, which we do get.</p>
 
 <p>What happens behind the scenes when we run a recursive function? When any
 function call is made, a frame containing data associated with that function is
@@ -62,8 +62,8 @@ a()</code></pre></div>
     (<span style="color:#666">&lt;</span>frame <span style="color:#007020">object</span> at <span style="color:#40a070">0x1042a9c20</span><span style="color:#666">&gt;</span>, <span style="color:#666">...</span>)  <span style="color:#60a0b0;font-style:italic"># output truncated</span>
 ]
 [
-    (<span style="color:#666">&lt;</span>frame <span style="color:#007020">object</span> at <span style="color:#40a070">0x7fa702d2a000</span><span style="color:#666">&gt;</span>, <span style="color:#666">...</span>), 
-    (<span style="color:#666">&lt;</span>frame <span style="color:#007020">object</span> at <span style="color:#40a070">0x1042a9c20</span><span style="color:#666">&gt;</span>, <span style="color:#666">...</span>)  
+    (<span style="color:#666">&lt;</span>frame <span style="color:#007020">object</span> at <span style="color:#40a070">0x7fa702d2a000</span><span style="color:#666">&gt;</span>, <span style="color:#666">...</span>),
+    (<span style="color:#666">&lt;</span>frame <span style="color:#007020">object</span> at <span style="color:#40a070">0x1042a9c20</span><span style="color:#666">&gt;</span>, <span style="color:#666">...</span>)
 ]</code></pre></div>
 <p>We can see that when <code>inspect.stack()</code> is called the first time, a single frame
 is on the stack. When it is called again, there are two.</p>
@@ -105,9 +105,9 @@ times larger than the largest value handled by our recursive version.</p>
 <span style="color:#40a070">4</span> <span style="color:#666">*</span> <span style="color:#40a070">3</span> <span style="color:#666">*</span> <span style="color:#40a070">2</span> <span style="color:#666">*</span> factorial(<span style="color:#40a070">1</span>)
 <span style="color:#40a070">4</span> <span style="color:#666">*</span> <span style="color:#40a070">3</span> <span style="color:#666">*</span> <span style="color:#40a070">2</span> <span style="color:#666">*</span> <span style="color:#40a070">1</span>
 <span style="color:#40a070">24</span></code></pre></div>
-<p>We see that a chain of deferred operations builds up. The total isn&rsquo;t
-calculated until the base case of <code>n = 1</code> is hit. The interpreter must keep
-track of operations which must be performed later.</p>
+<p>We see that a chain of deferred operations builds up. The total isn&rsquo;t calculated
+until the base case of <code>n = 1</code> is hit. The interpreter must keep track of
+operations which must be performed later.</p>
 
 <p>If we reformulate the factorial function:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">factorial_new</span>(n, total):
@@ -133,23 +133,23 @@ recursive processes. You get the performance benefits of an iterative process,
 with the elegance of a recursive procedure. The interpreter works out that no
 more work needs to be done on the stack frame, and throws it away.</p>
 
-<p>Unfortunately, Python is not a tail-recursive language, so
-<code>factorial_new(1000)</code> still throws <code>RuntimeError: maximum recursion depth 
-exceeded</code>.</p>
+<p>Unfortunately, Python is not a tail-recursive language, so <code>factorial_new(1000)</code>
+still throws <code>RuntimeError: maximum recursion depth exceeded</code>.</p>
 
 <p>For more information, I recommend section <code>1.2.1</code> of SICP.</p>
 
 <hr />
+
+<p>The maximum recursion limit can be set in Python with
+  <code>sys.setrecursionlimit()</code> but it&rsquo;s generally not advised. Functions which
+  recurse that far down should probably be rewritten to use an iterative
+  process.</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:maxrecursion"><p>The maximum recursion limit can be set in Python with
-<code>sys.setrecursionlimit()</code> but it&rsquo;s generally not advised. Functions which
-recurse that far down should probably be rewritten to use an iterative
-process.</p>
- <a class="footnote-return" href="#fnref:maxrecursion"><sup>[return]</sup></a></li>
+<li id="fn:maxrecursion"> <a class="footnote-return" href="#fnref:maxrecursion"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

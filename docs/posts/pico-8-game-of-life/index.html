@@ -41,18 +41,18 @@ large number of problems.</p>
 <h2 id="pico-8-standard-library-isn-t-lua-s-standard-library">Pico-8 standard library isn&rsquo;t Lua&rsquo;s standard library</h2>
 
 <p>This tripped me up a bit - I&rsquo;d get something working using Stack Overflow
-answers and the Lua REPL to find that it wouldn&rsquo;t work in Pico-8. This <a href="https://gist.github.com/josefnpat/bfe4aaa5bbb44f572cd0">GitHub
-Gist</a> outlines the
-discrepancies.</p>
+answers and the Lua REPL to find that it wouldn&rsquo;t work in Pico-8. This
+<a href="https://gist.github.com/josefnpat/bfe4aaa5bbb44f572cd0">GitHub Gist</a> outlines
+the discrepancies.</p>
 
 <h2 id="performance-matters">Performance matters</h2>
 
 <p>The Pico-8 runtime is CPU and memory restricted. This means the algorithmic
-complexity of your game update function actually matters. My initial, naive, Game
-of Life implementation ran in <code>O(n^2)</code> time, where <code>n^2</code> is the number of pixels
-on the board. This was too slow to run smoothly, so I had to rewrite it, and
-ended up with a <code>O(m)</code> implementation, where <code>m</code> is the number of &lsquo;alive&rsquo; pixels
-on the board. Usually, <code>m &lt;&lt; n^2</code>.</p>
+complexity of your game update function actually matters. My initial, naive,
+Game of Life implementation ran in <code>O(n^2)</code> time, where <code>n^2</code> is the number of
+pixels on the board. This was too slow to run smoothly, so I had to rewrite it,
+and ended up with a <code>O(m)</code> implementation, where <code>m</code> is the number of &lsquo;alive&rsquo;
+pixels on the board. Usually, <code>m &lt;&lt; n^2</code>.</p>
 
 <p>I round this limited runtime fun to work with. Most code I write is
 performance-limited by network latency, so its algorithmic complexity doesn&rsquo;t
@@ -72,7 +72,7 @@ debug <span style="color:#666">=</span> <span style="color:#007020;font-weight:b
             print(stat(<span style="color:#40a070">0</span>))
             <span style="color:#60a0b0;font-style:italic">-- you want this to be below than 1. Greater than 1 means you&#39;re</span>
             <span style="color:#60a0b0;font-style:italic">-- dropping frames</span>
-            print(stat(<span style="color:#40a070">1</span>)) 
+            print(stat(<span style="color:#40a070">1</span>))
     <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
 <p>You can find out more about the <code>stat</code> function

@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tech/2018/02/25/pico-8-game-of-life
-date: '2018-02-25'
+  - /tech/2018/02/25/pico-8-game-of-life
+date: "2018-02-25"
 layout: post
 title: Pico-8 Game of life
 ---
@@ -25,22 +25,22 @@ large number of problems.
 ## Pico-8 standard library isn't Lua's standard library
 
 This tripped me up a bit - I'd get something working using Stack Overflow
-answers and the Lua REPL to find that it wouldn't work in Pico-8. This [GitHub
-Gist](https://gist.github.com/josefnpat/bfe4aaa5bbb44f572cd0) outlines the
-discrepancies.
+answers and the Lua REPL to find that it wouldn't work in Pico-8. This
+[GitHub Gist](https://gist.github.com/josefnpat/bfe4aaa5bbb44f572cd0) outlines
+the discrepancies.
 
 ## Performance matters
 
 The Pico-8 runtime is CPU and memory restricted. This means the algorithmic
-complexity of your game update function actually matters. My initial, naive, Game
-of Life implementation ran in `O(n^2)` time, where `n^2` is the number of pixels
-on the board. This was too slow to run smoothly, so I had to rewrite it, and
-ended up with a `O(m)` implementation, where `m` is the number of 'alive' pixels
-on the board. Usually, `m << n^2`.
+complexity of your game update function actually matters. My initial, naive,
+Game of Life implementation ran in `O(n^2)` time, where `n^2` is the number of
+pixels on the board. This was too slow to run smoothly, so I had to rewrite it,
+and ended up with a `O(m)` implementation, where `m` is the number of 'alive'
+pixels on the board. Usually, `m << n^2`.
 
 I round this limited runtime fun to work with. Most code I write is
 performance-limited by network latency, so its algorithmic complexity doesn't
-matter as much. It was rewarding to *have* to write fast code.
+matter as much. It was rewarding to _have_ to write fast code.
 
 ## Debugging
 
@@ -58,7 +58,7 @@ function _draw()
             print(stat(0))
             -- you want this to be below than 1. Greater than 1 means you're
             -- dropping frames
-            print(stat(1)) 
+            print(stat(1))
     end
 end
 ```

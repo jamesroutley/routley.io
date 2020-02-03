@@ -82,7 +82,8 @@ Lua This was my first time writing Lua and found it easy to pick up.</descriptio
       
       <guid>http://routley.io/posts/hand-writing-dns-messages/</guid>
       <description>In this post, we&amp;rsquo;ll explore the Domain Name Service (DNS) binary message format, and we&amp;rsquo;ll write one by hand. This is deeper than you need to use DNS, but I think it&amp;rsquo;s fun and educational to see how these things work under the hood.
-We&amp;rsquo;ll learn how to: - Write binary DNS query messages - Send our message as the body of a UDP datagram using Python - Read the response from the DNS server</description>
+We&amp;rsquo;ll learn how to:
+ Write binary DNS query messages Send our message as the body of a UDP datagram using Python Read the response from the DNS server  Writing binary sounds difficult, but I actually found it quite approachable.</description>
     </item>
     
     <item>

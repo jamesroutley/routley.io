@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tech/2017/08/15/life-after-rc
-date: '2017-08-15'
+  - /tech/2017/08/15/life-after-rc
+date: "2017-08-15"
 layout: post
 title: Life after the Recurse Center
 ---
@@ -53,8 +53,8 @@ I wrote:
 
 - Monzo. I'm starting a new job as a backend developer at
   [Monzo](https://monzo.com/) in two weeks. I'll be working with a new
-  technology stack (Golang microservices on Kubernetes - how *de rigeur*) and
-  industry (banking).  I expect to learn a lot over the next couple of months,
+  technology stack (Golang microservices on Kubernetes - how _de rigeur_) and
+  industry (banking). I expect to learn a lot over the next couple of months,
   and I'm not worried about planning specifics.
 - Scheme compiler. Since learning Golang, I've been interested in the
   convenience of compiled languages. I'm toying with the idea of writing a

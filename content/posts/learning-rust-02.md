@@ -1,13 +1,13 @@
 ---
 aliases:
-- /tech/2018/07/08/learning-rust-02
-date: '2018-07-08'
+  - /tech/2018/07/08/learning-rust-02
+date: "2018-07-08"
 layout: post
-title: 'Learning Rust 02: an ls clone'
+title: "Learning Rust 02: an ls clone"
 ---
 
-*I'm learning Rust, and documenting the process. These posts are my notes -
-they're not guaranteed to be useful, interesting or correct!*
+_I'm learning Rust, and documenting the process. These posts are my notes -
+they're not guaranteed to be useful, interesting or correct!_
 
 In this post, I'm building an `ls` clone. It's pretty similar to the last post's
 `pwd` clone. It's called `rls`.
@@ -36,7 +36,7 @@ fn main() {
 fn usage() {
     eprintln!("usage: rls <dir>");
     process::exit(1);
-            
+
 }
 ```
 
@@ -69,7 +69,7 @@ out. Printing `path_buf` would print the file path **relative to the pwd** -
 
 Functions which interact with the file system are error-prone. That's why lots
 of the values we get back from the file system functions are wrapped in
-`Results`.  To use the success values, we need to handle the error case. We're
+`Results`. To use the success values, we need to handle the error case. We're
 currently doing this using `unwrap`, which panics if there's an error. This is
 both verbose and bad UX - we probably don't want to display a full Rust error
 message to our users.

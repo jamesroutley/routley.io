@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tech/2017/11/05/intermediate-go-testing
-date: '2017-11-05'
+  - /tech/2017/11/05/intermediate-go-testing
+date: "2017-11-05"
 layout: post
 title: Intermediate Testing in Golang
 ---
@@ -30,7 +30,7 @@ Parallel tests are run in a number of goroutines. This number is defaulted to
 Sometimes it's useful to skip a particular test. If a change causes multiple
 tests to fail, I like to skip all but one, to reduce noise while debugging. I
 used to do this by commenting out functions, but it can also be done by calling
-`t.SkipNow()` at the beginning of the test: 
+`t.SkipNow()` at the beginning of the test:
 
 ```go
 func TestThing(t *testing.T) {
@@ -54,7 +54,7 @@ func TestThing(t *testing.T) {
 }
 ```
 
-## Sub tests 
+## Sub tests
 
 A popular paradigm in Golang is table-driven testing, where a single test is run
 with an array of different input parameters:
@@ -62,7 +62,7 @@ with an array of different input parameters:
 ```go
 func TestAdd(t *testing.T) {
     testCases := []struct{
-        a, b, expected int    
+        a, b, expected int
     }{
        {a: 0, b: 0, expected: 0},
        {a: -1, b: 1, expected: 0}
@@ -76,9 +76,9 @@ func TestAdd(t *testing.T) {
 }
 ```
 
-Although this is written as a single test, it's really multiple. If one of
-the test cases fails, the whole test function fails, and it can be difficult to
-tell which one failed without a useful error message.
+Although this is written as a single test, it's really multiple. If one of the
+test cases fails, the whole test function fails, and it can be difficult to tell
+which one failed without a useful error message.
 
 The `testing` package contains a function which allows tests like this to be
 split out into explicit sub-tests:
@@ -86,7 +86,7 @@ split out into explicit sub-tests:
 ```go
 func TestAdd(t *testing.T) {
     testCases := []struct{
-        a, b, expected int    
+        a, b, expected int
     }{
        {a: 0, b: 0, expected: 0},
        {a: -1, b: 1, expected: 0}
@@ -152,10 +152,10 @@ func TestThing(t *testing.T) {
 
 Golang offers an easy way to write example functions which are displayed on the
 package's godoc page. These example functions are defined alongside a package's
-tests, and are run with the tests, to make sure they aren't outdated. 
+tests, and are run with the tests, to make sure they aren't outdated.
 
 If there's any ambiguity about how a function should be used, I like to add an
-example to make it easier to understand. 
+example to make it easier to understand.
 
 ## Helper functions
 
@@ -187,8 +187,8 @@ $ go test .
 ```
 
 This error message tells us which test failed, but the line given (11), is the
-line that `Errorf` is called. If this helper is called multiple times, it can
-be difficult to work out which call is erroring.
+line that `Errorf` is called. If this helper is called multiple times, it can be
+difficult to work out which call is erroring.
 
 Golang provides a way, `t.Helper`, to explicitly mark that function as a helper:
 

@@ -21,23 +21,23 @@
     </header>
     <section>
         <p>I&rsquo;ve recently been writing a Forth interpreter in x86 assembly. As my laptop
-runs masOS, I&rsquo;m using an Ubuntu virtual machine to compile and run my code.
-I&rsquo;m using <a href="https://www.vagrantup.com">Vagrant</a> to manage the VM.</p>
+runs masOS, I&rsquo;m using an Ubuntu virtual machine to compile and run my code. I&rsquo;m
+using <a href="https://www.vagrantup.com">Vagrant</a> to manage the VM.</p>
 
 <p>I experienced an issue with <code>Make</code>:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ make clean
 make: Warning: File <span style="color:#4070a0">&#39;Makefile&#39;</span> has modification <span style="color:#007020">time</span> <span style="color:#40a070">1153</span> s in the future
 rm -f forth forth.o
 make: warning:  Clock skew detected.  Your build may be incomplete.</code></pre></div>
-<p>This turned out to be an issue with clock drift on the VM. If the host
-machine sleeps and then wakes up, the VM&rsquo;s internal clock continues from where
-it left off, making the time lag behind the host.</p>
+<p>This turned out to be an issue with clock drift on the VM. If the host machine
+sleeps and then wakes up, the VM&rsquo;s internal clock continues from where it left
+off, making the time lag behind the host.</p>
 
 <p>Vagrant synchronises a directory between the host and the VM, copying over host
 changes to files. These changes include an edit date, accessible by running
 <code>ls -lat</code>. I was editing the Makefile on the host machine, giving an edit time
-that was in the future on the host machine. Make determines which files to
-build based on edit time, and so is sensitive to edit time issues.</p>
+that was in the future on the host machine. Make determines which files to build
+based on edit time, and so is sensitive to edit time issues.</p>
 
 <p>Luckily, this is easy to fix. Virtualbox (which Vagrant uses under the hood)
 already synchronises the time every 20 minutes, so we can solve this by
@@ -50,7 +50,8 @@ increasing the synchronisation rate.</p>
 <p>Run time synchronisation every ten seconds:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ VBoxManage guestproperty <span style="color:#007020">set</span> forth_default_xxxx <span style="color:#4070a0;font-weight:bold">\
 </span><span style="color:#4070a0;font-weight:bold"></span>    <span style="color:#4070a0">&#34;/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold&#34;</span> <span style="color:#40a070">10000</span></code></pre></div>
-<p>More information on this can be found <a href="https://stackoverflow.com/questions/19490652/how-to-sync-time-on-host-wake-up-within-virtualbox">here</a>.</p>
+<p>More information on this can be found
+<a href="https://stackoverflow.com/questions/19490652/how-to-sync-time-on-host-wake-up-within-virtualbox">here</a>.</p>
 
     </section>
 </article>

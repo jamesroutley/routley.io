@@ -83,8 +83,8 @@ Ran <span style="color:#40a070">7</span> tests in <span style="color:#40a070">0<
 
 OK</code></pre></div>
 <p>All our tests pass, but our test code is verbose. Although each test is
-basically the same, we need to add a new method for each one. There is a lot
-of repeated boilerplate code.</p>
+basically the same, we need to add a new method for each one. There is a lot of
+repeated boilerplate code.</p>
 
 <h2 id="parameterisation">Parameterisation</h2>
 
@@ -187,8 +187,8 @@ package.</p>
 <h2 id="parameterisation-with-pytest">Parameterisation with pytest</h2>
 
 <p>The <a href="https://docs.pytest.org/en/latest/">pytest</a> framework also solves these
-problems for us, and is compatible with Python 2. We can install it with <code>pip
-install pytest</code>.</p>
+problems for us, and is compatible with Python 2. We can install it with
+<code>pip install pytest</code>.</p>
 
 <p>Pytest contains a <a href="https://docs.pytest.org/en/latest/parametrize.html">feature</a>
 which allows us to parameterise test cases:</p>
@@ -243,8 +243,8 @@ test_prime_pytest.py:16: AssertionError
 data, the focus is shifted away from boilerplate code and onto testing features.
 It becomes trivial to add new test cases.</p>
 
-<p>Parameterised tests work best with pure functions. A pure function is a
-function which satisfies the following constraints:</p>
+<p>Parameterised tests work best with pure functions. A pure function is a function
+which satisfies the following constraints:</p>
 
 <ul>
 <li>Its return value is determined exclusively by the input values (e.g.. it
@@ -261,10 +261,10 @@ can often be exhaustively tested with a single parameterised test.</p>
 <p><strong>Change log</strong>:</p>
 
 <ul>
-<li>The <a href="https://github.com/jamesroutley/jamesroutley.co.uk/blob/65539b4e021ea3b5dabb9282dce2d71a7106b119/tech/_posts/2017-08-09-parameterise-python-tests.md">first
-version</a>
-of this article didn&rsquo;t contain the section on <a href="#parameterisation-with-subtest">Parameterisation with
-subTest</a>. Thanks to
+<li>The
+<a href="https://github.com/jamesroutley/jamesroutley.co.uk/blob/65539b4e021ea3b5dabb9282dce2d71a7106b119/tech/_posts/2017-08-09-parameterise-python-tests.md">first version</a>
+of this article didn&rsquo;t contain the section on
+<a href="#parameterisation-with-subtest">Parameterisation with subTest</a>. Thanks to
 <a href="https://twitter.com/rochacbruno">@rochacbruno</a> and
 <a href="https://twitter.com/ossronny">@ossronny</a> for pointing it out.</li>
 </ul>

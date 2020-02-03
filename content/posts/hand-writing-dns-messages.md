@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tech/2017/12/28/hand-writing-dns-messages
-date: '2017-12-28'
+  - /tech/2017/12/28/hand-writing-dns-messages
+date: "2017-12-28"
 layout: post
 title: Let's hand write DNS messages
 ---
@@ -11,6 +11,7 @@ and we'll write one by hand. This is deeper than you need to use DNS, but I
 think it's fun and educational to see how these things work under the hood.
 
 We'll learn how to:
+
 - Write binary DNS query messages
 - Send our message as the body of a UDP datagram using Python
 - Read the response from the DNS server
@@ -27,8 +28,8 @@ query to a DNS server. This query contains the domain name we're looking up. The
 DNS server tries to look up that domain name's IP address in its internal data
 store. If it finds it, it returns it. If it can't find it, the server will
 forward the query to a different DNS server, which will repeat this process
-until the IP is found. DNS messages are [usually
-sent](https://stackoverflow.com/a/40063433) using the UDP protocol.
+until the IP is found. DNS messages are
+[usually sent](https://stackoverflow.com/a/40063433) using the UDP protocol.
 
 DNS is documented in [RFC 1035](https://tools.ietf.org/html/rfc1035). All
 diagrams, and most of the information in this post was found in this RFC. I'd
@@ -63,7 +64,7 @@ will contain the `Header` and `Question` sections.
 The header has the following format:
 
 ```
-0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                      ID                       |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -86,8 +87,8 @@ bytes.
 
 As both queries and responses share a header format, some of the fields aren't
 relevant to our query, and will be set to `0`. A full desciption of each of
-these fields can be found in [RFC1035 Section
-4.1.1](https://tools.ietf.org/html/rfc1035#page-26).
+these fields can be found in
+[RFC1035 Section 4.1.1](https://tools.ietf.org/html/rfc1035#page-26).
 
 The fields which are relevant to us are:
 
@@ -98,19 +99,17 @@ The fields which are relevant to us are:
   response (`1`). As we're sending a query, we'll set this bit to `0`.
 
 - `Opcode`: A 4 bit field that specifies the query type. We're sending a
-  standard query, so we'll set this to `0`. The possibilities are:
-	- `0`: Standard query
-	- `1`: Inverse query
-	- `2`: Server status request
-	- `3-15`: Reserved for future use
+  standard query, so we'll set this to `0`. The possibilities are: - `0`:
+  Standard query - `1`: Inverse query - `2`: Server status request - `3-15`:
+  Reserved for future use
 
-- `TC`: 1 bit flag specifying if the message has been truncated. Our message
-  is short, and won't need to be truncated, so we can set this to `0`.
+- `TC`: 1 bit flag specifying if the message has been truncated. Our message is
+  short, and won't need to be truncated, so we can set this to `0`.
 
 - `RD`: 1 bit flag specifying if recursion is desired. If the DNS server we send
   our request to doesn't know the answer to our query, it can recursively ask
-  other DNS servers. We do wish recursion to be enabled, so we will
-  set this to `1`.
+  other DNS servers. We do wish recursion to be enabled, so we will set this to
+  `1`.
 
 - `QDCOUNT`: An unsigned 16 bit integer specifying the number of entries in the
   question section. We'll be sending `1` question.
@@ -138,7 +137,7 @@ standard DNS query.
 The question section has the format:
 
 ```
-0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                     QNAME                     /
@@ -150,19 +149,19 @@ The question section has the format:
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 ```
 
-- `QNAME`: This contains the URL who's IP address we wish to find. It is
-  encoded as a series of 'labels'. Each label corresponds to a section of the
-  URL. The URL `example.com` contains two sections, `example`, and `com`.
+- `QNAME`: This contains the URL who's IP address we wish to find. It is encoded
+  as a series of 'labels'. Each label corresponds to a section of the URL. The
+  URL `example.com` contains two sections, `example`, and `com`.
 
   To construct a label, we URL-encode the section, producing a series of bytes.
   The label is that series of bytes, preceded by an unsigned integer byte
   containing the number of bytes in the section. To URL-encode our URL, we can
-  just lookup the the ASCII code for each character. 
+  just lookup the the ASCII code for each character.
 
   The QNAME section is terminated with a zero byte (`00`).
 
-- `QTYPE`: The DNS record type we're looking up. We'll be looking up
-  `A` records, whose value is `1`.
+- `QTYPE`: The DNS record type we're looking up. We'll be looking up `A`
+  records, whose value is `1`.
 
 - `QCLASS`: The class we're looking up. We're using the the internet, `IN`,
   which has a value of `1`.
@@ -176,8 +175,8 @@ We can write out our full question section:
 6C 65 - l, e
 03 63 - 'com' has length 3, c
 6F 6D - o, m
-00    - zero byte to end the QNAME 
-00 01 - QTYPE 
+00    - zero byte to end the QNAME
+00 01 - QTYPE
 00 01 - QCLASS
 ```
 
@@ -261,7 +260,7 @@ Matching up these bits to the schema given [above](#header), we can see that:
 - `AA` = `0`: This server isn't an authority for the domain name `example.com`
 - `RD` = `1`: Recursion was desired for this request
 - `RA` = `1`: Recursion is available on this DNS server
-- `RCODE` = `0`: No errors reported 
+- `RCODE` = `0`: No errors reported
 
 ### Question section
 
@@ -274,8 +273,8 @@ The question section is identical to that of the query:
 6C 65 - l, e
 03 63 - 'com' has length 3, c
 6F 6D - o, m
-00    - zero byte to end the QNAME 
-00 01 - QTYPE 
+00    - zero byte to end the QNAME
+00 01 - QTYPE
 00 01 - QCLASS
 ```
 
@@ -284,7 +283,7 @@ The question section is identical to that of the query:
 The answer section has a `resource record` format:
 
 ```
-0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                                               /
@@ -309,10 +308,10 @@ The answer section has a `resource record` format:
 C0 0C - NAME
 00 01 - TYPE
 00 01 - CLASS
-00 00 
+00 00
 18 4C - TTL
 00 04 - RDLENGTH = 4 bytes
-5D B8 
+5D B8
 D8 22 - RDDATA
 ```
 
@@ -320,14 +319,15 @@ D8 22 - RDDATA
   compressed format:
 
   ```
-  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
   | 1  1|                OFFSET                   |
   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
   ```
+
   The first two bits are set to `1`, and then the next 14 contain an unsigned
-  interger, which counts the byte offset from the beginning of the message to
-  a prior occurance of the same name.
+  interger, which counts the byte offset from the beginning of the message to a
+  prior occurance of the same name.
 
   In this case, our name is `c0 0c`, which in binary is:
 
@@ -355,27 +355,31 @@ D8 22 - RDDATA
 ## Extensions
 
 We've seen how to construct DNS query. Here are some things you can now try:
+
 - Construct a query for a domain name of your choice
-- Query for a different [record type](https://en.wikipedia.org/wiki/List_of_DNS_record_types)
+- Query for a different
+  [record type](https://en.wikipedia.org/wiki/List_of_DNS_record_types)
 - Send a query with recursion disabled
 - Send a query with a domain name that isn't registered
 
 ---
 
-[^hex]: [Hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal) (base 16)
-    numbers are often used as a convenient shorthand for 4 bits of binary 
-    data. You can convert between the formats using this table:
+[^hex]:
 
-    | Decimal | Hex | Binary | Decimal | Hex | Binary | 
-    |---------|-----|--------|---------|-----|--------| 
-    | 0       | 0   | 0000   | 8       | 8   | 1000   | 
-    | 1       | 1   | 0001   | 9       | 9   | 1001   | 
-    | 2       | 2   | 0010   | 10      | A   | 1010   | 
-    | 3       | 3   | 0011   | 11      | B   | 1011   | 
-    | 4       | 4   | 0100   | 12      | C   | 1100   | 
-    | 5       | 5   | 0101   | 13      | D   | 1101   | 
-    | 6       | 6   | 0110   | 14      | E   | 1110   | 
-    | 7       | 7   | 0111   | 15      | F   | 1111   | 
+  [Hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal) (base 16) numbers are
+  often used as a convenient shorthand for 4 bits of binary data. You can
+  convert between the formats using this table:
 
-    As you can see, we can represent any byte (8 bits) with two hexadecimal
-    characters.
+  | Decimal | Hex | Binary | Decimal | Hex | Binary |
+  | ------- | --- | ------ | ------- | --- | ------ |
+  | 0       | 0   | 0000   | 8       | 8   | 1000   |
+  | 1       | 1   | 0001   | 9       | 9   | 1001   |
+  | 2       | 2   | 0010   | 10      | A   | 1010   |
+  | 3       | 3   | 0011   | 11      | B   | 1011   |
+  | 4       | 4   | 0100   | 12      | C   | 1100   |
+  | 5       | 5   | 0101   | 13      | D   | 1101   |
+  | 6       | 6   | 0110   | 14      | E   | 1110   |
+  | 7       | 7   | 0111   | 15      | F   | 1111   |
+
+  As you can see, we can represent any byte (8 bits) with two hexadecimal
+  characters.

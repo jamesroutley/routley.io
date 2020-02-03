@@ -26,10 +26,13 @@
 and we&rsquo;ll write one by hand. This is deeper than you need to use DNS, but I
 think it&rsquo;s fun and educational to see how these things work under the hood.</p>
 
-<p>We&rsquo;ll learn how to:
-- Write binary DNS query messages
-- Send our message as the body of a UDP datagram using Python
-- Read the response from the DNS server</p>
+<p>We&rsquo;ll learn how to:</p>
+
+<ul>
+<li>Write binary DNS query messages</li>
+<li>Send our message as the body of a UDP datagram using Python</li>
+<li>Read the response from the DNS server</li>
+</ul>
 
 <p>Writing binary sounds difficult, but I actually found it quite approachable. The
 DNS documentation is well written and easy to follow, and the message we&rsquo;ll
@@ -43,8 +46,8 @@ query to a DNS server. This query contains the domain name we&rsquo;re looking u
 DNS server tries to look up that domain name&rsquo;s IP address in its internal data
 store. If it finds it, it returns it. If it can&rsquo;t find it, the server will
 forward the query to a different DNS server, which will repeat this process
-until the IP is found. DNS messages are <a href="https://stackoverflow.com/a/40063433">usually
-sent</a> using the UDP protocol.</p>
+until the IP is found. DNS messages are
+<a href="https://stackoverflow.com/a/40063433">usually sent</a> using the UDP protocol.</p>
 
 <p>DNS is documented in <a href="https://tools.ietf.org/html/rfc1035">RFC 1035</a>. All
 diagrams, and most of the information in this post was found in this RFC. I&rsquo;d
@@ -77,7 +80,7 @@ will contain the <code>Header</code> and <code>Question</code> sections.</p>
 
 <p>The header has the following format:</p>
 
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                      ID                       |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -100,8 +103,8 @@ bytes.</p>
 
 <p>As both queries and responses share a header format, some of the fields aren&rsquo;t
 relevant to our query, and will be set to <code>0</code>. A full desciption of each of
-these fields can be found in <a href="https://tools.ietf.org/html/rfc1035#page-26">RFC1035 Section
-4.1.1</a>.</p>
+these fields can be found in
+<a href="https://tools.ietf.org/html/rfc1035#page-26">RFC1035 Section 4.1.1</a>.</p>
 
 <p>The fields which are relevant to us are:</p>
 
@@ -113,22 +116,17 @@ response to the query so we can match them up. Let&rsquo;s go with <code>AA AA</
 response (<code>1</code>). As we&rsquo;re sending a query, we&rsquo;ll set this bit to <code>0</code>.</p></li>
 
 <li><p><code>Opcode</code>: A 4 bit field that specifies the query type. We&rsquo;re sending a
-standard query, so we&rsquo;ll set this to <code>0</code>. The possibilities are:</p>
+standard query, so we&rsquo;ll set this to <code>0</code>. The possibilities are: - <code>0</code>:
+Standard query - <code>1</code>: Inverse query - <code>2</code>: Server status request - <code>3-15</code>:
+Reserved for future use</p></li>
 
-<ul>
-<li><code>0</code>: Standard query</li>
-<li><code>1</code>: Inverse query</li>
-<li><code>2</code>: Server status request</li>
-<li><code>3-15</code>: Reserved for future use</li>
-</ul></li>
-
-<li><p><code>TC</code>: 1 bit flag specifying if the message has been truncated. Our message
-is short, and won&rsquo;t need to be truncated, so we can set this to <code>0</code>.</p></li>
+<li><p><code>TC</code>: 1 bit flag specifying if the message has been truncated. Our message is
+short, and won&rsquo;t need to be truncated, so we can set this to <code>0</code>.</p></li>
 
 <li><p><code>RD</code>: 1 bit flag specifying if recursion is desired. If the DNS server we send
 our request to doesn&rsquo;t know the answer to our query, it can recursively ask
-other DNS servers. We do wish recursion to be enabled, so we will
-set this to <code>1</code>.</p></li>
+other DNS servers. We do wish recursion to be enabled, so we will set this to
+<code>1</code>.</p></li>
 
 <li><p><code>QDCOUNT</code>: An unsigned 16 bit integer specifying the number of entries in the
 question section. We&rsquo;ll be sending <code>1</code> question.</p></li>
@@ -155,7 +153,7 @@ standard DNS query.</p>
 
 <p>The question section has the format:</p>
 
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                     QNAME                     /
@@ -168,9 +166,9 @@ standard DNS query.</p>
 </code></pre>
 
 <ul>
-<li><code>QNAME</code>: This contains the URL who&rsquo;s IP address we wish to find. It is
-encoded as a series of &lsquo;labels&rsquo;. Each label corresponds to a section of the
-URL. The URL <code>example.com</code> contains two sections, <code>example</code>, and <code>com</code>.</li>
+<li><code>QNAME</code>: This contains the URL who&rsquo;s IP address we wish to find. It is encoded
+as a series of &lsquo;labels&rsquo;. Each label corresponds to a section of the URL. The
+URL <code>example.com</code> contains two sections, <code>example</code>, and <code>com</code>.</li>
 </ul>
 
 <p>To construct a label, we URL-encode the section, producing a series of bytes.
@@ -181,8 +179,8 @@ URL. The URL <code>example.com</code> contains two sections, <code>example</code
 <p>The QNAME section is terminated with a zero byte (<code>00</code>).</p>
 
 <ul>
-<li><p><code>QTYPE</code>: The DNS record type we&rsquo;re looking up. We&rsquo;ll be looking up
-<code>A</code> records, whose value is <code>1</code>.</p></li>
+<li><p><code>QTYPE</code>: The DNS record type we&rsquo;re looking up. We&rsquo;ll be looking up <code>A</code>
+records, whose value is <code>1</code>.</p></li>
 
 <li><p><code>QCLASS</code>: The class we&rsquo;re looking up. We&rsquo;re using the the internet, <code>IN</code>,
 which has a value of <code>1</code>.</p></li>
@@ -196,8 +194,8 @@ which has a value of <code>1</code>.</p></li>
 6C 65 - l, e
 03 63 - 'com' has length 3, c
 6F 6D - o, m
-00    - zero byte to end the QNAME 
-00 01 - QTYPE 
+00    - zero byte to end the QNAME
+00 01 - QTYPE
 00 01 - QCLASS
 </code></pre>
 
@@ -289,8 +287,8 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 6C 65 - l, e
 03 63 - 'com' has length 3, c
 6F 6D - o, m
-00    - zero byte to end the QNAME 
-00 01 - QTYPE 
+00    - zero byte to end the QNAME
+00 01 - QTYPE
 00 01 - QCLASS
 </code></pre>
 
@@ -298,7 +296,7 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 
 <p>The answer section has a <code>resource record</code> format:</p>
 
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                                               /
@@ -322,10 +320,10 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 <pre><code>C0 0C - NAME
 00 01 - TYPE
 00 01 - CLASS
-00 00 
+00 00
 18 4C - TTL
 00 04 - RDLENGTH = 4 bytes
-5D B8 
+5D B8
 D8 22 - RDDATA
 </code></pre>
 
@@ -333,7 +331,7 @@ D8 22 - RDDATA
 <li><p><code>NAME</code>: This is the URL who&rsquo;s IP address this response contains. This uses a
 compressed format:</p>
 
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F 
+<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 | 1  1|                OFFSET                   |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -341,8 +339,8 @@ compressed format:</p>
 </ul>
 
 <p>The first two bits are set to <code>1</code>, and then the next 14 contain an unsigned
-  interger, which counts the byte offset from the beginning of the message to
-  a prior occurance of the same name.</p>
+  interger, which counts the byte offset from the beginning of the message to a
+  prior occurance of the same name.</p>
 
 <p>In this case, our name is <code>c0 0c</code>, which in binary is:</p>
 
@@ -370,36 +368,41 @@ segments of our IP address: <code>93.184.216.34</code>.</p></li>
 
 <h2 id="extensions">Extensions</h2>
 
-<p>We&rsquo;ve seen how to construct DNS query. Here are some things you can now try:
-- Construct a query for a domain name of your choice
-- Query for a different <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">record type</a>
-- Send a query with recursion disabled
-- Send a query with a domain name that isn&rsquo;t registered</p>
+<p>We&rsquo;ve seen how to construct DNS query. Here are some things you can now try:</p>
+
+<ul>
+<li>Construct a query for a domain name of your choice</li>
+<li>Query for a different
+<a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">record type</a></li>
+<li>Send a query with recursion disabled</li>
+<li>Send a query with a domain name that isn&rsquo;t registered</li>
+</ul>
 
 <hr />
+
+<p><a href="https://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal</a> (base 16) numbers are
+  often used as a convenient shorthand for 4 bits of binary data. You can
+  convert between the formats using this table:</p>
+
+<p>| Decimal | Hex | Binary | Decimal | Hex | Binary |
+  | &mdash;&mdash;- | &mdash; | &mdash;&mdash; | &mdash;&mdash;- | &mdash; | &mdash;&mdash; |
+  | 0       | 0   | 0000   | 8       | 8   | 1000   |
+  | 1       | 1   | 0001   | 9       | 9   | 1001   |
+  | 2       | 2   | 0010   | 10      | A   | 1010   |
+  | 3       | 3   | 0011   | 11      | B   | 1011   |
+  | 4       | 4   | 0100   | 12      | C   | 1100   |
+  | 5       | 5   | 0101   | 13      | D   | 1101   |
+  | 6       | 6   | 0110   | 14      | E   | 1110   |
+  | 7       | 7   | 0111   | 15      | F   | 1111   |</p>
+
+<p>As you can see, we can represent any byte (8 bits) with two hexadecimal
+  characters.</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:hex"><p><a href="https://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal</a> (base 16)
-numbers are often used as a convenient shorthand for 4 bits of binary
-data. You can convert between the formats using this table:</p>
-
-<p>| Decimal | Hex | Binary | Decimal | Hex | Binary |
-|&mdash;&mdash;&mdash;|&mdash;&ndash;|&mdash;&mdash;&ndash;|&mdash;&mdash;&mdash;|&mdash;&ndash;|&mdash;&mdash;&ndash;|
-| 0       | 0   | 0000   | 8       | 8   | 1000   |
-| 1       | 1   | 0001   | 9       | 9   | 1001   |
-| 2       | 2   | 0010   | 10      | A   | 1010   |
-| 3       | 3   | 0011   | 11      | B   | 1011   |
-| 4       | 4   | 0100   | 12      | C   | 1100   |
-| 5       | 5   | 0101   | 13      | D   | 1101   |
-| 6       | 6   | 0110   | 14      | E   | 1110   |
-| 7       | 7   | 0111   | 15      | F   | 1111   |</p>
-
-<p>As you can see, we can represent any byte (8 bits) with two hexadecimal
-characters.</p>
- <a class="footnote-return" href="#fnref:hex"><sup>[return]</sup></a></li>
+<li id="fn:hex"> <a class="footnote-return" href="#fnref:hex"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

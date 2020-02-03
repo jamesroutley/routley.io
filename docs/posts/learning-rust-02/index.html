@@ -50,7 +50,7 @@ they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
 </span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">fn</span> <span style="color:#06287e">usage</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>eprintln<span style="color:#666">!</span>(<span style="color:#4070a0">&#34;usage: rls &lt;dir&gt;&#34;</span>);<span style="color:#bbb">
 </span><span style="color:#bbb">    </span>process::exit(<span style="color:#40a070">1</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">            
+</span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>}<span style="color:#bbb">
 </span></code></pre></div>
 <h2 id="fetching-arguments">Fetching arguments</h2>
@@ -82,7 +82,7 @@ out. Printing <code>path_buf</code> would print the file path <strong>relative t
 
 <p>Functions which interact with the file system are error-prone. That&rsquo;s why lots
 of the values we get back from the file system functions are wrapped in
-<code>Results</code>.  To use the success values, we need to handle the error case. We&rsquo;re
+<code>Results</code>. To use the success values, we need to handle the error case. We&rsquo;re
 currently doing this using <code>unwrap</code>, which panics if there&rsquo;s an error. This is
 both verbose and bad UX - we probably don&rsquo;t want to display a full Rust error
 message to our users.</p>

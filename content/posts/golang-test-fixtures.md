@@ -1,11 +1,11 @@
 ---
 aliases:
-- /tech/2017/07/20/golang-test-fixtures
-date: '2017-07-20'
+  - /tech/2017/07/20/golang-test-fixtures
+date: "2017-07-20"
 layout: post
 tags:
-- go
-- tdd
+  - go
+  - tdd
 title: Simplify Golang test fixtures with this one weird trick
 ---
 
@@ -62,7 +62,7 @@ func TestFeature(t *testing.T) {
 This pattern has two benefits:
 
 1. `startServer` and `stopServer` are inherently linked and should always be
-  called together. Binding the two functions together makes this explicit.
+   called together. Binding the two functions together makes this explicit.
 2. In the first example, the writer of `TestFeature` must know that
    `startServer` returns a `net.Listener`, which must be passed to `stopServer`.
    This leaks implementation detail. In the second example, this information is
@@ -71,5 +71,7 @@ This pattern has two benefits:
 
 ---
 
-[^1]: The nested functions in the second example form a closure, in which the
-    `net.Listener` is persisted.
+[^1]:
+
+  The nested functions in the second example form a closure, in which the
+  `net.Listener` is persisted.

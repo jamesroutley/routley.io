@@ -22,8 +22,8 @@
     <section>
         
 
-<p>This article walks through writing a spell-checking algorithm, making use of
-a neat data structure called a <a href="https://en.wikipedia.org/wiki/Trie">trie</a>, which
+<p>This article walks through writing a spell-checking algorithm, making use of a
+neat data structure called a <a href="https://en.wikipedia.org/wiki/Trie">trie</a>, which
 is particularly suited to the problem.</p>
 
 <p>We will look at:</p>
@@ -42,8 +42,7 @@ is particularly suited to the problem.</p>
 <p>We wish to write a spell-checking algorithm which should return a boolean
 indicating whether the word might be valid or not. It should return false only
 if there is no possibility of the word being correct. Words which are incorrect
-but may be made correct with the addition of further letters should return
-true.</p>
+but may be made correct with the addition of further letters should return true.</p>
 
 <ul>
 <li><code>zebr</code> -&gt; <code>true</code></li>
@@ -107,8 +106,8 @@ the end of a complete word.</p>
 
 <p>The child nodes can be stored in different ways, depending on the properties
 desired in the trie. Here, we store them in a <code>dict</code>, which offers fast <code>O(1)</code>
-lookup times, but require larger memory usage. A list could alternatively
-be used to reduce memory usage, at the cost of slower lookup time.</p>
+lookup times, but require larger memory usage. A list could alternatively be
+used to reduce memory usage, at the cost of slower lookup time.</p>
 
 <p>Using a <code>dict</code>, the algorithmic complexity of spell-checking a word should be
 <code>O(m)</code>, where <code>m</code> is the length of the string being checked<sup class="footnote-ref" id="fnref:trie-complexity"><a href="#fn:trie-complexity">3</a></sup>.</p>
@@ -238,9 +237,8 @@ trie reduces the total number of characters stored<sup class="footnote-ref" id="
 character stored now has overhead associated with it from the <code>Node</code> object
 which contains it, and the <code>dict</code> used to store its relationships.</p>
 
-<p>This memory usage can be reduced by storing the words in a <a href="https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic
-acyclic finite state
-automaton</a>,
+<p>This memory usage can be reduced by storing the words in a
+<a href="https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic acyclic finite state automaton</a>,
 which prunes some of the redundancy out of the trie.</p>
 
 <h2 id="extensions">Extensions</h2>
@@ -254,34 +252,35 @@ algorithm to output the keys in order)</li>
 </ul>
 
 <hr />
+
+<p>Perform binary search, but instead of searching for the string in the
+  dictionary which <code>==</code> the search term, search for a string which
+  <code>startswith()</code> the search term.</p>
+
+<p>We are not just searching for a word in a dictionary, but also for words which
+  could have letters added them to make them valid. We can do this by checking
+  whether the dictionary entry starts with the letters of the search term <code>O(m)</code>
+  at each step of the search <code>O(log n)</code></p>
+
+<p>At each step of the seach, we do a <code>dict</code> key lookup, which is <code>O(1)</code>. For a
+  word with <code>m</code> characters, we perform <code>m</code> of these lookups, giving an overall
+  search complexity of <code>O(m)</code>.</p>
+
+<p>Storing the words &lsquo;cat&rsquo; and &lsquo;cab&rsquo; in a list requires storing six characters.
+  In a trie, we only store four:</p>
+
+<pre><code>  c -&gt; a -&gt; t
+        `-&gt; b
+</code></pre>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:binary-search"><p>Perform binary search, but instead of searching for the string
-in the dictionary which <code>==</code> the search term, search for a string which
-<code>startswith()</code> the search term.</p>
- <a class="footnote-return" href="#fnref:binary-search"><sup>[return]</sup></a></li>
-
-<li id="fn:bin-search-complexity"><p>We are not just searching for a word in a dictionary,
-but also for words which could have letters added them to make them valid.
-We can do this by checking whether the dictionary entry starts with the
-letters of the search term <code>O(m)</code> at each step of the search <code>O(log n)</code></p>
- <a class="footnote-return" href="#fnref:bin-search-complexity"><sup>[return]</sup></a></li>
-
-<li id="fn:trie-complexity"><p>At each step of the seach, we do a <code>dict</code> key lookup, which
-is <code>O(1)</code>. For a word with <code>m</code> characters, we perform <code>m</code> of these lookups,
-giving an overall search complexity of <code>O(m)</code>.</p>
- <a class="footnote-return" href="#fnref:trie-complexity"><sup>[return]</sup></a></li>
-
-<li id="fn:chars-stored"><p>Storing the words &lsquo;cat&rsquo; and &lsquo;cab&rsquo; in a list requires storing
-six characters. In a trie, we only store four:</p>
-
-<pre><code>c -&gt; a -&gt; t
-      `-&gt; b
-</code></pre>
- <a class="footnote-return" href="#fnref:chars-stored"><sup>[return]</sup></a></li>
+<li id="fn:binary-search"> <a class="footnote-return" href="#fnref:binary-search"><sup>[return]</sup></a></li>
+<li id="fn:bin-search-complexity"> <a class="footnote-return" href="#fnref:bin-search-complexity"><sup>[return]</sup></a></li>
+<li id="fn:trie-complexity"> <a class="footnote-return" href="#fnref:trie-complexity"><sup>[return]</sup></a></li>
+<li id="fn:chars-stored"> <a class="footnote-return" href="#fnref:chars-stored"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

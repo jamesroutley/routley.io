@@ -1,19 +1,19 @@
 ---
 aliases:
-- /tech/2017/06/04/tail-recursion
-date: '2017-06-04'
+  - /tech/2017/06/04/tail-recursion
+date: "2017-06-04"
 layout: post
 title: Tail recursion for imperative programmers
 ---
 
 At the Recurse Center, I've been working my way through The Structure and
-Interpretation of Computer Programs (SICP) book. It's an introductory 
-programming book written for an MIT course in 1985. It teaches programming 
-using the language Scheme, a LISP dialect. Scheme is functional, and I've
-been enjoying learning new functional concepts.
+Interpretation of Computer Programs (SICP) book. It's an introductory
+programming book written for an MIT course in 1985. It teaches programming using
+the language Scheme, a LISP dialect. Scheme is functional, and I've been
+enjoying learning new functional concepts.
 
-This article aims to explain tail recursion to programmers without experience
-in functional languages or concepts.
+This article aims to explain tail recursion to programmers without experience in
+functional languages or concepts.
 
 Before looking at tail recursion, let's look at recursion in an imperative
 language, Python.
@@ -31,8 +31,8 @@ language, Python.
 ```
 
 The snippet above defines a function which returns the factorial of some number
-`n`. `factorial(n) = n * n - 1 * ... * 2 * 1`. For `n = 4`, we
-expect the result to be `4 * 3 * 2 * 1 = 24`, which we do get.
+`n`. `factorial(n) = n * n - 1 * ... * 2 * 1`. For `n = 4`, we expect the result
+to be `4 * 3 * 2 * 1 = 24`, which we do get.
 
 What happens behind the scenes when we run a recursive function? When any
 function call is made, a frame containing data associated with that function is
@@ -56,8 +56,8 @@ Running this script gives:
     (<frame object at 0x1042a9c20>, ...)  # output truncated
 ]
 [
-    (<frame object at 0x7fa702d2a000>, ...), 
-    (<frame object at 0x1042a9c20>, ...)  
+    (<frame object at 0x7fa702d2a000>, ...),
+    (<frame object at 0x1042a9c20>, ...)
 ]
 ```
 
@@ -67,7 +67,7 @@ is on the stack. When it is called again, there are two.
 Frames take up memory, and a Python process is allocated a limited amount of
 memory. If a stack contains too many frames, the process can run out of memory,
 or the stack may expand into memory not allocated to its process, causing a
-stack overflow. To stop this from happening, the interpreter sets a maximum 
+stack overflow. To stop this from happening, the interpreter sets a maximum
 recursion limit, which can be found with `sys.getrecursionlimit()`. On my
 computer, this limit is set to 1000 [^maxrecursion].
 
@@ -113,9 +113,9 @@ factorial(4)
 24
 ```
 
-We see that a chain of deferred operations builds up. The total isn't
-calculated until the base case of `n = 1` is hit. The interpreter must keep
-track of operations which must be performed later.
+We see that a chain of deferred operations builds up. The total isn't calculated
+until the base case of `n = 1` is hit. The interpreter must keep track of
+operations which must be performed later.
 
 If we reformulate the factorial function:
 
@@ -144,20 +144,21 @@ variable `total`, not by the interpreter.
 ## Tail recursion
 
 In tail-recursive languages, recursive procedures defined in the second way are
-interpreted as *iterative* processes, and do not exhibit the downsides of
+interpreted as _iterative_ processes, and do not exhibit the downsides of
 recursive processes. You get the performance benefits of an iterative process,
 with the elegance of a recursive procedure. The interpreter works out that no
 more work needs to be done on the stack frame, and throws it away.
 
-Unfortunately, Python is not a tail-recursive language, so 
-`factorial_new(1000)` still throws `RuntimeError: maximum recursion depth 
-exceeded`.
+Unfortunately, Python is not a tail-recursive language, so `factorial_new(1000)`
+still throws `RuntimeError: maximum recursion depth exceeded`.
 
 For more information, I recommend section `1.2.1` of SICP.
 
 ---
 
-[^maxrecursion]: The maximum recursion limit can be set in Python with
-    `sys.setrecursionlimit()` but it's generally not advised. Functions which
-    recurse that far down should probably be rewritten to use an iterative
-    process.
+[^maxrecursion]:
+
+  The maximum recursion limit can be set in Python with
+  `sys.setrecursionlimit()` but it's generally not advised. Functions which
+  recurse that far down should probably be rewritten to use an iterative
+  process.

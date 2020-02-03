@@ -22,8 +22,8 @@
     <section>
         
 
-<p>Today I found out (<a href="https://github.com/cloudreach/sceptre/commit/91dc1c64056e190912577ba9c354092798589879">the hard
-way</a>)
+<p>Today I found out
+(<a href="https://github.com/cloudreach/sceptre/commit/91dc1c64056e190912577ba9c354092798589879">the hard way</a>)
 that the GNU (available on linux) and BSD (available on macOS) implementations
 of <code>cp</code> behave differently when used to recursively copy.</p>
 
@@ -35,8 +35,8 @@ directory that ends with a slash (<code>/</code>):</p>
 <li>BSD/macOS: copy the contents of the directory</li>
 </ul>
 
-<p>While this is documented behaviour (see man pages below), it can lead to unwanted behaviour if you
-develop on a mac and build on a linux-based CI system.</p>
+<p>While this is documented behaviour (see man pages below), it can lead to
+unwanted behaviour if you develop on a mac and build on a linux-based CI system.</p>
 
 <h2 id="man-pages">Man pages</h2>
 

@@ -1,13 +1,13 @@
 ---
 aliases:
-- /tech/2017/07/16/tries
-date: '2017-07-16'
+  - /tech/2017/07/16/tries
+date: "2017-07-16"
 layout: post
-title: 'Investigating tries: writing a spell-checking algorithm'
+title: "Investigating tries: writing a spell-checking algorithm"
 ---
 
-This article walks through writing a spell-checking algorithm, making use of
-a neat data structure called a [trie](https://en.wikipedia.org/wiki/Trie), which
+This article walks through writing a spell-checking algorithm, making use of a
+neat data structure called a [trie](https://en.wikipedia.org/wiki/Trie), which
 is particularly suited to the problem.
 
 We will look at:
@@ -24,8 +24,7 @@ We will look at:
 We wish to write a spell-checking algorithm which should return a boolean
 indicating whether the word might be valid or not. It should return false only
 if there is no possibility of the word being correct. Words which are incorrect
-but may be made correct with the addition of further letters should return
-true. 
+but may be made correct with the addition of further letters should return true.
 
 - `zebr` -> `true`
 - `zebra` -> `true`
@@ -64,8 +63,8 @@ value associated. Nodes marked are marked with a dot `.` to signify that they
 contain a letter which is at the end of a word.
 
 The trie is made up of a series of interconnected nodes. Each node stores a
-single character, and interconnecting lines show the relationship between 
-characters. By following the lines, we can see our three words 
+single character, and interconnecting lines show the relationship between
+characters. By following the lines, we can see our three words
 
 We can see that a trie explicitly encodes the characters of a word in its nodes,
 making it suitable for our spell-checking algorithm, where we need to be able to
@@ -84,11 +83,11 @@ the end of a complete word.
 
 The child nodes can be stored in different ways, depending on the properties
 desired in the trie. Here, we store them in a `dict`, which offers fast `O(1)`
-lookup times, but require larger memory usage. A list could alternatively
-be used to reduce memory usage, at the cost of slower lookup time.
+lookup times, but require larger memory usage. A list could alternatively be
+used to reduce memory usage, at the cost of slower lookup time.
 
 Using a `dict`, the algorithmic complexity of spell-checking a word should be
-`O(m)`, where `m` is the length of the string being checked[^trie_complexity]. 
+`O(m)`, where `m` is the length of the string being checked[^trie_complexity].
 
 ```python
 class Node(object):
@@ -146,7 +145,7 @@ child whose value matches the letter.
 
 ## Analysis
 
-### Comparison to binary search 
+### Comparison to binary search
 
 We can compare how our trie-based algorithm compares to binary search which by
 running a benchmark test. The test searches for 1000 randomly selected words
@@ -235,9 +234,8 @@ trie reduces the total number of characters stored[^chars_stored], each
 character stored now has overhead associated with it from the `Node` object
 which contains it, and the `dict` used to store its relationships.
 
-This memory usage can be reduced by storing the words in a [deterministic
-acyclic finite state
-automaton](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton),
+This memory usage can be reduced by storing the words in a
+[deterministic acyclic finite state automaton](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton),
 which prunes some of the redundancy out of the trie.
 
 ## Extensions
@@ -250,21 +248,29 @@ Tries can be used in similar ways to implement:
 
 ---
 
-[^binary_search]: Perform binary search, but instead of searching for the string
-    in the dictionary which `==` the search term, search for a string which
-    `startswith()` the search term.
+[^binary_search]:
 
-[^bin_search_complexity]: We are not just searching for a word in a dictionary,
-    but also for words which could have letters added them to make them valid.
-    We can do this by checking whether the dictionary entry starts with the
-    letters of the search term `O(m)` at each step of the search `O(log n)`
+  Perform binary search, but instead of searching for the string in the
+  dictionary which `==` the search term, search for a string which
+  `startswith()` the search term.
 
-[^trie_complexity]: At each step of the seach, we do a `dict` key lookup, which
-    is `O(1)`. For a word with `m` characters, we perform `m` of these lookups,
-    giving an overall search complexity of `O(m)`.
+[^bin_search_complexity]:
 
-[^chars_stored]: Storing the words 'cat' and 'cab' in a list requires storing
-    six characters. In a trie, we only store four:
+  We are not just searching for a word in a dictionary, but also for words which
+  could have letters added them to make them valid. We can do this by checking
+  whether the dictionary entry starts with the letters of the search term `O(m)`
+  at each step of the search `O(log n)`
 
-        c -> a -> t
-              `-> b
+[^trie_complexity]:
+
+  At each step of the seach, we do a `dict` key lookup, which is `O(1)`. For a
+  word with `m` characters, we perform `m` of these lookups, giving an overall
+  search complexity of `O(m)`.
+
+[^chars_stored]:
+
+  Storing the words 'cat' and 'cab' in a list requires storing six characters.
+  In a trie, we only store four:
+
+      c -> a -> t
+            `-> b

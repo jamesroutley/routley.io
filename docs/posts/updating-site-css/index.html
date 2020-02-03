@@ -24,13 +24,18 @@
 
 <h2 id="old-website">Old Website</h2>
 
-<p>The old website&rsquo;s CSS was based on <a href="http://getbootstrap.com/">Bootstrap</a>, with some custom styling. Source code can be found <a href="https://github.com/jamesroutley/jamesroutley.github.io/tree/52ae9222a013fe30e56242373e2e6f4f8009128c/css">here</a>. The code itself was hacked together.</p>
+<p>The old website&rsquo;s CSS was based on <a href="http://getbootstrap.com/">Bootstrap</a>, with
+some custom styling. Source code can be found
+<a href="https://github.com/jamesroutley/jamesroutley.github.io/tree/52ae9222a013fe30e56242373e2e6f4f8009128c/css">here</a>.
+The code itself was hacked together.</p>
 
 <p><img src="/img/posts/from-jekyll/01-css/old-main.png" alt="Old website main page" title="old website main page" /></p>
 
 <p><img src="/img/posts/from-jekyll/01-css/old-portfolio.png" alt="Old website portfolio page" title="old website portfolio page" /></p>
 
-<p>The font is <a href="https://fonts.google.com/specimen/Josefin+Slab">Josefin Slab</a>, which I quite liked for the main page, but I thought it felt too affected for use as the main font for blog posts.</p>
+<p>The font is <a href="https://fonts.google.com/specimen/Josefin+Slab">Josefin Slab</a>,
+which I quite liked for the main page, but I thought it felt too affected for
+use as the main font for blog posts.</p>
 
 <p><img src="/img/posts/from-jekyll/01-css/old-blog-1.png" alt="Old website blog page 1" title="old website blog page 1" /></p>
 
@@ -40,20 +45,30 @@
 
 <h2 id="new-website">New Website</h2>
 
-<p>The new website takes a minimalist approach to CSS, using system defaults where possible. The full code is 67 lines long, including whitespace and comments, and can be found <a href="https://github.com/jamesroutley/jamesroutley.github.io/blob/812401e4bb92a9248a7883682e3106f6439bae5b/css/jamesroutley.css">here</a>.</p>
+<p>The new website takes a minimalist approach to CSS, using system defaults where
+possible. The full code is 67 lines long, including whitespace and comments, and
+can be found
+<a href="https://github.com/jamesroutley/jamesroutley.github.io/blob/812401e4bb92a9248a7883682e3106f6439bae5b/css/jamesroutley.css">here</a>.</p>
 
 <h3 id="font">Font</h3>
 
-<p>Josefin Slab has been replaced by the user&rsquo;s system font, for speed and a native feel. More information about using system fonts in web design can be found in this <a href="https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/">post</a>. The <code>font-family</code> used here is the same as the one used by GitHub for Markdown text formatting.</p>
+<p>Josefin Slab has been replaced by the user&rsquo;s system font, for speed and a native
+feel. More information about using system fonts in web design can be found in
+this
+<a href="https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/">post</a>.
+The <code>font-family</code> used here is the same as the one used by GitHub for Markdown
+text formatting.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#062873;font-weight:bold">body</span> {
-  <span style="color:#007020;font-weight:bold">font-family</span>:
-    <span style="color:#666">-</span>apple-system, BlinkMacSystemFont,
-    <span style="color:#4070a0">&#34;Segoe UI&#34;</span>, Helvetica, Arial, <span style="color:#007020;font-weight:bold">sans-serif</span>,
-    <span style="color:#4070a0">&#34;Apple Color Emoji&#34;</span>, <span style="color:#4070a0">&#34;Segoe UI Emoji&#34;</span>, <span style="color:#4070a0">&#34;Segoe UI Symbol&#34;</span>;
+  <span style="color:#007020;font-weight:bold">font-family</span>: <span style="color:#666">-</span>apple-system, BlinkMacSystemFont, <span style="color:#4070a0">&#34;Segoe UI&#34;</span>, Helvetica, Arial,
+    <span style="color:#007020;font-weight:bold">sans-serif</span>, <span style="color:#4070a0">&#34;Apple Color Emoji&#34;</span>, <span style="color:#4070a0">&#34;Segoe UI Emoji&#34;</span>, <span style="color:#4070a0">&#34;Segoe UI Symbol&#34;</span>;
 }</code></pre></div>
 <h3 id="alignment">Alignment</h3>
 
-<p>The new site removes the Bootstrap dependency. Previously, the content was centered by offsetting grid columns. Centre alignment is now implemented by setting <code>margin-left</code> and <code>margin-right</code> of the main <code>div</code> to <code>auto</code>. Setting <code>max-width</code> rather than <code>width</code> scales down the size of the <code>div</code> if screen size is less than <code>600px</code>.</p>
+<p>The new site removes the Bootstrap dependency. Previously, the content was
+centered by offsetting grid columns. Centre alignment is now implemented by
+setting <code>margin-left</code> and <code>margin-right</code> of the main <code>div</code> to <code>auto</code>. Setting
+<code>max-width</code> rather than <code>width</code> scales down the size of the <code>div</code> if screen size
+is less than <code>600px</code>.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#0e84b5;font-weight:bold">main</span> {
   <span style="color:#007020;font-weight:bold">max-width</span>: <span style="color:#40a070">600</span><span style="color:#902000">px</span>;
   <span style="color:#007020;font-weight:bold">margin</span>: <span style="color:#40a070">50</span><span style="color:#902000">px</span> <span style="color:#007020;font-weight:bold">auto</span> <span style="color:#40a070">50</span><span style="color:#902000">px</span>;
@@ -71,12 +86,18 @@
   <span style="color:#007020;font-weight:bold">height</span>: <span style="color:#007020;font-weight:bold">auto</span>;
   <span style="color:#007020;font-weight:bold">margin</span>: <span style="color:#007020;font-weight:bold">auto</span>;
 }</code></pre></div>
-<p>All pages in the new website are compiled from <code>Markdown</code>. Attaching classes to the generated <code>HTML</code> elements is possible, but requires <code>HTML</code> to be explicitly written into the <code>Markdown</code>. Applying CSS to the HTML element itself (rather than a class each image is assigned to) feels like bad practice, but I chose it over having to add classes manually.</p>
+<p>All pages in the new website are compiled from <code>Markdown</code>. Attaching classes to
+the generated <code>HTML</code> elements is possible, but requires <code>HTML</code> to be explicitly
+written into the <code>Markdown</code>. Applying CSS to the HTML element itself (rather
+than a class each image is assigned to) feels like bad practice, but I chose it
+over having to add classes manually.</p>
 
 <h3 id="code-blocks">Code Blocks</h3>
 
-<p>Code blocks are again inspired by GitHub&rsquo;s <code>Markdown</code> rendering, borrowing their <code>background-color</code> and <code>border-radius</code>.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#062873;font-weight:bold">code</span><span style="color:#666">,</span> <span style="color:#062873;font-weight:bold">pre</span> {
+<p>Code blocks are again inspired by GitHub&rsquo;s <code>Markdown</code> rendering, borrowing their
+<code>background-color</code> and <code>border-radius</code>.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#062873;font-weight:bold">code</span><span style="color:#666">,</span>
+<span style="color:#062873;font-weight:bold">pre</span> {
   <span style="color:#007020;font-weight:bold">font-size</span>: <span style="color:#40a070">0.95</span><span style="color:#902000">em</span>;
   <span style="color:#007020;font-weight:bold">font-family</span>: Consolas, <span style="color:#4070a0">&#34;Liberation Mono&#34;</span>, Menlo, Courier, <span style="color:#007020;font-weight:bold">monospace</span>;
   <span style="color:#007020;font-weight:bold">background-color</span>: <span style="color:#40a070">#f7f7f7</span>;
@@ -92,20 +113,21 @@
 
 <p><img src="/img/posts/from-jekyll/01-css/new-blog-hyperlink.png" alt="New website hyperlink demonstration" title="new website hyperlink demonstration" /></p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#062873;font-weight:bold">a</span>:<span style="color:#555;font-weight:bold">link</span> {
-    <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#ff6868</span>;
-    <span style="color:#007020;font-weight:bold">text-decoration</span>: <span style="color:#007020;font-weight:bold">underline</span>;
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#ff6868</span>;
+  <span style="color:#007020;font-weight:bold">text-decoration</span>: <span style="color:#007020;font-weight:bold">underline</span>;
 }
 
 <span style="color:#062873;font-weight:bold">a</span>:<span style="color:#555;font-weight:bold">visited</span> {
-    <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#ff6868</span>;
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#ff6868</span>;
 }
 
 <span style="color:#062873;font-weight:bold">a</span>:<span style="color:#555;font-weight:bold">hover</span> {
-    <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#007020;font-weight:bold">white</span>;
-    <span style="color:#007020;font-weight:bold">background-color</span>: <span style="color:#40a070">#ff6868</span>;
-    <span style="color:#007020;font-weight:bold">text-decoration</span>: <span style="color:#007020;font-weight:bold">none</span>;
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#007020;font-weight:bold">white</span>;
+  <span style="color:#007020;font-weight:bold">background-color</span>: <span style="color:#40a070">#ff6868</span>;
+  <span style="color:#007020;font-weight:bold">text-decoration</span>: <span style="color:#007020;font-weight:bold">none</span>;
 }</code></pre></div>
-<p>The <code>a:hover</code> styling is used to &lsquo;highlight&rsquo; hyperlinks when the user hovers over them, an idea borrowed from <a href="http://hackcss.com/">Hack CSS</a>.</p>
+<p>The <code>a:hover</code> styling is used to &lsquo;highlight&rsquo; hyperlinks when the user hovers
+over them, an idea borrowed from <a href="http://hackcss.com/">Hack CSS</a>.</p>
 
     </section>
 </article>

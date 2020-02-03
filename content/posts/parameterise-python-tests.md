@@ -1,11 +1,11 @@
 ---
 aliases:
-- /tech/2017/08/09/parameterise-python-tests
-date: '2017-08-09'
+  - /tech/2017/08/09/parameterise-python-tests
+date: "2017-08-09"
 layout: post
 tags:
-- python
-- tdd
+  - python
+  - tdd
 title: Improve Python testing with parameterisation
 ---
 
@@ -82,8 +82,8 @@ OK
 ```
 
 All our tests pass, but our test code is verbose. Although each test is
-basically the same, we need to add a new method for each one. There is a lot
-of repeated boilerplate code.
+basically the same, we need to add a new method for each one. There is a lot of
+repeated boilerplate code.
 
 ## Parameterisation
 
@@ -147,6 +147,7 @@ Ran 1 test in 0.000s
 
 FAILED (failures=1)
 ```
+
 ## Parameterisation with subTest
 
 Python 3.4 introduced a way to solve this problem. We can use the
@@ -205,8 +206,8 @@ package.
 ## Parameterisation with pytest
 
 The [pytest](https://docs.pytest.org/en/latest/) framework also solves these
-problems for us, and is compatible with Python 2. We can install it with `pip
-install pytest`.
+problems for us, and is compatible with Python 2. We can install it with
+`pip install pytest`.
 
 Pytest contains a [feature](https://docs.pytest.org/en/latest/parametrize.html)
 which allows us to parameterise test cases:
@@ -273,8 +274,8 @@ Parameterising tests is a powerful technique. By separating test logic from
 data, the focus is shifted away from boilerplate code and onto testing features.
 It becomes trivial to add new test cases.
 
-Parameterised tests work best with pure functions. A pure function is a
-function which satisfies the following constraints:
+Parameterised tests work best with pure functions. A pure function is a function
+which satisfies the following constraints:
 
 - Its return value is determined exclusively by the input values (e.g.. it
   doesn't use global or object variables)
@@ -286,11 +287,11 @@ can often be exhaustively tested with a single parameterised test.
 
 ---
 
-**Change log**: 
+**Change log**:
 
-- The [first
-  version](https://github.com/jamesroutley/jamesroutley.co.uk/blob/65539b4e021ea3b5dabb9282dce2d71a7106b119/tech/_posts/2017-08-09-parameterise-python-tests.md)
-  of this article didn't contain the section on [Parameterisation with
-  subTest](#parameterisation-with-subtest). Thanks to
+- The
+  [first version](https://github.com/jamesroutley/jamesroutley.co.uk/blob/65539b4e021ea3b5dabb9282dce2d71a7106b119/tech/_posts/2017-08-09-parameterise-python-tests.md)
+  of this article didn't contain the section on
+  [Parameterisation with subTest](#parameterisation-with-subtest). Thanks to
   [@rochacbruno](https://twitter.com/rochacbruno) and
   [@ossronny](https://twitter.com/ossronny) for pointing it out.

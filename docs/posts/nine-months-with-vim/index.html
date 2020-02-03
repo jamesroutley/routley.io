@@ -35,7 +35,7 @@ programming languages, and needed to set Vim up for each one separately.</li>
 </ol>
 
 <p>I decided to deal with these problems separately. I focused on the former by
-using a preconfigured Vim setup to defer having to think about the  latter.</p>
+using a preconfigured Vim setup to defer having to think about the latter.</p>
 
 <h2 id="initial-vim-configuration">Initial Vim configuration</h2>
 
@@ -44,21 +44,27 @@ provided a really good starting point, and I&rsquo;d recommend it to people who 
 want to roll their own config.</p>
 
 <p>Once I felt productive at using Vim, I decided to write my own Vim
-configuration. This let me address some minor issues I had:
-- I found it difficult to understand which features were and built into
-    Vim, and which came from the <code>vimrc</code>
-- The <code>vimrc</code> contained features I didn&rsquo;t use
-- The <code>vimrc</code> vendored packages into the repo. To add new things, I needed to
-    use git submodules, a lower level of abstraction than I wanted to use
-- I forked the repo to make some changes. Maintaining the fork and keeping
-    everything up to date was a lot of effort</p>
+configuration. This let me address some minor issues I had:</p>
+
+<ul>
+<li>I found it difficult to understand which features were and built into Vim, and
+which came from the <code>vimrc</code></li>
+<li>The <code>vimrc</code> contained features I didn&rsquo;t use</li>
+<li>The <code>vimrc</code> vendored packages into the repo. To add new things, I needed to
+use git submodules, a lower level of abstraction than I wanted to use</li>
+<li>I forked the repo to make some changes. Maintaining the fork and keeping
+everything up to date was a lot of effort</li>
+</ul>
 
 <h2 id="current-vim-configuration">Current Vim configuration</h2>
 
-<p>I wanted a configuration that was:
-- Language agnostic and supported a wide range of languages
-- Minimal and close to native Vim where possible
-- Easy to edit and used a modern package manager</p>
+<p>I wanted a configuration that was:</p>
+
+<ul>
+<li>Language agnostic and supported a wide range of languages</li>
+<li>Minimal and close to native Vim where possible</li>
+<li>Easy to edit and used a modern package manager</li>
+</ul>
 
 <p>You can see my full configuration on
 <a href="https://github.com/jamesroutley/nvim/blob/master/init.vim">GitHub</a>. It&rsquo;s just
@@ -100,10 +106,13 @@ from the same package/directory in a new split.</p>
 </span><span style=""></span>nnoremap T :tabnew&lt;cr&gt;</code></pre></div>
 <h3 id="language-support">Language support</h3>
 
-<p>I use two plugins to get decent Vim support for most languages I&rsquo;ll ever use:
-- <a href="https://github.com/sheerun/vim-polyglot">vim-polyglot</a>: Syntax highlighting
-    and correct indenting
-- <a href="https://github.com/w0rp/ale">Asynchronous Line Engine (ALE)</a>: Linting</p>
+<p>I use two plugins to get decent Vim support for most languages I&rsquo;ll ever use:</p>
+
+<ul>
+<li><a href="https://github.com/sheerun/vim-polyglot">vim-polyglot</a>: Syntax highlighting
+and correct indenting</li>
+<li><a href="https://github.com/w0rp/ale">Asynchronous Line Engine (ALE)</a>: Linting</li>
+</ul>
 
 <h3 id="interacting-with-code">Interacting with code</h3>
 
@@ -111,11 +120,11 @@ from the same package/directory in a new split.</p>
 features they implement come built into Visual Studio Code:</p>
 
 <ul>
-<li><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment out lines or
-blocks of code. It works for most languages I&rsquo;ve tried</li>
+<li><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment out lines
+or blocks of code. It works for most languages I&rsquo;ve tried</li>
 <li><a href="https://github.com/jiangmiao/auto-pairs">auto-pairs</a>: When you type a left
-parenthesis, it automatically types a right parenthesis and moves your
-cursor between the two</li>
+parenthesis, it automatically types a right parenthesis and moves your cursor
+between the two</li>
 <li><a href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a>: Display a green
 <code>+</code> or a red <code>-</code> next to columns that have been edited in a file</li>
 <li><code>:set colorcolumn = 80</code>: Display a faint line at 80 chars</li>

@@ -1,9 +1,9 @@
 ---
 aliases:
-- /tech/2017/09/01/gap-buffer
-date: '2017-09-01'
+  - /tech/2017/09/01/gap-buffer
+date: "2017-09-01"
 layout: post
-title: 'Gap Buffers: a data structure for editable text'
+title: "Gap Buffers: a data structure for editable text"
 ---
 
 I've recently been writing a text editor. One of the first problems I faced was
@@ -20,11 +20,11 @@ We wish to find a data structure which supports the following operations:
 ## A naive solution: array of strings
 
 The simplest way to represent text is with an array of strings. As strings are
-just arrays of characters, we're really storing a 2D array of characters. 
+just arrays of characters, we're really storing a 2D array of characters.
 
 However, we see that it has poor performance for the insert and delete
 operations. If we want to insert or delete a character, we have to shift every
-character that comes after it one position over. 
+character that comes after it one position over.
 
 ```python
 ['h', 'e', 'y']
@@ -34,7 +34,7 @@ character that comes after it one position over.
 
 Given a body of text with a lines of length `n`, inserting a character at
 position 0 would require moving `n` characters over, giving insert a time
-complexity of `O(n)`. 
+complexity of `O(n)`.
 
 Similarly, inserting and deleting rows all have linear time performance.
 
@@ -52,7 +52,7 @@ Gap buffers are an array of characters and empty spaces (the gap):
 
 The gap can be kept track of by storing the index of the start and the end of
 the gap. Often, the start index points to the first character in the gap, and
-the end index points to the first character *after* the gap:
+the end index points to the first character _after_ the gap:
 
 ```python
 ['t', 'e', 'n', '_', '_', '_', '_', '_', '_']
@@ -75,8 +75,8 @@ We then insert the letter, decreasing the size of the gap:
 ```
 
 At first, this doesn't seem to be much better than the array of strings. To
-insert, we must still shift characters around. However, we see the benefit
-when we continue to insert letters:
+insert, we must still shift characters around. However, we see the benefit when
+we continue to insert letters:
 
 ```python
 ['t', 'h', '_', '_', '_', '_', '_', 'e', 'n']
@@ -92,8 +92,8 @@ letters. Luckily, this pattern of inserts is common in text editing.
 ### Delete
 
 Deleting characters behaves similarly. Move the gap to the delete position, then
-increase the size of the gap by 1. 
- 
+increase the size of the gap by 1.
+
 ```python
 ['t', 'h', '_', '_', '_', '_', '_', 'e', 'n']
             ^ start                  ^ end
@@ -101,8 +101,8 @@ increase the size of the gap by 1.
        ^ start                       ^ end
 ```
 
-Note that we don't have to change the value
-of the deleted character. Simply increasing the size of the gap is enough.
+Note that we don't have to change the value of the deleted character. Simply
+increasing the size of the gap is enough.
 
 ### Expanding the gap
 
@@ -122,7 +122,5 @@ allows us to easily insert and delete lines.
 
 Gap Buffers offer a simple, decent solution to the problem of storing editable
 text. They are not quite as performant as others, such as
-[ropes](https://en.wikipedia.org/wiki/Rope_(data_structure)), but are
+[ropes](<https://en.wikipedia.org/wiki/Rope_(data_structure)>), but are
 considerably simpler to implement, and should be adequate for most situations.
-
-

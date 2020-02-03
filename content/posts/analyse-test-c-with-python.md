@@ -1,19 +1,19 @@
 ---
 aliases:
-- /tech/2017/08/16/analyse-test-c-with-python
-date: '2017-08-16'
+  - /tech/2017/08/16/analyse-test-c-with-python
+date: "2017-08-16"
 layout: post
 tags:
-- python
-- c
-- tdd
+  - python
+  - c
+  - tdd
 title: Analyse and test C with Python
 ---
 
 I've recently been implementing data structures in C. Writing C is fun and
 educational, because it's lower level than most other common languages. It's
 fast, and writing it teaches you to understand what's happening at a machine
-level. 
+level.
 
 However, C is also relatively difficult to write, making it harder to analyse
 and test. It would be helpful to be able to do this with a higher level
@@ -27,7 +27,7 @@ Python library for interfacing with C called `ctypes`.
 ## Example C code
 
 For this example, I've written a simple (but unsafe)
-[stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) data
+[stack](<https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>) data
 structure, which defines the following API:
 
 ```c
@@ -54,8 +54,8 @@ $ clang -shared -o stack.so -fPIC stack.c
 
 ## Python wrapper
 
-Next, we need to define a wrapper module[^2], which creates the Python objects used
-to interact with the shared library.
+Next, we need to define a wrapper module[^2], which creates the Python objects
+used to interact with the shared library.
 
 ```python
 # stack_wrapper.py
@@ -110,7 +110,10 @@ Python objects can be used. We can use them with:
 
 ---
 
-[^1]: **Warning**: This stack implementation was written to be as simple as
+<!-- prettier-ignore-start -->
+
+[^1]: 
+    **Warning**: This stack implementation was written to be as simple as
     possible, and isn't really safe to use.
 
     ```c
@@ -136,7 +139,10 @@ Python objects can be used. We can use them with:
     }
     ```
 
-[^2]: When using `ctypes`, we end up writing a Python wrapper module, which is
+[^2]: 
+    When using `ctypes`, we end up writing a Python wrapper module, which is
     basically a Python translation of the C header file. Other libraries for
     calling into C try to remove this repetition. One example is
     [`cffi`](https://cffi.readthedocs.io/en/latest/), written by the PyPy team.
+
+<!-- prettier-ignore-end -->

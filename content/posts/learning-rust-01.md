@@ -1,13 +1,13 @@
 ---
 aliases:
-- /tech/2018/06/23/learning-rust-01
-date: '2018-06-23'
+  - /tech/2018/06/23/learning-rust-01
+date: "2018-06-23"
 layout: post
-title: 'Learning Rust 01: a pwd clone'
+title: "Learning Rust 01: a pwd clone"
 ---
 
-*I'm learning Rust, and documenting the process. These posts are my notes -
-they're not guaranteed to be useful, interesting or correct!*
+_I'm learning Rust, and documenting the process. These posts are my notes -
+they're not guaranteed to be useful, interesting or correct!_
 
 In this post, I'm writing my first Rust program. It's a simplified clone of the
 Unix tool `pwd`, which prints out the current directory. I'm calling it `rpwd`.
@@ -35,8 +35,8 @@ fn main() {
 
 ## Importing a module
 
-The first line imports the [`env`
-module](https://doc.rust-lang.org/std/env/index.html) from the standard
+The first line imports the
+[`env` module](https://doc.rust-lang.org/std/env/index.html) from the standard
 library, which implements functions to inspect and manipulate the process's
 environment.
 

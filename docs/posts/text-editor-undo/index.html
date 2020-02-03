@@ -32,8 +32,8 @@ their last action. If they accidentally undo an action, we want to let them redo
 it.</p>
 
 <p>For the purposes of this post, let&rsquo;s assume that a text editor makes edits to a
-<code>text</code> object. This <code>text</code> object is an array of string pointers<sup class="footnote-ref" id="fnref:pointer"><a href="#fn:pointer">1</a></sup>,
-with each string representing a line of text<sup class="footnote-ref" id="fnref:gap-buffer"><a href="#fn:gap-buffer">2</a></sup>.</p>
+<code>text</code> object. This <code>text</code> object is an array of string pointers<sup class="footnote-ref" id="fnref:pointer"><a href="#fn:pointer">1</a></sup>, with
+each string representing a line of text<sup class="footnote-ref" id="fnref:gap-buffer"><a href="#fn:gap-buffer">2</a></sup>.</p>
 
 <h2 id="a-solution">A solution</h2>
 
@@ -99,27 +99,28 @@ language, this is managed by the runtime.</p>
 be deleted. The strings that are only used in that state can also be deleted.
 Strings used in other states are kept.</p>
 
-<p>This technique can be used in non-garbage collected languages, but this
-object management must be done manually.</p>
+<p>This technique can be used in non-garbage collected languages, but this object
+management must be done manually.</p>
 
 <hr />
+
+<p>This technique doesn&rsquo;t actually require a language with pointers; Pointers
+  just offer a convenient notation for this example.</p>
+
+<p>This isn&rsquo;t actually a good way to store text in a text editor. For a better
+  solution, see a post I wrote about
+  <a href="/tech/2017/09/01/gap-buffer.html">gap buffers</a>.</p>
+
+<p>Note that the memory addresses in this example have been simplified for the
+  sake of clarity and don&rsquo;t make physical sense.</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:pointer"><p>This technique doesn&rsquo;t actually require a language with pointers;
-Pointers just offer a convenient notation for this example.</p>
- <a class="footnote-return" href="#fnref:pointer"><sup>[return]</sup></a></li>
-
-<li id="fn:gap-buffer"><p>This isn&rsquo;t actually a good way to store text in a text editor.
-For a better solution, see a post I wrote about <a href="/tech/2017/09/01/gap-buffer.html">gap
-buffers</a>.</p>
- <a class="footnote-return" href="#fnref:gap-buffer"><sup>[return]</sup></a></li>
-
-<li id="fn:memory"><p>Note that the memory addresses in this example have been simplified
-for the sake of clarity and don&rsquo;t make physical sense.</p>
- <a class="footnote-return" href="#fnref:memory"><sup>[return]</sup></a></li>
+<li id="fn:pointer"> <a class="footnote-return" href="#fnref:pointer"><sup>[return]</sup></a></li>
+<li id="fn:gap-buffer"> <a class="footnote-return" href="#fnref:gap-buffer"><sup>[return]</sup></a></li>
+<li id="fn:memory"> <a class="footnote-return" href="#fnref:memory"><sup>[return]</sup></a></li>
 </ol>
 </div>
 

@@ -1,10 +1,10 @@
 ---
 aliases:
-- /tech/2017/10/08/text-editor-undo
-date: '2017-10-08'
+  - /tech/2017/10/08/text-editor-undo
+date: "2017-10-08"
 layout: post
 tags:
-- algorithms
+  - algorithms
 title: Implementing 'undo' in a text editor
 ---
 
@@ -18,8 +18,8 @@ their last action. If they accidentally undo an action, we want to let them redo
 it.
 
 For the purposes of this post, let's assume that a text editor makes edits to a
-`text` object. This `text` object is an array of string pointers[^pointer],
-with each string representing a line of text[^gap-buffer].
+`text` object. This `text` object is an array of string pointers[^pointer], with
+each string representing a line of text[^gap-buffer].
 
 ## A solution
 
@@ -31,7 +31,7 @@ the `text`, with the changes made to it. If we store each of these text objects
 version.
 
 Making a full copy of the `text` object on every edit would be wasteful. We can
-make things better by copying pointers, rather than full objects. 
+make things better by copying pointers, rather than full objects.
 
 ## Example
 
@@ -73,8 +73,7 @@ The trick to implementing undo is to realise that our previous array, containing
 the string `"Hello\nworld"` still exists. To undo our changes, we simply revert
 to the previous array.
 
-
-## (In)finite history 
+## (In)finite history
 
 To implement infinite history, we store the states in a linked list. To undo, we
 move back a state. To redo, we move forward a state. Infinite undo history can
@@ -91,23 +90,29 @@ from the tail end of the list.
 
 When deleting the oldest state, we need to be careful to make sure we don't
 delete any strings which are reused by other states. In a garbage collected
-language, this is managed by the runtime. 
+language, this is managed by the runtime.
 
 We remove the state from our linked list. Because it is no longer used, it can
 be deleted. The strings that are only used in that state can also be deleted.
 Strings used in other states are kept.
 
-This technique can be used in non-garbage collected languages, but this
-object management must be done manually. 
+This technique can be used in non-garbage collected languages, but this object
+management must be done manually.
 
 ---
 
-[^pointer]: This technique doesn't actually require a language with pointers;
-    Pointers just offer a convenient notation for this example.
+[^pointer]:
 
-[^gap-buffer]: This isn't actually a good way to store text in a text editor.
-    For a better solution, see a post I wrote about [gap
-    buffers](/tech/2017/09/01/gap-buffer.html).
+  This technique doesn't actually require a language with pointers; Pointers
+  just offer a convenient notation for this example.
 
-[^memory]: Note that the memory addresses in this example have been simplified
-    for the sake of clarity and don't make physical sense.
+[^gap-buffer]:
+
+  This isn't actually a good way to store text in a text editor. For a better
+  solution, see a post I wrote about
+  [gap buffers](/tech/2017/09/01/gap-buffer.html).
+
+[^memory]:
+
+  Note that the memory addresses in this example have been simplified for the
+  sake of clarity and don't make physical sense.

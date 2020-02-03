@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tech/2017/11/23/logbook
-date: '2017-11-23'
+  - /tech/2017/11/23/logbook
+date: "2017-11-23"
 layout: post
 title: Using a logbook to improve your programming
 ---
@@ -20,9 +20,9 @@ which we recorded in a logbook. To use a logbook successfully, you have to:
 4. Record what happened, and ask how it could be improved
 
 This process is well suited to problem solving and active learning, and is
-described by George Pólya in his book [How to Solve
-It](https://en.wikipedia.org/wiki/How_to_Solve_It), which describes a method for
-solving mathematical problems.
+described by George Pólya in his book
+[How to Solve It](https://en.wikipedia.org/wiki/How_to_Solve_It), which
+describes a method for solving mathematical problems.
 
 ## Logbooks for programming
 

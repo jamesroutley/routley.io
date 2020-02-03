@@ -73,8 +73,8 @@ insert position:</p>
 <p>We then insert the letter, decreasing the size of the gap:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#4070a0">&#39;t&#39;</span>, <span style="color:#4070a0">&#39;h&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;e&#39;</span>, <span style="color:#4070a0">&#39;n&#39;</span>]</code></pre></div>
 <p>At first, this doesn&rsquo;t seem to be much better than the array of strings. To
-insert, we must still shift characters around. However, we see the benefit
-when we continue to insert letters:</p>
+insert, we must still shift characters around. However, we see the benefit when
+we continue to insert letters:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#4070a0">&#39;t&#39;</span>, <span style="color:#4070a0">&#39;h&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;e&#39;</span>, <span style="color:#4070a0">&#39;n&#39;</span>]
 [<span style="color:#4070a0">&#39;t&#39;</span>, <span style="color:#4070a0">&#39;h&#39;</span>, <span style="color:#4070a0">&#39;i&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;e&#39;</span>, <span style="color:#4070a0">&#39;n&#39;</span>]
 [<span style="color:#4070a0">&#39;t&#39;</span>, <span style="color:#4070a0">&#39;h&#39;</span>, <span style="color:#4070a0">&#39;i&#39;</span>, <span style="color:#4070a0">&#39;r&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;e&#39;</span>, <span style="color:#4070a0">&#39;n&#39;</span>]
@@ -91,8 +91,8 @@ increase the size of the gap by 1.</p>
             <span style="color:#666">^</span> start                  <span style="color:#666">^</span> end
 [<span style="color:#4070a0">&#39;t&#39;</span>, <span style="color:#4070a0">&#39;h&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;_&#39;</span>, <span style="color:#4070a0">&#39;e&#39;</span>, <span style="color:#4070a0">&#39;n&#39;</span>]
        <span style="color:#666">^</span> start                       <span style="color:#666">^</span> end</code></pre></div>
-<p>Note that we don&rsquo;t have to change the value
-of the deleted character. Simply increasing the size of the gap is enough.</p>
+<p>Note that we don&rsquo;t have to change the value of the deleted character. Simply
+increasing the size of the gap is enough.</p>
 
 <h3 id="expanding-the-gap">Expanding the gap</h3>
 
