@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>James Routley | James Routley on James Routley</title>
@@ -6,10 +6,20 @@
     <description>Recent content in James Routley | James Routley on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 03 Feb 2020 20:19:21 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Feb 2020 08:13:04 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Real vs percieved simplicity</title>
+      <link>http://routley.io/posts/cli-cheatsheets-simplicity/</link>
+      <pubDate>Tue, 04 Feb 2020 08:13:04 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/cli-cheatsheets-simplicity/</guid>
+      <description>There are certain command line tasks I need to do every few weeks or months, which is infrequently enough that I need to look up the syntax every time I do them. For example:
+ Undoing a commit Getting ripgrep to return only the text which matches a regular expression, not the whole line Executing a command against all files in a directory  A solution To save time searching for how to do these things, I decided to create my own command line tool, cookbook, which would let me save examples (or &amp;lsquo;recipes&amp;rsquo;) for these tasks.</description>
+    </item>
     
     <item>
       <title>How I make coffee</title>
