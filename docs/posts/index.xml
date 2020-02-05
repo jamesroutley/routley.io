@@ -6,10 +6,21 @@
     <description>Recent content in Posts on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 04 Feb 2020 08:13:04 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 20:03:04 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vim diff</title>
+      <link>http://routley.io/posts/vim-diff/</link>
+      <pubDate>Wed, 05 Feb 2020 20:03:04 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/vim-diff/</guid>
+      <description>I was digging through Vim&amp;rsquo;s documentation, and came across the help article diff.txt. It turns out that Vim implements a visual diff feature, which shows the &amp;lsquo;difference between two to eight versions of the same file&amp;rsquo;.
+I occasionally need to find the differences between two files, and have historically used diff for this. Unfortunately, I find the output quite hard to parse:
+$ diff file_1 file_2 32c32 &amp;lt; TODO: screenshot of diff --- &amp;gt; !</description>
+    </item>
     
     <item>
       <title>Real vs percieved simplicity</title>
