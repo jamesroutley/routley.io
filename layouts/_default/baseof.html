@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    {{/* NOTE: the Site's title, and if there is a page title, that is set too */}}
-    <title>{{ block "title" . }}{{ .Site.Title }} {{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>{{ .Site.Title }} {{ with .Params.Title }} | {{ . }}{{ end }}</title>
 
-    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css">
-    {{ block "custom-css" . }}
-    <!-- layouts can override this block to add custom css -->
-    {{ end }}
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
   </head>
   <body>
     {{- partial "header.html" . -}}
-    <div id="content">
+    <main>
       {{- block "main" . }}{{- end }}
-    </div>
+    </main>
+    <!-- prettier-ignore -->
+    {{ if eq .Type "posts" }} {{- partial "post_footer.html" -}} {{ end }}
+    <!-- prettier-ignore -->
     {{- partial "footer.html" . -}}
   </body>
 </html>

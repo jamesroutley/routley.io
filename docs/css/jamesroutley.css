@@ -1,18 +1,49 @@
 body {
   font-family: "Nanum Myeongjo", serif;
-  /* plex-sans; */
   line-height: 1.7;
   max-width: 700px;
   margin: 50px auto 50px;
+  padding: 0 12px 0;
 }
 
-.header-date {
-  text-align: right;
+/* Header styling */
+
+article > header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+article > header > h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+/* Footer styling */
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 48px;
+  border-top: solid 1px;
+  border-color: #aaa;
+  padding: 24px;
+}
+
+footer > img {
+  margin-right: 12px;
+  height: 150px;
+  display: inline;
+}
+
+footer > p {
+  max-width: 450px;
 }
 
 /* Image styling */
 
-img {
+article img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -24,6 +55,7 @@ img {
 code,
 pre {
   font-family: plex-mono;
+  font-size: 14px;
 }
 
 pre {
