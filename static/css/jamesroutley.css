@@ -6,6 +6,21 @@ body {
   padding: 0 12px 0;
 }
 
+/* Navigation styling */
+
+nav ul {
+  padding-left: 0;
+}
+
+nav ul li + li:before {
+  padding: 8px;
+  content: "/";
+}
+
+nav li {
+  display: inline;
+}
+
 /* Header styling */
 
 article > header {

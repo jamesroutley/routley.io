@@ -1,0 +1,13 @@
+<nav>
+  <ul>
+    <!-- Initialise a scratch variable "path" to an empty string -->
+    {{ $.Scratch.Set "path" "" }}
+    <li><a href="/">Home</a></li>
+    <!-- For each non-empty item in the URL path -->
+    {{ range $element := split .RelPermalink "/" }}{{ if ne $element "" }}
+    <!-- Add the element to the scratch variable -->
+    {{ $.Scratch.Add "path" "/" }}{{ $.Scratch.Add "path" $element }}
+    <li><a href="{{ $.Scratch.Get "path" }}">{{ humanize . }}</a></li>
+    {{ end }}{{ end }}
+  </ul>
+</nav>
