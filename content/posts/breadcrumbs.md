@@ -1,3 +1,13 @@
+---
+title: "Breadcrumbs"
+date: 2020-02-07T23:57:10Z
+---
+
+I just implemented breadcrumb navigation for this blog. How it works is quite
+neat - we iterate over the sections of the path, and store our current position
+using a Hugo `Scratch` variable:
+
+```html
 <nav>
   <ul>
     <!-- Initialise a scratch variable "path" to an empty string -->
@@ -12,3 +22,8 @@
     {{ end }}{{ end }}
   </ul>
 </nav>
+```
+
+I'd always thought of templating as a stateless thing, but using a stateful
+variable makes this problem intuitive to solve if you're used to programming in
+stateful languages.

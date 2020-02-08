@@ -6,10 +6,20 @@
     <description>Recent content in James Routley | James Routley on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 06 Feb 2020 23:19:57 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Feb 2020 23:57:10 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Breadcrumbs</title>
+      <link>http://routley.io/posts/breadcrumbs/</link>
+      <pubDate>Fri, 07 Feb 2020 23:57:10 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/breadcrumbs/</guid>
+      <description>I just implemented breadcrumb navigation for this blog. How it works is quite neat - we iterate over the sections of the path, and store our current position using a Hugo Scratch variable:
+&amp;lt;nav&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;!-- Initialise a scratch variable &amp;#34;path&amp;#34; to an empty string --&amp;gt; {{ $.Scratch.Set &amp;#34;path&amp;#34; &amp;#34;&amp;#34; }} &amp;lt;li&amp;gt;&amp;lt;a href=&amp;#34;/&amp;#34;&amp;gt;Home&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt; &amp;lt;!-- For each non-empty item in the URL path --&amp;gt; {{ range $element := split .RelPermalink &amp;#34;/&amp;#34; }}{{ if ne $element &amp;#34;&amp;#34; }} &amp;lt;!</description>
+    </item>
     
     <item>
       <title>Blog UI updates</title>
