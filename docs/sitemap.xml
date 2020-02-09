@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://routley.io/posts/breadcrumbs/</loc>
-    <lastmod>2020-02-07T23:57:10+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://routley.io/</loc>
-    <lastmod>2020-02-07T23:57:10+00:00</lastmod>
+    <lastmod>2020-02-08T15:40:39+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://routley.io/posts/</loc>
+    <lastmod>2020-02-08T15:40:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/writing-daily-one-week-in/</loc>
+    <lastmod>2020-02-08T15:40:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://routley.io/posts/breadcrumbs/</loc>
     <lastmod>2020-02-07T23:57:10+00:00</lastmod>
   </url>
   
