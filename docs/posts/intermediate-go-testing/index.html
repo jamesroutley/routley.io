@@ -41,10 +41,10 @@ post shares some things I&rsquo;ve learnt about testing Go code.</p>
 
 <p>Golang tests can be easily parallelised by calling <code>t.Parallel()</code> at the
 beginning of a test:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-    t.<span style="color:#06287e">Parallel</span>()
-    <span style="color:#60a0b0;font-style:italic">// test code
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
+    t.Parallel()
+    <span style="color:#008000">// test code
+</span><span style="color:#008000"></span>}</code></pre></div>
 <p>This test will now be run in parallel with other tests marked as parallel.
 Parallel tests are run in a number of goroutines. This number is defaulted to
 <code>GOMAXPROCS</code>, but can be set by passing the <code>-parallel</code> flag to <code>go test</code>.</p>
@@ -55,10 +55,10 @@ Parallel tests are run in a number of goroutines. This number is defaulted to
 tests to fail, I like to skip all but one, to reduce noise while debugging. I
 used to do this by commenting out functions, but it can also be done by calling
 <code>t.SkipNow()</code> at the beginning of the test:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-    t.<span style="color:#06287e">SkipNow</span>()
-    <span style="color:#60a0b0;font-style:italic">// test is skipped
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
+    t.SkipNow()
+    <span style="color:#008000">// test is skipped
+</span><span style="color:#008000"></span>}</code></pre></div>
 <p><code>SkipNow</code> should be called at the top of the function. If a test fails before
 <code>SkipNow</code> is called, the test is still considered to have failed.</p>
 
@@ -67,24 +67,24 @@ Explicitly skipping a test is less confusing to future readers than a commented
 test. Was the commented out test done so intentionally? Is that test meant to
 pass? Skipping can be made even more explicit by calling <code>Skip</code> or <code>Skipf</code>,
 which logs a (formatted) message before skipping the test.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-    t.<span style="color:#06287e">Skip</span>(<span style="color:#4070a0">&#34;Temporarily skipping test because ...&#34;</span>)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
+    t.Skip(<span style="color:#a31515">&#34;Temporarily skipping test because ...&#34;</span>)
 }</code></pre></div>
 <h2 id="sub-tests">Sub tests</h2>
 
 <p>A popular paradigm in Golang is table-driven testing, where a single test is run
 with an array of different input parameters:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestAdd</span>(t <span style="color:#666">*</span>testing.T) {
-    testCases <span style="color:#666">:=</span> []<span style="color:#007020;font-weight:bold">struct</span>{
-        a, b, expected <span style="color:#902000">int</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestAdd(t *testing.T) {
+    testCases := []<span style="color:#00f">struct</span>{
+        a, b, expected <span style="color:#2b91af">int</span>
     }{
-       {a: <span style="color:#40a070">0</span>, b: <span style="color:#40a070">0</span>, expected: <span style="color:#40a070">0</span>},
-       {a: <span style="color:#666">-</span><span style="color:#40a070">1</span>, b: <span style="color:#40a070">1</span>, expected: <span style="color:#40a070">0</span>}
+       {a: 0, b: 0, expected: 0},
+       {a: -1, b: 1, expected: 0}
     }
 
-    <span style="color:#007020;font-weight:bold">for</span> _, tc <span style="color:#666">:=</span> <span style="color:#007020;font-weight:bold">range</span> testCases {
-        <span style="color:#007020;font-weight:bold">if</span> tc.a <span style="color:#666">+</span> tc.b <span style="color:#666">!=</span> tc.expected {
-            t.<span style="color:#06287e">Errorf</span>(<span style="color:#4070a0">&#34;%d + %d != %d&#34;</span>, tc.a, tc.b, tc.expected)
+    <span style="color:#00f">for</span> _, tc := <span style="color:#00f">range</span> testCases {
+        <span style="color:#00f">if</span> tc.a + tc.b != tc.expected {
+            t.Errorf(<span style="color:#a31515">&#34;%d + %d != %d&#34;</span>, tc.a, tc.b, tc.expected)
         }
     }
 }</code></pre></div>
@@ -94,20 +94,20 @@ which one failed without a useful error message.</p>
 
 <p>The <code>testing</code> package contains a function which allows tests like this to be
 split out into explicit sub-tests:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestAdd</span>(t <span style="color:#666">*</span>testing.T) {
-    testCases <span style="color:#666">:=</span> []<span style="color:#007020;font-weight:bold">struct</span>{
-        a, b, expected <span style="color:#902000">int</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestAdd(t *testing.T) {
+    testCases := []<span style="color:#00f">struct</span>{
+        a, b, expected <span style="color:#2b91af">int</span>
     }{
-       {a: <span style="color:#40a070">0</span>, b: <span style="color:#40a070">0</span>, expected: <span style="color:#40a070">0</span>},
-       {a: <span style="color:#666">-</span><span style="color:#40a070">1</span>, b: <span style="color:#40a070">1</span>, expected: <span style="color:#40a070">0</span>}
+       {a: 0, b: 0, expected: 0},
+       {a: -1, b: 1, expected: 0}
     }
 
-    <span style="color:#007020;font-weight:bold">for</span> _, tc <span style="color:#666">:=</span> <span style="color:#007020;font-weight:bold">range</span> testCases {
-        name <span style="color:#666">:=</span> fmt.<span style="color:#06287e">Sprintf</span>(<span style="color:#4070a0">&#34;%d + %d != %d&#34;</span>, tc.a, tc.b, tc.expected)
-        t.<span style="color:#06287e">Run</span>(name, <span style="color:#007020;font-weight:bold">func</span>(t <span style="color:#666">*</span>testing.T) {
-            t.<span style="color:#06287e">Parallel</span>()
-            <span style="color:#007020;font-weight:bold">if</span> tc.a <span style="color:#666">+</span> tc.b <span style="color:#666">!=</span> tc.expected {
-                t.<span style="color:#06287e">Error</span>(<span style="color:#4070a0">&#34;incorrect addition&#34;</span>)
+    <span style="color:#00f">for</span> _, tc := <span style="color:#00f">range</span> testCases {
+        name := fmt.Sprintf(<span style="color:#a31515">&#34;%d + %d != %d&#34;</span>, tc.a, tc.b, tc.expected)
+        t.Run(name, <span style="color:#00f">func</span>(t *testing.T) {
+            t.Parallel()
+            <span style="color:#00f">if</span> tc.a + tc.b != tc.expected {
+                t.Error(<span style="color:#a31515">&#34;incorrect addition&#34;</span>)
             }
         })
     }
@@ -119,32 +119,32 @@ split out into explicit sub-tests:</p>
 <p>Golang doesn&rsquo;t have a built in <code>assert</code> function. Manual comparison is the
 recommended way to check that two objects are the same. This can be verbose, and
 the comparison method depends of the object&rsquo;s type:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-    a <span style="color:#666">:=</span> <span style="color:#40a070">0</span>
-    b <span style="color:#666">:=</span> <span style="color:#40a070">1</span>
-    <span style="color:#007020;font-weight:bold">if</span> a <span style="color:#666">!=</span> b {
-        t.<span style="color:#06287e">Errorf</span>(<span style="color:#4070a0">&#34;%d != %d&#34;</span>, a, b)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
+    a := 0
+    b := 1
+    <span style="color:#00f">if</span> a != b {
+        t.Errorf(<span style="color:#a31515">&#34;%d != %d&#34;</span>, a, b)
     }
 
-    c <span style="color:#666">:=</span> []<span style="color:#902000">int</span>{<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, <span style="color:#40a070">3</span>}
-    d <span style="color:#666">:=</span> []<span style="color:#902000">int</span>{<span style="color:#40a070">4</span>, <span style="color:#40a070">5</span>, <span style="color:#40a070">6</span>}
-    <span style="color:#60a0b0;font-style:italic">// Comparing slices is different to comparing ints
-</span><span style="color:#60a0b0;font-style:italic"></span>    <span style="color:#007020;font-weight:bold">if</span> !reflect.<span style="color:#06287e">DeepEqual</span>(c, d) {
-       t.<span style="color:#06287e">Errorf</span>(<span style="color:#4070a0">&#34;%v != %v&#34;</span>, c, d)
+    c := []<span style="color:#2b91af">int</span>{1, 2, 3}
+    d := []<span style="color:#2b91af">int</span>{4, 5, 6}
+    <span style="color:#008000">// Comparing slices is different to comparing ints
+</span><span style="color:#008000"></span>    <span style="color:#00f">if</span> !reflect.DeepEqual(c, d) {
+       t.Errorf(<span style="color:#a31515">&#34;%v != %v&#34;</span>, c, d)
     }
 }</code></pre></div>
 <p>I&rsquo;ve started using the <code>assert</code>
 <a href="https://godoc.org/github.com/stretchr/testify/assert">package</a> to simplify this
 code:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-    a <span style="color:#666">:=</span> <span style="color:#40a070">0</span>
-    b <span style="color:#666">:=</span> <span style="color:#40a070">1</span>
-    assert.<span style="color:#06287e">Equal</span>(t, a, b)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
+    a := 0
+    b := 1
+    assert.Equal(t, a, b)
 
-    c <span style="color:#666">:=</span> []<span style="color:#902000">int</span>{<span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>, <span style="color:#40a070">3</span>}
-    d <span style="color:#666">:=</span> []<span style="color:#902000">int</span>{<span style="color:#40a070">4</span>, <span style="color:#40a070">5</span>, <span style="color:#40a070">6</span>}
-    <span style="color:#60a0b0;font-style:italic">// ✨ API is now the same
-</span><span style="color:#60a0b0;font-style:italic"></span>    assert.<span style="color:#06287e">Equal</span>(t, c, d)
+    c := []<span style="color:#2b91af">int</span>{1, 2, 3}
+    d := []<span style="color:#2b91af">int</span>{4, 5, 6}
+    <span style="color:#008000">// ✨ API is now the same
+</span><span style="color:#008000"></span>    assert.Equal(t, c, d)
 }</code></pre></div>
 <p><code>assert</code> comes with lots of functions for verifying your data.</p>
 
@@ -161,38 +161,38 @@ example to make it easier to understand.</p>
 
 <p>Sometimes it&rsquo;s useful to refactor code used in multiple tests into a helper
 function:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">package</span> main
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#34;testing&#34;</span>
+<span style="color:#00f">import</span> <span style="color:#a31515">&#34;testing&#34;</span>
 
-<span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">TestThing</span>(t <span style="color:#666">*</span>testing.T) {
-	<span style="color:#06287e">AssertEqualInt</span>(t, <span style="color:#40a070">1</span>, <span style="color:#40a070">2</span>)
+<span style="color:#00f">func</span> TestThing(t *testing.T) {
+	AssertEqualInt(t, 1, 2)
 }
 
-<span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">AssertEqualInt</span>(t <span style="color:#666">*</span>testing.T, a, b <span style="color:#902000">int</span>) {
-	<span style="color:#007020;font-weight:bold">if</span> a <span style="color:#666">!=</span> b {
-		t.<span style="color:#06287e">Errorf</span>(<span style="color:#4070a0">&#34;%d != %d&#34;</span>, a, b)
+<span style="color:#00f">func</span> AssertEqualInt(t *testing.T, a, b <span style="color:#2b91af">int</span>) {
+	<span style="color:#00f">if</span> a != b {
+		t.Errorf(<span style="color:#a31515">&#34;%d != %d&#34;</span>, a, b)
 	}
 }</code></pre></div>
 <p>When we run this test, we get the error:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go <span style="color:#007020">test</span> .
---- FAIL: TestThing <span style="color:#666">(</span><span style="color:#40a070">0</span>.00s<span style="color:#666">)</span>
-        scratch_test.go:11: <span style="color:#40a070">1</span> !<span style="color:#666">=</span> <span style="color:#40a070">2</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go test .
+--- FAIL: TestThing (0.00s)
+        scratch_test.go:11: 1 != 2</code></pre></div>
 <p>This error message tells us which test failed, but the line given (11), is the
 line that <code>Errorf</code> is called. If this helper is called multiple times, it can be
 difficult to work out which call is erroring.</p>
 
 <p>Golang provides a way, <code>t.Helper</code>, to explicitly mark that function as a helper:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007020;font-weight:bold">func</span> <span style="color:#06287e">AssertEqualInt</span>(t <span style="color:#666">*</span>testing.T, a, b <span style="color:#902000">int</span>) {
-    t.<span style="color:#06287e">Helper</span>()
-	<span style="color:#007020;font-weight:bold">if</span> a <span style="color:#666">!=</span> b {
-		t.<span style="color:#06287e">Errorf</span>(<span style="color:#4070a0">&#34;%d != %d&#34;</span>, a, b)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> AssertEqualInt(t *testing.T, a, b <span style="color:#2b91af">int</span>) {
+    t.Helper()
+	<span style="color:#00f">if</span> a != b {
+		t.Errorf(<span style="color:#a31515">&#34;%d != %d&#34;</span>, a, b)
 	}
 }</code></pre></div>
 <p><code>go test</code> now prints out the line number where the helper function was called:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go <span style="color:#007020">test</span> .
---- FAIL: TestThing <span style="color:#666">(</span><span style="color:#40a070">0</span>.00s<span style="color:#666">)</span>
-        scratch_test.go:6: <span style="color:#40a070">1</span> !<span style="color:#666">=</span> <span style="color:#40a070">2</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go test .
+--- FAIL: TestThing (0.00s)
+        scratch_test.go:6: 1 != 2</code></pre></div>
 </article>
 
     </main>

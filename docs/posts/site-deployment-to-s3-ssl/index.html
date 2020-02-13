@@ -55,11 +55,11 @@ GitHub Pages the Jekyll build was managed by GitHub, on S3 it needs to be run
 manually. The website is deployed by uploading it to S3.</p>
 
 <p>These two steps can be automated using the following <code>Make</code> process:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#06287e">build</span><span style="color:#666">:</span>  <span style="color:#60a0b0;font-style:italic"># Create the static and store it in _site/
-</span><span style="color:#60a0b0;font-style:italic"></span>	jekyll build
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make">build:  <span style="color:#008000"># Create the static and store it in _site/
+</span><span style="color:#008000"></span>	jekyll build
 
-<span style="color:#06287e">deploy-prod</span><span style="color:#666">:</span> build  <span style="color:#60a0b0;font-style:italic"># Deploy the production website to S3
-</span><span style="color:#60a0b0;font-style:italic"></span>	aws s3 sync _site s3://jamesroutley.co.uk --delete
+deploy-prod: build  <span style="color:#008000"># Deploy the production website to S3
+</span><span style="color:#008000"></span>	aws s3 sync _site s3://jamesroutley.co.uk --delete
 </code></pre></div>
 <p>They deployment uses the AWS <a href="https://aws.amazon.com/cli/">CLI</a>, which must be
 correctly

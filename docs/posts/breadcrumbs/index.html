@@ -35,20 +35,20 @@
   <p>I just implemented breadcrumb navigation for this blog. How it works is quite
 neat - we iterate over the sections of the path, and store our current position
 using a Hugo <code>Scratch</code> variable:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">nav</span>&gt;
-  &lt;<span style="color:#062873;font-weight:bold">ul</span>&gt;
-    <span style="color:#60a0b0;font-style:italic">&lt;!-- Initialise a scratch variable &#34;path&#34; to an empty string --&gt;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;nav&gt;
+  &lt;ul&gt;
+    <span style="color:#008000">&lt;!-- Initialise a scratch variable &#34;path&#34; to an empty string --&gt;</span>
     {{ $.Scratch.Set &#34;path&#34; &#34;&#34; }}
-    &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;/&#34;</span>&gt;Home&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
-    <span style="color:#60a0b0;font-style:italic">&lt;!-- For each non-empty item in the URL path --&gt;</span>
+    &lt;li&gt;&lt;a href=<span style="color:#a31515">&#34;/&#34;</span>&gt;Home&lt;/a&gt;&lt;/li&gt;
+    <span style="color:#008000">&lt;!-- For each non-empty item in the URL path --&gt;</span>
     {{ range $element := split .RelPermalink &#34;/&#34; }}{{ if ne $element &#34;&#34; }}
-    <span style="color:#60a0b0;font-style:italic">&lt;!-- Add the element to the scratch variable --&gt;</span>
+    <span style="color:#008000">&lt;!-- Add the element to the scratch variable --&gt;</span>
     {{ $.Scratch.Add &#34;path&#34; &#34;/&#34; }}{{ $.Scratch.Add &#34;path&#34; $element }}
-    <span style="color:#60a0b0;font-style:italic">&lt;!-- Populate the href from the scratch variable --&gt;</span>
-    &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;{{ $.Scratch.Get &#34;</span><span style="color:#4070a0">path</span><span style="">&#34;</span> <span style="">}}&#34;</span>&gt;{{ humanize . }}&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+    <span style="color:#008000">&lt;!-- Populate the href from the scratch variable --&gt;</span>
+    &lt;li&gt;&lt;a href=<span style="color:#a31515">&#34;{{ $.Scratch.Get &#34;</span>path<span style="">&#34;</span> <span style="">}}&#34;</span>&gt;{{ humanize . }}&lt;/a&gt;&lt;/li&gt;
     {{ end }}{{ end }}
-  &lt;/<span style="color:#062873;font-weight:bold">ul</span>&gt;
-&lt;/<span style="color:#062873;font-weight:bold">nav</span>&gt;</code></pre></div>
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre></div>
 <p>I&rsquo;d always thought of templating as a stateless thing, but using a stateful
 variable makes this problem intuitive to solve if you&rsquo;re used to programming in
 stateful languages.</p>

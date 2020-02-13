@@ -75,7 +75,7 @@ stored at two locations in memory<sup class="footnote-ref" id="fnref:memory"><a 
 </code></pre>
 
 <p>Our array contains pointers to those memory locations:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[<span style="color:#666">*</span><span style="color:#40a070">0</span>, <span style="color:#666">*</span><span style="color:#40a070">1</span>]</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[*0, *1]</code></pre></div>
 <p>When we make an edit, we create a new array of strings, where all pointers are
 the same, apart from the edited one:</p>
 
@@ -83,7 +83,7 @@ the same, apart from the edited one:</p>
 1: &quot;world&quot;
 2: &quot;James&quot;
 </code></pre>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#666">*</span><span style="color:#40a070">0</span>, <span style="color:#666">*</span><span style="color:#40a070">2</span>]</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[*0, *2]</code></pre></div>
 <p>The trick to implementing undo is to realise that our previous array, containing
 the string <code>&quot;Hello\nworld&quot;</code> still exists. To undo our changes, we simply revert
 to the previous array.</p>

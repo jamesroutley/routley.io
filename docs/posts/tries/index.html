@@ -123,42 +123,42 @@ used to reduce memory usage, at the cost of slower lookup time.</p>
 
 <p>Using a <code>dict</code>, the algorithmic complexity of spell-checking a word should be
 <code>O(m)</code>, where <code>m</code> is the length of the string being checked<sup class="footnote-ref" id="fnref:trie-complexity"><a href="#fn:trie-complexity">3</a></sup>.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Node</span>(<span style="color:#007020">object</span>):
-   <span style="color:#007020;font-weight:bold">def</span> __init__(self, value<span style="color:#666">=</span>None):
-        self<span style="color:#666">.</span>value <span style="color:#666">=</span> value
-        self<span style="color:#666">.</span>children <span style="color:#666">=</span> {}
-        self<span style="color:#666">.</span>is_complete <span style="color:#666">=</span> False</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Node</span>(object):
+   <span style="color:#00f">def</span> __init__(self, value=None):
+        self.value = value
+        self.children = {}
+        self.is_complete = False</code></pre></div>
 <p>The trie itself just contains a reference to the top of the string of nodes:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
-    <span style="color:#007020;font-weight:bold">def</span> __init__(self):
-        self<span style="color:#666">.</span>node <span style="color:#666">=</span> Node()</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+    <span style="color:#00f">def</span> __init__(self):
+        self.node = Node()</code></pre></div>
 <p>We can now implement the <code>insert</code> method:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
-    <span style="color:#60a0b0;font-style:italic"># ...</span>
-    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">insert</span>(self, key):
-        node <span style="color:#666">=</span> self<span style="color:#666">.</span>node
-        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
-            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
-                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
-            <span style="color:#007020;font-weight:bold">else</span>:
-                new_node <span style="color:#666">=</span> Node(letter)
-                node<span style="color:#666">.</span>children[letter] <span style="color:#666">=</span> new_node
-                node <span style="color:#666">=</span> new_node
-        node<span style="color:#666">.</span>is_complete <span style="color:#666">=</span> True</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+    <span style="color:#008000"># ...</span>
+    <span style="color:#00f">def</span> insert(self, key):
+        node = self.node
+        <span style="color:#00f">for</span> letter <span style="color:#00f">in</span> key:
+            <span style="color:#00f">if</span> letter <span style="color:#00f">in</span> node.children:
+                node = node.children[letter]
+            <span style="color:#00f">else</span>:
+                new_node = Node(letter)
+                node.children[letter] = new_node
+                node = new_node
+        node.is_complete = True</code></pre></div>
 <p>Insert takes a key to insert, iterates over it, and adds each letter to the
 trie, creating new nodes if necessary.</p>
 
 <p><code>search</code> method:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
-    <span style="color:#60a0b0;font-style:italic"># ...</span>
-    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">search</span>(self, key):
-        node <span style="color:#666">=</span> self<span style="color:#666">.</span>node
-        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
-            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">not</span> <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
-                <span style="color:#007020;font-weight:bold">return</span> False
-            <span style="color:#007020;font-weight:bold">else</span>:
-                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
-        <span style="color:#007020;font-weight:bold">return</span> True</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+    <span style="color:#008000"># ...</span>
+    <span style="color:#00f">def</span> search(self, key):
+        node = self.node
+        <span style="color:#00f">for</span> letter <span style="color:#00f">in</span> key:
+            <span style="color:#00f">if</span> letter <span style="color:#00f">not</span> <span style="color:#00f">in</span> node.children:
+                <span style="color:#00f">return</span> False
+            <span style="color:#00f">else</span>:
+                node = node.children[letter]
+        <span style="color:#00f">return</span> True</code></pre></div>
 <p>Search iterates over the letters in the key, checking that each node contains a
 child whose value matches the letter.</p>
 
@@ -202,16 +202,16 @@ searches are made:</p>
 
 <p>When searching for &lsquo;wor&rsquo;, you repeat the work done when searching for &lsquo;wo&rsquo; and
 &lsquo;w&rsquo;. We can modify our algorithm to take this into account:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Trie</span>(<span style="color:#007020">object</span>):
-    <span style="color:#60a0b0;font-style:italic"># ...</span>
-    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">search</span>(self, key, prev_node<span style="color:#666">=</span>None):
-        node <span style="color:#666">=</span> prev_node <span style="color:#007020;font-weight:bold">if</span> prev_node <span style="color:#007020;font-weight:bold">is</span> <span style="color:#007020;font-weight:bold">not</span> None <span style="color:#007020;font-weight:bold">else</span> self<span style="color:#666">.</span>node
-        <span style="color:#007020;font-weight:bold">for</span> letter <span style="color:#007020;font-weight:bold">in</span> key:
-            <span style="color:#007020;font-weight:bold">if</span> letter <span style="color:#007020;font-weight:bold">not</span> <span style="color:#007020;font-weight:bold">in</span> node<span style="color:#666">.</span>children:
-                <span style="color:#007020;font-weight:bold">return</span> False, node
-            <span style="color:#007020;font-weight:bold">else</span>:
-                node <span style="color:#666">=</span> node<span style="color:#666">.</span>children[letter]
-        <span style="color:#007020;font-weight:bold">return</span> True, node</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+    <span style="color:#008000"># ...</span>
+    <span style="color:#00f">def</span> search(self, key, prev_node=None):
+        node = prev_node <span style="color:#00f">if</span> prev_node <span style="color:#00f">is</span> <span style="color:#00f">not</span> None <span style="color:#00f">else</span> self.node
+        <span style="color:#00f">for</span> letter <span style="color:#00f">in</span> key:
+            <span style="color:#00f">if</span> letter <span style="color:#00f">not</span> <span style="color:#00f">in</span> node.children:
+                <span style="color:#00f">return</span> False, node
+            <span style="color:#00f">else</span>:
+                node = node.children[letter]
+        <span style="color:#00f">return</span> True, node</code></pre></div>
 <p>In this code, the last searched node is returned to the caller. The caller can
 then supply this node when calling <code>search</code> with the next character in the word
 to continue searching when we left off.</p>

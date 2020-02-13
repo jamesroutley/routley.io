@@ -84,9 +84,9 @@ work must start on a new page.</p>
 files each titled with today&rsquo;s date. I store them all in the directory
 <code>~/logbook</code>. To simplify this, I&rsquo;ve added a shell function for quickly opening
 today&rsquo;s entry in Vim:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#007020;font-weight:bold">function</span> lb<span style="color:#666">()</span> <span style="color:#666">{</span>
-    vim ~/logbook/<span style="color:#007020;font-weight:bold">$(</span>date <span style="color:#4070a0">&#39;+%Y-%m-%d&#39;</span><span style="color:#007020;font-weight:bold">)</span>.md
-<span style="color:#666">}</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#00f">function</span> lb() {
+    vim ~/logbook/<span style="color:#00f">$(</span>date <span style="color:#a31515">&#39;+%Y-%m-%d&#39;</span><span style="color:#00f">)</span>.md
+}</code></pre></div>
 <p>Although it&rsquo;s simple enough to be added as an <code>alias</code>, I&rsquo;d recommend using the
 function. The function re-evaluates <code>date</code> each time its run, while the alias
 only evaluates it when your <code>bashrc</code> or <code>zshrc</code> is evaluated. If you leave a

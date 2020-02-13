@@ -6,10 +6,20 @@
     <description>Recent content in James Routley | James Routley on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 12 Feb 2020 09:22:53 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Feb 2020 03:29:13 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How do .epubs work?</title>
+      <link>http://routley.io/posts/how-do-epubs-work/</link>
+      <pubDate>Thu, 13 Feb 2020 03:29:13 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/how-do-epubs-work/</guid>
+      <description>There are a couple of different file formats that e-books are distributed in. The one I most commonly see is the EPUB format, which has the .epub file extension. Let&amp;rsquo;s take a look at the internals of this file this format.
+An example EPUB In this article, we&amp;rsquo;ll be looking at a copy of Moby Dick, published by the website Planet Ebook. You can download the EPUB from this page.</description>
+    </item>
     
     <item>
       <title>A gratitude journal design</title>
@@ -123,7 +133,7 @@ Aeropress Equipment:
       <guid>http://routley.io/posts/learning-rust-02/</guid>
       <description>I&amp;rsquo;m learning Rust, and documenting the process. These posts are my notes - they&amp;rsquo;re not guaranteed to be useful, interesting or correct!
 In this post, I&amp;rsquo;m building an ls clone. It&amp;rsquo;s pretty similar to the last post&amp;rsquo;s pwd clone. It&amp;rsquo;s called rls.
-Code usestd::env;usestd::fs;usestd::process;fn main(){letargs: Vec&amp;lt;String&amp;gt;=env::args().collect();ifargs.len()!=2{usage();}letdirectory=&amp;amp;args[1];letpaths=fs::read_dir(directory).unwrap();forpathinpaths{letpath_buf=path.unwrap().path();letfile_name=path_buf.file_name().unwrap();println!(&amp;#34;{}&amp;#34;,file_name.to_string_lossy())}}fn usage(){eprintln!(&amp;#34;usage: rls &amp;lt;dir&amp;gt;&amp;#34;);process::exit(1);} Fetching arguments We can get the arguments passed to rls with the env::args function, which returns an iterator. We can convert the iterator to a vector, Rust&amp;rsquo;s &amp;lsquo;contiguous growable array type&amp;rsquo;.</description>
+Code use std::env; use std::fs; use std::process; fn main() { let args: Vec&amp;lt;String&amp;gt; = env::args().collect(); if args.len() != 2 { usage(); } let directory = &amp;amp;args[1]; let paths = fs::read_dir(directory).</description>
     </item>
     
     <item>

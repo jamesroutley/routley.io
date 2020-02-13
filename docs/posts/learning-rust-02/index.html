@@ -41,30 +41,30 @@ they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
 <code>pwd</code> clone. It&rsquo;s called <code>rls</code>.</p>
 
 <h2 id="code">Code</h2>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::env;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::fs;<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">use</span><span style="color:#bbb"> </span>std::process;<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">fn</span> <span style="color:#06287e">main</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>args: <span style="color:#007020">Vec</span><span style="color:#666">&lt;</span><span style="color:#007020">String</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>env::args().collect();<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">if</span><span style="color:#bbb"> </span>args.len()<span style="color:#bbb"> </span><span style="color:#666">!=</span><span style="color:#bbb"> </span><span style="color:#40a070">2</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>usage();<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>directory<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">&amp;</span>args[<span style="color:#40a070">1</span>];<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>paths<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>fs::read_dir(directory).unwrap();<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#007020;font-weight:bold">for</span><span style="color:#bbb"> </span>path<span style="color:#bbb"> </span><span style="color:#007020;font-weight:bold">in</span><span style="color:#bbb"> </span>paths<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>path_buf<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>path.unwrap().path();<span style="color:#bbb">
-</span><span style="color:#bbb">        </span><span style="color:#007020;font-weight:bold">let</span><span style="color:#bbb"> </span>file_name<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>path_buf.file_name().unwrap();<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>println<span style="color:#666">!</span>(<span style="color:#4070a0">&#34;{}&#34;</span>,<span style="color:#bbb"> </span>file_name.to_string_lossy())<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#007020;font-weight:bold">fn</span> <span style="color:#06287e">usage</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>eprintln<span style="color:#666">!</span>(<span style="color:#4070a0">&#34;usage: rls &lt;dir&gt;&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>process::exit(<span style="color:#40a070">1</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">use</span> std::env;
+<span style="color:#00f">use</span> std::fs;
+<span style="color:#00f">use</span> std::process;
+
+<span style="color:#00f">fn</span> main() {
+    <span style="color:#00f">let</span> args: Vec&lt;String&gt; = env::args().collect();
+    <span style="color:#00f">if</span> args.len() != 2 {
+        usage();
+    }
+    <span style="color:#00f">let</span> directory = &amp;args[1];
+    <span style="color:#00f">let</span> paths = fs::read_dir(directory).unwrap();
+    <span style="color:#00f">for</span> path <span style="color:#00f">in</span> paths {
+        <span style="color:#00f">let</span> path_buf = path.unwrap().path();
+        <span style="color:#00f">let</span> file_name = path_buf.file_name().unwrap();
+        println!(<span style="color:#a31515">&#34;{}&#34;</span>, file_name.to_string_lossy())
+    }
+}
+
+<span style="color:#00f">fn</span> usage() {
+    eprintln!(<span style="color:#a31515">&#34;usage: rls &lt;dir&gt;&#34;</span>);
+    process::exit(1);
+
+}
+</code></pre></div>
 <h2 id="fetching-arguments">Fetching arguments</h2>
 
 <p>We can get the arguments passed to <code>rls</code> with the <code>env::args</code> function, which

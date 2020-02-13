@@ -75,18 +75,18 @@ matter as much. It was rewarding to <em>have</em> to write fast code.</p>
 <p>You can access live Memory and CPU usage with the builtin <code>stat</code> function. I
 used this to print out debug information when trying to get my frame rate high
 enough:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#60a0b0;font-style:italic">-- debug printing</span>
-debug <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">false</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#008000">-- debug printing</span>
+debug = <span style="color:#00f">false</span>
 
-<span style="color:#007020;font-weight:bold">function</span> <span style="color:#06287e">_draw</span>()
-    <span style="color:#60a0b0;font-style:italic">-- ...</span>
-    <span style="color:#007020;font-weight:bold">if</span> debug <span style="color:#007020;font-weight:bold">then</span>
-            print(stat(<span style="color:#40a070">0</span>))
-            <span style="color:#60a0b0;font-style:italic">-- you want this to be below than 1. Greater than 1 means you&#39;re</span>
-            <span style="color:#60a0b0;font-style:italic">-- dropping frames</span>
-            print(stat(<span style="color:#40a070">1</span>))
-    <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
+<span style="color:#00f">function</span> _draw()
+    <span style="color:#008000">-- ...</span>
+    <span style="color:#00f">if</span> debug <span style="color:#00f">then</span>
+            print(stat(0))
+            <span style="color:#008000">-- you want this to be below than 1. Greater than 1 means you&#39;re</span>
+            <span style="color:#008000">-- dropping frames</span>
+            print(stat(1))
+    <span style="color:#00f">end</span>
+<span style="color:#00f">end</span></code></pre></div>
 <p>You can find out more about the <code>stat</code> function
 <a href="http://pico-8.wikia.com/wiki/Stat">here</a>.</p>
 

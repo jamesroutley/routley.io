@@ -219,39 +219,39 @@ required before the start of the <code>QTYPE</code> section.</p>
 <p>We send our DNS message as the body of a UDP request. The following Python code
 will take our hexadecimal DNS query, convert it to binary and send it to
 Google&rsquo;s DNS server, at the address <code>8.8.8.8:53</code>:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">binascii</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">socket</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> binascii
+<span style="color:#00f">import</span> socket
 
 
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">send_udp_message</span>(message, address, port):
-    <span style="color:#4070a0">&#34;&#34;&#34;send_udp_message sends a message to UDP server
-</span><span style="color:#4070a0">
-</span><span style="color:#4070a0">    message should be a hexadecimal encoded string
-</span><span style="color:#4070a0">    &#34;&#34;&#34;</span>
-    message <span style="color:#666">=</span> message<span style="color:#666">.</span>replace(<span style="color:#4070a0">&#34; &#34;</span>, <span style="color:#4070a0">&#34;&#34;</span>)<span style="color:#666">.</span>replace(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span>, <span style="color:#4070a0">&#34;&#34;</span>)
-    server_address <span style="color:#666">=</span> (address, port)
+<span style="color:#00f">def</span> send_udp_message(message, address, port):
+    <span style="color:#a31515">&#34;&#34;&#34;send_udp_message sends a message to UDP server
+</span><span style="color:#a31515">
+</span><span style="color:#a31515">    message should be a hexadecimal encoded string
+</span><span style="color:#a31515">    &#34;&#34;&#34;</span>
+    message = message.replace(<span style="color:#a31515">&#34; &#34;</span>, <span style="color:#a31515">&#34;&#34;</span>).replace(<span style="color:#a31515">&#34;</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>, <span style="color:#a31515">&#34;&#34;</span>)
+    server_address = (address, port)
 
-    sock <span style="color:#666">=</span> socket<span style="color:#666">.</span>socket(socket<span style="color:#666">.</span>AF_INET, socket<span style="color:#666">.</span>SOCK_DGRAM)
-    <span style="color:#007020;font-weight:bold">try</span>:
-        sock<span style="color:#666">.</span>sendto(binascii<span style="color:#666">.</span>unhexlify(message), server_address)
-        data, _ <span style="color:#666">=</span> sock<span style="color:#666">.</span>recvfrom(<span style="color:#40a070">4096</span>)
-    <span style="color:#007020;font-weight:bold">finally</span>:
-        sock<span style="color:#666">.</span>close()
-    <span style="color:#007020;font-weight:bold">return</span> binascii<span style="color:#666">.</span>hexlify(data)<span style="color:#666">.</span>decode(<span style="color:#4070a0">&#34;utf-8&#34;</span>)
-
-
-<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">format_hex</span>(<span style="color:#007020">hex</span>):
-    <span style="color:#4070a0">&#34;&#34;&#34;format_hex returns a pretty version of a hex string&#34;&#34;&#34;</span>
-    octets <span style="color:#666">=</span> [<span style="color:#007020">hex</span>[i:i<span style="color:#666">+</span><span style="color:#40a070">2</span>] <span style="color:#007020;font-weight:bold">for</span> i <span style="color:#007020;font-weight:bold">in</span> <span style="color:#007020">range</span>(<span style="color:#40a070">0</span>, <span style="color:#007020">len</span>(<span style="color:#007020">hex</span>), <span style="color:#40a070">2</span>)]
-    pairs <span style="color:#666">=</span> [<span style="color:#4070a0">&#34; &#34;</span><span style="color:#666">.</span>join(octets[i:i<span style="color:#666">+</span><span style="color:#40a070">2</span>]) <span style="color:#007020;font-weight:bold">for</span> i <span style="color:#007020;font-weight:bold">in</span> <span style="color:#007020">range</span>(<span style="color:#40a070">0</span>, <span style="color:#007020">len</span>(octets), <span style="color:#40a070">2</span>)]
-    <span style="color:#007020;font-weight:bold">return</span> <span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span><span style="color:#666">.</span>join(pairs)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    <span style="color:#00f">try</span>:
+        sock.sendto(binascii.unhexlify(message), server_address)
+        data, _ = sock.recvfrom(4096)
+    <span style="color:#00f">finally</span>:
+        sock.close()
+    <span style="color:#00f">return</span> binascii.hexlify(data).decode(<span style="color:#a31515">&#34;utf-8&#34;</span>)
 
 
-message <span style="color:#666">=</span> <span style="color:#4070a0">&#34;AA AA 01 00 00 01 00 00 00 00 00 00 &#34;</span> \
-<span style="color:#4070a0">&#34;07 65 78 61 6d 70 6c 65 03 63 6f 6d 00 00 01 00 01&#34;</span>
+<span style="color:#00f">def</span> format_hex(hex):
+    <span style="color:#a31515">&#34;&#34;&#34;format_hex returns a pretty version of a hex string&#34;&#34;&#34;</span>
+    octets = [hex[i:i+2] <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(0, len(hex), 2)]
+    pairs = [<span style="color:#a31515">&#34; &#34;</span>.join(octets[i:i+2]) <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(0, len(octets), 2)]
+    <span style="color:#00f">return</span> <span style="color:#a31515">&#34;</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>.join(pairs)
 
-response <span style="color:#666">=</span> send_udp_message(message, <span style="color:#4070a0">&#34;8.8.8.8&#34;</span>, <span style="color:#40a070">53</span>)
-<span style="color:#007020;font-weight:bold">print</span>(format_hex(response))</code></pre></div>
+
+message = <span style="color:#a31515">&#34;AA AA 01 00 00 01 00 00 00 00 00 00 &#34;</span> \
+<span style="color:#a31515">&#34;07 65 78 61 6d 70 6c 65 03 63 6f 6d 00 00 01 00 01&#34;</span>
+
+response = send_udp_message(message, <span style="color:#a31515">&#34;8.8.8.8&#34;</span>, 53)
+<span style="color:#00f">print</span>(format_hex(response))</code></pre></div>
 <p>You can run this script by copying it into a file, <code>query.py</code> and running it
 from your terminal with: <code>$ python query.py</code>. It doesn&rsquo;t have any external
 dependencies, and should run with Python 2 or 3.</p>

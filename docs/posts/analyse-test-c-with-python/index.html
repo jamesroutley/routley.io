@@ -53,14 +53,14 @@ Python library for interfacing with C called <code>ctypes</code>.</p>
 <p>For this example, I&rsquo;ve written a simple (but unsafe)
 <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a> data
 structure, which defines the following API:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#60a0b0;font-style:italic">// stack.h
-</span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">typedef</span> <span style="color:#007020;font-weight:bold">struct</span> {
-    <span style="color:#902000">int</span> stk[<span style="color:#40a070">100</span>];
-    <span style="color:#902000">int</span> top;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.h
+</span><span style="color:#008000"></span><span style="color:#00f">typedef</span> <span style="color:#00f">struct</span> {
+    <span style="color:#2b91af">int</span> stk[100];
+    <span style="color:#2b91af">int</span> top;
 } stack;
 
-<span style="color:#902000">void</span> <span style="color:#06287e">stack_push</span>(stack<span style="color:#666">*</span> s, <span style="color:#902000">int</span> x);
-<span style="color:#902000">int</span> <span style="color:#06287e">stack_pop</span>(stack<span style="color:#666">*</span> s);</code></pre></div>
+<span style="color:#2b91af">void</span> stack_push(stack* s, <span style="color:#2b91af">int</span> x);
+<span style="color:#2b91af">int</span> stack_pop(stack* s);</code></pre></div>
 <p>The stack&rsquo;s source code is included below<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
 
 <h2 id="shared-library">Shared library</h2>
@@ -75,26 +75,26 @@ library with:</p>
 
 <p>Next, we need to define a wrapper module<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>, which creates the Python objects
 used to interact with the shared library.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#60a0b0;font-style:italic"># stack_wrapper.py</span>
-<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">ctypes</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># stack_wrapper.py</span>
+<span style="color:#00f">import</span> ctypes
 
-<span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">stack</span>(ctypes<span style="color:#666">.</span>Structure):
-    _fields_ <span style="color:#666">=</span> [
-        (<span style="color:#4070a0">&#34;stk&#34;</span>, ctypes<span style="color:#666">.</span>c_int<span style="color:#666">*</span><span style="color:#40a070">100</span>),
-        (<span style="color:#4070a0">&#34;top&#34;</span>, ctypes<span style="color:#666">.</span>c_int),
+<span style="color:#00f">class</span> <span style="color:#2b91af">stack</span>(ctypes.Structure):
+    _fields_ = [
+        (<span style="color:#a31515">&#34;stk&#34;</span>, ctypes.c_int*100),
+        (<span style="color:#a31515">&#34;top&#34;</span>, ctypes.c_int),
     ]
 
-_lib <span style="color:#666">=</span> ctypes<span style="color:#666">.</span>cdll<span style="color:#666">.</span>LoadLibrary(<span style="color:#4070a0">&#34;stack.so&#34;</span>)
+_lib = ctypes.cdll.LoadLibrary(<span style="color:#a31515">&#34;stack.so&#34;</span>)
 
-new <span style="color:#666">=</span> _lib<span style="color:#666">.</span>stack_new
-new<span style="color:#666">.</span>restype <span style="color:#666">=</span> ctypes<span style="color:#666">.</span>POINTER(stack)
+new = _lib.stack_new
+new.restype = ctypes.POINTER(stack)
 
-push <span style="color:#666">=</span> _lib<span style="color:#666">.</span>stack_push
-push<span style="color:#666">.</span>argtypes <span style="color:#666">=</span> [ctypes<span style="color:#666">.</span>POINTER(stack), ctypes<span style="color:#666">.</span>c_int]
+push = _lib.stack_push
+push.argtypes = [ctypes.POINTER(stack), ctypes.c_int]
 
-pop <span style="color:#666">=</span> _lib<span style="color:#666">.</span>stack_pop
-pop<span style="color:#666">.</span>restype <span style="color:#666">=</span> ctypes<span style="color:#666">.</span>c_int
-pop<span style="color:#666">.</span>argtypes <span style="color:#666">=</span> [ctypes<span style="color:#666">.</span>POINTER(stack)]</code></pre></div>
+pop = _lib.stack_pop
+pop.restype = ctypes.c_int
+pop.argtypes = [ctypes.POINTER(stack)]</code></pre></div>
 <p><strong>Note</strong>: It seems idiomatic from examples in the Python documentation to use
 the global import <code>from ctypes import *</code> to reduce code verbosity. I haven&rsquo;t
 done this here to make it clear what objects come from <code>ctypes</code>.</p>
@@ -102,14 +102,14 @@ done this here to make it clear what objects come from <code>ctypes</code>.</p>
 <h2 id="use">Use</h2>
 
 <p>It&rsquo;s now simple to import and use this module:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">stack_wrapper</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">stack</span>
-<span style="color:#666">&gt;&gt;&gt;</span> s <span style="color:#666">=</span> stack<span style="color:#666">.</span>new()
-<span style="color:#666">&gt;&gt;&gt;</span> stack<span style="color:#666">.</span>push(s, <span style="color:#40a070">5</span>)
-<span style="color:#666">&gt;&gt;&gt;</span> stack<span style="color:#666">.</span>push(s, <span style="color:#40a070">15</span>)
-<span style="color:#666">&gt;&gt;&gt;</span> stack<span style="color:#666">.</span>pop(s)
-<span style="color:#40a070">15</span>
-<span style="color:#666">&gt;&gt;&gt;</span> stack<span style="color:#666">.</span>pop(s)
-<span style="color:#40a070">5</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">import</span> stack_wrapper <span style="color:#00f">as</span> stack
+&gt;&gt;&gt; s = stack.new()
+&gt;&gt;&gt; stack.push(s, 5)
+&gt;&gt;&gt; stack.push(s, 15)
+&gt;&gt;&gt; stack.pop(s)
+15
+&gt;&gt;&gt; stack.pop(s)
+5</code></pre></div>
 <p>We&rsquo;re now fully in Python land, with a set of objects which let us call into our
 C code. These objects are native Python, and can be used in any way that native
 Python objects can be used. We can use them with:</p>
@@ -133,25 +133,25 @@ Python objects can be used. We can use them with:</p>
 <ol>
 <li id="fn:1"><p><strong>Warning</strong>: This stack implementation was written to be as simple as
 possible, and isn&rsquo;t really safe to use.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#60a0b0;font-style:italic">// stack.c
-</span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020">#include</span> <span style="color:#007020">&lt;stdlib.h&gt;</span><span style="color:#007020">
-</span><span style="color:#007020">#include</span> <span style="color:#007020">&#34;stack.h&#34;</span><span style="color:#007020">
-</span><span style="color:#007020"></span>
-stack<span style="color:#666">*</span> <span style="color:#06287e">stack_new</span>() {
-    stack<span style="color:#666">*</span> s <span style="color:#666">=</span> malloc(<span style="color:#007020;font-weight:bold">sizeof</span>(stack));
-    s<span style="color:#666">-&gt;</span>top <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#40a070">1</span>;
-    <span style="color:#007020;font-weight:bold">return</span> s;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.c
+</span><span style="color:#008000"></span><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdlib.h&gt;</span><span style="color:#00f">
+</span><span style="color:#00f">#include</span> <span style="color:#00f">&#34;stack.h&#34;</span><span style="color:#00f">
+</span><span style="color:#00f"></span>
+stack* stack_new() {
+    stack* s = malloc(<span style="color:#00f">sizeof</span>(stack));
+    s-&gt;top = -1;
+    <span style="color:#00f">return</span> s;
 }
 
-<span style="color:#902000">void</span> <span style="color:#06287e">stack_push</span>(stack<span style="color:#666">*</span> s, <span style="color:#902000">int</span> x) {
-    s<span style="color:#666">-&gt;</span>top<span style="color:#666">++</span>;
-    s<span style="color:#666">-&gt;</span>stk[s<span style="color:#666">-&gt;</span>top] <span style="color:#666">=</span> x;
+<span style="color:#2b91af">void</span> stack_push(stack* s, <span style="color:#2b91af">int</span> x) {
+    s-&gt;top++;
+    s-&gt;stk[s-&gt;top] = x;
 }
 
-<span style="color:#902000">int</span> <span style="color:#06287e">stack_pop</span>(stack<span style="color:#666">*</span> s) {
-    <span style="color:#902000">int</span> x <span style="color:#666">=</span> s<span style="color:#666">-&gt;</span>stk[s<span style="color:#666">-&gt;</span>top];
-    s<span style="color:#666">-&gt;</span>top<span style="color:#666">--</span>;
-    <span style="color:#007020;font-weight:bold">return</span> x;
+<span style="color:#2b91af">int</span> stack_pop(stack* s) {
+    <span style="color:#2b91af">int</span> x = s-&gt;stk[s-&gt;top];
+    s-&gt;top--;
+    <span style="color:#00f">return</span> x;
 }</code></pre></div> <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 
 <li id="fn:2"><p>When using <code>ctypes</code>, we end up writing a Python wrapper module, which is

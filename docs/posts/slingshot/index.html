@@ -49,28 +49,28 @@ reach a series of checkpoints. You can play Slingshot
 <p>All drawing was done using the <a href="https://p5js.org/">P5.js</a> library. P5 offers a
 clean API for drawing on HTML canvasses. A basic P5 sketch can be created with
 the following code:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">const</span> start <span style="color:#666">=</span> p =&gt; {
-  p.setup <span style="color:#666">=</span> () =&gt; {
-    <span style="color:#60a0b0;font-style:italic">// Code that is run once, at sketch initialisation
-</span><span style="color:#60a0b0;font-style:italic"></span>    p.createCanvas(<span style="color:#40a070">700</span>, <span style="color:#40a070">700</span>);
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> start = p =&gt; {
+  p.setup = () =&gt; {
+    <span style="color:#008000">// Code that is run once, at sketch initialisation
+</span><span style="color:#008000"></span>    p.createCanvas(700, 700);
   };
-  p.draw <span style="color:#666">=</span> () =&gt; {
-    <span style="color:#60a0b0;font-style:italic">// Code that is run at every frame of the sketch
-</span><span style="color:#60a0b0;font-style:italic"></span>    <span style="color:#60a0b0;font-style:italic">// Render upcoming elements in black
-</span><span style="color:#60a0b0;font-style:italic"></span>    p.fill(<span style="color:#4070a0">&#34;#000000&#34;</span>);
-    <span style="color:#60a0b0;font-style:italic">// Draw a 5x5 square at coordinate (10, 10)
-</span><span style="color:#60a0b0;font-style:italic"></span>    p.rect(<span style="color:#40a070">10</span>, <span style="color:#40a070">10</span>, <span style="color:#40a070">5</span>, <span style="color:#40a070">5</span>);
+  p.draw = () =&gt; {
+    <span style="color:#008000">// Code that is run at every frame of the sketch
+</span><span style="color:#008000"></span>    <span style="color:#008000">// Render upcoming elements in black
+</span><span style="color:#008000"></span>    p.fill(<span style="color:#a31515">&#34;#000000&#34;</span>);
+    <span style="color:#008000">// Draw a 5x5 square at coordinate (10, 10)
+</span><span style="color:#008000"></span>    p.rect(10, 10, 5, 5);
   };
 };
-<span style="color:#007020;font-weight:bold">new</span> p5(start);
+<span style="color:#00f">new</span> p5(start);
 </code></pre></div>
 <p>This simple setup makes it easy to start drawing and animating with P5.
 <code>p.draw()</code> is called every frame, so it&rsquo;s possible to animate things by changing
 the coordinate that they&rsquo;re rendered at:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">let</span> xCoord <span style="color:#666">=</span> <span style="color:#40a070">10</span>;
-p.draw <span style="color:#666">=</span> () =&gt; {
-  p.rect(xCoord, <span style="color:#40a070">10</span>, <span style="color:#40a070">5</span>, <span style="color:#40a070">5</span>);
-  xCoord <span style="color:#666">+=</span> <span style="color:#40a070">1</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> xCoord = 10;
+p.draw = () =&gt; {
+  p.rect(xCoord, 10, 5, 5);
+  xCoord += 1;
 };
 </code></pre></div>
 <h2 id="physics">Physics</h2>

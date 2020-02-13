@@ -39,16 +39,16 @@ the &lsquo;difference between two to eight versions of the same file&rsquo;.</p>
 <p>I occasionally need to find the differences between two files, and have
 historically used <code>diff</code> for this. Unfortunately, I find the output quite hard
 to parse:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ diff file_1 file_2
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ diff file_1 file_2
 32c32
 &lt; TODO: screenshot of diff
 ---
-&gt; !<span style="color:#666">[</span>Image showing what a diff looks like in Vim<span style="color:#666">][</span>vim-diff<span style="color:#666">]</span>
+&gt; ![Image showing what a diff looks like in Vim][vim-diff]
 41a42,43
 &gt;
-&gt; <span style="color:#666">[</span>vim-diff<span style="color:#666">]</span>: /img/posts/vim-diff/diff.png</code></pre></div>
+&gt; [vim-diff]: /img/posts/vim-diff/diff.png</code></pre></div>
 <p>Vim&rsquo;s visual diff is much clearer to me:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ vim -d file_1 file_2</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ vim -d file_1 file_2</code></pre></div>
 <p><img src="/img/posts/vim-diff/diff.png" alt="Image showing what a diff looks like in Vim" /></p>
 
 <p>Vim sets some options to make browsing the diff easier:</p>

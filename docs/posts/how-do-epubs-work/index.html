@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>James Routley  | How do .epubs work?</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
+  </head>
+  <body><nav>
+  <ul>
+    
+    
+    <li><a href="/">Home</a></li>
+    
+    
+    
+    
+    
+    <li><a href="/posts">Posts</a></li>
+    
+    
+    
+    
+    <li><a href="/posts/how-do-epubs-work">How do epubs work</a></li>
+    
+  </ul>
+</nav>
+<main>
+<article>
+  <header>
+    <h1>How do .epubs work?</h1>
+    <time datetime="2020-02-13">13 February 2020</time>
+  </header>
+  
+
+<p>There are a couple of different file formats that e-books are distributed in.
+The one I most commonly see is the EPUB format, which has the <code>.epub</code> file
+extension. Let&rsquo;s take a look at the internals of this file this format.</p>
+
+<h2 id="an-example-epub">An example EPUB</h2>
+
+<p>In this article, we&rsquo;ll be looking at a copy of Moby Dick, published by the
+website <a href="https://www.planetebook.com/">Planet Ebook</a>. You can download the EPUB
+<a href="https://www.planetebook.com/moby-dick/">from this page</a>. N.B: you should check
+that this book is in the public domain and out of copyright in your country
+before downloading.</p>
+
+<h2 id="epubs-are-zip-files">EPUBs are zip files</h2>
+
+<p>We can see their contents by unzipping them:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ unzip moby-dick.epub
+$ rm moby-dick.epub  <span style="color:#008000"># We don&#39;t need this anymore</span>
+$ tree
+.
+├── META-INF
+│   ├── com.apple.ibooks.display-options.xml
+│   ├── container.xml
+│   └── encryption.xml
+├── OEBPS
+│   ├── Moby-Dick.xhtml
+│   ├── content.opf
+│   ├── cover.xhtml
+│   ├── css
+│   │   └── idGeneratedStyles.css
+│   ├── font
+│   │   ├── MinionPro-BoldDisp.otf
+│   │   ├── MinionPro-CnIt.otf
+│   │   ├── MinionPro-MediumDisp.otf
+│   │   └── MinionPro-Regular.otf
+│   ├── image
+│   │   ├── 1.png
+│   │   └── Moby-Dick.jpg
+│   └── toc.ncx
+└── mimetype</code></pre></div>
+<h2 id="epubs-are-similar-to-websites">EPUBs are similar to websites</h2>
+
+<p>We can see a couple of filetypes we&rsquo;d expect to see in a website:</p>
+
+<ul>
+<li><code>xhtml</code>, which defines the content of pages</li>
+<li><code>css</code>, which defines styling</li>
+<li><code>otf</code>, which are font files</li>
+<li><code>png</code>/<code>jpg</code> which are images</li>
+<li><code>mimetype</code>, which specifies the nature and format of a file</li>
+</ul>
+
+<h2 id="mimetype">MIMEtype</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cat mimetype
+application/epub+zip</code></pre></div>
+<p>This file provies a more reliable way of telling that this file is actually an
+EPUB than the <code>.epub</code> file extension. All EPUBs must have an
+<code>application/epub+zip</code> MIMEtype</p>
+
+<h1 id="meta-inf">META-INF</h1>
+
+<p>The <code>META-INF</code> directory contains metadata about the book. The only required
+file here is <code>container.xml</code>. This file points to the file which contains the
+contents of the book:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- META-INF/container.xml --&gt;</span>
+<span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+&lt;container version=<span style="color:#a31515">&#34;1.0&#34;</span> xmlns=<span style="color:#a31515">&#34;urn:oasis:names:tc:opendocument:xmlns:container&#34;</span>&gt;
+  &lt;rootfiles&gt;
+    &lt;rootfile full-path=<span style="color:#a31515">&#34;OEBPS/content.opf&#34;</span> media-type=<span style="color:#a31515">&#34;application/oebps-package+xml&#34;</span> /&gt;
+  &lt;/rootfiles&gt;
+&lt;/container&gt;</code></pre></div>
+<p>We can see that the content of the book is stored at <code>OEBPS/content.opf</code></p>
+
+<h2 id="document-layout">Document layout</h2>
+
+<p><code>OEBPS/content.opf</code> is an Open Packaging Format file. It&rsquo;s an XML document with
+a particular format used to define the contents of EPUBs:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/content.opf --&gt;</span>
+<span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+&lt;package version=<span style="color:#a31515">&#34;2.0&#34;</span> xmlns=<span style="color:#a31515">&#34;http://www.idpf.org/2007/opf&#34;</span> unique-identifier=<span style="color:#a31515">&#34;bookid&#34;</span>&gt;
+  &lt;metadata xmlns:dc=<span style="color:#a31515">&#34;http://purl.org/dc/elements/1.1/&#34;</span> xmlns:opf=<span style="color:#a31515">&#34;http://www.idpf.org/2007/opf&#34;</span>&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;generator&#34;</span> content=<span style="color:#a31515">&#34;Adobe InDesign 12.1&#34;</span> /&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;cover&#34;</span> content=<span style="color:#a31515">&#34;x1.png&#34;</span> /&gt;
+    &lt;dc:title&gt;Moby-Dick&lt;/dc:title&gt;
+    &lt;dc:date&gt;2018-02-20T05:18:46Z&lt;/dc:date&gt;
+    &lt;dc:language&gt;en-US&lt;/dc:language&gt;
+    &lt;dc:identifier id=<span style="color:#a31515">&#34;bookid&#34;</span>&gt;urn:uuid:29d919dd-24f5-4384-be78-b447c9dc299b&lt;/dc:identifier&gt;
+  &lt;/metadata&gt;
+  &lt;manifest&gt;
+    &lt;item id=<span style="color:#a31515">&#34;cover&#34;</span> href=<span style="color:#a31515">&#34;cover.xhtml&#34;</span> media-type=<span style="color:#a31515">&#34;application/xhtml+xml&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;Moby-Dick&#34;</span> href=<span style="color:#a31515">&#34;Moby-Dick.xhtml&#34;</span> media-type=<span style="color:#a31515">&#34;application/xhtml+xml&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;ncx&#34;</span> href=<span style="color:#a31515">&#34;toc.ncx&#34;</span> media-type=<span style="color:#a31515">&#34;application/x-dtbncx+xml&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;idGeneratedStyles.css&#34;</span> href=<span style="color:#a31515">&#34;css/idGeneratedStyles.css&#34;</span> media-type=<span style="color:#a31515">&#34;text/css&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;Moby-Dick.jpg&#34;</span> href=<span style="color:#a31515">&#34;image/Moby-Dick.jpg&#34;</span> media-type=<span style="color:#a31515">&#34;image/jpeg&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;x1.png&#34;</span> href=<span style="color:#a31515">&#34;image/1.png&#34;</span> media-type=<span style="color:#a31515">&#34;image/png&#34;</span> /&gt;
+    &lt;item id=<span style="color:#a31515">&#34;MinionPro-Regular.otf&#34;</span> href=<span style="color:#a31515">&#34;font/MinionPro-Regular.otf&#34;</span>
+      media-type=<span style="color:#a31515">&#34;application/vnd.ms-opentype&#34;</span> /&gt;
+    <span style="color:#008000">&lt;!-- other fonts --&gt;</span>
+  &lt;/manifest&gt;
+  &lt;spine toc=<span style="color:#a31515">&#34;ncx&#34;</span>&gt;
+    &lt;itemref idref=<span style="color:#a31515">&#34;cover&#34;</span> linear=<span style="color:#a31515">&#34;no&#34;</span> /&gt;
+    &lt;itemref idref=<span style="color:#a31515">&#34;Moby-Dick&#34;</span> /&gt;
+  &lt;/spine&gt;
+  &lt;guide&gt;
+    &lt;reference type=<span style="color:#a31515">&#34;cover&#34;</span> href=<span style="color:#a31515">&#34;cover.xhtml&#34;</span> title=<span style="color:#a31515">&#34;Cover&#34;</span> /&gt;
+  &lt;/guide&gt;
+&lt;/package&gt;</code></pre></div>
+<p>Let&rsquo;s look at each of the sections:</p>
+
+<ul>
+<li>Metadata. The author, title, language etc of the book</li>
+<li>Manifest. The list of files that make up the book</li>
+<li>Spine. The order in which items should be displayed in the book</li>
+<li>Guide.
+&ldquo;<a href="http://idpf.org/epub/20/spec/OPF_2.0.1_draft.htm#Section2.0">A set of references to fundamental structural features of the publication, such as table of contents, foreword, bibliography, etc.</a>&rdquo;.
+To be honest, I&rsquo;m not sure how this differs from the <code>spine</code> section</li>
+</ul>
+
+<p>When reading the book, you&rsquo;ll see the <code>cover</code>, defined in <code>OEBPS/cover.xhtml</code>,
+then the main content <code>Moby-Dick</code>, defined in <code>OEBPS.Moby-Dick.xhtml</code>.</p>
+
+<h2 id="table-of-contents">Table of contents</h2>
+
+<p>The table of contents is defined in the NCX (Navigation Control file for XML)
+file <code>OEBPS/toc.ncx</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/toc.ncx --&gt;</span>
+<span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
+<span style="color:#00f">&lt;!DOCTYPE ncx PUBLIC &#34;-//NISO//DTD ncx 2005-1//EN&#34;
+</span><span style="color:#00f">  &#34;http://www.daisy.org/z3986/2005/ncx-2005-1.dtd&#34;&gt;</span>
+&lt;ncx xmlns=<span style="color:#a31515">&#34;http://www.daisy.org/z3986/2005/ncx/&#34;</span> version=<span style="color:#a31515">&#34;2005-1&#34;</span>&gt;
+  &lt;head&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;dtb:uid&#34;</span>
+      content=<span style="color:#a31515">&#34;urn:uuid:29d919dd-24f5-4384-be78-b447c9dc299b&#34;</span> /&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;dtb:depth&#34;</span> content=<span style="color:#a31515">&#34;3&#34;</span> /&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;dtb:totalPageCount&#34;</span> content=<span style="color:#a31515">&#34;0&#34;</span> /&gt;
+    &lt;meta name=<span style="color:#a31515">&#34;dtb:maxPageNumber&#34;</span> content=<span style="color:#a31515">&#34;0&#34;</span> /&gt;
+  &lt;/head&gt;
+  &lt;docTitle&gt;
+    &lt;text&gt;Moby-Dick&lt;/text&gt;
+  &lt;/docTitle&gt;
+  &lt;navMap&gt;
+    &lt;navPoint id=<span style="color:#a31515">&#34;navpoint1&#34;</span> playOrder=<span style="color:#a31515">&#34;1&#34;</span>&gt;
+      &lt;navLabel&gt;&lt;text&gt;Moby Dick &lt;/text&gt;&lt;/navLabel&gt;
+      &lt;content src=<span style="color:#a31515">&#34;Moby-Dick.xhtml#_idParaDest-1&#34;</span> /&gt;
+      &lt;navPoint id=<span style="color:#a31515">&#34;navpoint2&#34;</span> playOrder=<span style="color:#a31515">&#34;2&#34;</span>&gt;
+        &lt;navLabel&gt;&lt;text&gt;ETYMOLOGY.&lt;/text&gt;&lt;/navLabel&gt;
+        &lt;content src=<span style="color:#a31515">&#34;Moby-Dick.xhtml#_idParaDest-2&#34;</span> /&gt;
+        &lt;navPoint id=<span style="color:#a31515">&#34;navpoint3&#34;</span> playOrder=<span style="color:#a31515">&#34;3&#34;</span>&gt;
+          &lt;navLabel&gt;&lt;text&gt;Chapter 1 Loomings.&lt;/text&gt;&lt;/navLabel&gt;
+          &lt;content src=<span style="color:#a31515">&#34;Moby-Dick.xhtml#_idParaDest-3&#34;</span> /&gt;
+        &lt;/navPoint&gt;
+        <span style="color:#008000">&lt;!-- other chapters --&gt;</span>
+      &lt;/navPoint&gt;
+    &lt;/navPoint&gt;
+  &lt;/navMap&gt;
+&lt;/ncx&gt;</code></pre></div>
+<p>The <code>content</code> tags in this file link to the relevant places in the main text.</p>
+
+<h2 id="cover">Cover</h2>
+
+<p>This is just an HTML file which displays a full page image</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
+<span style="color:#00f">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.1//EN&#34;
+</span><span style="color:#00f">  &#34;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&#34;&gt;</span>
+&lt;html xmlns=<span style="color:#a31515">&#34;http://www.w3.org/1999/xhtml&#34;</span>&gt;
+  &lt;head&gt;
+    &lt;title&gt;cover&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div style=<span style="color:#a31515">&#34;text-align:center;&#34;</span>&gt;
+      &lt;img src=<span style="color:#a31515">&#34;image/1.png&#34;</span> alt=<span style="color:#a31515">&#34;1.png&#34;</span> style=<span style="color:#a31515">&#34;max-width:100%;&#34;</span> /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<h2 id="content">Content</h2>
+
+<p>This is another HTML file which contains the actual text of the book. Chapter
+headings are marked with <code>id</code>s that match the URL fragment in <code>OEBPS/toc.ncx</code>.</p>
+
+</article>
+
+    </main>
+    
+    <footer>
+  <img id="profile_picture" src="/img/me.png" />
+  <p>
+    👋 Hey, I'm James - I'm a senior software engineer building a bank at
+    <a href="https://monzo.com/">Monzo</a>. If you like what I post about, you
+    should consider applying to the
+    <a href="https://www.recurse.com/">Recurse Centre</a>.
+  </p>
+</footer>
+
+    </body>
+</html>
