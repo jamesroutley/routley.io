@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>James Routley  | A gratitude journal design</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
+  </head>
+  <body><nav>
+  <ul>
+    
+    
+    <li><a href="/">Home</a></li>
+    
+    
+    
+    
+    
+    <li><a href="/posts">Posts</a></li>
+    
+    
+    
+    
+    <li><a href="/posts/gratitude-journal">Gratitude journal</a></li>
+    
+  </ul>
+</nav>
+<main>
+<article>
+  <header>
+    <h1>A gratitude journal design</h1>
+    <time datetime="2020-02-12">12 February 2020</time>
+  </header>
+  
+
+<p>I&rsquo;ve been thinking about how I&rsquo;d design a gratitude journal product. A gratitude
+journal lets you keep a record of things you&rsquo;re grateful for. Proponents say
+gratitude journaling offers a number of mental health benefits.</p>
+
+<h2 id="why-build-a-product">Why build a product?</h2>
+
+<ol>
+<li>Habit building. One of the common issues with starting a gratitude journal is
+developing the habit of writing consistently. Products can help develop
+habits by reminding users to write. There&rsquo;s a dark side to habit building
+products, so we&rsquo;d want to stay away from being too intrusive.</li>
+<li>Encouraging best practice. For example, journaling too frequently can lead to
+writing for the sake of it, without properly thinking things through.
+Journaling too infrequently can mean you drop the habit. A product can nudge
+users to do things well.</li>
+</ol>
+
+<h2 id="minimum-set-of-features">Minimum set of features</h2>
+
+<ol>
+<li>Prompt users to list things they&rsquo;re grateful for</li>
+<li>Let users to write them down</li>
+<li>Store this list</li>
+</ol>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>I think the simplest way to implement this (as a centralised product) is via
+email. Let&rsquo;s look at each of the steps:</p>
+
+<h3 id="account-setup-and-onboarding">Account setup and onboarding</h3>
+
+<ol>
+<li>Send an email to our email address. It&rsquo;ll see that we haven&rsquo;t received an
+email from you before, and send you an onboarding email</li>
+<li>Reply choosing how frequently you&rsquo;d like to be prompted to write a journal
+entry</li>
+</ol>
+
+<h3 id="journal-entries">Journal entries</h3>
+
+<ol>
+<li>Every X days, you&rsquo;ll receive an email prompting you to write an entry</li>
+<li>Write it by repling to the email</li>
+</ol>
+
+<h3 id="changing-settings">Changing settings</h3>
+
+<ol>
+<li>Send an email asking to change settings? This might need to preformatted so
+we can parse the email automatically</li>
+</ol>
+
+<h3 id="closing-your-account-offboarding">Closing your account / offboarding</h3>
+
+<ol>
+<li>Either: send an email asking to close your account. We&rsquo;ll stop sending
+reminder emails</li>
+<li>Or: if you haven&rsquo;t replied to the last X emails, we&rsquo;ll stop sending
+reminders. You can resume reminders by emailing</li>
+</ol>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Using email as the main interface means we don&rsquo;t need to worry about a few
+things:</p>
+
+<ul>
+<li>Building a text editor</li>
+<li>Account manaagement</li>
+<li>Persistence - users can just look through their email history</li>
+<li>Web/mobile support</li>
+</ul>
+
+<p>However, dealing with email is always annoying, because you don&rsquo;t control the
+channel. You need to maintiain a good sending reputation, not get marked as spam
+by any email providers etc.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>An email-based system seems like quite a good fit for this problem. Working
+through this design has made me wonder if the &lsquo;products built on email&rsquo; pattern
+can be abstracted out, and we can build a more generic email workflow system.
+I&rsquo;ll have a think about this and might write something up about it at some
+point.</p>
+
+</article>
+
+    </main>
+    
+    <footer>
+  <img id="profile_picture" src="/img/me.png" />
+  <p>
+    👋 Hey, I'm James - I'm a senior software engineer building a bank at
+    <a href="https://monzo.com/">Monzo</a>. If you like what I post about, you
+    should consider applying to the
+    <a href="https://www.recurse.com/">Recurse Centre</a>.
+  </p>
+</footer>
+
+    </body>
+</html>

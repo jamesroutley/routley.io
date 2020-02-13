@@ -6,10 +6,20 @@
     <description>Recent content in Posts on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 09 Feb 2020 16:00:11 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Feb 2020 09:22:53 +0000</lastBuildDate>
     
 	<atom:link href="http://routley.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A gratitude journal design</title>
+      <link>http://routley.io/posts/gratitude-journal/</link>
+      <pubDate>Wed, 12 Feb 2020 09:22:53 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/gratitude-journal/</guid>
+      <description>I&amp;rsquo;ve been thinking about how I&amp;rsquo;d design a gratitude journal product. A gratitude journal lets you keep a record of things you&amp;rsquo;re grateful for. Proponents say gratitude journaling offers a number of mental health benefits.
+Why build a product?  Habit building. One of the common issues with starting a gratitude journal is developing the habit of writing consistently. Products can help develop habits by reminding users to write. There&amp;rsquo;s a dark side to habit building products, so we&amp;rsquo;d want to stay away from being too intrusive.</description>
+    </item>
     
     <item>
       <title>mmv, a tool for batch renaming files</title>
