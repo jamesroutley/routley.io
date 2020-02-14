@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>James Routley  | This website has small text on Firefox for mobile</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
+  </head>
+  <body><nav>
+  <ul>
+    
+    
+    <li><a href="/">Home</a></li>
+    
+    
+    
+    
+    
+    <li><a href="/posts">Posts</a></li>
+    
+    
+    
+    
+    <li><a href="/posts/firefox-mobile-default-css">Firefox mobile default css</a></li>
+    
+  </ul>
+</nav>
+<main>
+<article>
+  <header>
+    <h1>This website has small text on Firefox for mobile</h1>
+    <time datetime="2020-02-14">14 February 2020</time>
+  </header>
+  <style>
+article img {
+    max-width: 350px;
+}
+</style>
+
+<p>This website is currently rendered with very small text in Firefox on mobile.
+Here&rsquo;s a screenshot of what it looks like on a Pixel 2:</p>
+
+<p><img src="/img/posts/firefox-mobile-default-css/website-firefox.png" alt="" /></p>
+
+<p>While debugging this, I tried removing all CSS from my website. It turns out
+that the issue isn&rsquo;t to do with anything I&rsquo;ve written (I think), but the way
+Firefox displays unstyled HTML on mobile:</p>
+
+<p><img src="/img/posts/firefox-mobile-default-css/firefox.png" alt="" /></p>
+
+<p>I&rsquo;m a bit surprised by this - I would have assumed that rendering unstyled HTML
+would be legible in any browser. For comparison, here&rsquo;s how Chrome displays the
+same page on mobile:</p>
+
+<p><img src="/img/posts/firefox-mobile-default-css/chrome.png" alt="" /></p>
+
+<p>I&rsquo;m not sure how to fix this yet - I&rsquo;ll do some digging and post back. It&rsquo;s
+completely plausible that this is just user error 🤷‍♀️</p>
+
+</article>
+
+    </main>
+    
+    <footer>
+  <img id="profile_picture" src="/img/me.png" />
+  <p>
+    👋 Hey, I'm James - I'm a senior software engineer building a bank at
+    <a href="https://monzo.com/">Monzo</a>. If you like what I post about, you
+    should consider applying to the
+    <a href="https://www.recurse.com/">Recurse Centre</a>.
+  </p>
+</footer>
+
+    </body>
+</html>
