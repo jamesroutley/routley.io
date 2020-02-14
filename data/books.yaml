@@ -1,4 +1,10 @@
 books:
+  - title: The Three Body Problem
+    author: Cixin Liu
+    date: 2020-02-10
+  - title: Girl, Woman, Other
+    author: Bernardine Evaristo
+    date: 2020-02-07
   - title: Dubliners
     author: James Joyce
     date: 2020-01-14
