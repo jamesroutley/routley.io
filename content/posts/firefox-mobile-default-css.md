@@ -28,3 +28,6 @@ same page on mobile:
 
 I'm not sure how to fix this yet - I'll do some digging and post back. It's
 completely plausible that this is just user error 🤷‍♀️
+
+Edit: it turns out this is to do with [mobile
+viewports]({{< ref "/posts/viewport" >}}).
