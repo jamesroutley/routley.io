@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>James Routley  | Analytics server</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
+  </head>
+  <body><nav>
+  <ul>
+    
+    
+    <li><a href="/">Home</a></li>
+    
+    
+    
+    
+    
+    <li><a href="/posts">Posts</a></li>
+    
+    
+    
+    
+    <li><a href="/posts/analytics-server">Analytics server</a></li>
+    
+  </ul>
+</nav>
+<main>
+<article>
+  <header>
+    <h1>Analytics server</h1>
+    <time datetime="2020-02-16">16 February 2020</time>
+  </header>
+  
+
+<p>This website runs as a static site hosted on GitHub pages. I don&rsquo;t currently
+have any way of telling how many people are reading it, or what pages they&rsquo;re
+reading etc.</p>
+
+<p>The simple way to get this data would be to add Google Analytics to the website.
+However, I think it&rsquo;s an interesting exercise to work out how to implement
+something similar ourselves. This would let us specify the amount of information
+we&rsquo;d like to log about each visitor and we&rsquo;d also have control of the data
+ourselves, rather than shipping it to a third party.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>On each visit to my blog, some JavaScript code would run, which would make an
+HTTP request to a web server with some information about the page view.</p>
+
+<p>The web server accepts requests, and stores the information in a database.</p>
+
+<h2 id="what-analytics-do-we-care-about">What analytics do we care about?</h2>
+
+<p>We get a couple of data points from the HTTP request itself:</p>
+
+<ul>
+<li>The visitor&rsquo;s country (derived from the IP address)</li>
+<li>Timestamp</li>
+</ul>
+
+<p>On top of this, we can send the following in the request body:</p>
+
+<ul>
+<li>URL of the visited page</li>
+<li>Referrer URL</li>
+<li>Screen width (so we can tell if the user is on web or mobile)</li>
+</ul>
+
+<h2 id="user-privacy">User privacy</h2>
+
+<p>I&rsquo;m interested in preserving the privacy of website visitors, so we:</p>
+
+<ul>
+<li>Won&rsquo;t store IP addresses</li>
+<li>Won&rsquo;t set any cookies to uniquely identify visitors</li>
+<li>Will honour the Do Not Track (<code>DNT</code>) header</li>
+</ul>
+
+<h2 id="request-format">Request format</h2>
+
+<p>Requests will be <code>POST</code>ed to <code>https://analytics.routley.io/track</code> with the body</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  &#34;page_url&#34;: <span style="color:#a31515">&#34;https://routley.io/posts/a-blog-post&#34;</span>,
+  &#34;referer_url&#34;: <span style="color:#a31515">&#34;google.com&#34;</span>,
+  &#34;screen_width&#34;: 1000
+}</code></pre></div>
+<h2 id="database">Database</h2>
+
+<p>I think I&rsquo;m going to start with a SQLite database. I&rsquo;m going to run the
+analytics server on a free Google Cloud Instance, and I&rsquo;m not sure if I need the
+power or scalability of MySQL or Postgres. I&rsquo;m not super worried about losing
+historic data if the instance dies for whatever reason.</p>
+
+<p>Arguably a time series database like Prometheus would be a better fit for our
+data - I&rsquo;m avoiding this because I use Prometheus at work but don&rsquo;t use SQL and
+would like to get more experience with it.</p>
+
+<h2 id="querying">Querying</h2>
+
+<p>We can write SQL queries to find out information about our visitors:</p>
+
+<ul>
+<li>Number of views per page per day</li>
+<li>Bucketed screen widths, so we can see what devices visitors are using</li>
+<li>What countries people are visiting from</li>
+<li>Where visitors are being referred form</li>
+</ul>
+
+</article>
+
+    </main>
+    
+    <footer>
+  <img id="profile_picture" src="/img/me.png" />
+  <p>
+    👋 Hey, I'm James - I'm a senior software engineer building a bank at
+    <a href="https://monzo.com/">Monzo</a>. If you like what I post about, you
+    should consider applying to the
+    <a href="https://www.recurse.com/">Recurse Centre</a>.
+  </p>
+</footer>
+
+    </body>
+</html>
