@@ -71,10 +71,12 @@ code,
 pre {
   font-family: plex-mono;
   font-size: 14px;
+  background: #f7f3e8 !important; /* Wimborne White */
 }
 
 pre {
-  padding: 1.2em;
+  padding: 24px;
+  overflow: scroll;
 }
 
 /* Hyperlink styling */
