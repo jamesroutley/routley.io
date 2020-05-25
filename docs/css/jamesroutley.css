@@ -117,6 +117,14 @@ li {
   margin-bottom: 10px;
 }
 
+/* Footnotes */
+
+.footnotes hr {
+  border-style: dashed;
+  border-bottom: 0;
+  width: 66%;
+}
+
 /* Fonts */
 
 @font-face {
