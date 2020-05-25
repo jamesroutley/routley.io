@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>James Routley  | Bespoke software, and a really simple RSS aggregator</title>
+
+    <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
+  </head>
+  <body><nav>
+  <ul>
+    
+    
+    <li><a href="/">Home</a></li>
+    
+    
+    
+    
+    
+    <li><a href="/posts">Posts</a></li>
+    
+    
+    
+    
+    <li><a href="/posts/bespoke-software-rss-aggregator">Bespoke software rss aggregator</a></li>
+    
+  </ul>
+</nav>
+<main>
+<article>
+  <header>
+    <h1>Bespoke software, and a really simple RSS aggregator</h1>
+    <time datetime="2020-05-25">25 May 2020</time>
+  </header>
+  
+
+<p>This week I built myself an RSS<sup class="footnote-ref" id="fnref:rss"><a href="#fn:rss">1</a></sup> aggregator<sup class="footnote-ref" id="fnref:aggregator"><a href="#fn:aggregator">2</a></sup>. There are a
+couple of websites that are written by friends, or are of high enough quality
+that I want to read everything published on them, not just the things that are
+popular enough make their way to me via Hacker News or similar.</p>
+
+<p>I had fun building it, and I think its design is interesting, so let&rsquo;s take a
+look at how it works. I&rsquo;ll also use it as an example to talk about the sort of
+bespoke software that I&rsquo;ve really been enjoying writing recently.</p>
+
+<h2 id="how-the-rss-aggregator-works">How the RSS aggregator works</h2>
+
+<p><img src="/img/posts/bespoke-software-rss-aggregator/screenshot.png" alt="web page displaying a list of links" /></p>
+
+<p>This is what it looks like. It&rsquo;s a webpage, hosted at
+<a href="https://news.routley.io/">news.routley.io</a>, which contains links to the last 30
+days worth of posts from each of the blogs I subscribe to.</p>
+
+<p>The website and the code which generates it are stored in a single
+<a href="https://github.com/jamesroutley/news.routley.io">GitHub repo</a>, and it works by
+gluing together a couple of GitHub features.</p>
+
+<h3 id="generating-the-web-page">Generating the web page</h3>
+
+<p>I wrote a simple
+<a href="https://github.com/jamesroutley/news.routley.io/blob/master/main.go">Go script</a>,
+which stores a list of RSS feeds I subscribe to. When the script is run, it:</p>
+
+<ol>
+<li>Iterates over the feeds, fetches the list of posts from each one, and stores
+them in a big list of all posts</li>
+<li>Uses Go&rsquo;s HTML templating package to generate a self-contained HTML page
+containing the list of posts</li>
+<li>Saves this HTML page as a file in the repo, at <code>docs/index.html</code></li>
+</ol>
+
+<h3 id="serving-the-webpage">Serving the webpage</h3>
+
+<p>Github Pages is enabled for the repo. It serves the contents of the <code>docs</code>
+directory (which just contains the <code>index.html</code> file) on my custom domain
+<a href="https://news.routley.io/">news.routley.io</a>.</p>
+
+<h3 id="updating-the-webpage">Updating the webpage</h3>
+
+<p>I created a
+<a href="https://github.com/jamesroutley/news.routley.io/blob/master/.github/workflows/build-website.yml">GitHub Action</a>
+which:</p>
+
+<ol>
+<li>Pulls the repo</li>
+<li>Runs the Go script to generate the website</li>
+<li>Commits any changes to <code>index.html</code>, and pushes them back to the repo</li>
+</ol>
+
+<p>This action is triggered by a cron, and runs every hour. When the updated
+<code>index.html</code> is pushed to the repo, GitHub Pages automatically updates the
+website.</p>
+
+<h2 id="bespoke-software">Bespoke software</h2>
+
+<p>Historically, I would have built this as a CLI tool, so other people could use
+it to generate their own RSS aggregators. This adds a number of things I&rsquo;d need
+to think about. For example I&rsquo;d need to:</p>
+
+<ul>
+<li>Define a way to let people specify feeds to pull posts from. This would
+probably be a config file with a pre-defined syntax, which we&rsquo;d need to read
+and parse.</li>
+<li>Let the user specify the name of the file to output HTML to in case they don&rsquo;t
+want to use GitHub Pages.</li>
+<li>Let users specify their own CSS, rather than hard coding it into the HTML
+template.</li>
+<li>Store the code which generates the RSS aggregator to be in a separate repo
+from the repo which stores and serves my RSS aggregator, so users can clone or
+fork it without getting things specific to my aggregator.</li>
+<li>Update the script to read multiple feeds concurrently, so it remains fast for
+users who subscribe to large numbers of feeds.</li>
+</ul>
+
+<p>None of these are particularly difficult to add, but each adds to the total
+complexity of the project. In my day job as a software engineer, I write a lot
+of code which is &lsquo;used&rsquo; by other people - sometimes directly, but also
+indirectly when they read it, make changes to it and keep it running in
+production. Writing code that other people use requires extra work. Sometimes
+it&rsquo;s nice to step back from it and write code that&rsquo;s just for yourself.</p>
+
+<!-- prettier-ignore-start -->
+
+<!-- prettier-ignore-end -->
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:rss"><p><a href="https://en.wikipedia.org/wiki/RSS">RSS</a> stands for &lsquo;Really Simple
+Syndication&rsquo;. It&rsquo;s a protocol that lets websites list their content in a
+machine-readable format. Applications can read RSS feeds to pull content
+from multiple websites into one place.</p>
+ <a class="footnote-return" href="#fnref:rss"><sup>[return]</sup></a></li>
+
+<li id="fn:aggregator"><p>I call it an &lsquo;RSS aggregator&rsquo; rather than the more common &lsquo;RSS
+reader&rsquo; because mine doesn&rsquo;t let you read any of the content directly - it
+just links out to the source webpages.</p>
+ <a class="footnote-return" href="#fnref:aggregator"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+</article>
+
+    </main>
+    
+    <footer>
+  <img id="profile_picture" src="/img/me.png" />
+  <p>
+    👋 Hey, I'm James - I'm a senior software engineer building a bank at
+    <a href="https://monzo.com/">Monzo</a>. If you like what I post about, you
+    should consider applying to the
+    <a href="https://www.recurse.com/">Recurse Centre</a>.
+  </p>
+</footer>
+
+    <script
+      data-goatcounter="https://routley.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
+  </body>
+</html>

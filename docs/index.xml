@@ -6,10 +6,20 @@
     <description>Recent content in James Routley | James Routley on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 21 Feb 2020 08:48:14 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2020 10:01:41 +0100</lastBuildDate>
     
 	<atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bespoke software, and a really simple RSS aggregator</title>
+      <link>http://routley.io/posts/bespoke-software-rss-aggregator/</link>
+      <pubDate>Mon, 25 May 2020 10:01:41 +0100</pubDate>
+      
+      <guid>http://routley.io/posts/bespoke-software-rss-aggregator/</guid>
+      <description>This week I built myself an RSS1 aggregator2. There are a couple of websites that are written by friends, or are of high enough quality that I want to read everything published on them, not just the things that are popular enough make their way to me via Hacker News or similar.
+I had fun building it, and I think its design is interesting, so let&amp;rsquo;s take a look at how it works.</description>
+    </item>
     
     <item>
       <title>Setting up Syncthing to synchronise files between computers</title>

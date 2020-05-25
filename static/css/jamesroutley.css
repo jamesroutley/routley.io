@@ -74,9 +74,17 @@ pre {
   background: #f7f3e8 !important; /* Wimborne White */
 }
 
+code {
+  padding: 4px;
+}
+
 pre {
   padding: 24px;
   overflow: scroll;
+}
+
+pre code {
+  padding: 0;
 }
 
 /* Hyperlink styling */
