@@ -82,7 +82,7 @@ indirectly when they read it, make changes to it and keep it running in
 production. Writing code that other people use requires extra work. Sometimes
 it's nice to step back from it and write code that's just for yourself.
 
-(By the way - if enjoyed this post and would like to follow me, I've got also an
+(By the way - if enjoyed this post and would like to follow me, I've also got an
 [RSS feed](/posts/index.xml))
 
 <!-- prettier-ignore-start -->
