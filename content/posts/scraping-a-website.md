@@ -1,11 +1,10 @@
 ---
 title: "Scraping a website"
-date: 2020-02-22T19:06:09Z
-draft: True
+date: 2020-05-27T19:06:09Z
 ---
 
 I've spent today writing some code to scrape a series of lessons from a website.
-Each lessons consists of text and image data. I wanted to save the content of
+Each lesson consists of text and image data. I wanted to save the content of
 each lesson, so I could read through them offline.
 
 I'll go through what I did, the issues I ran into and how I solved them.

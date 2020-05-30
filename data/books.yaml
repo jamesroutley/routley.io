@@ -1,4 +1,7 @@
 books:
+  - title: The Secret History
+    author: Donna Tartt
+    date: 2020-05-30
   - title: The Dark Forest
     author: Cixin Liu
     date: 2020-05-10
@@ -11,6 +14,9 @@ books:
   - title: Heart of Darkness
     author: Joseph Conrad
     date: 2020-03-30
+  - title: Autumn
+    author: Ali Smith
+    date: 2020-03-05
   - title: The Handmaiden's Tale
     author: Margaret Atwood
     date: 2020-02-16
