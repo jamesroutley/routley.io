@@ -1,4 +1,7 @@
 books:
+  - title: A Philosophy of Software Design
+    author: John Ousterhout
+    date: 2020-07-05
   - title: The Secret History
     author: Donna Tartt
     date: 2020-05-30
