@@ -104,6 +104,10 @@ a:hover {
   text-decoration: none;
 }
 
+a:hover > h2 {
+  color: #000;
+}
+
 hr {
   margin: 25px auto 25px;
 }

@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article id="content">
+  <header>
+    <!-- <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time> -->
+  </header>
+  <section>
+    <a href="/img/images/{{ .Params.image }}">
+      <img src="/img/images/{{ .Params.image }}" />
+    </a>
+    {{ .Content }}
+  </section>
+</article>
+{{ end }}

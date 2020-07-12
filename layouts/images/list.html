@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+<link type="text/css" rel="stylesheet" href="/css/image.css" />
+<header>
+  <h1>{{.Title}}</h1>
+</header>
+{{ range .Pages }}
+<article>
+  <img src="/img/images/{{ .Params.image }}" />
+  {{ .Content }}
+  <a href="{{ .Permalink }}"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></a>
+</article>
+{{ end }} {{ end }}

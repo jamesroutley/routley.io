@@ -1,0 +1,12 @@
+article {
+  margin-bottom: 40px;
+  padding: 24px;
+  /* border-radius: 8px; */
+  background: #f7f3e8; /* Wimborne White */
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.16);
+}
+
+img {
+  /* box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.24); */
+  max-height: 450px !important;
+}
