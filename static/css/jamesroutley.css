@@ -69,7 +69,7 @@ article img {
 
 code,
 pre {
-  font-family: plex-mono;
+  font-family: "plex-mono-italic";
   font-size: 14px;
   background: #f7f3e8 !important; /* Wimborne White */
 }
@@ -151,6 +151,14 @@ li {
   font-family: "plex-mono";
   src: url("/font/IBMPlexMono-Regular.woff") format("woff"),
     url("/font/IBMPlexMono-Regular.eot");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "plex-mono-italic";
+  src: url("/font/IBMPlexMono-Italic.otf") format("otf"),
+    url("/font/IBMPlexMono-Italic.ttf");
   font-weight: normal;
   font-style: italic;
 }
