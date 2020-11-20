@@ -7,6 +7,9 @@
 
     <title>{{ .Site.Title }} {{ with .Params.Title }} | {{ . }}{{ end }}</title>
 
+    {{ range .Params.Scripts }}<script src="{{ . }}"></script>
+    {{ end }}
+
     <link type="text/css" rel="stylesheet" href="/css/jamesroutley.css" />
   </head>
   <body>

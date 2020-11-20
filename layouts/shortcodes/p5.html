@@ -1,0 +1,25 @@
+<iframe
+  title="Inline Frame Example"
+  style="overflow: hidden;
+  margin: 0 auto 0;
+  display: block;
+  margin-top: 16px
+  margin-bottom: 16px"
+  width="{{ if .Get "width" }}{{ .Get "with" }}{{ else }}100%{{ end }}"
+  height="{{ if .Get "height" }}{{ .Get "height" }}{{ else }}400px{{ end }}"
+  scrolling="no"
+  frameborder="0"
+  srcdoc="
+<html>
+  <head>
+    <script src=&quot;/js/p5-v1-1-9.min.js&quot;></script>
+    <script src=&quot;{{ .Get "script" }}&quot;></script>
+  </head>
+  <body style=&quot;margin: 0;&quot;>
+    <main>
+      <noscript>This drawing requires JavaScript to work</noscript>
+    </main>
+  </body>
+</html>"
+>;
+</iframe>

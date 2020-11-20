@@ -1,5 +1,5 @@
 ---
-title: "Literate Programming"
+title: "Literate programming"
 date: 2020-06-01T21:40:54+01:00
 draft: true
 ---
