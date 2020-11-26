@@ -1,11 +1,13 @@
 ---
-title: "Terazzo Generator"
+title: "Random terazzo generator"
 date: 2020-11-16T11:32:38Z
 draft: true
 scripts:
-    - "/js/p5-v1-1-9.min.js"
-    - "/js/terazzo.js"
+  - "/js/p5-v1-1-9.min.js"
+  - "/js/terazzo.js"
 ---
+
+<noscript>This article has diagrams which require JavaScript to show</noscript>
 
 <div id="terazzo"></div>
 
@@ -34,7 +36,7 @@ When implementing the generator, I had the following goals:
 
 We want to generate random 3-5 sided shapes, which look like this:
 
-TODO: image of three random chips
+<div id="threeIdealChips"></div>
 
 My first thought was to draw the outline of the shape by:
 
@@ -44,14 +46,14 @@ My first thought was to draw the outline of the shape by:
 3.  Repeat this a number of times
 4.  Close the shape by drawing a line from the final point to the starting point
 
-TODO: image of this path walking
+<div id="pathWalking"></div>
 
 However, this can give shapes with unwanted features:
 
 1.  The lines sometimes cross over themselves
 2.  The random choices sometimes give a very long and thin shape
 
-TODO: image of this
+<div id="pathWalkingBad"></div>
 
 While considering how to bound the size of a chip, I remembered that there are
 certain shapes (known as
@@ -65,8 +67,6 @@ solve the two problems above:
 2.  We know the size of the shape will be smaller than the size of the circle,
     preventing the creation of long, thin shapes
 
-TODO: image
-
 We actually generate the chips by:
 
 1.  Creating a bounding circle with a random radius. This radius determines the
@@ -78,6 +78,8 @@ We actually generate the chips by:
 3.  Because we sorted the angles, the points we've just calculated are all next
     to each other on the circle. To create the shape, we draw lines from each
     point to its two neighbours
+
+<div id="chipGeneration"></div>
 
 ## Chip placement
 
@@ -93,13 +95,20 @@ together, then they overlap.
 
 <div id="circleIntersection"></div>
 
-TODO: moving image of circles overlapping. Use sine wave for movement of one
+To draw the final pattern, we repeatedly generate chips with random sizes,
+colours and positions. If the chip's bounding circle overlaps with an existing
+chip's bounding circle, we discard it. If not, we draw it.
 
-To draw the final pattern, we:
+<div id="chipPlacement"></div>
 
-2.  Randomly generate a chip. If its bounding circle overlaps overlaps with an
-    existing chip's bounding circle, discard it. If not, draw it
-3.  Repeat
+## Wrapping up
 
-We can control the number of repititions - the more we have, the more densely
-packed our pattern will be.
+That's about it! There are a couple of limitations I've encountered with this
+approach. Most notably, if you have a small chip with a large bounding circle,
+you end up with some empty space which will never be filled. This leads to
+sparser patterns than you can get with real terazzo.
+
+I've also noticed that we sometimes generate very thin shapes when we (for
+example) generate a triangle with two corners close to one another. We could fix
+this by picking angles that are at least a certain distance away from each other
+when generating the chip.

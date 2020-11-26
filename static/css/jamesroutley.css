@@ -56,6 +56,13 @@ footer > p {
   max-width: 450px;
 }
 
+/* Canvas styling */
+
+.p5Canvas {
+  display: block;
+  margin: auto;
+}
+
 /* Image styling */
 
 article img {

@@ -1,4 +1,13 @@
 books:
+  - title: Mrs Dalloway
+    author: Virginia Woolf
+    date: 2020-11-20
+  - title: Wilding
+    author: Isabella Tree
+    date: 2020-11-13
+  - title: Summer's Lease
+    author: Thom Eagle
+    date: 2020-10-11
   - title: A Philosophy of Software Design
     author: John Ousterhout
     date: 2020-07-05
