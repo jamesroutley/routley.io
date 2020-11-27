@@ -36,38 +36,25 @@
     <h1>Updating site CSS</h1>
     <time datetime="2016-11-29">29 November 2016</time>
   </header>
-  
-
-<h2 id="old-website">Old Website</h2>
-
+  <h2 id="old-website">Old Website</h2>
 <p>The old website&rsquo;s CSS was based on <a href="http://getbootstrap.com/">Bootstrap</a>, with
 some custom styling. Source code can be found
 <a href="https://github.com/jamesroutley/jamesroutley.github.io/tree/52ae9222a013fe30e56242373e2e6f4f8009128c/css">here</a>.
 The code itself was hacked together.</p>
-
-<p><img src="/img/posts/from-jekyll/01-css/old-main.png" alt="Old website main page" title="old website main page" /></p>
-
-<p><img src="/img/posts/from-jekyll/01-css/old-portfolio.png" alt="Old website portfolio page" title="old website portfolio page" /></p>
-
+<p><img src="/img/posts/from-jekyll/01-css/old-main.png" alt="Old website main page" title="old website main page"></p>
+<p><img src="/img/posts/from-jekyll/01-css/old-portfolio.png" alt="Old website portfolio page" title="old website portfolio page"></p>
 <p>The font is <a href="https://fonts.google.com/specimen/Josefin+Slab">Josefin Slab</a>,
 which I quite liked for the main page, but I thought it felt too affected for
 use as the main font for blog posts.</p>
-
-<p><img src="/img/posts/from-jekyll/01-css/old-blog-1.png" alt="Old website blog page 1" title="old website blog page 1" /></p>
-
+<p><img src="/img/posts/from-jekyll/01-css/old-blog-1.png" alt="Old website blog page 1" title="old website blog page 1"></p>
 <p>There are issues with the font size of the monospace font used for code blocks.</p>
-
-<p><img src="/img/posts/from-jekyll/01-css/old-blog-2.png" alt="Old website blog page 2" title="old website blog page 2" /></p>
-
+<p><img src="/img/posts/from-jekyll/01-css/old-blog-2.png" alt="Old website blog page 2" title="old website blog page 2"></p>
 <h2 id="new-website">New Website</h2>
-
 <p>The new website takes a minimalist approach to CSS, using system defaults where
 possible. The full code is 67 lines long, including whitespace and comments, and
 can be found
 <a href="https://github.com/jamesroutley/jamesroutley.github.io/blob/812401e4bb92a9248a7883682e3106f6439bae5b/css/jamesroutley.css">here</a>.</p>
-
 <h3 id="font">Font</h3>
-
 <p>Josefin Slab has been replaced by the user&rsquo;s system font, for speed and a native
 feel. More information about using system fonts in web design can be found in
 this
@@ -77,9 +64,8 @@ text formatting.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">body {
   <span style="color:#00f">font-family</span>: -apple-system, BlinkMacSystemFont, <span style="color:#a31515">&#34;Segoe UI&#34;</span>, Helvetica, Arial,
     <span style="color:#00f">sans-serif</span>, <span style="color:#a31515">&#34;Apple Color Emoji&#34;</span>, <span style="color:#a31515">&#34;Segoe UI Emoji&#34;</span>, <span style="color:#a31515">&#34;Segoe UI Symbol&#34;</span>;
-}</code></pre></div>
-<h3 id="alignment">Alignment</h3>
-
+}
+</code></pre></div><h3 id="alignment">Alignment</h3>
 <p>The new site removes the Bootstrap dependency. Previously, the content was
 centered by offsetting grid columns. Centre alignment is now implemented by
 setting <code>margin-left</code> and <code>margin-right</code> of the main <code>div</code> to <code>auto</code>. Setting
@@ -88,28 +74,23 @@ is less than <code>600px</code>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#2b91af">main</span> {
   <span style="color:#00f">max-width</span>: 600<span style="color:#2b91af">px</span>;
   <span style="color:#00f">margin</span>: 50<span style="color:#2b91af">px</span> <span style="color:#00f">auto</span> 50<span style="color:#2b91af">px</span>;
-}</code></pre></div>
-<p><img src="/img/posts/from-jekyll/01-css/new-main.png" alt="New website main page" title="new website main page" /></p>
-
+}
+</code></pre></div><p><img src="/img/posts/from-jekyll/01-css/new-main.png" alt="New website main page" title="new website main page"></p>
 <h3 id="responsive-images">Responsive Images</h3>
-
-<p><img src="/img/posts/from-jekyll/01-css/new-portfolio.png" alt="New website portfolio page" title="new website portfolio page" /></p>
-
+<p><img src="/img/posts/from-jekyll/01-css/new-portfolio.png" alt="New website portfolio page" title="new website portfolio page"></p>
 <p>Bootstrap-style responsive images can be acomplished with the following code:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">img {
   <span style="color:#00f">display</span>: <span style="color:#00f">block</span>;
   <span style="color:#00f">max-width</span>: 100<span style="color:#2b91af">%</span>;
   <span style="color:#00f">height</span>: <span style="color:#00f">auto</span>;
   <span style="color:#00f">margin</span>: <span style="color:#00f">auto</span>;
-}</code></pre></div>
-<p>All pages in the new website are compiled from <code>Markdown</code>. Attaching classes to
+}
+</code></pre></div><p>All pages in the new website are compiled from <code>Markdown</code>. Attaching classes to
 the generated <code>HTML</code> elements is possible, but requires <code>HTML</code> to be explicitly
 written into the <code>Markdown</code>. Applying CSS to the HTML element itself (rather
 than a class each image is assigned to) feels like bad practice, but I chose it
 over having to add classes manually.</p>
-
 <h3 id="code-blocks">Code Blocks</h3>
-
 <p>Code blocks are again inspired by GitHub&rsquo;s <code>Markdown</code> rendering, borrowing their
 <code>background-color</code> and <code>border-radius</code>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">code,
@@ -122,12 +103,10 @@ pre {
 
 pre {
   <span style="color:#00f">padding</span>: 1.2<span style="color:#2b91af">em</span>;
-}</code></pre></div>
-<h3 id="hyperlinks">Hyperlinks</h3>
-
+}
+</code></pre></div><h3 id="hyperlinks">Hyperlinks</h3>
 <p>Hyperlink styling introduces the only colour in the website.</p>
-
-<p><img src="/img/posts/from-jekyll/01-css/new-blog-hyperlink.png" alt="New website hyperlink demonstration" title="new website hyperlink demonstration" /></p>
+<p><img src="/img/posts/from-jekyll/01-css/new-blog-hyperlink.png" alt="New website hyperlink demonstration" title="new website hyperlink demonstration"></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">a:link {
   <span style="color:#00f">color</span>: #ff6868;
   <span style="color:#00f">text-decoration</span>: <span style="color:#00f">underline</span>;
@@ -141,8 +120,8 @@ a:hover {
   <span style="color:#00f">color</span>: <span style="color:#00f">white</span>;
   <span style="color:#00f">background-color</span>: #ff6868;
   <span style="color:#00f">text-decoration</span>: <span style="color:#00f">none</span>;
-}</code></pre></div>
-<p>The <code>a:hover</code> styling is used to &lsquo;highlight&rsquo; hyperlinks when the user hovers
+}
+</code></pre></div><p>The <code>a:hover</code> styling is used to &lsquo;highlight&rsquo; hyperlinks when the user hovers
 over them, an idea borrowed from <a href="http://hackcss.com/">Hack CSS</a>.</p>
 
 </article>

@@ -36,14 +36,10 @@
     <h1>Learning Rust 02: an ls clone</h1>
     <time datetime="2018-07-08">8 July 2018</time>
   </header>
-  
-
-<p><em>I&rsquo;m learning Rust, and documenting the process. These posts are my notes -
+  <p><em>I&rsquo;m learning Rust, and documenting the process. These posts are my notes -
 they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
-
 <p>In this post, I&rsquo;m building an <code>ls</code> clone. It&rsquo;s pretty similar to the last post&rsquo;s
 <code>pwd</code> clone. It&rsquo;s called <code>rls</code>.</p>
-
 <h2 id="code">Code</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">use</span> std::env;
 <span style="color:#00f">use</span> std::fs;
@@ -68,41 +64,30 @@ they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
     process::exit(1);
 
 }
-</code></pre></div>
-<h2 id="fetching-arguments">Fetching arguments</h2>
-
+</code></pre></div><h2 id="fetching-arguments">Fetching arguments</h2>
 <p>We can get the arguments passed to <code>rls</code> with the <code>env::args</code> function, which
 returns an iterator. We can convert the iterator to a
 <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">vector</a>, Rust&rsquo;s &lsquo;contiguous
 growable array type&rsquo;. I think vectors are the Rust equivalent to Go&rsquo;s slices, or
 Python&rsquo;s lists. We assign this vector to a new variable, <code>args</code>.</p>
-
 <h2 id="input-validation">Input validation</h2>
-
 <p>We require that an argument is passed to <code>rls</code>, the directory whose contents we
 want to list. If this argument isn&rsquo;t supplied, we call <code>usage</code>, which prints a
 help message to <code>stderr</code> and exits with a non-zero code, indicating an error.</p>
-
-<h2 id="fetching-a-directory-s-contents">Fetching a directory&rsquo;s contents</h2>
-
+<h2 id="fetching-a-directorys-contents">Fetching a directory&rsquo;s contents</h2>
 <p>The standard library function <code>fs::read_dir</code> returns an iterator of
 <code>Result&lt;ReadDir&gt;</code>, where <code>ReadDir</code> is an iterator of <code>io::Result&lt;DirEntry&gt;</code>s.</p>
-
 <h2 id="printing-the-directories">Printing the directories</h2>
-
 <p>We iterate over the <code>ReadDir</code>, <code>unwrap</code> each path, and pull the actual file name
 out. Printing <code>path_buf</code> would print the file path <strong>relative to the pwd</strong> -
 <code>ls</code> only prints file names. We print the file names with the <code>println!</code> macro.</p>
-
 <h2 id="error-handling">Error handling</h2>
-
 <p>Functions which interact with the file system are error-prone. That&rsquo;s why lots
 of the values we get back from the file system functions are wrapped in
 <code>Results</code>. To use the success values, we need to handle the error case. We&rsquo;re
 currently doing this using <code>unwrap</code>, which panics if there&rsquo;s an error. This is
 both verbose and bad UX - we probably don&rsquo;t want to display a full Rust error
 message to our users.</p>
-
 <p>It looks like there are a couple of ways of improving this - I&rsquo;ll be doing some
 reading about it
 <a href="https://doc.rust-lang.org/book/second-edition/ch09-00-error-handling.html">here</a>.</p>

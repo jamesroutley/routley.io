@@ -39,7 +39,6 @@
   <p>I was digging through Vim&rsquo;s documentation, and came across the help article
 <code>diff.txt</code>. It turns out that Vim implements a visual diff feature, which shows
 the &lsquo;difference between two to eight versions of the same file&rsquo;.</p>
-
 <p>I occasionally need to find the differences between two files, and have
 historically used <code>diff</code> for this. Unfortunately, I find the output quite hard
 to parse:</p>
@@ -50,19 +49,16 @@ to parse:</p>
 &gt; ![Image showing what a diff looks like in Vim][vim-diff]
 41a42,43
 &gt;
-&gt; [vim-diff]: /img/posts/vim-diff/diff.png</code></pre></div>
-<p>Vim&rsquo;s visual diff is much clearer to me:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ vim -d file_1 file_2</code></pre></div>
-<p><img src="/img/posts/vim-diff/diff.png" alt="Image showing what a diff looks like in Vim" /></p>
-
+&gt; [vim-diff]: /img/posts/vim-diff/diff.png
+</code></pre></div><p>Vim&rsquo;s visual diff is much clearer to me:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ vim -d file_1 file_2
+</code></pre></div><p><img src="/img/posts/vim-diff/diff.png" alt="Image showing what a diff looks like in Vim"></p>
 <p>Vim sets some options to make browsing the diff easier:</p>
-
 <ol>
 <li><code>scrollbind</code> is set to <code>on</code>, so when you scroll through one file, the other
 will scroll alongside it</li>
 <li>Sections of common text are hidden with a fold</li>
 </ol>
-
 <p>There are commands for jumping between diffs, and copying text from one file to
 the other. You can find out more by typing <code>:help diff.txt</code> from inside Vim.</p>
 

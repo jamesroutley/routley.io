@@ -36,53 +36,40 @@
     <h1>Site deployment to S3 and SSL</h1>
     <time datetime="2016-12-04">4 December 2016</time>
   </header>
-  
-
-<h2 id="previous-hosting-and-deployment">Previous Hosting and Deployment</h2>
-
+  <h2 id="previous-hosting-and-deployment">Previous Hosting and Deployment</h2>
 <p>Previously, the website was hosted using
 <a href="https://pages.github.com/">GitHub Pages</a>, a free static website hosting
 provided by GitHub. Once Pages is configured, the updated site can be deployed
 by pushing it to GitHub with <code>git push</code>.</p>
-
 <p>The old website used the Jekyll static site generator. As Jekyll is written by
 GitHub, GitHub Pages also natively supports Jekyll sites, running the build step
 for you.</p>
-
 <h2 id="s3-website-hosting">S3 Website Hosting</h2>
-
 <p>AWS S3 can be
 <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">configured</a>
 to host static websites. As the Jekyll build process produces a static website,
 this static site can be hosted on S3. This requires an extra build step; with
 GitHub Pages the Jekyll build was managed by GitHub, on S3 it needs to be run
 manually. The website is deployed by uploading it to S3.</p>
-
 <p>These two steps can be automated using the following <code>Make</code> process:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make">build:  <span style="color:#008000"># Create the static and store it in _site/
 </span><span style="color:#008000"></span>	jekyll build
 
 deploy-prod: build  <span style="color:#008000"># Deploy the production website to S3
 </span><span style="color:#008000"></span>	aws s3 sync _site s3://jamesroutley.co.uk --delete
-</code></pre></div>
-<p>They deployment uses the AWS <a href="https://aws.amazon.com/cli/">CLI</a>, which must be
+</code></pre></div><p>They deployment uses the AWS <a href="https://aws.amazon.com/cli/">CLI</a>, which must be
 correctly
 <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">configured</a>
 with AWS credentials for the destination account.</p>
-
 <p>A development environment was set up at
 <a href="https://dev.jamesroutley.co.uk/">dev.jamesroutley.co.uk</a>.</p>
-
 <h2 id="dns">DNS</h2>
-
 <p>S3 static websites are assigned a URL, such as
 <a href="http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/">http://jamesroutley.co.uk.s3-website-eu-west-1.amazonaws.com/</a>.
 To access the website from a custom domain name, a Route53 Alias Record pointing
 the custom domain name to the S3 bucket
 <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html">should be created</a>.</p>
-
 <h2 id="ssl">SSL</h2>
-
 <p>While S3 can be used to host static websites, it doesn&rsquo;t natively support SSL.
 To set it up, a <a href="https://aws.amazon.com/cloudfront/">CloudFront</a> distribution
 must be created. CloudFront is AWS&rsquo;s content delivery network (CDN), a

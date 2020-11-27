@@ -6,11 +6,7 @@
     <description>Recent content in go on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 20 Jul 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://routley.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 20 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://routley.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Simplify Golang test fixtures with this one weird trick</title>
       <link>http://routley.io/posts/golang-test-fixtures/</link>

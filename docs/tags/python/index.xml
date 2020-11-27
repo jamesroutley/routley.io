@@ -6,11 +6,7 @@
     <description>Recent content in python on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 16 Aug 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://routley.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 16 Aug 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://routley.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Analyse and test C with Python</title>
       <link>http://routley.io/posts/analyse-test-c-with-python/</link>

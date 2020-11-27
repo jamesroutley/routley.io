@@ -36,32 +36,21 @@
     <h1>This website has small text on Firefox for mobile</h1>
     <time datetime="2020-02-14">14 February 2020</time>
   </header>
-  <style>
-article img {
-    max-width: 350px;
-}
-</style>
-
+  <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>This website is currently rendered with very small text in Firefox on mobile.
 Here&rsquo;s a screenshot of what it looks like on a Pixel 2:</p>
-
-<p><img src="/img/posts/firefox-mobile-default-css/website-firefox.png" alt="" /></p>
-
+<p><img src="/img/posts/firefox-mobile-default-css/website-firefox.png" alt=""></p>
 <p>While debugging this, I tried removing all CSS from my website. It turns out
 that the issue isn&rsquo;t to do with anything I&rsquo;ve written (I think), but the way
 Firefox displays unstyled HTML on mobile:</p>
-
-<p><img src="/img/posts/firefox-mobile-default-css/firefox.png" alt="" /></p>
-
+<p><img src="/img/posts/firefox-mobile-default-css/firefox.png" alt=""></p>
 <p>I&rsquo;m a bit surprised by this - I would have assumed that rendering unstyled HTML
 would be legible in any browser. For comparison, here&rsquo;s how Chrome displays the
 same page on mobile:</p>
-
-<p><img src="/img/posts/firefox-mobile-default-css/chrome.png" alt="" /></p>
-
+<p><img src="/img/posts/firefox-mobile-default-css/chrome.png" alt=""></p>
 <p>I&rsquo;m not sure how to fix this yet - I&rsquo;ll do some digging and post back. It&rsquo;s
 completely plausible that this is just user error 🤷‍♀️</p>
-
 <p>Edit: it turns out this is to do with <a href="http://routley.io/posts/viewport/">mobile
 viewports</a>.</p>
 

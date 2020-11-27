@@ -36,20 +36,14 @@
     <h1>Learning Rust 01: a pwd clone</h1>
     <time datetime="2018-06-23">23 June 2018</time>
   </header>
-  
-
-<p><em>I&rsquo;m learning Rust, and documenting the process. These posts are my notes -
+  <p><em>I&rsquo;m learning Rust, and documenting the process. These posts are my notes -
 they&rsquo;re not guaranteed to be useful, interesting or correct!</em></p>
-
 <p>In this post, I&rsquo;m writing my first Rust program. It&rsquo;s a simplified clone of the
 Unix tool <code>pwd</code>, which prints out the current directory. I&rsquo;m calling it <code>rpwd</code>.</p>
-
 <h2 id="creating-a-project">Creating a project</h2>
-
 <p>I started a new executable application with:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cargo rpwd --bin</code></pre></div>
-<h2 id="code">Code</h2>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cargo rpwd --bin
+</code></pre></div><h2 id="code">Code</h2>
 <p>The code is simple:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">use</span> std::env;
 
@@ -57,50 +51,38 @@ Unix tool <code>pwd</code>, which prints out the current directory. I&rsquo;m ca
     <span style="color:#00f">let</span> path = env::current_dir().unwrap();
     println!(<span style="color:#a31515">&#34;{}&#34;</span>, path.display());
 }
-</code></pre></div>
-<h2 id="importing-a-module">Importing a module</h2>
-
+</code></pre></div><h2 id="importing-a-module">Importing a module</h2>
 <p>The first line imports the
 <a href="https://doc.rust-lang.org/std/env/index.html"><code>env</code> module</a> from the standard
 library, which implements functions to inspect and manipulate the process&rsquo;s
 environment.</p>
-
 <h2 id="variable-declaration">Variable declaration</h2>
-
 <p><code>let path</code> declares a new variable, <code>path</code>. Variables are
 <a href="https://doc.rust-lang.org/book/second-edition/ch03-01-variables-and-mutability.html">immutable</a>
 in Rust. This variable is set to the result of the function call
 <code>env::current_dir().unwrap()</code>.</p>
-
 <h2 id="current-directory-results">Current directory, Results</h2>
-
 <p><code>env::current_dir()</code> calls the <code>current_dir()</code> function in the <code>std::env</code>
 module. <code>current_dir</code> returns a <code>std::io::Result&lt;PathBuf&gt;</code>. A
 <a href="https://doc.rust-lang.org/std/result/index.html"><code>Result</code></a> is a type which
 represents a success or an error. To get at the success value, we must deal with
 any potential errors. In Rust, &lsquo;functions return <code>Result</code> whenever errors are
 expected and recoverable&rsquo;. It&rsquo;s a way to ensure errors are dealt with.</p>
-
 <h2 id="unwrap">Unwrap</h2>
-
 <p><code>.unwrap()</code> calls <code>Result</code>&rsquo;s <code>unwrap</code> method, which returns the success value if
 the <code>Result</code> is <code>Ok</code>, or
 <a href="https://doc.rust-lang.org/std/macro.panic.html"><code>panics</code></a> if there&rsquo;s an error.
 According to <code>env::current_dir</code>&rsquo;s
 <a href="https://doc.rust-lang.org/std/env/fn.current_dir.html#errors">docs</a>, the
 function can error if:</p>
-
 <ul>
 <li>Current directory does not exist</li>
 <li>There are insufficient permissions to access the current directory.</li>
 </ul>
-
 <h2 id="printing">Printing</h2>
-
 <p>Assuming there are no errors, <code>path</code> will hold <code>current_dir</code>&rsquo;s success value, an
 object of type <code>std::path::PathBuf</code>. This object represents an owned, mutable
 path.</p>
-
 <p>Finally, we print out the path. This uses the <code>println!</code> macro. Before printing
 the path, we must call <code>PathBuf</code>&rsquo;s <code>display</code> method. This converts the path into
 a format <a href="https://stackoverflow.com/a/24061240">printable</a> by <code>println!</code>.</p>

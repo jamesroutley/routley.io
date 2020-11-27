@@ -36,32 +36,24 @@
     <h1>Real vs percieved simplicity</h1>
     <time datetime="2020-02-04">4 February 2020</time>
   </header>
-  
-
-<p>There are certain command line tasks I need to do every few weeks or months,
+  <p>There are certain command line tasks I need to do every few weeks or months,
 which is infrequently enough that I need to look up the syntax every time I do
 them. For example:</p>
-
 <ul>
 <li>Undoing a commit</li>
 <li>Getting <code>ripgrep</code> to return only the text which matches a regular expression,
 not the whole line</li>
 <li>Executing a command against all files in a directory</li>
 </ul>
-
 <h2 id="a-solution">A solution</h2>
-
 <p>To save time searching for how to do these things, I decided to create my own
 command line tool, <code>cookbook</code>, which would let me save examples (or &lsquo;recipes&rsquo;)
 for these tasks. I wrote this in Python, and it&rsquo;s about 70 lines of code with
 whitespace and comments. Because I wanted it to be simple, it shells out to
 other programs if it needs to do anything complicated. For example, the <code>edit</code>
 command just opens a file in Vim.</p>
-
 <h2 id="issues">Issues</h2>
-
 <p>My <code>cookbook</code> tool worked well, until it didn&rsquo;t. I ran into several issues:</p>
-
 <ol>
 <li>The <code>cookbook</code> script wouldn&rsquo;t be in my <code>$PATH</code>, so the command wouldn&rsquo;t work</li>
 <li>I&rsquo;d try and run it on a computer which didn&rsquo;t have Python 3 installed</li>
@@ -71,16 +63,12 @@ indexed by multiple names. For example, <code>ripgrep</code> is known by both <c
 and <code>rg</code>. I use <code>neovim</code> as my text editor, and I could never remember if I&rsquo;d
 stored examples under <code>neovim</code>, <code>nvim</code> or <code>vim</code></li>
 </ol>
-
 <p>By definition, these issues would crop up when I was trying to do something
 else, so I&rsquo;d work around them, rather than fixing them.</p>
-
 <h2 id="real-vs-perceived-simplicity">Real vs perceived simplicity</h2>
-
 <p>Over time, I realised that the real problem was with my entire approach. I&rsquo;d
 tricked myself into thinking that my solution was simple because the code I&rsquo;d
 written was simple.</p>
-
 <p>In retrospect, it&rsquo;s obvious that my initial approach was too complex. I fell
 into a trap which is easy to fall into as a programmer. When you learn to code,
 a world of automation, improved productivity and control opens up to you, and
@@ -88,9 +76,7 @@ every problem becomes solvable by writing a script or a command line tool.
 Writing this code feels good, but it&rsquo;s important to remember that while lots of
 problems can be solved by writing code, they&rsquo;re not always best solved by
 writing code.</p>
-
 <h2 id="a-simpler-solution">A simpler solution</h2>
-
 <p>I&rsquo;ve since switched to storing these examples in a single file, which I search
 through with <code>grep</code>, and edit with Vim. There&rsquo;s no custom code involved.</p>
 

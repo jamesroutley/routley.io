@@ -36,25 +36,19 @@
     <h1>Intermediate Testing in Golang</h1>
     <time datetime="2017-11-05">5 November 2017</time>
   </header>
-  
-
-<p>I&rsquo;ve been writing Golang in production at Monzo for a couple of months now. This
+  <p>I&rsquo;ve been writing Golang in production at Monzo for a couple of months now. This
 post shares some things I&rsquo;ve learnt about testing Go code.</p>
-
 <h2 id="parallelisation">Parallelisation</h2>
-
 <p>Golang tests can be easily parallelised by calling <code>t.Parallel()</code> at the
 beginning of a test:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
     t.Parallel()
     <span style="color:#008000">// test code
-</span><span style="color:#008000"></span>}</code></pre></div>
-<p>This test will now be run in parallel with other tests marked as parallel.
+</span><span style="color:#008000"></span>}
+</code></pre></div><p>This test will now be run in parallel with other tests marked as parallel.
 Parallel tests are run in a number of goroutines. This number is defaulted to
 <code>GOMAXPROCS</code>, but can be set by passing the <code>-parallel</code> flag to <code>go test</code>.</p>
-
 <h2 id="skipping-tests">Skipping tests</h2>
-
 <p>Sometimes it&rsquo;s useful to skip a particular test. If a change causes multiple
 tests to fail, I like to skip all but one, to reduce noise while debugging. I
 used to do this by commenting out functions, but it can also be done by calling
@@ -62,10 +56,9 @@ used to do this by commenting out functions, but it can also be done by calling
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
     t.SkipNow()
     <span style="color:#008000">// test is skipped
-</span><span style="color:#008000"></span>}</code></pre></div>
-<p><code>SkipNow</code> should be called at the top of the function. If a test fails before
+</span><span style="color:#008000"></span>}
+</code></pre></div><p><code>SkipNow</code> should be called at the top of the function. If a test fails before
 <code>SkipNow</code> is called, the test is still considered to have failed.</p>
-
 <p><code>SkipNow</code> is useful if skipping a test needs to be committed to version control.
 Explicitly skipping a test is less confusing to future readers than a commented
 test. Was the commented out test done so intentionally? Is that test meant to
@@ -73,9 +66,8 @@ pass? Skipping can be made even more explicit by calling <code>Skip</code> or <c
 which logs a (formatted) message before skipping the test.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
     t.Skip(<span style="color:#a31515">&#34;Temporarily skipping test because ...&#34;</span>)
-}</code></pre></div>
-<h2 id="sub-tests">Sub tests</h2>
-
+}
+</code></pre></div><h2 id="sub-tests">Sub tests</h2>
 <p>A popular paradigm in Golang is table-driven testing, where a single test is run
 with an array of different input parameters:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestAdd(t *testing.T) {
@@ -91,11 +83,10 @@ with an array of different input parameters:</p>
             t.Errorf(<span style="color:#a31515">&#34;%d + %d != %d&#34;</span>, tc.a, tc.b, tc.expected)
         }
     }
-}</code></pre></div>
-<p>Although this is written as a single test, it&rsquo;s really multiple. If one of the
+}
+</code></pre></div><p>Although this is written as a single test, it&rsquo;s really multiple. If one of the
 test cases fails, the whole test function fails, and it can be difficult to tell
 which one failed without a useful error message.</p>
-
 <p>The <code>testing</code> package contains a function which allows tests like this to be
 split out into explicit sub-tests:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestAdd(t *testing.T) {
@@ -115,11 +106,9 @@ split out into explicit sub-tests:</p>
             }
         })
     }
-}</code></pre></div>
-<p>Each of these subtests can also now be parallelised.</p>
-
+}
+</code></pre></div><p>Each of these subtests can also now be parallelised.</p>
 <h2 id="assertions">Assertions</h2>
-
 <p>Golang doesn&rsquo;t have a built in <code>assert</code> function. Manual comparison is the
 recommended way to check that two objects are the same. This can be verbose, and
 the comparison method depends of the object&rsquo;s type:</p>
@@ -136,8 +125,8 @@ the comparison method depends of the object&rsquo;s type:</p>
 </span><span style="color:#008000"></span>    <span style="color:#00f">if</span> !reflect.DeepEqual(c, d) {
        t.Errorf(<span style="color:#a31515">&#34;%v != %v&#34;</span>, c, d)
     }
-}</code></pre></div>
-<p>I&rsquo;ve started using the <code>assert</code>
+}
+</code></pre></div><p>I&rsquo;ve started using the <code>assert</code>
 <a href="https://godoc.org/github.com/stretchr/testify/assert">package</a> to simplify this
 code:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> TestThing(t *testing.T) {
@@ -149,20 +138,15 @@ code:</p>
     d := []<span style="color:#2b91af">int</span>{4, 5, 6}
     <span style="color:#008000">// ✨ API is now the same
 </span><span style="color:#008000"></span>    assert.Equal(t, c, d)
-}</code></pre></div>
-<p><code>assert</code> comes with lots of functions for verifying your data.</p>
-
+}
+</code></pre></div><p><code>assert</code> comes with lots of functions for verifying your data.</p>
 <h2 id="examples">Examples</h2>
-
 <p>Golang offers an easy way to write example functions which are displayed on the
 package&rsquo;s godoc page. These example functions are defined alongside a package&rsquo;s
 tests, and are run with the tests, to make sure they aren&rsquo;t outdated.</p>
-
 <p>If there&rsquo;s any ambiguity about how a function should be used, I like to add an
 example to make it easier to understand.</p>
-
 <h2 id="helper-functions">Helper functions</h2>
-
 <p>Sometimes it&rsquo;s useful to refactor code used in multiple tests into a helper
 function:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
@@ -177,26 +161,26 @@ function:</p>
 	<span style="color:#00f">if</span> a != b {
 		t.Errorf(<span style="color:#a31515">&#34;%d != %d&#34;</span>, a, b)
 	}
-}</code></pre></div>
-<p>When we run this test, we get the error:</p>
+}
+</code></pre></div><p>When we run this test, we get the error:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go test .
 --- FAIL: TestThing (0.00s)
-        scratch_test.go:11: 1 != 2</code></pre></div>
-<p>This error message tells us which test failed, but the line given (11), is the
+        scratch_test.go:11: 1 != 2
+</code></pre></div><p>This error message tells us which test failed, but the line given (11), is the
 line that <code>Errorf</code> is called. If this helper is called multiple times, it can be
 difficult to work out which call is erroring.</p>
-
 <p>Golang provides a way, <code>t.Helper</code>, to explicitly mark that function as a helper:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> AssertEqualInt(t *testing.T, a, b <span style="color:#2b91af">int</span>) {
     t.Helper()
 	<span style="color:#00f">if</span> a != b {
 		t.Errorf(<span style="color:#a31515">&#34;%d != %d&#34;</span>, a, b)
 	}
-}</code></pre></div>
-<p><code>go test</code> now prints out the line number where the helper function was called:</p>
+}
+</code></pre></div><p><code>go test</code> now prints out the line number where the helper function was called:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ go test .
 --- FAIL: TestThing (0.00s)
-        scratch_test.go:6: 1 != 2</code></pre></div>
+        scratch_test.go:6: 1 != 2
+</code></pre></div>
 </article>
 
     </main>

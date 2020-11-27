@@ -36,26 +36,19 @@
     <h1>Home server and Pi-hole</h1>
     <time datetime="2020-02-17">17 February 2020</time>
   </header>
-  
-
-<p>I recently bought a small (10 by 10cm), cheap (~£100) computer to use as a home
+  <p>I recently bought a small (10 by 10cm), cheap (~£100) computer to use as a home
 server. It&rsquo;s got 4GB of RAM and 60GB of disk, so not very powerful, but not
 terrible either. I got it to get some experience with classical system
 administration. At work everything is containerised and runs in Kubernetes, so I
 don&rsquo;t actually have much experience managing linux servers the traditional way.</p>
-
 <h2 id="operating-system">Operating system</h2>
-
 <p>I installed Ubuntu Server 18.04 (the latest long term support version) by
 booting from a USB stick then following the standard installation instructions.</p>
-
 <h2 id="network">Network</h2>
-
 <p>I plugged an Ethernet cable into the computer, but couldn&rsquo;t connect to the
 internet. It turns out Ubuntu Server doesn&rsquo;t have network connectivity set up by
 default. We need to enable DHCP for our Ethernet interface to let our DHCP
 server (managed by our router) automatically assign us an IP address.</p>
-
 <p>Let&rsquo;s get our Ethernet interface ID:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ip a
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -69,9 +62,8 @@ server (managed by our router) automatically assign us an IP address.</p>
     inet 192.168.1.104/24 brd 192.168.1.255 scope global enp1s0
        valid_lft forever preferred_lft forever
     inet6 fe80::6a1d:efff:fe19:4714/64 scope link
-       valid_lft forever preferred_lft forever</code></pre></div>
-<p><code>enp1s0</code> is the interface we&rsquo;re interested in.</p>
-
+       valid_lft forever preferred_lft forever
+</code></pre></div><p><code>enp1s0</code> is the interface we&rsquo;re interested in.</p>
 <p>We can then enable DHCP for it by adding the following file:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#008000"># /etc/netplan/99_config.yaml</span>
 network:
@@ -79,35 +71,27 @@ network:
   renderer: networkd
   ethernets:
     enp1s0: <span style="color:#008000"># ethernet interface ID we found above</span>
-      dhcp4: <span style="color:#00f">true</span></code></pre></div>
-<h2 id="pi-hole">Pi-hole</h2>
-
+      dhcp4: <span style="color:#00f">true</span>
+</code></pre></div><h2 id="pi-hole">Pi-hole</h2>
 <p>Pi-hole is an ad-blocking DNS server. DNS converts domain names to IP addresses.
 Pi-hole does this conversion, but doesn&rsquo;t respond to requests for IP addresses
 of known advertising domain names.</p>
-
 <p>It&rsquo;s neat because most devices use a network-assigned DNS server by default. If
 you set up Pi-hole on your network, all devices on it will get ad blocking for
 free.</p>
-
 <p>You can get more info and installation instructions about Pi-hole
 <a href="https://pi-hole.net/">on their website</a>.</p>
-
 <p>To set Pi-hole up, you install it on a server on your network. You then
 configure your router&rsquo;s DHCP settings to use the Pi-hole server&rsquo;s IP address as
 the DNS server it gives to clients.</p>
-
 <h2 id="router">Router</h2>
-
 <p>The router I got from my ISP doesn&rsquo;t support configuring DHCP, so I bought a new
 TP-Link router for ~£30. To set up Pi-hole:</p>
-
 <ol>
 <li>Set up a DHCP address reservation, so our server running Pi-hole has a static
 IP address</li>
 <li>Set DPCP client server to be the static IP address configured in step 1</li>
 </ol>
-
 <p>Clients using your network should start using Pi-hole as their DNS server. DHCP
 configuration is cached for a period of time, so you might need to renew your
 DHCP lease before the changes are registered by clients. Your device might let

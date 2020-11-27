@@ -36,26 +36,19 @@
     <h1>Let&#39;s hand write DNS messages</h1>
     <time datetime="2017-12-28">28 December 2017</time>
   </header>
-  
-
-<p>In this post, we&rsquo;ll explore the Domain Name Service (DNS) binary message format,
+  <p>In this post, we&rsquo;ll explore the Domain Name Service (DNS) binary message format,
 and we&rsquo;ll write one by hand. This is deeper than you need to use DNS, but I
 think it&rsquo;s fun and educational to see how these things work under the hood.</p>
-
 <p>We&rsquo;ll learn how to:</p>
-
 <ul>
 <li>Write binary DNS query messages</li>
 <li>Send our message as the body of a UDP datagram using Python</li>
 <li>Read the response from the DNS server</li>
 </ul>
-
 <p>Writing binary sounds difficult, but I actually found it quite approachable. The
 DNS documentation is well written and easy to follow, and the message we&rsquo;ll
 write is short - only 29 bytes long.</p>
-
 <h2 id="dns-overview">DNS overview</h2>
-
 <p>DNS is used to map human-readable domain names (such as <code>example.com</code>) to
 machine-readable IP addresses (like <code>93.184.216.34</code>). To use DNS, we send a
 query to a DNS server. This query contains the domain name we&rsquo;re looking up. The
@@ -64,18 +57,13 @@ store. If it finds it, it returns it. If it can&rsquo;t find it, the server will
 forward the query to a different DNS server, which will repeat this process
 until the IP is found. DNS messages are
 <a href="https://stackoverflow.com/a/40063433">usually sent</a> using the UDP protocol.</p>
-
 <p>DNS is documented in <a href="https://tools.ietf.org/html/rfc1035">RFC 1035</a>. All
 diagrams, and most of the information in this post was found in this RFC. I&rsquo;d
 recommend referring to it if anything is unclear.</p>
-
 <p>In this post, we&rsquo;ll use hexadecimal notation to simplify working with binary.
-I&rsquo;ve added a brief note on how to convert between the two below<sup class="footnote-ref" id="fnref:hex"><a href="#fn:hex">1</a></sup>.</p>
-
+I&rsquo;ve added a brief note on how to convert between the two below<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <h2 id="request-message-format">Request message format</h2>
-
 <p>All DNS messages have the same format:</p>
-
 <pre><code>+---------------------+
 |        Header       |
 +---------------------+
@@ -87,15 +75,10 @@ I&rsquo;ve added a brief note on how to convert between the two below<sup class=
 +---------------------+
 |      Additional     | RRs holding additional information
 +---------------------+
-</code></pre>
-
-<p>Query and request messages fill out different parts of the message. Our query
+</code></pre><p>Query and request messages fill out different parts of the message. Our query
 will contain the <code>Header</code> and <code>Question</code> sections.</p>
-
 <h3 id="header">Header</h3>
-
 <p>The header has the following format:</p>
-
 <pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                      ID                       |
@@ -110,65 +93,59 @@ will contain the <code>Header</code> and <code>Question</code> sections.</p>
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                    ARCOUNT                    |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-</code></pre>
-
-<p>In this diagram, each cell represents a single bit. In each row, there are
+</code></pre><p>In this diagram, each cell represents a single bit. In each row, there are
 sixteen columns, representing two bytes of data. The diagram is split into rows
 to make it easier to read, but the actual message is a continuous series of
 bytes.</p>
-
 <p>As both queries and responses share a header format, some of the fields aren&rsquo;t
 relevant to our query, and will be set to <code>0</code>. A full desciption of each of
 these fields can be found in
 <a href="https://tools.ietf.org/html/rfc1035#page-26">RFC1035 Section 4.1.1</a>.</p>
-
 <p>The fields which are relevant to us are:</p>
-
 <ul>
-<li><p><code>ID</code>: An arbitrary 16 bit request identifier. The same ID is used in the
-response to the query so we can match them up. Let&rsquo;s go with <code>AA AA</code>.</p></li>
-
-<li><p><code>QR</code>: A 1 bit flag specifying whether this message is a query (<code>0</code>) or a
-response (<code>1</code>). As we&rsquo;re sending a query, we&rsquo;ll set this bit to <code>0</code>.</p></li>
-
-<li><p><code>Opcode</code>: A 4 bit field that specifies the query type. We&rsquo;re sending a
+<li>
+<p><code>ID</code>: An arbitrary 16 bit request identifier. The same ID is used in the
+response to the query so we can match them up. Let&rsquo;s go with <code>AA AA</code>.</p>
+</li>
+<li>
+<p><code>QR</code>: A 1 bit flag specifying whether this message is a query (<code>0</code>) or a
+response (<code>1</code>). As we&rsquo;re sending a query, we&rsquo;ll set this bit to <code>0</code>.</p>
+</li>
+<li>
+<p><code>Opcode</code>: A 4 bit field that specifies the query type. We&rsquo;re sending a
 standard query, so we&rsquo;ll set this to <code>0</code>. The possibilities are: - <code>0</code>:
 Standard query - <code>1</code>: Inverse query - <code>2</code>: Server status request - <code>3-15</code>:
-Reserved for future use</p></li>
-
-<li><p><code>TC</code>: 1 bit flag specifying if the message has been truncated. Our message is
-short, and won&rsquo;t need to be truncated, so we can set this to <code>0</code>.</p></li>
-
-<li><p><code>RD</code>: 1 bit flag specifying if recursion is desired. If the DNS server we send
+Reserved for future use</p>
+</li>
+<li>
+<p><code>TC</code>: 1 bit flag specifying if the message has been truncated. Our message is
+short, and won&rsquo;t need to be truncated, so we can set this to <code>0</code>.</p>
+</li>
+<li>
+<p><code>RD</code>: 1 bit flag specifying if recursion is desired. If the DNS server we send
 our request to doesn&rsquo;t know the answer to our query, it can recursively ask
 other DNS servers. We do wish recursion to be enabled, so we will set this to
-<code>1</code>.</p></li>
-
-<li><p><code>QDCOUNT</code>: An unsigned 16 bit integer specifying the number of entries in the
-question section. We&rsquo;ll be sending <code>1</code> question.</p></li>
+<code>1</code>.</p>
+</li>
+<li>
+<p><code>QDCOUNT</code>: An unsigned 16 bit integer specifying the number of entries in the
+question section. We&rsquo;ll be sending <code>1</code> question.</p>
+</li>
 </ul>
-
 <h4 id="full-header">Full header</h4>
-
 <p>Combining these fields, we can write out our header in hexadecimal:</p>
-
 <pre><code>AA AA - ID
 01 00 - Query parameters
 00 01 - Number of questions
 00 00 - Number of answers
 00 00 - Number of authority records
 00 00 - Number of additional records
-</code></pre>
-
-<p>To get the query parameters, we concatenate the values of the fields <code>QR</code> to
+</code></pre><p>To get the query parameters, we concatenate the values of the fields <code>QR</code> to
 <code>RCODE</code>, remembering that fields not mentioned above are set to <code>0</code>. This gives
 <code>0000 0001 0000 0000</code>, which is <code>01 00</code> in hexadecimal. This represents a
 standard DNS query.</p>
-
 <h3 id="question">Question</h3>
-
 <p>The question section has the format:</p>
-
 <pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
@@ -179,31 +156,27 @@ standard DNS query.</p>
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                     QCLASS                    |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-</code></pre>
-
-<ul>
-<li><code>QNAME</code>: This contains the URL who&rsquo;s IP address we wish to find. It is encoded
+</code></pre><ul>
+<li>
+<p><code>QNAME</code>: This contains the URL who&rsquo;s IP address we wish to find. It is encoded
 as a series of &lsquo;labels&rsquo;. Each label corresponds to a section of the URL. The
-URL <code>example.com</code> contains two sections, <code>example</code>, and <code>com</code>.</li>
-</ul>
-
+URL <code>example.com</code> contains two sections, <code>example</code>, and <code>com</code>.</p>
 <p>To construct a label, we URL-encode the section, producing a series of bytes.
-  The label is that series of bytes, preceded by an unsigned integer byte
-  containing the number of bytes in the section. To URL-encode our URL, we can
-  just lookup the the ASCII code for each character.</p>
-
+The label is that series of bytes, preceded by an unsigned integer byte
+containing the number of bytes in the section. To URL-encode our URL, we can
+just lookup the the ASCII code for each character.</p>
 <p>The QNAME section is terminated with a zero byte (<code>00</code>).</p>
-
-<ul>
-<li><p><code>QTYPE</code>: The DNS record type we&rsquo;re looking up. We&rsquo;ll be looking up <code>A</code>
-records, whose value is <code>1</code>.</p></li>
-
-<li><p><code>QCLASS</code>: The class we&rsquo;re looking up. We&rsquo;re using the the internet, <code>IN</code>,
-which has a value of <code>1</code>.</p></li>
+</li>
+<li>
+<p><code>QTYPE</code>: The DNS record type we&rsquo;re looking up. We&rsquo;ll be looking up <code>A</code>
+records, whose value is <code>1</code>.</p>
+</li>
+<li>
+<p><code>QCLASS</code>: The class we&rsquo;re looking up. We&rsquo;re using the the internet, <code>IN</code>,
+which has a value of <code>1</code>.</p>
+</li>
 </ul>
-
 <p>We can write out our full question section:</p>
-
 <pre><code>07 65 - 'example' has length 7, e
 78 61 - x, a
 6D 70 - m, p
@@ -213,13 +186,9 @@ which has a value of <code>1</code>.</p></li>
 00    - zero byte to end the QNAME
 00 01 - QTYPE
 00 01 - QCLASS
-</code></pre>
-
-<p>An odd number of bytes are allowed in the <code>QNAME</code> section. No padding is
+</code></pre><p>An odd number of bytes are allowed in the <code>QNAME</code> section. No padding is
 required before the start of the <code>QTYPE</code> section.</p>
-
 <h2 id="sending-the-request">Sending the request</h2>
-
 <p>We send our DNS message as the body of a UDP request. The following Python code
 will take our hexadecimal DNS query, convert it to binary and send it to
 Google&rsquo;s DNS server, at the address <code>8.8.8.8:53</code>:</p>
@@ -255,36 +224,25 @@ message = <span style="color:#a31515">&#34;AA AA 01 00 00 01 00 00 00 00 00 00 &
 <span style="color:#a31515">&#34;07 65 78 61 6d 70 6c 65 03 63 6f 6d 00 00 01 00 01&#34;</span>
 
 response = send_udp_message(message, <span style="color:#a31515">&#34;8.8.8.8&#34;</span>, 53)
-<span style="color:#00f">print</span>(format_hex(response))</code></pre></div>
-<p>You can run this script by copying it into a file, <code>query.py</code> and running it
+<span style="color:#00f">print</span>(format_hex(response))
+</code></pre></div><p>You can run this script by copying it into a file, <code>query.py</code> and running it
 from your terminal with: <code>$ python query.py</code>. It doesn&rsquo;t have any external
 dependencies, and should run with Python 2 or 3.</p>
-
 <h2 id="reading-the-response">Reading the response</h2>
-
 <p>Running the script prints out the response from the DNS server. Let&rsquo;s break the
 response into sections and see if we can work out what&rsquo;s happening.</p>
-
 <h3 id="header-1">Header</h3>
-
 <p>The message starts out with a header, just like our query message:</p>
-
 <pre><code>AA AA - Same ID as before
 81 80 - Different flags, we'll look at this below
 00 01 - 1 question
 00 01 - 1 answer
 00 00 - No authority records
 00 00 - No additional records
-</code></pre>
-
-<p>Let&rsquo;s convert <code>81 80</code> to binary:</p>
-
+</code></pre><p>Let&rsquo;s convert <code>81 80</code> to binary:</p>
 <pre><code>8    1    8    0
 1000 0001 1000 0000
-</code></pre>
-
-<p>Matching up these bits to the schema given <a href="#header">above</a>, we can see that:</p>
-
+</code></pre><p>Matching up these bits to the schema given <a href="#header">above</a>, we can see that:</p>
 <ul>
 <li><code>QR</code> = <code>1</code>: This message is a response</li>
 <li><code>AA</code> = <code>0</code>: This server isn&rsquo;t an authority for the domain name <code>example.com</code></li>
@@ -292,11 +250,8 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 <li><code>RA</code> = <code>1</code>: Recursion is available on this DNS server</li>
 <li><code>RCODE</code> = <code>0</code>: No errors reported</li>
 </ul>
-
 <h3 id="question-section">Question section</h3>
-
 <p>The question section is identical to that of the query:</p>
-
 <pre><code>07 65 - 'example' has length 7, e
 78 61 - x, a
 6D 70 - m, p
@@ -306,12 +261,8 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 00    - zero byte to end the QNAME
 00 01 - QTYPE
 00 01 - QCLASS
-</code></pre>
-
-<h3 id="answer-section">Answer section</h3>
-
+</code></pre><h3 id="answer-section">Answer section</h3>
 <p>The answer section has a <code>resource record</code> format:</p>
-
 <pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
@@ -331,9 +282,7 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 /                     RDATA                     /
 /                                               /
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-</code></pre>
-
-<pre><code>C0 0C - NAME
+</code></pre><pre><code>C0 0C - NAME
 00 01 - TYPE
 00 01 - CLASS
 00 00
@@ -341,51 +290,43 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 00 04 - RDLENGTH = 4 bytes
 5D B8
 D8 22 - RDDATA
-</code></pre>
-
-<ul>
-<li><p><code>NAME</code>: This is the URL who&rsquo;s IP address this response contains. This uses a
+</code></pre><ul>
+<li>
+<p><code>NAME</code>: This is the URL who&rsquo;s IP address this response contains. This uses a
 compressed format:</p>
-
 <pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 | 1  1|                OFFSET                   |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-</code></pre></li>
-</ul>
-
-<p>The first two bits are set to <code>1</code>, and then the next 14 contain an unsigned
-  interger, which counts the byte offset from the beginning of the message to a
-  prior occurance of the same name.</p>
-
+</code></pre><p>The first two bits are set to <code>1</code>, and then the next 14 contain an unsigned
+interger, which counts the byte offset from the beginning of the message to a
+prior occurance of the same name.</p>
 <p>In this case, our name is <code>c0 0c</code>, which in binary is:</p>
-
-<pre><code>  1100 0000 0000 1100
-</code></pre>
-
-<p>The byte offset is therefore 12. If we count through the bytes in the message,
-  we can see that this points to the <code>07</code> at the start of the <code>example.com</code>
-  name.</p>
-
-<ul>
-<li><p><code>TYPE</code> and <code>CLASS</code>: These use the same naming schema as <code>QTYPE</code> and <code>QCLASS</code>
-above, and have the same values as above.</p></li>
-
-<li><p><code>TTL</code>: A 32-bit unsigned integer specifying the time to live for this
+<pre><code>1100 0000 0000 1100
+</code></pre><p>The byte offset is therefore 12. If we count through the bytes in the message,
+we can see that this points to the <code>07</code> at the start of the <code>example.com</code>
+name.</p>
+</li>
+<li>
+<p><code>TYPE</code> and <code>CLASS</code>: These use the same naming schema as <code>QTYPE</code> and <code>QCLASS</code>
+above, and have the same values as above.</p>
+</li>
+<li>
+<p><code>TTL</code>: A 32-bit unsigned integer specifying the time to live for this
 Response, measured in seconds. Before this time interval runs out, the result
-can be cached. After, it should be discarded.</p></li>
-
-<li><p><code>RDLENGTH</code>: The byte length of the following <code>RDDATA</code> section. In this case,
-the length is 4.</p></li>
-
-<li><p><code>RDDATA</code>: The data we&rsquo;ve been looking for! These four bytes contain the four
-segments of our IP address: <code>93.184.216.34</code>.</p></li>
+can be cached. After, it should be discarded.</p>
+</li>
+<li>
+<p><code>RDLENGTH</code>: The byte length of the following <code>RDDATA</code> section. In this case,
+the length is 4.</p>
+</li>
+<li>
+<p><code>RDDATA</code>: The data we&rsquo;ve been looking for! These four bytes contain the four
+segments of our IP address: <code>93.184.216.34</code>.</p>
+</li>
 </ul>
-
 <h2 id="extensions">Extensions</h2>
-
 <p>We&rsquo;ve seen how to construct DNS query. Here are some things you can now try:</p>
-
 <ul>
 <li>Construct a query for a domain name of your choice</li>
 <li>Query for a different
@@ -393,34 +334,97 @@ segments of our IP address: <code>93.184.216.34</code>.</p></li>
 <li>Send a query with recursion disabled</li>
 <li>Send a query with a domain name that isn&rsquo;t registered</li>
 </ul>
-
-<hr />
-
+<hr>
 <p><a href="https://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal</a> (base 16) numbers are
-  often used as a convenient shorthand for 4 bits of binary data. You can
-  convert between the formats using this table:</p>
-
-<p>| Decimal | Hex | Binary | Decimal | Hex | Binary |
-  | &mdash;&mdash;- | &mdash; | &mdash;&mdash; | &mdash;&mdash;- | &mdash; | &mdash;&mdash; |
-  | 0       | 0   | 0000   | 8       | 8   | 1000   |
-  | 1       | 1   | 0001   | 9       | 9   | 1001   |
-  | 2       | 2   | 0010   | 10      | A   | 1010   |
-  | 3       | 3   | 0011   | 11      | B   | 1011   |
-  | 4       | 4   | 0100   | 12      | C   | 1100   |
-  | 5       | 5   | 0101   | 13      | D   | 1101   |
-  | 6       | 6   | 0110   | 14      | E   | 1110   |
-  | 7       | 7   | 0111   | 15      | F   | 1111   |</p>
-
+often used as a convenient shorthand for 4 bits of binary data. You can
+convert between the formats using this table:</p>
+<table>
+<thead>
+<tr>
+<th>Decimal</th>
+<th>Hex</th>
+<th>Binary</th>
+<th>Decimal</th>
+<th>Hex</th>
+<th>Binary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0000</td>
+<td>8</td>
+<td>8</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0001</td>
+<td>9</td>
+<td>9</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>0010</td>
+<td>10</td>
+<td>A</td>
+<td>1010</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>0011</td>
+<td>11</td>
+<td>B</td>
+<td>1011</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>0100</td>
+<td>12</td>
+<td>C</td>
+<td>1100</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>0101</td>
+<td>13</td>
+<td>D</td>
+<td>1101</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>0110</td>
+<td>14</td>
+<td>E</td>
+<td>1110</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>0111</td>
+<td>15</td>
+<td>F</td>
+<td>1111</td>
+</tr>
+</tbody>
+</table>
 <p>As you can see, we can represent any byte (8 bits) with two hexadecimal
-  characters.</p>
-<div class="footnotes">
-
-<hr />
-
+characters.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:hex"> <a class="footnote-return" href="#fnref:hex"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+ <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
-</div>
+</section>
 
 </article>
 

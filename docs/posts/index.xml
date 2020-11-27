@@ -6,11 +6,7 @@
     <description>Recent content in Posts on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 27 May 2020 19:06:09 +0000</lastBuildDate>
-    
-	<atom:link href="http://routley.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 27 May 2020 19:06:09 +0000</lastBuildDate><atom:link href="http://routley.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scraping a website</title>
       <link>http://routley.io/posts/scraping-a-website/</link>
@@ -80,7 +76,7 @@ When smartphones were first introduced, most web pages weren&amp;rsquo;t optimis
       <pubDate>Fri, 14 Feb 2020 15:41:31 +0000</pubDate>
       
       <guid>http://routley.io/posts/firefox-mobile-default-css/</guid>
-      <description>article img { max-width: 350px; }  This website is currently rendered with very small text in Firefox on mobile. Here&amp;rsquo;s a screenshot of what it looks like on a Pixel 2:
+      <description>This website is currently rendered with very small text in Firefox on mobile. Here&amp;rsquo;s a screenshot of what it looks like on a Pixel 2:
 While debugging this, I tried removing all CSS from my website. It turns out that the issue isn&amp;rsquo;t to do with anything I&amp;rsquo;ve written (I think), but the way Firefox displays unstyled HTML on mobile:
 I&amp;rsquo;m a bit surprised by this - I would have assumed that rendering unstyled HTML would be legible in any browser.</description>
     </item>
@@ -92,7 +88,7 @@ I&amp;rsquo;m a bit surprised by this - I would have assumed that rendering unst
       
       <guid>http://routley.io/posts/how-do-epubs-work/</guid>
       <description>There are a couple of different file formats that e-books are distributed in. The one I most commonly see is the EPUB format, which has the .epub file extension. Let&amp;rsquo;s take a look at the internals of this file this format.
-An example EPUB In this article, we&amp;rsquo;ll be looking at a copy of Moby Dick, published by the website Planet Ebook. You can download the EPUB from this page.</description>
+An example EPUB In this article, we&amp;rsquo;ll be looking at a copy of Moby Dick, published by the website Planet Ebook. You can download the EPUB from this page. N.</description>
     </item>
     
     <item>
@@ -219,7 +215,8 @@ Code use std::env; use std::fs; use std::process; fn main() { let args: Vec&amp;
       <description>I&amp;rsquo;m learning Rust, and documenting the process. These posts are my notes - they&amp;rsquo;re not guaranteed to be useful, interesting or correct!
 In this post, I&amp;rsquo;m writing my first Rust program. It&amp;rsquo;s a simplified clone of the Unix tool pwd, which prints out the current directory. I&amp;rsquo;m calling it rpwd.
 Creating a project I started a new executable application with:
-$ cargo rpwd --bin Code The code is simple:</description>
+$ cargo rpwd --bin Code The code is simple:
+use std::env; fn main() { let path = env::current_dir().</description>
     </item>
     
     <item>
@@ -401,7 +398,7 @@ $ make clean make: Warning: File &amp;#39;Makefile&amp;#39; has modification tim
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://routley.io/posts/natas/</guid>
-      <description>One of my objectives while I&amp;rsquo;m at the Recurse Center is to improve my knowedge of securing computer systems. A good way of learning this is to play an attacker and to try to break into insecure systems1. I&amp;rsquo;ve been working through Natas, a &amp;lsquo;wargame&amp;rsquo; developed by Over The Wire. Natas is a series of insecure webapps, which aim to teach the basics of web security.
+      <description>One of my objectives while I&amp;rsquo;m at the [Recurse Center]({% post_url tech/2017-05-23-starting-at-recurse-center %}) is to improve my knowedge of securing computer systems. A good way of learning this is to play an attacker and to try to break into insecure systems1. I&amp;rsquo;ve been working through Natas, a &amp;lsquo;wargame&amp;rsquo; developed by Over The Wire. Natas is a series of insecure webapps, which aim to teach the basics of web security.
 This post covers solutions to the first twenty levels of Natas.</description>
     </item>
     

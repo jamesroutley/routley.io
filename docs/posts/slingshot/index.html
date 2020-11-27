@@ -36,20 +36,15 @@
     <h1>Slingshot: an interplanetary physics game</h1>
     <time datetime="2017-06-12">12 June 2017</time>
   </header>
-  
-
-<p>Over the weekend, Recurse Center held a
+  <p>Over the weekend, Recurse Center held a
 <a href="https://en.wikipedia.org/wiki/Game_jam">game jam</a>. Over 72 hours, I built a
 phyics game named Slingshot. In the game, you play the pilot of a spaceship with
 little fuel. To survive, you must navigate around planets and neutron stars to
 reach a series of checkpoints. You can play Slingshot
 <a href="https://slingshot.jamesroutley.co.uk/">here</a>, and view the source code
 <a href="https://github.com/jamesroutley/slingshot">here</a>.</p>
-
 <p>This post describes how the game is implemented.</p>
-
 <h2 id="drawing">Drawing</h2>
-
 <p>All drawing was done using the <a href="https://p5js.org/">P5.js</a> library. P5 offers a
 clean API for drawing on HTML canvasses. A basic P5 sketch can be created with
 the following code:</p>
@@ -67,8 +62,7 @@ the following code:</p>
   };
 };
 <span style="color:#00f">new</span> p5(start);
-</code></pre></div>
-<p>This simple setup makes it easy to start drawing and animating with P5.
+</code></pre></div><p>This simple setup makes it easy to start drawing and animating with P5.
 <code>p.draw()</code> is called every frame, so it&rsquo;s possible to animate things by changing
 the coordinate that they&rsquo;re rendered at:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> xCoord = 10;
@@ -76,18 +70,14 @@ p.draw = () =&gt; {
   p.rect(xCoord, 10, 5, 5);
   xCoord += 1;
 };
-</code></pre></div>
-<h2 id="physics">Physics</h2>
-
+</code></pre></div><h2 id="physics">Physics</h2>
 <p>To animate the spaceship, we must calculate its position at each frame.
 Slingshot uses a custom
 <a href="https://github.com/jamesroutley/slingshot/blob/master/src/physics.js">physics engine</a>
 to do this. The physics is all Newtonian (i.e. doesn&rsquo;t take relativity into
 account), and is relatively simple to calculate. As the spaceship is the only
-moving thing<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, all we need to calculate is its position</p>
-
-<p>At each frame perform the following calculations<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
-
+moving thing<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, all we need to calculate is its position</p>
+<p>At each frame perform the following calculations<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
 <ul>
 <li>Calculate the force on the spaceship.
 <code>force = gravitational pull from planets + force from booster</code>.</li>
@@ -98,14 +88,10 @@ moving thing<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, 
 <li>Calculate the new position of the spaceship.
 <code>position = previous position + velocity / frame rate</code>.</li>
 </ul>
-
 <p>We then draw the spaceship at this new position. With a high enough frame rate
 (&gt;= 30), the spaceship appears to move.</p>
-
 <h2 id="game-engine">Game engine</h2>
-
 <p>Slingshot consists of multiple views:</p>
-
 <ul>
 <li>title</li>
 <li>menu</li>
@@ -113,7 +99,6 @@ moving thing<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, 
 <li>level complete</li>
 <li>level failed</li>
 </ul>
-
 <p>Each of these views are independent, and I wanted them to be implemented
 independently. P5 doesn&rsquo;t natively support switching between sketches, so I
 built a rough game engine handle the switching. Although the code works, it is
@@ -124,28 +109,23 @@ the code which switches to the next sketch. I feel this breaks the principal of
 separation of concerns. Each sketch should implement the code which displays
 that sketch, not the code which switches between game states. At some point, I&rsquo;d
 like to pull the game state switching code out.</p>
-
 <h2 id="deployment">Deployment</h2>
-
 <p>As the game is implemented entirely in client-side javascript, the game is
 deployed as a static website to AWS S3.</p>
-
-<hr />
-
+<hr>
 <p>Some planets also move, but this doesn&rsquo;t change the force calculation for the
-  spaceship at a particular point in time.</p>
-
+spaceship at a particular point in time.</p>
 <p>As Slingshot is a 2D game, force, acceleration, velocity and position are
-  represented as 2D vectors.</p>
-<div class="footnotes">
-
-<hr />
-
+represented as 2D vectors.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"> <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2"> <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+ <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<li id="fn:2" role="doc-endnote">
+ <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
-</div>
+</section>
 
 </article>
 

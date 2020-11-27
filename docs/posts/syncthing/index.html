@@ -36,34 +36,26 @@
     <h1>Setting up Syncthing to synchronise files between computers</h1>
     <time datetime="2020-02-21">21 February 2020</time>
   </header>
-  
-
-<p>I&rsquo;ve just set up <a href="https://syncthing.net/">Syncthing</a> on my home computers. It&rsquo;s
+  <p>I&rsquo;ve just set up <a href="https://syncthing.net/">Syncthing</a> on my home computers. It&rsquo;s
 a program which keeps directories on different computers synchronised. It&rsquo;s like
 Dropbox, but your data isn&rsquo;t shared with any third parties.</p>
-
-<h2 id="what-s-it-for">What&rsquo;s it for?</h2>
-
+<h2 id="whats-it-for">What&rsquo;s it for?</h2>
 <p>I&rsquo;m currently using it to synchronise documents from my laptop to my home
 server, which gives a bit of redundancy if my laptop breaks or gets lost. We
 should note that Syncthing isn&rsquo;t suitable as a proper backup application,
 because changes (including deletions) are propagated to all machines. If you
 accidentally delete or corrupt a file, it&rsquo;ll be deleted or corrupted elsewhere
 too.</p>
-
 <h2 id="macos-setup">MacOS setup</h2>
-
 <p>Setting Syncthing up on macOS is super simple:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># Install syncthing</span>
 $ brew install syncthing
 
 <span style="color:#008000"># Get launchd to start syncthing now, and restart it at login</span>
-$ brew services start syncthing</code></pre></div>
-<p>I&rsquo;d not seen <code>brew services</code> before, but it&rsquo;s pretty neat - it wraps Launchd to
+$ brew services start syncthing
+</code></pre></div><p>I&rsquo;d not seen <code>brew services</code> before, but it&rsquo;s pretty neat - it wraps Launchd to
 let you easily automatically start services.</p>
-
 <h2 id="ubuntu-setup">Ubuntu setup</h2>
-
 <p>I installed the stable version of Syncthing. You can also install the release
 channel. N.B: these installation instructions are correct as of Feb 2020, but
 you should check for up-to-date instructions on their website.</p>
@@ -77,14 +69,13 @@ $ echo <span style="color:#a31515">&#34;deb https://apt.syncthing.net/ syncthing
 
 <span style="color:#008000"># Update and install syncthing:</span>
 $ sudo apt-get update
-$ sudo apt-get install syncthing</code></pre></div>
-<p>There are a couple of ways to get
+$ sudo apt-get install syncthing
+</code></pre></div><p>There are a couple of ways to get
 <a href="https://docs.syncthing.net/users/autostart.html#linux">Syncthing to start automatically on Linux</a>.
 I chose to do this with <code>systemd</code>, using a system service. This looks like the
 most involved method, but it didn&rsquo;t require me to install any other applications
 on Ubuntu Server 18.04, and learning how administrate servers using low-level
 tools like <code>systemd</code> is part of <a href="/posts/pi-hole/">why I got the server</a>.</p>
-
 <p>The docs linked above have more detail, but I ran:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># This is the unit file load path for system units installed by the</span>
 <span style="color:#008000"># administrator</span>
@@ -115,45 +106,34 @@ $ cat <span style="color:#a31515">&lt;&lt; &#39;EOF&#39; &gt; syncthing@.service
 </span><span style="color:#a31515">EOF</span>
 
 $ systemctl enable syncthing@jamesroutley.service
-$ systemctl start syncthing@jamesroutley.service</code></pre></div>
-<p>I chose to run the service as my user - I&rsquo;m not really sure if that&rsquo;s a good
+$ systemctl start syncthing@jamesroutley.service
+</code></pre></div><p>I chose to run the service as my user - I&rsquo;m not really sure if that&rsquo;s a good
 idea or not.</p>
-
 <h2 id="admin-gui">Admin GUI</h2>
-
 <p>After you start it, the admin server will be started, which you can access at
 <code>localhost:8384</code>.</p>
-
-<p><img src="/img/posts/syncthing/admin-ui.png" alt="Syncthing admin page" /></p>
-
+<p><img src="/img/posts/syncthing/admin-ui.png" alt="Syncthing admin page"></p>
 <p>The admin UI lets you set up folders to synchronise and check the status of
 things. In the image above, I&rsquo;ve got a single folder set up to synchronise
 between this computer, and my server, which you can see under <code>Remote Devices</code>.</p>
-
 <p>When you set up a folder, you specify its:</p>
-
 <ul>
 <li>Name</li>
 <li>ID</li>
 <li>Path</li>
 </ul>
-
 <p>To synchronise a folder between two computers, you set up a folder on each
 computer with a matching ID. You also need to pair the computers. Each one is
 assigned an ID by Syncthing, and on each computer you need to mark the other as
 trusted.</p>
-
 <h2 id="folder-setup">Folder setup</h2>
-
 <p>I&rsquo;m currently syncing a single folder, stored at <code>~/sync</code> on all my machines.
 I&rsquo;m planning on just syncing this, and using symlinks to show synchronised
 subdirectories elsewhere on my filesystem. Again, I think this is how Dropbox
 works (or at least is how it used to work?) - you get a single special
 synchronised directory, and then hack around it with standard filesystem tools
 if you need.</p>
-
 <h2 id="networking">Networking</h2>
-
 <p>My server is on my home network, and doesn&rsquo;t have a public IP address, so this
 set up only works when my laptop is also connected to my home network. I&rsquo;ll be
 looking into setting up Wireguard or similar to let me connect back when I&rsquo;m on

@@ -5,10 +5,6 @@
     <link>http://routley.io/books/</link>
     <description>Recent content in Books on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    
-	<atom:link href="http://routley.io/books/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-gb</language><atom:link href="http://routley.io/books/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -36,41 +36,30 @@
     <h1>Ptolemy: An AWS DMS Table Mapping Generator</h1>
     <time datetime="2016-11-22">22 November 2016</time>
   </header>
-  
-
-<p>This post introduces Ptolemy, a tool for creating AWS DMS mapping tables,
+  <p>This post introduces Ptolemy, a tool for creating AWS DMS mapping tables,
 recently open sourced by Cloudreach. Ptolemy&rsquo;s source code can be found on
 <a href="https://github.com/cloudreach/ptolemy">GitHub</a>.</p>
-
 <h2 id="motivation">Motivation</h2>
-
 <p>Amazon Web Services provides the
 <a href="https://aws.amazon.com/documentation/dms/">Database Migration Service</a> (DMS)
 tool for migrating data to, from, or between SQL databases. When running DMS,
 users can supply a table mapping, which allows the user to specify what data is
 sent from the source database to the target database.</p>
-
 <p>Table mappings are written as JSON documents, which can grow to be long and
 complex. Ptolemy allows the user to write terse YAML source files, which can be
 compiled to valid JSON table mappings, in a similar way to compiling Markdown or
 RST to HTML.</p>
-
 <h2 id="reducing-table-mapping-complexity">Reducing Table Mapping Complexity</h2>
-
 <p>Ptolemy simplifies native mappings in the following ways:</p>
-
 <ul>
 <li>The <code>object-locator</code> key has been replaced with the pluralised
 <code>object-locators</code>; this allows a particular rule to be applied to multiple
 schema/tables/columns</li>
 <li>For a clearer syntax, human-friendly <code>YAML</code> is used instead of <code>JSON</code></li>
 </ul>
-
 <p>These simplifications allow users to write mapping tables faster, with fewer
 mistakes.</p>
-
 <h2 id="example">Example</h2>
-
 <p>The following Ptolemy source file:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">selection:
   include:
@@ -79,8 +68,8 @@ mistakes.</p>
           - Test
         table-names:
           - <span style="color:#a31515">&#34;TableA&#34;</span>
-          - <span style="color:#a31515">&#34;TableB&#34;</span></code></pre></div>
-<p>Is compiled to the following DMS mapping table:</p>
+          - <span style="color:#a31515">&#34;TableB&#34;</span>
+</code></pre></div><p>Is compiled to the following DMS mapping table:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   &#34;rules&#34;: [
     {
@@ -104,15 +93,12 @@ mistakes.</p>
       &#34;rule-type&#34;: <span style="color:#a31515">&#34;selection&#34;</span>
     }
   ]
-}</code></pre></div>
-<p>More examples are available on the
+}
+</code></pre></div><p>More examples are available on the
 <a href="https://github.com/cloudreach/ptolemy/tree/master/examples">examples</a> page.</p>
-
 <h2 id="further-information">Further Information</h2>
-
 <p>Ptolemy is fully unit and integration tested, with 100% code coverage, and has
 been successfully used in production.</p>
-
 <p>For more information, and instructions on how to install Ptolemy, visit the
 project&rsquo;s <a href="https://github.com/cloudreach/ptolemy">GitHub</a> page.</p>
 

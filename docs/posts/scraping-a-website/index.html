@@ -36,89 +36,69 @@
     <h1>Scraping a website</h1>
     <time datetime="2020-05-27">27 May 2020</time>
   </header>
-  
-
-<p>I&rsquo;ve spent today writing some code to scrape a series of lessons from a website.
+  <p>I&rsquo;ve spent today writing some code to scrape a series of lessons from a website.
 Each lesson consists of text and image data. I wanted to save the content of
 each lesson, so I could read through them offline.</p>
-
 <p>I&rsquo;ll go through what I did, the issues I ran into and how I solved them.</p>
-
 <h2 id="overview">Overview</h2>
-
 <p>I split the crawling into two steps:</p>
-
 <ol>
 <li>Finding all the URLs to scrape</li>
 <li>Scraping data from each one</li>
 </ol>
-
 <p>I ended up using a mix of Python and JavaScript for this. I chose Python because
 I know it well and can write it quickly, and I used JavaScript for scripting
 Chrome because it has better library support.</p>
-
 <h2 id="finding-all-urls">Finding all URLs</h2>
-
 <p>This was surprisingly hard. The website has an index page which links to all the
 content I wanted to scrape, but the index is populated using JavaScript. This
 meant I couldn&rsquo;t pull the links from the HTML the server sent me, but had to
 pull them from the HTML that my browser renders.</p>
-
 <p>I couldn&rsquo;t find a native way to do this in Firefox or Chrome, so ended up
 installing a Chrome extension which let me copy the rendered HTML.</p>
-
 <p>Once I had the HTML, I use the Python library Beautiful Soup to find all <code>a</code>
 tags with the relevant class:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(index.html) <span style="color:#00f">as</span> f:
     body = f.read()
 soup = BeautifulSoup(body, <span style="color:#a31515">&#34;html.parser&#34;</span>)
 links = soup.find_all(<span style="color:#a31515">&#34;a&#34;</span>, class_=<span style="color:#a31515">&#34;content_link&#34;</span>, href=True)
-urls = [link[<span style="color:#a31515">&#34;href&#34;</span>] <span style="color:#00f">for</span> link <span style="color:#00f">in</span> links]</code></pre></div>
-<h2 id="scraping-each-page">Scraping each page</h2>
-
+urls = [link[<span style="color:#a31515">&#34;href&#34;</span>] <span style="color:#00f">for</span> link <span style="color:#00f">in</span> links]
+</code></pre></div><h2 id="scraping-each-page">Scraping each page</h2>
 <p>The way you scrape each page depends on your desired output format. Initially, I
 considered fetching the HTML, converting it to Markdown and saving that. This
 would have worked, but the data I was scraping contained a lot of images, and
 the generated Markdown would contain links to the images hosted on the website.
 To prevent link rot, we&rsquo;d need to download all of these images manually.</p>
-
 <p>To avoid this, I dedcided to save each page to a PDF. You can script Chrome to
 save websites as PDFs using the JavaScript library Puppeteer.</p>
-
 <h2 id="puppeteer">Puppeteer</h2>
-
 <p>Navingating to a page and saving it as a PDF is simple with Puppeteer:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> puppeteer = require(<span style="color:#a31515">&#34;puppeteer&#34;</span>);
 
-(async () =&gt; {
-  <span style="color:#00f">const</span> browser = await puppeteer.launch();
-  <span style="color:#00f">const</span> page = await browser.newPage();
-  await page.<span style="color:#00f">goto</span>(<span style="color:#a31515">&#34;https://example.com&#34;</span>);
-  await page.pdf({ path: <span style="color:#a31515">&#34;example.pdf&#34;</span>, format: <span style="color:#a31515">&#34;A4&#34;</span> });
+(<span style="color:#00f">async</span> () =&gt; {
+  <span style="color:#00f">const</span> browser = <span style="color:#00f">await</span> puppeteer.launch();
+  <span style="color:#00f">const</span> page = <span style="color:#00f">await</span> browser.newPage();
+  <span style="color:#00f">await</span> page.<span style="color:#00f">goto</span>(<span style="color:#a31515">&#34;https://example.com&#34;</span>);
+  <span style="color:#00f">await</span> page.pdf({ path: <span style="color:#a31515">&#34;example.pdf&#34;</span>, format: <span style="color:#a31515">&#34;A4&#34;</span> });
 
-  await browser.close();
+  <span style="color:#00f">await</span> browser.close();
 })();
-</code></pre></div>
-<p>However, I needed to add some extra code to get mine working:</p>
-
+</code></pre></div><p>However, I needed to add some extra code to get mine working:</p>
 <h3 id="authentication">Authentication</h3>
-
 <p>The website I was scraping required authentication. I spent a long time trying
 to solve this by getting Puppeteer to:</p>
-
 <ol>
 <li>Open my personal Chrome profile, where I was already logged in</li>
 <li>Script Puppeteer to go through the log in flow and enter my username and
 password</li>
 </ol>
-
 <p>In the end, I was looking through the cookies stored by the website, and found
 two which looked related to authentication: <code>_session</code> and <code>_token</code>. I set the
 authentication cookies on the page that Puppeteer opens, which makes the server
 think we&rsquo;re logged in:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000">// Set cookies before we visit the webpage
 </span><span style="color:#008000">// so it doesn&#39;t ask us to log in.
-</span><span style="color:#008000"></span>await page.setCookie(
+</span><span style="color:#008000"></span><span style="color:#00f">await</span> page.setCookie(
   {
     name: <span style="color:#a31515">&#34;_session&#34;</span>,
     value: <span style="color:#a31515">&#34;abc...&#34;</span>,
@@ -131,20 +111,17 @@ think we&rsquo;re logged in:</p>
   }
 );
 
-await page.<span style="color:#00f">goto</span>(<span style="color:#a31515">&#34;https://example.com&#34;</span>);
+<span style="color:#00f">await</span> page.<span style="color:#00f">goto</span>(<span style="color:#a31515">&#34;https://example.com&#34;</span>);
 <span style="color:#008000">// ...
-</span></code></pre></div>
-<h3 id="cleaning-up-the-pdf">Cleaning up the PDF</h3>
-
+</span></code></pre></div><h3 id="cleaning-up-the-pdf">Cleaning up the PDF</h3>
 <p>The page didn&rsquo;t look particularly good when it was saved as a PDF - elements
 like the header, navigation and footer were present and I didn&rsquo;t want them to
 be.</p>
-
 <p>Puppeteer lets you run arbitrary JavaScript on the website before saving the
 PDF, which you can use to remove those elements:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">try</span> {
   <span style="color:#008000">// Hide navbar
-</span><span style="color:#008000"></span>  await page.evaluate(() =&gt; {
+</span><span style="color:#008000"></span>  <span style="color:#00f">await</span> page.evaluate(() =&gt; {
     <span style="color:#00f">let</span> items = document.querySelectorAll(<span style="color:#a31515">&#34;.navbar&#34;</span>);
     items.forEach(e =&gt; {
       e.parentNode.removeChild(e);
@@ -155,26 +132,19 @@ PDF, which you can use to remove those elements:</p>
 </span><span style="color:#008000"></span>} <span style="color:#00f">catch</span> (err) {
   console.log(err);
 }
-</code></pre></div>
-<p>I wrapped this in a <code>try/catch</code> block so we don&rsquo;t crash on pages that don&rsquo;t
+</code></pre></div><p>I wrapped this in a <code>try/catch</code> block so we don&rsquo;t crash on pages that don&rsquo;t
 happen to have these elements.</p>
-
 <h2 id="automating-the-scraping">Automating the scraping</h2>
-
 <p>We&rsquo;ve got a list of URLs to scrape, and a method to scrape each one. We now need
 write some code which calls the scraper for each URL.</p>
-
 <p>There&rsquo;s one final bit of complexity here. The lessons we&rsquo;re scraping are split
 across sections and topics. There are a number of sections, which are each split
 into a number of topics, and each topic contains a number of lessons.</p>
-
 <p>On the website, the index page lays out the lessons in a specific order, but
 this order isn&rsquo;t explicit in the page URLs or titles.</p>
-
 <p>I&rsquo;d like to save the files in directories which match this format. I&rsquo;d also like
 to number each section, topic and lesson to preserve the order they&rsquo;re meant to
 be read in.</p>
-
 <p>I did all of this with the following code:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">current_section, current_topic = <span style="color:#a31515">&#34;&#34;</span>, <span style="color:#a31515">&#34;&#34;</span>
 section_count, topic_count, lesson_count = 0, 0, 0
@@ -220,18 +190,15 @@ section_count, topic_count, lesson_count = 0, 0, 0
     subprocess.run(
         [<span style="color:#a31515">&#34;node&#34;</span>, <span style="color:#a31515">&#34;get_pdf.js&#34;</span>, url, path],
         check=True
-    )</code></pre></div>
-<p>The counting logic above might seem incorrect, but it works. Sections, topic and
+    )
+</code></pre></div><p>The counting logic above might seem incorrect, but it works. Sections, topic and
 lessons are numbered from 1. In the first iteration of the loop, we increment
 the section and topic counters from 0 to 1, and set the lesson counter to 1.
 There&rsquo;s probably a better way of writing this.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>I spent a couple of hours working on this, a big chunk of which was spent trying
 to get Puppeteer to use my personal Chrome profile. Some thoughts on how it
 went:</p>
-
 <ul>
 <li>The Puppeteer script crawls a single page, and starts and stops Chrome each
 time it does this. This takes a long time (~12 seconds). You could speed this

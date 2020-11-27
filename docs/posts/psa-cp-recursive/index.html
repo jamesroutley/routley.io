@@ -36,34 +36,23 @@
     <h1>PSA: cp -r behaves differently on linux and macOS</h1>
     <time datetime="2017-07-20">20 July 2017</time>
   </header>
-  
-
-<p>Today I found out
+  <p>Today I found out
 (<a href="https://github.com/cloudreach/sceptre/commit/91dc1c64056e190912577ba9c354092798589879">the hard way</a>)
 that the GNU (available on linux) and BSD (available on macOS) implementations
 of <code>cp</code> behave differently when used to recursively copy.</p>
-
 <p>The differing behaviour comes when running <code>cp</code> with the <code>-r</code> flag on a source
 directory that ends with a slash (<code>/</code>):</p>
-
 <ul>
 <li>GNU/linux: copy the whole directory</li>
 <li>BSD/macOS: copy the contents of the directory</li>
 </ul>
-
 <p>While this is documented behaviour (see man pages below), it can lead to
 unwanted behaviour if you develop on a mac and build on a linux-based CI system.</p>
-
 <h2 id="man-pages">Man pages</h2>
-
 <p>GNU (linux):</p>
-
 <pre><code>-R, -r, --recursive
           copy directories recursively
-</code></pre>
-
-<p>BSD (macOS)</p>
-
+</code></pre><p>BSD (macOS)</p>
 <pre><code>-R      If source_file designates a directory, cp copies the directory and the
         entire subtree connected at that point.
 
@@ -72,7 +61,6 @@ unwanted behaviour if you develop on a mac and build on a linux-based CI system.
 
         [...]
 </code></pre>
-
 </article>
 
     </main>

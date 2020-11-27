@@ -36,24 +36,18 @@
     <h1>Analyse and test C with Python</h1>
     <time datetime="2017-08-16">16 August 2017</time>
   </header>
-  
-
-<p>I&rsquo;ve recently been implementing data structures in C. Writing C is fun and
+  <p>I&rsquo;ve recently been implementing data structures in C. Writing C is fun and
 educational, because it&rsquo;s lower level than most other common languages. It&rsquo;s
 fast, and writing it teaches you to understand what&rsquo;s happening at a machine
 level.</p>
-
 <p>However, C is also relatively difficult to write, making it harder to analyse
 and test. It would be helpful to be able to do this with a higher level
 language, such as Python. Analysis and testing don&rsquo;t affect performance of the
 actual data structure, so using a slower but easier and more productive language
 for this seems reasonable.</p>
-
 <p>In this article, we walk through a simple example of doing this with a built-in
 Python library for interfacing with C called <code>ctypes</code>.</p>
-
 <h2 id="example-c-code">Example C code</h2>
-
 <p>For this example, I&rsquo;ve written a simple (but unsafe)
 <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a> data
 structure, which defines the following API:</p>
@@ -64,20 +58,14 @@ structure, which defines the following API:</p>
 } stack;
 
 <span style="color:#2b91af">void</span> stack_push(stack* s, <span style="color:#2b91af">int</span> x);
-<span style="color:#2b91af">int</span> stack_pop(stack* s);</code></pre></div>
-<p>The stack&rsquo;s source code is included below<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
-
+<span style="color:#2b91af">int</span> stack_pop(stack* s);
+</code></pre></div><p>The stack&rsquo;s source code is included below<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <h2 id="shared-library">Shared library</h2>
-
 <p><code>ctypes</code> interacts with shared libraries. We can compile our stack to a shared
 library with:</p>
-
 <pre><code>$ clang -shared -o stack.so -fPIC stack.c
-</code></pre>
-
-<h2 id="python-wrapper">Python wrapper</h2>
-
-<p>Next, we need to define a wrapper module<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>, which creates the Python objects
+</code></pre><h2 id="python-wrapper">Python wrapper</h2>
+<p>Next, we need to define a wrapper module<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, which creates the Python objects
 used to interact with the shared library.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># stack_wrapper.py</span>
 <span style="color:#00f">import</span> ctypes
@@ -98,13 +86,11 @@ push.argtypes = [ctypes.POINTER(stack), ctypes.c_int]
 
 pop = _lib.stack_pop
 pop.restype = ctypes.c_int
-pop.argtypes = [ctypes.POINTER(stack)]</code></pre></div>
-<p><strong>Note</strong>: It seems idiomatic from examples in the Python documentation to use
+pop.argtypes = [ctypes.POINTER(stack)]
+</code></pre></div><p><strong>Note</strong>: It seems idiomatic from examples in the Python documentation to use
 the global import <code>from ctypes import *</code> to reduce code verbosity. I haven&rsquo;t
 done this here to make it clear what objects come from <code>ctypes</code>.</p>
-
 <h2 id="use">Use</h2>
-
 <p>It&rsquo;s now simple to import and use this module:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">import</span> stack_wrapper <span style="color:#00f">as</span> stack
 &gt;&gt;&gt; s = stack.new()
@@ -113,29 +99,24 @@ done this here to make it clear what objects come from <code>ctypes</code>.</p>
 &gt;&gt;&gt; stack.pop(s)
 15
 &gt;&gt;&gt; stack.pop(s)
-5</code></pre></div>
-<p>We&rsquo;re now fully in Python land, with a set of objects which let us call into our
+5
+</code></pre></div><p>We&rsquo;re now fully in Python land, with a set of objects which let us call into our
 C code. These objects are native Python, and can be used in any way that native
 Python objects can be used. We can use them with:</p>
-
 <ul>
 <li><code>unittest</code> or <code>pytest</code> for testing</li>
 <li><code>timeit</code> for benchmarking</li>
 <li><code>bokeh</code> or <code>matplotlib</code> for analytics</li>
 <li><code>AFL</code> for fuzz testing</li>
 </ul>
-
-<hr />
-
-<!-- prettier-ignore-start -->
-
-<!-- prettier-ignore-end -->
-<div class="footnotes">
-
-<hr />
-
+<hr>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"><p><strong>Warning</strong>: This stack implementation was written to be as simple as
+<li id="fn:1" role="doc-endnote">
+<p><strong>Warning</strong>: This stack implementation was written to be as simple as
 possible, and isn&rsquo;t really safe to use.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.c
 </span><span style="color:#008000"></span><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdlib.h&gt;</span><span style="color:#00f">
@@ -156,15 +137,16 @@ stack* stack_new() {
     <span style="color:#2b91af">int</span> x = s-&gt;stk[s-&gt;top];
     s-&gt;top--;
     <span style="color:#00f">return</span> x;
-}</code></pre></div> <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-
-<li id="fn:2"><p>When using <code>ctypes</code>, we end up writing a Python wrapper module, which is
+}
+</code></pre></div> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<li id="fn:2" role="doc-endnote">
+<p>When using <code>ctypes</code>, we end up writing a Python wrapper module, which is
 basically a Python translation of the C header file. Other libraries for
 calling into C try to remove this repetition. One example is
-<a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a>, written by the PyPy team.</p>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a>, written by the PyPy team. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
 </article>
 
