@@ -1,4 +1,22 @@
 books:
+  - title: The Descent of Man
+    author: Grayson Perry
+    date: 2021-02-07
+  - title: On a Sunbeam
+    author: Tille Walden
+    date: 2021-02-06
+  - title: The Laws of Simplicity
+    author: John Maeda
+    date: 2021-02-06
+  - title: Structure and Interpretation of Computer Programs
+    author: Harold Abelson and Gerald Sussman
+    date: 2021-01-21
+  - title: The Lessons of History
+    author: Will and Ariel Durant
+    date: 2021-01-14
+  - title: Shuggie Bain
+    author: Douglas Stuart
+    date: 2021-01-07
   - title: Mrs Dalloway
     author: Virginia Woolf
     date: 2020-11-20
