@@ -11,6 +11,9 @@ books:
   - title: Structure and Interpretation of Computer Programs
     author: Harold Abelson and Gerald Sussman
     date: 2021-01-21
+  - title: The Martian Chronicles
+    author: Ray Bradbury
+    date: 2021-01-19
   - title: The Lessons of History
     author: Will and Ariel Durant
     date: 2021-01-14
@@ -38,7 +41,7 @@ books:
   - title: Killing Floor
     author: Lee Child
     date: 2020-05-01
-  - title: The man who ate everything
+  - title: The Man Who Ate Everything
     author: Jeffrey Steingarten
     date: 2020-04-15
   - title: Heart of Darkness
