@@ -1,4 +1,7 @@
 books:
+  - title: Staff Engineer
+    author: Will Larson
+    date: 2021-02-26
   - title: The Descent of Man
     author: Grayson Perry
     date: 2021-02-07
