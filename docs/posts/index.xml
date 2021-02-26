@@ -40,6 +40,17 @@ What&amp;rsquo;s it for? I&amp;rsquo;m currently using it to synchronise documen
     </item>
     
     <item>
+      <title>Spinning up lots of Goroutines</title>
+      <link>http://routley.io/posts/lots-of-goroutines/</link>
+      <pubDate>Tue, 18 Feb 2020 21:21:11 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/lots-of-goroutines/</guid>
+      <description>Go&amp;rsquo;s Goroutines are described as &amp;lsquo;lightweight threads&amp;rsquo;. Because they&amp;rsquo;re more lightweight, you can create many more of them than threads. What happens if we create loads of them?
+Unbounded goroutines Let&amp;rsquo;s write a program which creates an unbounded number of goroutines:
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; ) func main() { i := 1 for { if i%1000 == 0 { fmt.Printf(&amp;#34;spawning goroutine %d\n&amp;#34;, i) } go work() i++ } } func work() { time.</description>
+    </item>
+    
+    <item>
       <title>Home server and Pi-hole</title>
       <link>http://routley.io/posts/pi-hole/</link>
       <pubDate>Mon, 17 Feb 2020 23:11:20 +0000</pubDate>
