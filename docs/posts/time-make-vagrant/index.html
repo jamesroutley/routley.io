@@ -40,7 +40,7 @@
 runs masOS, I&rsquo;m using an Ubuntu virtual machine to compile and run my code. I&rsquo;m
 using <a href="https://www.vagrantup.com">Vagrant</a> to manage the VM.</p>
 <p>I experienced an issue with <code>Make</code>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ make clean
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ make clean
 make: Warning: File <span style="color:#a31515">&#39;Makefile&#39;</span> has modification time 1153 s in the future
 rm -f forth forth.o
 make: warning:  Clock skew detected.  Your build may be incomplete.
@@ -56,11 +56,11 @@ based on edit time, and so is sensitive to edit time issues.</p>
 already synchronises the time every 20 minutes, so we can solve this by
 increasing the synchronisation rate.</p>
 <p>Find out the VM name:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ VBoxManage ls vms
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ VBoxManage ls vms
 <span style="color:#a31515">&#34;forth_default_xxxx&#34;</span> {&lt;uuid&gt;}
 <span style="color:#008000"># ... other VMs you may have</span>
 </code></pre></div><p>Run time synchronisation every ten seconds:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ VBoxManage guestproperty set forth_default_xxxx <span style="color:#a31515">\
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ VBoxManage guestproperty set forth_default_xxxx <span style="color:#a31515">\
 </span><span style="color:#a31515"></span>    <span style="color:#a31515">&#34;/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold&#34;</span> 10000
 </code></pre></div><p>More information on this can be found
 <a href="https://stackoverflow.com/questions/19490652/how-to-sync-time-on-host-wake-up-within-virtualbox">here</a>.</p>

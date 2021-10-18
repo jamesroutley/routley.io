@@ -39,7 +39,7 @@
   <p>I just implemented breadcrumb navigation for this blog. How it works is quite
 neat - we iterate over the sections of the path, and store our current position
 using a Hugo <code>Scratch</code> variable:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;nav&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;nav&gt;
   &lt;ul&gt;
     <span style="color:#008000">&lt;!-- Initialise a scratch variable &#34;path&#34; to an empty string --&gt;</span>
     {{ $.Scratch.Set &#34;path&#34; &#34;&#34; }}

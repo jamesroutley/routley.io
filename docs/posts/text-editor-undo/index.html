@@ -56,20 +56,20 @@ version.</p>
 make things better by copying pointers, rather than full objects.</p>
 <h2 id="example">Example</h2>
 <p>Consider a document which contains the text:</p>
-<pre><code>Hello
+<pre tabindex="0"><code>Hello
 world
 </code></pre><p>Let&rsquo;s assume this is stored in an array of pointers to strings. Our strings are
 stored at two locations in memory<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
-<pre><code>0: &quot;Hello&quot;
+<pre tabindex="0"><code>0: &quot;Hello&quot;
 1: &quot;world&quot;
 </code></pre><p>Our array contains pointers to those memory locations:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[*0, *1]
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[*0, *1]
 </code></pre></div><p>When we make an edit, we create a new array of strings, where all pointers are
 the same, apart from the edited one:</p>
-<pre><code>0: &quot;Hello&quot;
+<pre tabindex="0"><code>0: &quot;Hello&quot;
 1: &quot;world&quot;
 2: &quot;James&quot;
-</code></pre><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[*0, *2]
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[*0, *2]
 </code></pre></div><p>The trick to implementing undo is to realise that our previous array, containing
 the string <code>&quot;Hello\nworld&quot;</code> still exists. To undo our changes, we simply revert
 to the previous array.</p>
@@ -104,11 +104,11 @@ sake of clarity and don&rsquo;t make physical sense.</p>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:2" role="doc-endnote">
- <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:3" role="doc-endnote">
- <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>
 

@@ -46,7 +46,7 @@ functional languages or concepts.</p>
 <p>Before looking at tail recursion, let&rsquo;s look at recursion in an imperative
 language, Python.</p>
 <h2 id="an-issue-with-recursion">An issue with recursion</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial(n):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial(n):
         <span style="color:#00f">if</span> n == 1:
             <span style="color:#00f">return</span> 1
         <span style="color:#00f">else</span>:
@@ -60,15 +60,15 @@ to be <code>4 * 3 * 2 * 1 = 24</code>, which we do get.</p>
 function call is made, a frame containing data associated with that function is
 added to the stack. We can see this happening using the <code>inspect</code> package in
 Python:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> inspect
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> inspect
 
-<span style="color:#00f">print</span> inspect.stack()
+print inspect.stack()
 
 <span style="color:#00f">def</span> a():
-    <span style="color:#00f">print</span> inspect.stack()
+    print inspect.stack()
 a()
 </code></pre></div><p>Running this script gives:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[
     (&lt;frame object at 0x1042a9c20&gt;, ...)  <span style="color:#008000"># output truncated</span>
 ]
 [
@@ -86,13 +86,13 @@ computer, this limit is set to 1000 <sup id="fnref:1"><a href="#fn:1" class="foo
 <p>For each call to <code>factorial()</code>, a new frame is added to the stack. If too many
 frames are added, we&rsquo;ll excede the maximum recursion limit and the interpreter
 will throw an exception:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; factorial(999)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; factorial(999)
 4023872600770937735437024339230039...
 &gt;&gt;&gt; factorial(1000)
 RuntimeError: maximum recursion depth exceeded
 </code></pre></div><p>Recursion in imperative languages can be memory intensive, due to the frame
 overhead. Compare it to a function which finds a factorial iteratively:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial_iter(n):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial_iter(n):
         total = 1
         <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(1, n + 1):
             total *= i
@@ -105,7 +105,7 @@ overhead. Compare it to a function which finds a factorial iteratively:</p>
 times larger than the largest value handled by our recursive version.</p>
 <h2 id="iterative-recursion">Iterative recursion</h2>
 <p>Consider what happens when the interpreter executes <code>factorial(4)</code>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">factorial(4)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">factorial(4)
 4 * factorial(3)
 4 * 3 * factorial(2)
 4 * 3 * 2 * factorial(1)
@@ -115,14 +115,14 @@ times larger than the largest value handled by our recursive version.</p>
 until the base case of <code>n = 1</code> is hit. The interpreter must keep track of
 operations which must be performed later.</p>
 <p>If we reformulate the factorial function:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial_new(n, total):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">def</span> factorial_new(n, total):
         <span style="color:#00f">if</span> n == 1:
             <span style="color:#00f">return</span> total
         <span style="color:#00f">else</span>:
             <span style="color:#00f">return</span> factorial_new(n - 1, n * total)
 &gt;&gt;&gt; factorial(4, 1)  <span style="color:#008000"># initial total = 1</span>
 </code></pre></div><p>And reconsider what the interpreter does:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">factorial_new(4, 1)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">factorial_new(4, 1)
 factorial_new(3, 4)
 factorial_new(2, 12)
 factorial_new(1, 24)
@@ -147,7 +147,7 @@ process.</p>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>
 

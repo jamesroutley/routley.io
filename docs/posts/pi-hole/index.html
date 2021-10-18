@@ -50,7 +50,7 @@ internet. It turns out Ubuntu Server doesn&rsquo;t have network connectivity set
 default. We need to enable DHCP for our Ethernet interface to let our DHCP
 server (managed by our router) automatically assign us an IP address.</p>
 <p>Let&rsquo;s get our Ethernet interface ID:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ip a
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ip a
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -65,7 +65,7 @@ server (managed by our router) automatically assign us an IP address.</p>
        valid_lft forever preferred_lft forever
 </code></pre></div><p><code>enp1s0</code> is the interface we&rsquo;re interested in.</p>
 <p>We can then enable DHCP for it by adding the following file:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#008000"># /etc/netplan/99_config.yaml</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#008000"># /etc/netplan/99_config.yaml</span>
 network:
   version: 2
   renderer: networkd

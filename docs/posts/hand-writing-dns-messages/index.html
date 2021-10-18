@@ -26,7 +26,7 @@
     
     
     
-    <li><a href="/posts/hand-writing-dns-messages">Hand writing dns messages</a></li>
+    <li><a href="/posts/hand-writing-dns-messages">Hand writing DNS messages</a></li>
     
   </ul>
 </nav>
@@ -64,7 +64,7 @@ recommend referring to it if anything is unclear.</p>
 I&rsquo;ve added a brief note on how to convert between the two below<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <h2 id="request-message-format">Request message format</h2>
 <p>All DNS messages have the same format:</p>
-<pre><code>+---------------------+
+<pre tabindex="0"><code>+---------------------+
 |        Header       |
 +---------------------+
 |       Question      | the question for the name server
@@ -79,7 +79,7 @@ I&rsquo;ve added a brief note on how to convert between the two below<sup id="fn
 will contain the <code>Header</code> and <code>Question</code> sections.</p>
 <h3 id="header">Header</h3>
 <p>The header has the following format:</p>
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+<pre tabindex="0"><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                      ID                       |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -134,7 +134,7 @@ question section. We&rsquo;ll be sending <code>1</code> question.</p>
 </ul>
 <h4 id="full-header">Full header</h4>
 <p>Combining these fields, we can write out our header in hexadecimal:</p>
-<pre><code>AA AA - ID
+<pre tabindex="0"><code>AA AA - ID
 01 00 - Query parameters
 00 01 - Number of questions
 00 00 - Number of answers
@@ -146,7 +146,7 @@ question section. We&rsquo;ll be sending <code>1</code> question.</p>
 standard DNS query.</p>
 <h3 id="question">Question</h3>
 <p>The question section has the format:</p>
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+<pre tabindex="0"><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                     QNAME                     /
@@ -177,7 +177,7 @@ which has a value of <code>1</code>.</p>
 </li>
 </ul>
 <p>We can write out our full question section:</p>
-<pre><code>07 65 - 'example' has length 7, e
+<pre tabindex="0"><code>07 65 - 'example' has length 7, e
 78 61 - x, a
 6D 70 - m, p
 6C 65 - l, e
@@ -192,7 +192,7 @@ required before the start of the <code>QTYPE</code> section.</p>
 <p>We send our DNS message as the body of a UDP request. The following Python code
 will take our hexadecimal DNS query, convert it to binary and send it to
 Google&rsquo;s DNS server, at the address <code>8.8.8.8:53</code>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> binascii
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> binascii
 <span style="color:#00f">import</span> socket
 
 
@@ -224,7 +224,7 @@ message = <span style="color:#a31515">&#34;AA AA 01 00 00 01 00 00 00 00 00 00 &
 <span style="color:#a31515">&#34;07 65 78 61 6d 70 6c 65 03 63 6f 6d 00 00 01 00 01&#34;</span>
 
 response = send_udp_message(message, <span style="color:#a31515">&#34;8.8.8.8&#34;</span>, 53)
-<span style="color:#00f">print</span>(format_hex(response))
+print(format_hex(response))
 </code></pre></div><p>You can run this script by copying it into a file, <code>query.py</code> and running it
 from your terminal with: <code>$ python query.py</code>. It doesn&rsquo;t have any external
 dependencies, and should run with Python 2 or 3.</p>
@@ -233,14 +233,14 @@ dependencies, and should run with Python 2 or 3.</p>
 response into sections and see if we can work out what&rsquo;s happening.</p>
 <h3 id="header-1">Header</h3>
 <p>The message starts out with a header, just like our query message:</p>
-<pre><code>AA AA - Same ID as before
+<pre tabindex="0"><code>AA AA - Same ID as before
 81 80 - Different flags, we'll look at this below
 00 01 - 1 question
 00 01 - 1 answer
 00 00 - No authority records
 00 00 - No additional records
 </code></pre><p>Let&rsquo;s convert <code>81 80</code> to binary:</p>
-<pre><code>8    1    8    0
+<pre tabindex="0"><code>8    1    8    0
 1000 0001 1000 0000
 </code></pre><p>Matching up these bits to the schema given <a href="#header">above</a>, we can see that:</p>
 <ul>
@@ -252,7 +252,7 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 </ul>
 <h3 id="question-section">Question section</h3>
 <p>The question section is identical to that of the query:</p>
-<pre><code>07 65 - 'example' has length 7, e
+<pre tabindex="0"><code>07 65 - 'example' has length 7, e
 78 61 - x, a
 6D 70 - m, p
 6C 65 - l, e
@@ -263,7 +263,7 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 00 01 - QCLASS
 </code></pre><h3 id="answer-section">Answer section</h3>
 <p>The answer section has a <code>resource record</code> format:</p>
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+<pre tabindex="0"><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 |                                               |
 /                                               /
@@ -282,7 +282,7 @@ response into sections and see if we can work out what&rsquo;s happening.</p>
 /                     RDATA                     /
 /                                               /
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-</code></pre><pre><code>C0 0C - NAME
+</code></pre><pre tabindex="0"><code>C0 0C - NAME
 00 01 - TYPE
 00 01 - CLASS
 00 00
@@ -294,7 +294,7 @@ D8 22 - RDDATA
 <li>
 <p><code>NAME</code>: This is the URL who&rsquo;s IP address this response contains. This uses a
 compressed format:</p>
-<pre><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+<pre tabindex="0"><code>0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 | 1  1|                OFFSET                   |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -302,7 +302,7 @@ compressed format:</p>
 interger, which counts the byte offset from the beginning of the message to a
 prior occurance of the same name.</p>
 <p>In this case, our name is <code>c0 0c</code>, which in binary is:</p>
-<pre><code>1100 0000 0000 1100
+<pre tabindex="0"><code>1100 0000 0000 1100
 </code></pre><p>The byte offset is therefore 12. If we count through the bytes in the message,
 we can see that this points to the <code>07</code> at the start of the <code>example.com</code>
 name.</p>
@@ -422,7 +422,7 @@ characters.</p>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>
 

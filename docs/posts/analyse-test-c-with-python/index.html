@@ -51,7 +51,7 @@ Python library for interfacing with C called <code>ctypes</code>.</p>
 <p>For this example, I&rsquo;ve written a simple (but unsafe)
 <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a> data
 structure, which defines the following API:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.h
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.h
 </span><span style="color:#008000"></span><span style="color:#00f">typedef</span> <span style="color:#00f">struct</span> {
     <span style="color:#2b91af">int</span> stk[100];
     <span style="color:#2b91af">int</span> top;
@@ -63,11 +63,11 @@ structure, which defines the following API:</p>
 <h2 id="shared-library">Shared library</h2>
 <p><code>ctypes</code> interacts with shared libraries. We can compile our stack to a shared
 library with:</p>
-<pre><code>$ clang -shared -o stack.so -fPIC stack.c
+<pre tabindex="0"><code>$ clang -shared -o stack.so -fPIC stack.c
 </code></pre><h2 id="python-wrapper">Python wrapper</h2>
 <p>Next, we need to define a wrapper module<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, which creates the Python objects
 used to interact with the shared library.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># stack_wrapper.py</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># stack_wrapper.py</span>
 <span style="color:#00f">import</span> ctypes
 
 <span style="color:#00f">class</span> <span style="color:#2b91af">stack</span>(ctypes.Structure):
@@ -92,7 +92,7 @@ the global import <code>from ctypes import *</code> to reduce code verbosity. I 
 done this here to make it clear what objects come from <code>ctypes</code>.</p>
 <h2 id="use">Use</h2>
 <p>It&rsquo;s now simple to import and use this module:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">import</span> stack_wrapper <span style="color:#00f">as</span> stack
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#00f">import</span> stack_wrapper <span style="color:#00f">as</span> stack
 &gt;&gt;&gt; s = stack.new()
 &gt;&gt;&gt; stack.push(s, 5)
 &gt;&gt;&gt; stack.push(s, 15)
@@ -118,7 +118,7 @@ Python objects can be used. We can use them with:</p>
 <li id="fn:1" role="doc-endnote">
 <p><strong>Warning</strong>: This stack implementation was written to be as simple as
 possible, and isn&rsquo;t really safe to use.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.c
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#008000">// stack.c
 </span><span style="color:#008000"></span><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdlib.h&gt;</span><span style="color:#00f">
 </span><span style="color:#00f">#include</span> <span style="color:#00f">&#34;stack.h&#34;</span><span style="color:#00f">
 </span><span style="color:#00f"></span>
@@ -138,12 +138,12 @@ stack* stack_new() {
     s-&gt;top--;
     <span style="color:#00f">return</span> x;
 }
-</code></pre></div> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+</code></pre></div>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:2" role="doc-endnote">
 <p>When using <code>ctypes</code>, we end up writing a Python wrapper module, which is
 basically a Python translation of the C header file. Other libraries for
 calling into C try to remove this repetition. One example is
-<a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a>, written by the PyPy team. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a>, written by the PyPy team.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

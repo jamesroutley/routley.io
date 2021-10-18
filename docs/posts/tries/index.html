@@ -82,7 +82,7 @@ unsuitable for this purpose.</p>
 <p>A trie is a data structure which can store strings in a way which makes them
 easy to search. The following diagram shows a trie with the strings <code>app</code>,
 <code>apple</code> and <code>cat</code> stored in it.</p>
-<pre><code>0 -&gt; a -&gt; p -&gt; p. -&gt; l -&gt; e.
+<pre tabindex="0"><code>0 -&gt; a -&gt; p -&gt; p. -&gt; l -&gt; e.
  `-&gt; c -&gt; a -&gt; t.
 </code></pre><p>In this diagram, <code>0</code> represents the node at the top of the trie, which has no
 value associated. Nodes marked are marked with a dot <code>.</code> to signify that they
@@ -108,17 +108,17 @@ lookup times, but require larger memory usage. A list could alternatively be
 used to reduce memory usage, at the cost of slower lookup time.</p>
 <p>Using a <code>dict</code>, the algorithmic complexity of spell-checking a word should be
 <code>O(m)</code>, where <code>m</code> is the length of the string being checked<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Node</span>(object):
-   <span style="color:#00f">def</span> __init__(self, value=None):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Node</span>(object):
+   <span style="color:#00f">def</span> __init__(self, value=<span style="color:#00f">None</span>):
         self.value = value
         self.children = {}
-        self.is_complete = False
+        self.is_complete = <span style="color:#00f">False</span>
 </code></pre></div><p>The trie itself just contains a reference to the top of the string of nodes:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
     <span style="color:#00f">def</span> __init__(self):
         self.node = Node()
 </code></pre></div><p>We can now implement the <code>insert</code> method:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
     <span style="color:#008000"># ...</span>
     <span style="color:#00f">def</span> insert(self, key):
         node = self.node
@@ -129,20 +129,20 @@ used to reduce memory usage, at the cost of slower lookup time.</p>
                 new_node = Node(letter)
                 node.children[letter] = new_node
                 node = new_node
-        node.is_complete = True
+        node.is_complete = <span style="color:#00f">True</span>
 </code></pre></div><p>Insert takes a key to insert, iterates over it, and adds each letter to the
 trie, creating new nodes if necessary.</p>
 <p><code>search</code> method:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
     <span style="color:#008000"># ...</span>
     <span style="color:#00f">def</span> search(self, key):
         node = self.node
         <span style="color:#00f">for</span> letter <span style="color:#00f">in</span> key:
             <span style="color:#00f">if</span> letter <span style="color:#00f">not</span> <span style="color:#00f">in</span> node.children:
-                <span style="color:#00f">return</span> False
+                <span style="color:#00f">return</span> <span style="color:#00f">False</span>
             <span style="color:#00f">else</span>:
                 node = node.children[letter]
-        <span style="color:#00f">return</span> True
+        <span style="color:#00f">return</span> <span style="color:#00f">True</span>
 </code></pre></div><p>Search iterates over the letters in the key, checking that each node contains a
 child whose value matches the letter.</p>
 <h2 id="analysis">Analysis</h2>
@@ -150,7 +150,7 @@ child whose value matches the letter.</p>
 <p>We can compare how our trie-based algorithm compares to binary search which by
 running a benchmark test. The test searches for 1000 randomly selected words
 from the dictionary 100 times each.</p>
-<pre><code>$ python benchmark.py
+<pre tabindex="0"><code>$ python benchmark.py
 Binary search 1000 items 100 times: 2.32307600975
 Trie search 1000 items 100 times: 0.461572885513
 </code></pre><h3 id="complexity">Complexity</h3>
@@ -172,16 +172,16 @@ searches are made:</p>
 </ul>
 <p>When searching for &lsquo;wor&rsquo;, you repeat the work done when searching for &lsquo;wo&rsquo; and
 &lsquo;w&rsquo;. We can modify our algorithm to take this into account:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">Trie</span>(object):
     <span style="color:#008000"># ...</span>
-    <span style="color:#00f">def</span> search(self, key, prev_node=None):
-        node = prev_node <span style="color:#00f">if</span> prev_node <span style="color:#00f">is</span> <span style="color:#00f">not</span> None <span style="color:#00f">else</span> self.node
+    <span style="color:#00f">def</span> search(self, key, prev_node=<span style="color:#00f">None</span>):
+        node = prev_node <span style="color:#00f">if</span> prev_node <span style="color:#00f">is</span> <span style="color:#00f">not</span> <span style="color:#00f">None</span> <span style="color:#00f">else</span> self.node
         <span style="color:#00f">for</span> letter <span style="color:#00f">in</span> key:
             <span style="color:#00f">if</span> letter <span style="color:#00f">not</span> <span style="color:#00f">in</span> node.children:
-                <span style="color:#00f">return</span> False, node
+                <span style="color:#00f">return</span> <span style="color:#00f">False</span>, node
             <span style="color:#00f">else</span>:
                 node = node.children[letter]
-        <span style="color:#00f">return</span> True, node
+        <span style="color:#00f">return</span> <span style="color:#00f">True</span>, node
 </code></pre></div><p>In this code, the last searched node is returned to the caller. The caller can
 then supply this node when calling <code>search</code> with the next character in the word
 to continue searching when we left off.</p>
@@ -189,7 +189,7 @@ to continue searching when we left off.</p>
 <p>One disadvantage of this algorithm is that initialising the trie takes some
 time. By profiling the insertion of the dictionary into the trie, we can see
 that a lot of this time is spent initialising <code>Node</code> objects:</p>
-<pre><code>$ python profile_trie_insert.py
+<pre tabindex="0"><code>$ python profile_trie_insert.py
      1028667 function calls in 5.354 seconds
 
 Ordered by: standard name
@@ -240,13 +240,13 @@ In a trie, we only store four:</p>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:2" role="doc-endnote">
- <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:3" role="doc-endnote">
- <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:4" role="doc-endnote">
- <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>
 

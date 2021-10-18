@@ -47,7 +47,7 @@ that this book is in the public domain and out of copyright in your country
 before downloading.</p>
 <h2 id="epubs-are-zip-files">EPUBs are zip files</h2>
 <p>We can see their contents by unzipping them:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ unzip moby-dick.epub
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ unzip moby-dick.epub
 $ rm moby-dick.epub  <span style="color:#008000"># We don&#39;t need this anymore</span>
 $ tree
 .
@@ -81,7 +81,7 @@ $ tree
 <li><code>mimetype</code>, which specifies the nature and format of a file</li>
 </ul>
 <h2 id="mimetype">MIMEtype</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cat mimetype
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cat mimetype
 application/epub+zip
 </code></pre></div><p>This file provies a more reliable way of telling that this file is actually an
 EPUB than the <code>.epub</code> file extension. All EPUBs must have an
@@ -90,7 +90,7 @@ EPUB than the <code>.epub</code> file extension. All EPUBs must have an
 <p>The <code>META-INF</code> directory contains metadata about the book. The only required
 file here is <code>container.xml</code>. This file points to the file which contains the
 contents of the book:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- META-INF/container.xml --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- META-INF/container.xml --&gt;</span>
 <span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
 &lt;container version=<span style="color:#a31515">&#34;1.0&#34;</span> xmlns=<span style="color:#a31515">&#34;urn:oasis:names:tc:opendocument:xmlns:container&#34;</span>&gt;
   &lt;rootfiles&gt;
@@ -101,7 +101,7 @@ contents of the book:</p>
 <h2 id="document-layout">Document layout</h2>
 <p><code>OEBPS/content.opf</code> is an Open Packaging Format file. It&rsquo;s an XML document with
 a particular format used to define the contents of EPUBs:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/content.opf --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/content.opf --&gt;</span>
 <span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
 &lt;package version=<span style="color:#a31515">&#34;2.0&#34;</span> xmlns=<span style="color:#a31515">&#34;http://www.idpf.org/2007/opf&#34;</span> unique-identifier=<span style="color:#a31515">&#34;bookid&#34;</span>&gt;
   &lt;metadata xmlns:dc=<span style="color:#a31515">&#34;http://purl.org/dc/elements/1.1/&#34;</span> xmlns:opf=<span style="color:#a31515">&#34;http://www.idpf.org/2007/opf&#34;</span>&gt;
@@ -145,7 +145,7 @@ then the main content <code>Moby-Dick</code>, defined in <code>OEBPS.Moby-Dick.x
 <h2 id="table-of-contents">Table of contents</h2>
 <p>The table of contents is defined in the NCX (Navigation Control file for XML)
 file <code>OEBPS/toc.ncx</code>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/toc.ncx --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#008000">&lt;!-- OEBPS/toc.ncx --&gt;</span>
 <span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
 <span style="color:#00f">&lt;!DOCTYPE ncx PUBLIC &#34;-//NISO//DTD ncx 2005-1//EN&#34;
 </span><span style="color:#00f">  &#34;http://www.daisy.org/z3986/2005/ncx-2005-1.dtd&#34;&gt;</span>
@@ -179,7 +179,7 @@ file <code>OEBPS/toc.ncx</code>:</p>
 </code></pre></div><p>The <code>content</code> tags in this file link to the relevant places in the main text.</p>
 <h2 id="cover">Cover</h2>
 <p>This is just an HTML file which displays a full page image</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#00f">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
 <span style="color:#00f">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.1//EN&#34;
 </span><span style="color:#00f">  &#34;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&#34;&gt;</span>
 &lt;html xmlns=<span style="color:#a31515">&#34;http://www.w3.org/1999/xhtml&#34;</span>&gt;

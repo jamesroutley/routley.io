@@ -1,4 +1,13 @@
 books:
+  - title: The Uncommon Reader
+    author: Alan Bennett
+    date: 2021-10-15
+  - title: 100 Poets
+    author: John Carey
+    date: 2021-10-01
+  - title: Jonathan Strange & Mr Norrell
+    author: Susanna Clarke
+    date: 2021-08-14
   - title: Piranesi
     author: Susanna Clarke
     date: 2021-06-28

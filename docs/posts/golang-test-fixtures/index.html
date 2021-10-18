@@ -47,7 +47,7 @@ requires.</p>
 <p>Say we&rsquo;re writing a web crawler and want to test it against a real website. We
 can define <code>startServer</code> and <code>stopServer</code> functions which are called by our test
 functions to serve the website required for our testing:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> startServer() net.Listener {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> startServer() net.Listener {
     <span style="color:#008000">// Start server
 </span><span style="color:#008000"></span>    <span style="color:#00f">return</span> listener
 }
@@ -62,7 +62,7 @@ functions to serve the website required for our testing:</p>
     <span style="color:#008000">// Run test
 </span><span style="color:#008000"></span>}
 </code></pre></div><p>We can simplify this code by making the start function return the stop function:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> startServer() <span style="color:#00f">func</span> {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> startServer() <span style="color:#00f">func</span> {
     <span style="color:#008000">// Start server
 </span><span style="color:#008000"></span>
     <span style="color:#00f">func</span> stopServer() {
@@ -94,7 +94,7 @@ functions can be changed internally, without affecting test code.</li>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
 </section>
 

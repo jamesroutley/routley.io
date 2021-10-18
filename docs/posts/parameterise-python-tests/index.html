@@ -42,7 +42,7 @@ consider a test for a simple function, and how it can be improved by
 parameterisation.</p>
 <h2 id="simple-test">Simple test</h2>
 <p>Let&rsquo;s test the following function:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># prime.py</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># prime.py</span>
 <span style="color:#00f">import</span> math
 
 
@@ -51,13 +51,13 @@ parameterisation.</p>
 </span><span style="color:#a31515">    is_prime returns True or False indicating whether x is prime or not.
 </span><span style="color:#a31515">    &#34;&#34;&#34;</span>
     <span style="color:#00f">if</span> x &lt;= 1:
-        <span style="color:#00f">return</span> False
+        <span style="color:#00f">return</span> <span style="color:#00f">False</span>
     <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(2, int(math.sqrt(x))):
         <span style="color:#00f">if</span> x % i == 0:
-            <span style="color:#00f">return</span> False
-    <span style="color:#00f">return</span> True
+            <span style="color:#00f">return</span> <span style="color:#00f">False</span>
+    <span style="color:#00f">return</span> <span style="color:#00f">True</span>
 </code></pre></div><p>We can test this for a range of inputs with the following code:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
 <span style="color:#00f">import</span> unittest
 
 <span style="color:#00f">from</span> prime <span style="color:#00f">import</span> is_prime
@@ -66,31 +66,31 @@ parameterisation.</p>
 <span style="color:#00f">class</span> <span style="color:#2b91af">TestIsPrime</span>(unittest.TestCase):
 
     <span style="color:#00f">def</span> test_x_negative(self):
-        self.assertEqual(is_prime(-1), False)
+        self.assertEqual(is_prime(-1), <span style="color:#00f">False</span>)
 
     <span style="color:#00f">def</span> test_x_zero(self):
-        self.assertEqual(is_prime(0), False)
+        self.assertEqual(is_prime(0), <span style="color:#00f">False</span>)
 
     <span style="color:#00f">def</span> test_x_one(self):
-        self.assertEqual(is_prime(1), False)
+        self.assertEqual(is_prime(1), <span style="color:#00f">False</span>)
 
     <span style="color:#00f">def</span> test_x_two(self):
-        self.assertEqual(is_prime(2), True)
+        self.assertEqual(is_prime(2), <span style="color:#00f">True</span>)
 
     <span style="color:#00f">def</span> test_x_three(self):
-        self.assertEqual(is_prime(3), True)
+        self.assertEqual(is_prime(3), <span style="color:#00f">True</span>)
 
     <span style="color:#00f">def</span> test_x_ten(self):
-        self.assertEqual(is_prime(10), False)
+        self.assertEqual(is_prime(10), <span style="color:#00f">False</span>)
 
     <span style="color:#00f">def</span> test_x_fifty_three(self):
-        self.assertEqual(is_prime(53), True)
+        self.assertEqual(is_prime(53), <span style="color:#00f">True</span>)
 
 
 <span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     unittest.main()
 </code></pre></div><p>We run the tests with:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
 Ran 7 tests in 0.000s
 
 OK
@@ -99,7 +99,7 @@ basically the same, we need to add a new method for each one. There is a lot of
 repeated boilerplate code.</p>
 <h2 id="parameterisation">Parameterisation</h2>
 <p>We can reduce this boilerplate by parameterising the tests:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
 <span style="color:#00f">import</span> unittest
 
 <span style="color:#00f">from</span> prime <span style="color:#00f">import</span> is_prime
@@ -109,13 +109,13 @@ repeated boilerplate code.</p>
 
     <span style="color:#00f">def</span> test_is_prime(self):
         test_cases = [
-            (-1, False),
-            (0, False),
-            (1, False),
-            (2, True),
-            (3, True),
-            (10, False),
-            (53, True),
+            (-1, <span style="color:#00f">False</span>),
+            (0, <span style="color:#00f">False</span>),
+            (1, <span style="color:#00f">False</span>),
+            (2, <span style="color:#00f">True</span>),
+            (3, <span style="color:#00f">True</span>),
+            (10, <span style="color:#00f">False</span>),
+            (53, <span style="color:#00f">True</span>),
         ]
         <span style="color:#00f">for</span> x, output <span style="color:#00f">in</span> test_cases:
             self.assertEqual(is_prime(x), output)
@@ -126,14 +126,14 @@ repeated boilerplate code.</p>
 </code></pre></div><p>We&rsquo;ve extracted the test data into the <code>test_cases</code> variable. The test logic is
 then run on each of the test cases in turn. This is an improvement, but still
 has some flaws. When we run the test, we get the following output:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
 Ran 1 test in 0.000s
 
 OK
 </code></pre></div><p>The test output says we&rsquo;re running one test, even though we still have seven
 test cases. Even worse, if one of our tests fails, we aren&rsquo;t given any
 information on which test failed:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
 F
 ======================================================================
 FAIL: test_is_prime (__main__.TestIsPrime)
@@ -150,7 +150,7 @@ FAILED (failures=1)
 </code></pre></div><h2 id="parameterisation-with-subtest">Parameterisation with subTest</h2>
 <p>Python 3.4 introduced a way to solve this problem. We can use the
 <code>unittest.TestCase.subTest</code> context manager for explicit parameterisation:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> unittest
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> unittest
 
 <span style="color:#00f">from</span> prime <span style="color:#00f">import</span> is_prime
 
@@ -159,13 +159,13 @@ FAILED (failures=1)
 
     <span style="color:#00f">def</span> test_is_prime(self):
         test_cases = [
-            (-1, False),
-            (0, False),
-            (1, False),
-            (2, True),
-            (3, True),
-            (10, True),
-            (53, True),
+            (-1, <span style="color:#00f">False</span>),
+            (0, <span style="color:#00f">False</span>),
+            (1, <span style="color:#00f">False</span>),
+            (2, <span style="color:#00f">True</span>),
+            (3, <span style="color:#00f">True</span>),
+            (10, <span style="color:#00f">True</span>),
+            (53, <span style="color:#00f">True</span>),
         ]
         <span style="color:#00f">for</span> x, output <span style="color:#00f">in</span> test_cases:
             <span style="color:#00f">with</span> self.subTest(name=str(x)):
@@ -175,7 +175,7 @@ FAILED (failures=1)
 <span style="color:#00f">if</span> __name__ == <span style="color:#a31515">&#34;__main__&#34;</span>:
     unittest.main()
 </code></pre></div><p>If a test fails, <code>unittest</code> will print out the name of the failed test:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python test_prime.py
 
 ======================================================================
 FAIL: test_is_prime (__main__.TestIsPrime) (name=<span style="color:#a31515">&#39;10&#39;</span>)
@@ -198,20 +198,20 @@ problems for us, and is compatible with Python 2. We can install it with
 <code>pip install pytest</code>.</p>
 <p>Pytest contains a <a href="https://docs.pytest.org/en/latest/parametrize.html">feature</a>
 which allows us to parameterise test cases:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># test_prime.py</span>
 <span style="color:#00f">import</span> pytest
 
 <span style="color:#00f">from</span> prime <span style="color:#00f">import</span> is_prime
 
 
 @pytest.mark.parametrize(<span style="color:#a31515">&#34;x,output&#34;</span>, [
-    (-1, False),
-    (0, False),
-    (1, False),
-    (2, True),
-    (3, True),
-    (10, False),
-    (53, True),
+    (-1, <span style="color:#00f">False</span>),
+    (0, <span style="color:#00f">False</span>),
+    (1, <span style="color:#00f">False</span>),
+    (2, <span style="color:#00f">True</span>),
+    (3, <span style="color:#00f">True</span>),
+    (10, <span style="color:#00f">False</span>),
+    (53, <span style="color:#00f">True</span>),
 ])
 <span style="color:#00f">def</span> test_is_prime(x, output):
     <span style="color:#00f">assert</span> is_prime(x) == output
@@ -222,13 +222,13 @@ argument is a list of tuples. Each tuple contains the data needed for a test
 case.</p>
 <p>The decorator makes seven separate calls to <code>test_is_prime</code>, supplying each of
 the test cases in turn. When we run the tests, we see that seven tests are run:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest test_prime_pytest.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest test_prime_pytest.py
 test_prime_pytest.py .......
 
 7 passed in 0.02 seconds
 </code></pre></div><p>Importantly, when a test fails, pytest gives us information about which test
 failed:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest test_prime.py
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest test_prime.py
 test_prime_pytest.py ...F...
 
 FAILURES

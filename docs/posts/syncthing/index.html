@@ -48,7 +48,7 @@ accidentally delete or corrupt a file, it&rsquo;ll be deleted or corrupted elsew
 too.</p>
 <h2 id="macos-setup">MacOS setup</h2>
 <p>Setting Syncthing up on macOS is super simple:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># Install syncthing</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># Install syncthing</span>
 $ brew install syncthing
 
 <span style="color:#008000"># Get launchd to start syncthing now, and restart it at login</span>
@@ -59,7 +59,7 @@ let you easily automatically start services.</p>
 <p>I installed the stable version of Syncthing. You can also install the release
 channel. N.B: these installation instructions are correct as of Feb 2020, but
 you should check for up-to-date instructions on their website.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># Add the release PGP keys:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># Add the release PGP keys:</span>
 $ curl -s https://syncthing.net/release-key.txt <span style="color:#a31515">\
 </span><span style="color:#a31515"></span>    | sudo apt-key add -
 
@@ -77,7 +77,7 @@ most involved method, but it didn&rsquo;t require me to install any other applic
 on Ubuntu Server 18.04, and learning how administrate servers using low-level
 tools like <code>systemd</code> is part of <a href="/posts/pi-hole/">why I got the server</a>.</p>
 <p>The docs linked above have more detail, but I ran:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># This is the unit file load path for system units installed by the</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#008000"># This is the unit file load path for system units installed by the</span>
 <span style="color:#008000"># administrator</span>
 $ mkdir -p /usr/local/lib/systemd/system
 
