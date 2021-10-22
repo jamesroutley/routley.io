@@ -1,10 +1,16 @@
 books:
+  - title: The Sisters Brothers
+    author: Patrick deWitt
+    date: 2021-10-10
   - title: The Uncommon Reader
     author: Alan Bennett
     date: 2021-10-15
   - title: 100 Poets
     author: John Carey
     date: 2021-10-01
+  - title: The Passenger
+    author: Ulrich Boschwitz
+    date: 2021-09-01
   - title: Jonathan Strange & Mr Norrell
     author: Susanna Clarke
     date: 2021-08-14
