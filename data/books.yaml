@@ -1,4 +1,13 @@
 books:
+  - title: The Odyssey
+    author: "Homer, transalated by Emily Wilson"
+    date: 2021-12-05
+  - title: "Psychotherapy: A Very Short Introduction"
+    author: Tom Burns and Eva Burns-Lundgren
+    date: 2021-12-01
+  - title: "Thinking in Systems: A Primer"
+    author: Donella H. Meadows
+    date: 2021-10-27
   - title: The Sisters Brothers
     author: Patrick deWitt
     date: 2021-10-10
