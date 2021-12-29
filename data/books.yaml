@@ -1,4 +1,10 @@
 books:
+  - title: The Wood
+    author: John Lewis-Stempel
+    date: 2021-12-29
+  - title: Games people play
+    author: Eric Berne
+    date: 2021-12-18
   - title: The Odyssey
     author: "Homer, transalated by Emily Wilson"
     date: 2021-12-05
