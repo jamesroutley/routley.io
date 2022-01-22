@@ -1,4 +1,13 @@
 books:
+  - title: Double-Tracking
+    author: Rosanna Mclaughlin
+    date: 2022-01-22
+  - title: The Midnight Library
+    author: Matt Haig
+    date: 2022-01-20
+  - title: The Highest Tide
+    author: Jim Lynch
+    date: 2022-01-14
   - title: The Wood
     author: John Lewis-Stempel
     date: 2021-12-29
