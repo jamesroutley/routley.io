@@ -1,4 +1,10 @@
 books:
+  - title: "One Summer: America 1927"
+    author: Bill Bryson
+    date: 2022-02-10
+  - title: Project Hail Mary
+    author: Andy Weir
+    date: 2022-02-04
   - title: Double-Tracking
     author: Rosanna Mclaughlin
     date: 2022-01-22
