@@ -8,3 +8,8 @@ pygmentsStyle = "vs"
 
 # Publish to /docs, where GitHub pages will serve from
 publishDir = "docs"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -39,7 +39,7 @@ function terazzo(p) {
 
   function drawTerazzo() {
     p.clear();
-    chips = [];
+    let chips = [];
 
     for (let i = 0; i < 500; i++) {
       // Propose a chip location. We check if it intersects with an existing
@@ -80,7 +80,6 @@ function terazzo(p) {
 function threeIdealChips(p) {
   const width = 370;
   const height = 200;
-  const y = height / 2;
 
   p.setup = function () {
     p.createCanvas(width, height);
@@ -109,7 +108,6 @@ function threeIdealChips(p) {
 function pathWalking(p) {
   const width = 305;
   const height = 305;
-  const radius = 150;
 
   const points = [
     { x: 50, y: 50 },
@@ -169,7 +167,6 @@ function pathWalking(p) {
 function pathWalkingBad(p) {
   const width = 305;
   const height = 305;
-  const radius = 150;
 
   const points = [
     { x: 50, y: 50 },
@@ -352,10 +349,9 @@ function circleIntersection(p) {
     const x = xR * p.cos(p.frameCount / 30);
     p.circle(x, 0, radiusR * 2);
 
-    // Line between centres. This is green if intersecting,
-    // red if not
+    // Line between centres. This is red if intersecting, green if not
     const distance = p.dist(xL, 0, x, 0);
-    const lineColor = distance < radiusL + radiusR ? "green" : "red";
+    const lineColor = distance < radiusL + radiusR ? "red" : "green";
     p.push();
     p.stroke(lineColor);
     p.line(xL, 0, x, 0);

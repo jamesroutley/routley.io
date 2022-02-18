@@ -1,7 +1,6 @@
 ---
 title: "Random terazzo generator"
-date: 2020-11-16T11:32:38Z
-draft: true
+date: 2022-02-18T06:41:00Z
 scripts:
   - "/js/p5-v1-1-9.min.js"
   - "/js/terazzo.js"

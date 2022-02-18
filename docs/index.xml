@@ -6,7 +6,17 @@
     <description>Recent content on James Routley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 13 Jul 2020 22:53:12 +0100</lastBuildDate><atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Feb 2022 06:41:00 +0000</lastBuildDate><atom:link href="http://routley.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Random terazzo generator</title>
+      <link>http://routley.io/posts/terazzo-generator/</link>
+      <pubDate>Fri, 18 Feb 2022 06:41:00 +0000</pubDate>
+      
+      <guid>http://routley.io/posts/terazzo-generator/</guid>
+      <description>This article has diagrams which require JavaScript to show
+ Terazzo is a material made by binding small coloured chips in cement. After it&amp;rsquo;s set, it&amp;rsquo;s cut and polished, revealing a pattern made by the chips. I recently built a random terazzo pattern generator, using the JavaScript drawing library P5. I think the implementation is quite neat - it produces decent results, doesn&amp;rsquo;t involve complex maths and uses a couple of techniques common in generative art.</description>
+    </item>
+    
     <item>
       <title>2020 07 13</title>
       <link>http://routley.io/images/2020-07-13/</link>
@@ -94,7 +104,7 @@ When smartphones were first introduced, most web pages weren&amp;rsquo;t optimis
       <pubDate>Fri, 14 Feb 2020 15:41:31 +0000</pubDate>
       
       <guid>http://routley.io/posts/firefox-mobile-default-css/</guid>
-      <description>This website is currently rendered with very small text in Firefox on mobile. Here&amp;rsquo;s a screenshot of what it looks like on a Pixel 2:
+      <description>article img { max-width: 350px; }  This website is currently rendered with very small text in Firefox on mobile. Here&amp;rsquo;s a screenshot of what it looks like on a Pixel 2:
 While debugging this, I tried removing all CSS from my website. It turns out that the issue isn&amp;rsquo;t to do with anything I&amp;rsquo;ve written (I think), but the way Firefox displays unstyled HTML on mobile:
 I&amp;rsquo;m a bit surprised by this - I would have assumed that rendering unstyled HTML would be legible in any browser.</description>
     </item>

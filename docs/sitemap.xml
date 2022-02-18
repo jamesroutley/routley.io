@@ -2,20 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://routley.io/</loc>
+    <lastmod>2022-02-18T06:41:00+00:00</lastmod>
+  </url><url>
+    <loc>http://routley.io/posts/</loc>
+    <lastmod>2022-02-18T06:41:00+00:00</lastmod>
+  </url><url>
+    <loc>http://routley.io/posts/terazzo-generator/</loc>
+    <lastmod>2022-02-18T06:41:00+00:00</lastmod>
+  </url><url>
     <loc>http://routley.io/images/2020-07-13/</loc>
     <lastmod>2020-07-13T22:53:12+01:00</lastmod>
   </url><url>
     <loc>http://routley.io/images/</loc>
     <lastmod>2020-07-13T22:53:12+01:00</lastmod>
   </url><url>
-    <loc>http://routley.io/</loc>
-    <lastmod>2020-07-13T22:53:12+01:00</lastmod>
-  </url><url>
     <loc>http://routley.io/images/2020-07-08/</loc>
     <lastmod>2020-07-08T22:57:55+01:00</lastmod>
-  </url><url>
-    <loc>http://routley.io/posts/</loc>
-    <lastmod>2020-05-27T19:06:09+00:00</lastmod>
   </url><url>
     <loc>http://routley.io/posts/scraping-a-website/</loc>
     <lastmod>2020-05-27T19:06:09+00:00</lastmod>
