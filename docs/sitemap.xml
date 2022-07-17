@@ -2,8 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://routley.io/food/</loc>
+    <lastmod>2022-02-19T16:26:42+00:00</lastmod>
+  </url><url>
     <loc>http://routley.io/</loc>
-    <lastmod>2022-02-18T06:41:00+00:00</lastmod>
+    <lastmod>2022-02-19T16:26:42+00:00</lastmod>
+  </url><url>
+    <loc>http://routley.io/food/specifications/</loc>
+    <lastmod>2022-02-19T16:26:42+00:00</lastmod>
   </url><url>
     <loc>http://routley.io/posts/</loc>
     <lastmod>2022-02-18T06:41:00+00:00</lastmod>

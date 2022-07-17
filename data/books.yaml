@@ -1,4 +1,16 @@
 books:
+  - title: "Notes from a Small Island"
+    author: Bill Bryson
+    date: 2022-07-15
+  - title: "The Coaching Habit"
+    author: "Michael Bungay Stanier"
+    date: 2022-07-16
+  - title: "The Ministry for the Future"
+    author: "Kim Stanley Robinson"
+    date: 2022-07-01
+  - title: "Fingersmith"
+    author: "Sarah Waters"
+    date: 2022-05-01
   - title: "One Summer: America 1927"
     author: Bill Bryson
     date: 2022-02-10
