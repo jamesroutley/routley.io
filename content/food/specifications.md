@@ -39,3 +39,19 @@ date: 2022-02-19T16:26:42Z
 3. Add sauce ingredients, and add water to just cover
 4. Pressure cook for 40 mins
 5. Release heat, reduce sauce if needed
+
+## Banana pancakes
+
+(serves 1)
+
+- 1 overripe banana, mashed
+- 60g plain flour
+- 60g (oat) milk
+- 1 egg
+- 1/2 tsp baking powder
+- pinch of salt
+
+## Self raising flour
+
+- 100g plain flour
+- 1 tsp baking powder
